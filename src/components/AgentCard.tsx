@@ -66,7 +66,27 @@ export function AgentCard({ agent }: { agent: Agent }) {
               <p className="text-xs text-gray-500">by {agent.author.name}</p>
             </div>
           </div>
-          <ToolBadge tool={agent.tool} />
+          <div className="flex flex-col items-end gap-2">
+            <ToolBadge tool={agent.tool} />
+            <div className="flex gap-1">
+              {agent.verified && (
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-500/10 text-green-400 border border-green-500/20" title="Verified by AgentDepot">
+                  ✓
+                </span>
+              )}
+              {agent.trending && (
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-orange-500/10 text-orange-400 border border-orange-500/20" title="Trending this week">
+                  🔥
+                </span>
+              )}
+              {/* Check if created within last 7 days */}
+              {new Date(agent.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) && (
+                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20" title="New Arrival">
+                  NEW
+                </span>
+              )}
+            </div>
+          </div>
         </div>
 
         <p className="text-sm text-gray-400 mb-6 flex-grow line-clamp-2 leading-relaxed">

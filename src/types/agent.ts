@@ -25,6 +25,7 @@ export interface Agent {
   installation: AgentInstallation;
   verified: boolean;
   featured: boolean;
+  trending?: boolean;
   stats?: {
     downloads?: number;
     stars?: number;

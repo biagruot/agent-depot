@@ -19,7 +19,7 @@ export default function PrivacyPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Introduction</h2>
             <p className="text-gray-300 leading-relaxed">
-              AgentDepot ("we", "our", or "us") operates agentstack.directory (the "Site"). 
+              AgentDepot ("we", "our", or "us") operates agentdepot.dev (the "Site"). 
               This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
               when you visit our website.
             </p>
@@ -120,7 +120,7 @@ export default function PrivacyPage() {
               <li>Request data portability</li>
             </ul>
             <p className="text-gray-300 leading-relaxed mt-4">
-              To exercise these rights, contact us at <a href="mailto:privacy@agentstack.directory" className="text-primary hover:underline">privacy@agentstack.directory</a>
+              To exercise these rights, contact us at <a href="mailto:privacy@agentdepot.dev" className="text-primary hover:underline">privacy@agentdepot.dev</a>
             </p>
           </section>
 
@@ -146,7 +146,7 @@ export default function PrivacyPage() {
               If you have questions about this Privacy Policy, please contact us:
             </p>
             <ul className="text-gray-300 space-y-2">
-              <li>Email: <a href="mailto:privacy@agentstack.directory" className="text-primary hover:underline">privacy@agentstack.directory</a></li>
+              <li>Email: <a href="mailto:privacy@agentdepot.dev" className="text-primary hover:underline">privacy@agentdepot.dev</a></li>
               <li>GitHub: <a href="https://github.com/agentdepot/directory" className="text-primary hover:underline" target="_blank">github.com/agentdepot/directory</a></li>
             </ul>
           </section>

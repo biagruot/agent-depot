@@ -162,7 +162,7 @@ export default function TermsPage() {
               If you have questions about these Terms, please contact us:
             </p>
             <ul className="text-gray-300 space-y-2">
-              <li>Email: <a href="mailto:legal@agentstack.directory" className="text-primary hover:underline">legal@agentstack.directory</a></li>
+              <li>Email: <a href="mailto:legal@agentdepot.dev" className="text-primary hover:underline">legal@agentdepot.dev</a></li>
               <li>GitHub: <a href="https://github.com/agentdepot/directory" className="text-primary hover:underline" target="_blank">github.com/agentdepot/directory</a></li>
             </ul>
           </section>

@@ -8,6 +8,7 @@ import { AgentCard } from "@/components/AgentCard";
 import { CollectionShelf } from "@/components/CollectionShelf";
 import { agents } from "@/data/agents";
 import { collections } from "@/data/collections";
+import { WhySection } from "@/components/WhySection";
 import { AgentTool } from "@/types/agent";
 
 export default function Home() {
@@ -82,27 +83,16 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            name: "AgentDepot",
-            description: "The complete directory of AI coding agents for developers",
-            url: "https://agentstack.directory",
-            potentialAction: {
+            "name": "AgentDepot",
+            "description": "The complete directory of AI coding agents for developers",
+            "url": "https://agentdepot.dev",
+            "potentialAction": {
               "@type": "SearchAction",
-              target: {
+              "target": {
                 "@type": "EntryPoint",
-                urlTemplate: "https://agentstack.directory/?q={search_term_string}"
+                "urlTemplate": "https://agentdepot.dev/?q={search_term_string}"
               },
               "query-input": "required name=search_term_string"
-            },
-            about: {
-              "@type": "SoftwareApplication",
-              applicationCategory: "DeveloperApplication",
-              name: "AgentDepot Directory",
-              operatingSystem: "Web",
-              offers: {
-                "@type": "Offer",
-                price: "0",
-                priceCurrency: "USD"
-              }
             }
           })
         }}
@@ -113,20 +103,45 @@ export default function Home() {
       {/* Hero Section */}
       <section className="pt-32 pb-8 px-4 relative z-10">
         <div className="container mx-auto text-center max-w-4xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-gray-400 mb-8 animate-fade-in">
-            <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-            v1.0 Now Live
-          </div>
-          
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 tracking-tight text-white">
-            The <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-purple-400 to-orange-400">Agent</span> Directory
-          </h1>
-          
-          <p className="text-xl text-gray-400 mb-12 leading-relaxed max-w-2xl mx-auto">
-            Discover verified coding agents for Claude, Windsurf, Cursor, and Replit. 
-            Curated for developers who build the future.
-          </p>
-          
+          <div className="text-center max-w-4xl mx-auto mb-16 space-y-8 pt-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-sm text-gray-400 mb-4">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+              <span>100+ Verified Premium Agents Available</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50 pb-2">
+              The Ultimate Directory<br />for AI Agents
+            </h1>
+            
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto leading-relaxed">
+              Discover 100+ verified, free agents for <span className="text-white font-medium">Windsurf</span>, <span className="text-white font-medium">Cursor</span>, and <span className="text-white font-medium">Replit</span>. Stop configuring, start shipping.
+            </p>
+
+            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center pt-4">
+              <button 
+                onClick={() => document.getElementById('agents-grid')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-8 py-4 bg-white text-black rounded-xl font-semibold hover:bg-gray-200 transition-all hover:scale-105 active:scale-95 flex items-center gap-2 shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+              >
+                Explore Agents
+              </button>
+              <a href="/submit" className="px-8 py-4 glass-panel rounded-xl font-semibold hover:bg-white/10 transition-all hover:scale-105 active:scale-95 flex items-center gap-2">
+                Submit Agent
+              </a>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="flex flex-wrap justify-center gap-6 pt-8 opacity-70">
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <span className="text-green-400">✓</span> Multi-Tool Support
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <span className="text-green-400">✓</span> 100% Verified
+              </div>
+              <div className="flex items-center gap-2 text-sm text-gray-400">
+                <span className="text-green-400">✓</span> Production Ready
+              </div>
+            </div>
+          </div>  
           <SearchFilters 
             searchQuery={searchQuery}
             setSearchQuery={(q) => { setSearchQuery(q); if(q) setSelectedCollectionId(null); }} // Clear collection on search
@@ -198,6 +213,26 @@ export default function Home() {
           )}
         </div>
       </section>
+
+      {/* Trending Agents Section */}
+      <section className="py-16 px-4 border-t border-white/5 bg-white/[0.02]">
+        <div className="container mx-auto max-w-7xl">
+          <div className="flex items-center gap-3 mb-8">
+            <span className="text-2xl">🔥</span>
+            <h2 className="text-2xl font-bold text-white">Trending This Week</h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            {agents.filter(a => a.trending).slice(0, 4).map(agent => (
+              <div key={agent.id} className="h-[280px]">
+                <AgentCard agent={agent} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <WhySection />
       
       {/* Footer */}
       <footer className="border-t border-white/5 py-12 mt-auto bg-black/20 backdrop-blur-lg">

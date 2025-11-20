@@ -2,7 +2,7 @@ import { MetadataRoute } from 'next';
 import { agents } from '@/data/agents';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://agentstack.directory';
+  const baseUrl = 'https://agentdepot.dev';
   
   // Static pages
   const staticPages = [

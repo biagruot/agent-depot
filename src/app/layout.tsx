@@ -13,12 +13,12 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://agentstack.directory'),
+  metadataBase: new URL('https://agentdepot.dev'),
   title: {
-    default: "AgentDepot | The AI Coding Agent Directory",
+    default: "AgentDepot | Every AI Agent, Every Tool, One Place",
     template: "%s | AgentDepot"
   },
-  description: "Discover, compare, and install the best AI coding agents for Claude Code, Windsurf, Cursor, and Replit. Curated collection of 100+ verified agents, plugins, and rules.",
+  description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 100+ verified AI coding agents, plugins, and rules in one place.",
   keywords: [
     "AI agents",
     "coding agents",
@@ -48,23 +48,23 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://agentstack.directory",
+    url: "https://agentdepot.dev",
     siteName: "AgentDepot",
-    title: "AgentDepot - The AI Coding Agent Directory",
-    description: "Discover 100+ verified AI coding agents for Claude, Windsurf, Cursor, and Replit. Find the perfect agent for your development workflow.",
+    title: "AgentDepot | Every AI Agent, Every Tool, One Place",
+    description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 100+ verified AI coding agents, plugins, and rules.",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "AgentDepot - AI Coding Agent Directory",
+        alt: "AgentDepot - Multi-Tool AI Agent Directory",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "AgentDepot - The AI Coding Agent Directory",
-    description: "Discover 100+ verified AI coding agents for Claude, Windsurf, Cursor, and Replit.",
+    title: "AgentDepot | Every AI Agent, Every Tool, One Place",
+    description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. 100% Verified.",
     images: ["/og-image.png"],
     creator: "@agentdepot",
   },
@@ -95,7 +95,7 @@ export default function RootLayout({
       <head>
         {/* Privacy-Focused Analytics - Plausible */}
         {/* Uncomment and add your Plausible domain when ready:
-        <script defer data-domain="agentstack.directory" src="https://plausible.io/js/script.js"></script>
+        <script defer data-domain="agentdepot.dev" src="https://plausible.io/js/script.js"></script>
         */}
         
         {/* Alternative: Umami Analytics */}

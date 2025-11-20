@@ -54,5 +54,23 @@ export const collections: Collection[] = [
     gradient: "linear-gradient(140deg, rgba(14,165,233,0.35), rgba(6,182,212,0.35), rgba(20,184,166,0.4))",
     agentIds: ["devops-automation-pack", "kubernetes-operations"],
     featured: true,
+  },
+  {
+    id: "windsurf-power-pack",
+    name: "Windsurf Power Pack",
+    description: "The essential collection for Windsurf IDE users. Rules for React, Next.js, and clean code.",
+    icon: "Zap",
+    gradient: "linear-gradient(135deg, rgba(59,130,246,0.4), rgba(37,99,235,0.35), rgba(29,78,216,0.4))",
+    agentIds: ["windsurf-react-starter", "windsurf-nextjs-15-rules", "windsurf-clean-code", "windsurf-fullstack-typescript", "windsurf-prisma-postgres"],
+    featured: true,
+  },
+  {
+    id: "replit-starter-pack",
+    name: "Replit Starter Pack",
+    description: "Launch your next idea instantly with these production-ready Replit templates.",
+    icon: "Rocket",
+    gradient: "linear-gradient(135deg, rgba(249,115,22,0.4), rgba(234,88,12,0.35), rgba(194,65,12,0.4))",
+    agentIds: ["replit-python-data-science", "replit-discord-bot", "replit-react-vite", "replit-nextjs-blog", "replit-flask-api"],
+    featured: true,
   }
 ];

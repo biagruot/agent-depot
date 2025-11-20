@@ -1,14 +1,15 @@
 # AgentDepot.directory - Project Task List
 
-**Project:** AgentDepot (AI Coding Agent Directory)
-**Current Status:** MVP Phase (Collection Shelf Implemented)
-**Created:** 2025-11-20
+**Project:** AgentDepot (formerly AgentStack Directory)
+**Domain:** `agentdepot.dev` (Primary), `agentstack.directory` (Redirect)
+**Launch Date:** Monday, Nov 25th (5 Days)
+**Goal:** 100+ Verified Agents (COMPLETED) -> Launch on Product Hunt
 
 ---
 
 ## 📊 Current Progress Summary
 
-### ✅ Completed
+### ✅ Completed (MVP ~95%)
 - [x] Domain acquired (agentstack.directory)
 - [x] Email setup (support@agentstack.directory)
 - [x] Next.js project initialized
@@ -26,10 +27,174 @@
 - [x] **Legal Pages** (Privacy Policy, Terms of Service)
 - [x] **Mobile Responsiveness** (tested and verified working)
 - [x] **Analytics Setup** (Plausible/Umami ready, needs account signup)
+- [x] **OG Image** (social sharing 1200x630)
+
+### 🎯 Strategic Focus: Multi-Tool Premium Aggregator
+**Positioning:** "Every AI Agent, Every Tool, One Place"  
+**Differentiation:** Multi-tool coverage + 100% verification + Premium UX  
+**Market Gap:** Windsurf & Replit have NO directories
+
+See [MARKETING_PLAN.md](/Users/biagioruotolo/Documents/Personal/Dev/agentstack/agent-depot/MARKETING_PLAN.md) for full 90-day strategy.
 
 ---
 
-## 🎯 Phase 1: MVP Completion (Week 1-2) - HIGH PRIORITY
+## 🚀 PHASE 0: PRE-LAUNCH (5 DAYS) - CRITICAL
+
+### Day 1: Positioning & Messaging (4 hours) [COMPLETED]
+- [x] **Homepage Content Overhaul**
+  - [x] Rewrite hero section: "Every AI Agent, Every Tool, One Place"
+  - [x] Add subheading: "100+ verified agents for Claude, Windsurf, Cursor, Replit & more"
+  - [x] Update CTA buttons with clear value props
+  
+- [x] **Add "Why AgentDepot?" Section**
+  - [x] Multi-tool coverage advantage
+  - [x] 100% verification process explanation
+  - [x] Premium UX highlights
+  - [x] Curated collections benefit
+  
+- [x] **Feature Comparison Table**
+  - [x] Multi-tool support (✅ vs others)
+  - [x] Manual verification (✅ vs automated)
+  - [x] Video demos (✅ coming)
+  - [x] Premium design (✅)
+  - [x] Curated collections (✅)
+  
+- [x] **Update Meta Tags**
+  - [x] Meta description with "multi-tool" messaging
+  - [x] OG title and description
+  - [x] Twitter card updates
+
+### Day 2: Product Polish (4 hours) [COMPLETED]
+- [x] **Add Verification Badges**
+  - [x] ✅ Verified badge to ALL agents
+  - [x] 🆕 New badge (< 7 days)
+  - [x] 🔥 Trending badge (manual for now)
+  - [x] ⭐ Featured badge (top agents)
+  
+- [x] **Create Strategic Collections**
+  - [x] "Beginner's Starter Pack" (5 essential cross-tool agents)
+  - [x] "Windsurf Power Pack" (capitalize on market gap)
+  - [x] "Full-Stack Toolkit" (cross-tool collection)
+  
+- [x] **Add "Trending This Week" Section**
+  - [x] Homepage section for trending agents
+  - [x] Manual curation for launch week
+
+### Day 3: Agent Curation Blitz (8 hours) [COMPLETED]
+**Goal: Reach 100+ total verified agents**
+- [x] **Windsurf Expansion**
+  - [x] Add 30+ Windsurf rules/agents (Source: GitHub)
+  - [x] Focus on framework-specific rules (Laravel, Django, etc.)
+  
+- [x] **Replit Expansion**
+  - [x] Add 15+ Replit Templates (Source: Official Gallery)
+  - [x] Cover key use cases (Bots, Flask, Express)
+
+- [x] **Premium Claude Agents (10 agents)**
+  - [x] Focus on QUALITY over quantity
+  - [x] Well-documented, maintained agents
+  - [x] Different from automated listings
+  
+- [-] **Video Demos (Top 5 Agents)**
+  - [-] Record 30-second screen demos (Deferred to Post-Launch)
+  - [-] Show installation + usage
+  - [-] Convert to GIF format
+  - [-] Add to agent detail pages
+
+**Target Distribution:**
+- Claude: 50 total
+- Windsurf: 30 total (from 7!)
+- Cursor: 20 total  
+- Replit: 15 total (from 8!)
+- **Total: 115 agents**
+
+### Day 4: Launch Prep (4 hours)
+- [ ] **Product Hunt Preparation**
+  - [ ] Write PH post title and tagline
+  - [ ] Prepare first comment (explain multi-tool advantage)
+  - [ ] Create 3-4 preview screenshots
+  - [ ] Draft responses for common questions
+  
+- [ ] **Hacker News Preparation**
+  - [ ] Write "Show HN" post
+  - [ ] Prepare body text (technical but humble)
+  - [ ] Have responses ready for feedback
+  
+- [ ] **Reddit Preparation**
+  - [ ] Customize posts for 7 subreddits:
+    - r/ClaudeAI
+    - r/Cursor
+    - r/Replit
+    - r/LocalLLaMA
+    - r/ChatGPT
+    - r/ArtificialIntelligence
+    - r/SideProject
+  - [ ] Each post unique, valuable, not spammy
+  
+- [ ] **Influencer Outreach**
+  - [ ] Create list of 10 micro-influencers (500-5K followers)
+  - [ ] Draft personalized outreach emails
+  - [ ] Prepare value offer (early access, featured placement)
+  
+- [ ] **Newsletter Setup**
+  - [ ] Sign up for ConvertKit or Substack
+  - [ ] Create welcome email sequence
+  - [ ] Add signup form to homepage and footer
+  - [ ] Prepare "Launch Week" newsletter
+
+### Day 5: LAUNCH DAY (All Day)
+
+**Pre-Launch Checklist:**
+- [ ] 100+ agents verified ✓
+- [ ] All badges added ✓
+- [ ] Homepage positioning clear ✓
+- [ ] Mobile tested ✓
+- [ ] Analytics working ✓
+
+**Hour-by-Hour Schedule (Tuesday):**
+
+**12:01 AM PST:**
+- [ ] Post to Product Hunt
+- [ ] Share on personal social media
+
+**9:00 AM PST:**
+- [ ] Post "Show HN" on Hacker News
+- [ ] Begin monitoring comments
+
+**9:00-11:00 AM:**
+- [ ] Post to r/ClaudeAI
+- [ ] Post to r/Cursor
+- [ ] Post to r/Replit
+
+**11:00 AM-1:00 PM:**
+- [ ] Post to r/LocalLLaMA
+- [ ] Post to r/ChatGPT
+- [ ] Post to r/AI
+
+**1:00-3:00 PM:**
+- [ ] Post to r/SideProject
+- [ ] Twitter/X launch thread (7 tweets)
+
+**3:00-5:00 PM:**
+- [ ] Discord community posts (5 servers)
+- [ ] Dev.to launch post
+- [ ] LinkedIn announcement
+
+**All Day:**
+- [ ] Respond to EVERY comment within 1 hour
+- [ ] Monitor traffic with analytics
+- [ ] Tweet milestones ("Just hit 500 visitors!")
+- [ ] Engage genuinely, not salesy
+- [ ] Fix any bugs immediately
+
+**Evening:**
+- [ ] Send outreach emails to influencers
+- [ ] Post summary tweet
+- [ ] Thank everyone who shared
+- [ ] Plan Day 2 follow-ups
+
+---
+
 
 ### A. Core Functionality [CRITICAL]
 

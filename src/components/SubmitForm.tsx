@@ -100,7 +100,7 @@ ${formData.authorTwitter ? `Twitter: ${formData.authorTwitter}\n` : ''}
 Submitted via AgentDepot.directory
       `);
 
-      window.location.href = `mailto:submit@agentstack.directory?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:submit@agentdepot.dev?subject=${subject}&body=${body}`;
       setStatus("success");
     } catch (error) {
       setStatus("error");
