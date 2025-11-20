@@ -1,24 +1,25 @@
 import { Agent } from "@/types/agent";
 import { Download, Star, ExternalLink, Terminal, Code, Bug, Zap, Database, Globe } from "lucide-react";
 import Link from "next/link";
+import { SpotlightCard } from "./SpotlightCard";
 
 const ToolBadge = ({ tool }: { tool: Agent['tool'] }) => {
-  const colors = {
-    claude: "bg-orange-500/10 text-orange-500 border-orange-500/20",
-    windsurf: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-    cursor: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-    replit: "bg-red-500/10 text-red-500 border-red-500/20",
+  const styles = {
+    claude: "text-[#d97757] bg-[#d97757]/10 border-[#d97757]/20",
+    windsurf: "text-[#3b82f6] bg-[#3b82f6]/10 border-[#3b82f6]/20",
+    cursor: "text-[#a855f7] bg-[#a855f7]/10 border-[#a855f7]/20",
+    replit: "text-[#f97316] bg-[#f97316]/10 border-[#f97316]/20",
   };
 
   const labels = {
-    claude: "Claude Code",
+    claude: "Claude",
     windsurf: "Windsurf",
     cursor: "Cursor",
     replit: "Replit",
   };
 
   return (
-    <span className={`px-2 py-1 rounded-md text-xs font-medium border ${colors[tool]}`}>
+    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-medium border uppercase tracking-wider ${styles[tool]}`}>
       {labels[tool]}
     </span>
   );
@@ -35,55 +36,64 @@ const CategoryIcon = ({ category }: { category: Agent['category'] }) => {
     other: Terminal,
   };
   const Icon = icons[category];
-  return <Icon className="w-4 h-4 text-gray-400" />;
+  return <Icon className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />;
 };
 
 export function AgentCard({ agent }: { agent: Agent }) {
+  // Determine spotlight color based on tool
+  const spotlightColors = {
+    claude: "rgba(217, 119, 87, 0.2)",
+    windsurf: "rgba(59, 130, 246, 0.2)",
+    cursor: "rgba(168, 85, 247, 0.2)",
+    replit: "rgba(249, 115, 22, 0.2)",
+  };
+
   return (
-    <div className="group bg-card-bg border border-card-border rounded-xl p-5 hover:border-primary/50 transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 flex flex-col h-full">
-      <div className="flex justify-between items-start mb-4">
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-lg bg-card-border/50 flex items-center justify-center group-hover:bg-primary/10 transition-colors">
-            <CategoryIcon category={agent.category} />
+    <Link href={`/agent/${agent.id}`} className="block h-full">
+      <SpotlightCard 
+        className="h-full flex flex-col p-5 transition-transform duration-300 hover:-translate-y-1"
+        spotlightColor={spotlightColors[agent.tool]}
+      >
+        <div className="flex justify-between items-start mb-4">
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+              <CategoryIcon category={agent.category} />
+            </div>
+            <div>
+              <h3 className="font-semibold text-base text-gray-100 group-hover:text-white transition-colors">
+                {agent.name}
+              </h3>
+              <p className="text-xs text-gray-500">by {agent.author.name}</p>
+            </div>
           </div>
-          <div>
-            <h3 className="font-semibold text-lg leading-tight group-hover:text-primary transition-colors">
-              {agent.name}
-            </h3>
-            <p className="text-xs text-gray-500 mt-1">by {agent.author.name}</p>
+          <ToolBadge tool={agent.tool} />
+        </div>
+
+        <p className="text-sm text-gray-400 mb-6 flex-grow line-clamp-2 leading-relaxed">
+          {agent.description}
+        </p>
+
+        <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto">
+          <div className="flex items-center gap-4 text-xs text-gray-500 font-mono">
+            {agent.stats?.stars && (
+              <div className="flex items-center gap-1.5">
+                <Star className="w-3 h-3" />
+                <span>{agent.stats.stars}</span>
+              </div>
+            )}
+            {agent.stats?.downloads && (
+              <div className="flex items-center gap-1.5">
+                <Download className="w-3 h-3" />
+                <span>{agent.stats.downloads}</span>
+              </div>
+            )}
+          </div>
+          
+          <div className="text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+            Details <ExternalLink className="w-3 h-3" />
           </div>
         </div>
-        <ToolBadge tool={agent.tool} />
-      </div>
-
-      <p className="text-sm text-gray-400 mb-6 flex-grow line-clamp-2">
-        {agent.description}
-      </p>
-
-      <div className="flex items-center justify-between pt-4 border-t border-card-border mt-auto">
-        <div className="flex items-center gap-4 text-xs text-gray-500">
-          {agent.stats?.stars && (
-            <div className="flex items-center gap-1">
-              <Star className="w-3 h-3" />
-              <span>{agent.stats.stars}</span>
-            </div>
-          )}
-          {agent.stats?.downloads && (
-            <div className="flex items-center gap-1">
-              <Download className="w-3 h-3" />
-              <span>{agent.stats.downloads}</span>
-            </div>
-          )}
-        </div>
-        
-        <Link 
-          href={`/agent/${agent.id}`}
-          className="text-xs font-medium bg-white/5 hover:bg-white/10 px-3 py-1.5 rounded-md transition-colors flex items-center gap-2"
-        >
-          View Details
-          <ExternalLink className="w-3 h-3" />
-        </Link>
-      </div>
-    </div>
+      </SpotlightCard>
+    </Link>
   );
 }

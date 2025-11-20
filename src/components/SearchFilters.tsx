@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Filter } from "lucide-react";
+import { Search, Command } from "lucide-react";
 import { AgentTool } from "@/types/agent";
 
 interface SearchFiltersProps {
@@ -19,37 +19,45 @@ export function SearchFilters({
   const tools: { id: AgentTool | 'all'; label: string }[] = [
     { id: 'all', label: 'All Tools' },
     { id: 'windsurf', label: 'Windsurf' },
-    { id: 'claude', label: 'Claude Code' },
+    { id: 'claude', label: 'Claude' },
     { id: 'cursor', label: 'Cursor' },
     { id: 'replit', label: 'Replit' },
   ];
 
   return (
-    <div className="space-y-6">
-      {/* Search Bar */}
-      <div className="relative max-w-2xl mx-auto">
-        <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-          <Search className="h-5 w-5 text-gray-500" />
+    <div className="space-y-8">
+      {/* Command Palette Style Search */}
+      <div className="relative max-w-2xl mx-auto group">
+        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-purple-500/20 to-orange-500/20 rounded-2xl opacity-50 group-hover:opacity-100 blur transition duration-500" />
+        <div className="relative bg-[#0A0A0A] rounded-xl border border-white/10 flex items-center p-2 shadow-2xl">
+          <div className="p-3 text-gray-500">
+            <Search className="w-5 h-5" />
+          </div>
+          <input
+            type="text"
+            className="w-full bg-transparent border-none text-lg text-white placeholder-gray-500 focus:ring-0 px-2 py-1"
+            placeholder="Search agents..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            autoFocus
+          />
+          <div className="hidden md:flex items-center gap-1 px-3 py-1.5 bg-white/5 rounded-lg border border-white/5">
+            <Command className="w-3 h-3 text-gray-500" />
+            <span className="text-xs text-gray-500 font-mono">K</span>
+          </div>
         </div>
-        <input
-          type="text"
-          className="block w-full pl-11 pr-4 py-4 bg-card-bg border border-card-border rounded-xl text-foreground placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary transition-all"
-          placeholder="Search for agents, debugging tools, or frameworks..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-        />
       </div>
 
-      {/* Tool Filters */}
+      {/* Minimal Pill Filters */}
       <div className="flex flex-wrap justify-center gap-2">
         {tools.map((tool) => (
           <button
             key={tool.id}
             onClick={() => setSelectedTool(tool.id)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+            className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
               selectedTool === tool.id
-                ? "bg-primary text-white shadow-lg shadow-primary/25"
-                : "bg-card-bg border border-card-border text-gray-400 hover:border-gray-600 hover:text-white"
+                ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+                : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
             }`}
           >
             {tool.label}
