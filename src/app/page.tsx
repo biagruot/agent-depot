@@ -75,6 +75,39 @@ export default function Home() {
 
   return (
     <main className="min-h-screen relative">
+      {/* JSON-LD Structured Data for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebSite",
+            name: "AgentDepot",
+            description: "The complete directory of AI coding agents for developers",
+            url: "https://agentstack.directory",
+            potentialAction: {
+              "@type": "SearchAction",
+              target: {
+                "@type": "EntryPoint",
+                urlTemplate: "https://agentstack.directory/?q={search_term_string}"
+              },
+              "query-input": "required name=search_term_string"
+            },
+            about: {
+              "@type": "SoftwareApplication",
+              applicationCategory: "DeveloperApplication",
+              name: "AgentDepot Directory",
+              operatingSystem: "Web",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "USD"
+              }
+            }
+          })
+        }}
+      />
+      
       <Navbar />
 
       {/* Hero Section */}
