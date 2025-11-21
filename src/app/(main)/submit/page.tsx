@@ -1,4 +1,3 @@
-import { Navbar } from "@/components/Navbar";
 import { SubmitForm } from "@/components/SubmitForm";
 import { Github, Mail, ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
@@ -11,7 +10,6 @@ export const metadata = {
 export default function SubmitPage() {
   return (
     <main className="min-h-screen relative pb-32">
-      <Navbar />
       
       <div className="container mx-auto px-4 pt-32 max-w-5xl relative z-10">
         {/* Header */}

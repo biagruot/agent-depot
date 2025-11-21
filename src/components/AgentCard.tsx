@@ -1,118 +1,138 @@
 import { Agent } from "@/types/agent";
-import { Download, Star, ExternalLink, Terminal, Code, Bug, Zap, Database, Globe } from "lucide-react";
 import Link from "next/link";
 import { SpotlightCard } from "./SpotlightCard";
+import { Check, Copy } from "lucide-react";
+import { useState } from "react";
+import { AgentStats } from "./AgentStats";
 
 const ToolBadge = ({ tool }: { tool: Agent['tool'] }) => {
   const styles = {
-    claude: "text-[#d97757] bg-[#d97757]/10 border-[#d97757]/20",
-    windsurf: "text-[#3b82f6] bg-[#3b82f6]/10 border-[#3b82f6]/20",
-    cursor: "text-[#a855f7] bg-[#a855f7]/10 border-[#a855f7]/20",
-    replit: "text-[#f97316] bg-[#f97316]/10 border-[#f97316]/20",
+    'claude-code': 'bg-orange-500/10 text-orange-400 border-orange-500/20',
+    'windsurf': 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+    'cursor': 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+    'replit': 'bg-orange-600/10 text-orange-500 border-orange-600/20',
+    'mcp': 'bg-green-500/10 text-green-400 border-green-500/20',
   };
 
   const labels = {
-    claude: "Claude",
-    windsurf: "Windsurf",
-    cursor: "Cursor",
-    replit: "Replit",
+    'claude-code': 'Claude',
+    'windsurf': 'Windsurf',
+    'cursor': 'Cursor',
+    'replit': 'Replit',
+    'mcp': 'MCP',
   };
 
   return (
-    <span className={`px-2.5 py-0.5 rounded-full text-[10px] font-medium border uppercase tracking-wider ${styles[tool]}`}>
+    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border uppercase tracking-wider ${styles[tool]}`}>
       {labels[tool]}
     </span>
   );
 };
 
-const CategoryIcon = ({ category }: { category: Agent['category'] }) => {
+const TypeIcon = ({ type }: { type: Agent['type'] }) => {
   const icons = {
-    coding: Code,
-    debugging: Bug,
-    testing: Zap,
-    productivity: Terminal,
-    data: Database,
-    web: Globe,
-    other: Terminal,
+    rule: "📝",
+    agent: "🤖",
+    plugin: "🔌",
+    skill: "📚",
+    template: "📦",
   };
-  const Icon = icons[category];
-  return <Icon className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />;
+
+  return <span className="text-sm" title={type}>{icons[type]}</span>;
 };
 
-export function AgentCard({ agent }: { agent: Agent }) {
+export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: Agent) => void }) {
+  const [copied, setCopied] = useState(false);
+
   // Determine spotlight color based on tool
   const spotlightColors = {
-    claude: "rgba(217, 119, 87, 0.2)",
+    "claude-code": "rgba(217, 119, 87, 0.2)",
     windsurf: "rgba(59, 130, 246, 0.2)",
     cursor: "rgba(168, 85, 247, 0.2)",
     replit: "rgba(249, 115, 22, 0.2)",
+    mcp: "rgba(34, 197, 94, 0.2)",
+  };
+
+  const handleCopy = (e: React.MouseEvent) => {
+    e.preventDefault(); // Prevent opening modal/link
+    e.stopPropagation();
+    if (agent.installation.command) {
+      navigator.clipboard.writeText(agent.installation.command);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const handleClick = (e: React.MouseEvent) => {
+    if (onClick) {
+      e.preventDefault();
+      onClick(agent);
+    }
   };
 
   return (
-    <Link href={`/agent/${agent.id}`} className="block h-full">
+    <Link href={`/agent/${agent.id}`} className="block h-full" onClick={handleClick}>
       <SpotlightCard 
-        className="h-full flex flex-col p-5 transition-transform duration-300 hover:-translate-y-1"
+        className="h-full flex flex-col p-3 transition-transform duration-300 hover:-translate-y-1 justify-between relative group"
         spotlightColor={spotlightColors[agent.tool]}
       >
-        <div className="flex justify-between items-start mb-4">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center group-hover:bg-white/10 transition-colors">
-              <CategoryIcon category={agent.category} />
-            </div>
-            <div>
-              <h3 className="font-semibold text-base text-gray-100 group-hover:text-white transition-colors">
-                {agent.name}
-              </h3>
-              <p className="text-xs text-gray-500">by {agent.author.name}</p>
-            </div>
-          </div>
-          <div className="flex flex-col items-end gap-2">
-            <ToolBadge tool={agent.tool} />
-            <div className="flex gap-1">
-              {agent.verified && (
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-green-500/10 text-green-400 border border-green-500/20" title="Verified by AgentDepot">
-                  ✓
-                </span>
-              )}
-              {agent.trending && (
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-orange-500/10 text-orange-400 border border-orange-500/20" title="Trending this week">
-                  🔥
-                </span>
-              )}
-              {/* Check if created within last 7 days */}
-              {new Date(agent.createdAt) > new Date(Date.now() - 7 * 24 * 60 * 60 * 1000) && (
-                <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20" title="New Arrival">
-                  NEW
-                </span>
-              )}
-            </div>
-          </div>
+        {/* Tool Badge - Top Right */}
+        <div className="absolute top-3 right-2">
+          <ToolBadge tool={agent.tool} />
         </div>
 
-        <p className="text-sm text-gray-400 mb-6 flex-grow line-clamp-2 leading-relaxed">
+        {/* Header with Type Icon */}
+        <div className="mb-3 pr-24">
+          <div className="flex items-start gap-2 mb-1">
+            <span className="flex-shrink-0 w-5 flex items-center justify-center">
+              <TypeIcon type={agent.type} />
+            </span>
+            <h3 className="font-semibold text-lg text-gray-100 group-hover:text-white transition-colors line-clamp-2 flex-1">
+              {agent.name}
+            </h3>
+          </div>
+          <p className="text-xs text-gray-500 pl-7">by {agent.author.name}</p>
+        </div>
+
+        {/* Description - aligned with title text */}
+        <p className="text-sm text-gray-400 line-clamp-2 overflow-hidden mb-4 h-[40px] leading-relaxed pl-7">
           {agent.description}
         </p>
 
-        <div className="flex items-center justify-between pt-4 border-t border-white/5 mt-auto">
-          <div className="flex items-center gap-4 text-xs text-gray-500 font-mono">
-            {agent.stats?.stars && (
-              <div className="flex items-center gap-1.5">
-                <Star className="w-3 h-3" />
-                <span>{agent.stats.stars}</span>
-              </div>
-            )}
-            {agent.stats?.downloads && (
-              <div className="flex items-center gap-1.5">
-                <Download className="w-3 h-3" />
-                <span>{agent.stats.downloads}</span>
-              </div>
+        <div className="mt-4 flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded-full border border-white/5">
+                {agent.type}
+              </span>
+              <AgentStats downloads={agent.stats?.downloads} stars={agent.stats?.stars} />
+            </div>
+            
+            {/* Copy Button (Visible on Hover) */}
+            {agent.installation.command && (
+              <button
+                onClick={handleCopy}
+                className={`
+                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200
+                  ${copied 
+                    ? "bg-green-500/20 text-green-400 border border-green-500/30" 
+                    : "bg-white text-black hover:bg-gray-200 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
+                  }
+                `}
+              >
+                {copied ? (
+                  <>
+                    <Check className="w-3 h-3" />
+                    <span>Copied</span>
+                  </>
+                ) : (
+                  <>
+                    <Copy className="w-3 h-3" />
+                    <span>Copy</span>
+                  </>
+                )}
+              </button>
             )}
           </div>
-          
-          <div className="text-xs font-medium text-primary opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-            Details <ExternalLink className="w-3 h-3" />
-          </div>
-        </div>
       </SpotlightCard>
     </Link>
   );

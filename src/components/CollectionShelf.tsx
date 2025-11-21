@@ -25,7 +25,7 @@ export function CollectionShelf({
   onSelectCollection 
 }: CollectionShelfProps) {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+    <div className="flex gap-4 overflow-x-auto pb-6 -mx-4 px-4 snap-x scrollbar-hide">
       {collections.map((collection, index) => {
         const Icon = iconMap[collection.icon] || Sparkles;
         const isSelected = selectedCollectionId === collection.id;
@@ -33,12 +33,12 @@ export function CollectionShelf({
         return (
           <motion.button
             key={collection.id}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: index * 0.1 }}
             onClick={() => onSelectCollection(isSelected ? null : collection.id)}
             className={cn(
-              "relative group overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 border",
+              "relative group overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 border min-w-[280px] w-[280px] snap-start",
               isSelected 
                 ? "border-white/20 shadow-[0_0_30px_-5px_rgba(255,255,255,0.1)]" 
                 : "border-white/5 hover:border-white/10 hover:bg-white/5"

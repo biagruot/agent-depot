@@ -91,7 +91,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
         {/* Privacy-Focused Analytics - Plausible */}
         {/* Uncomment and add your Plausible domain when ready:
@@ -102,7 +102,7 @@ export default function RootLayout({
         {/* <script async src="https://analytics.umami.is/script.js" data-website-id="your-website-id"></script> */}
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-black text-white selection:bg-blue-500/30`}
       >
         {children}
       </body>

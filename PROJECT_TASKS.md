@@ -108,10 +108,16 @@ See [MARKETING_PLAN.md](/Users/biagioruotolo/Documents/Personal/Dev/agentstack/a
 - Replit: 15 total (from 8!)
 - **Total: 115 agents**
 
-### Day 4: Launch Prep (4 hours)
-- [ ] **Product Hunt Preparation**
-  - [ ] Write PH post title and tagline
-  - [ ] Prepare first comment (explain multi-tool advantage)
+### Day 4: Launch Prep & Community Features (Friday)
+- [ ] **Create MCPs Page** (Curate top MCP servers)
+- [ ] **Create Jobs Page** (Add initial job listings or embed)
+- [ ] **Final Polish:** Check mobile responsiveness of new Navbar
+- [ ] **Domain Setup:** Buy `agentdepot.dev` and configure DNS
+- [ ] **Analytics:** Verify Plausible/Umami setup
+- [ ] **Legal:** Double check Privacy/Terms links in footer
+- [ ] **Product Hunt Prep:**
+    - [ ] Prepare screenshots (Hero, Search, Agent Detail)
+    - [ ] Write launch copy (Tagline, Description, First Comment)
   - [ ] Create 3-4 preview screenshots
   - [ ] Draft responses for common questions
   
