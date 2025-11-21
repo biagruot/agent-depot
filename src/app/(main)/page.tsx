@@ -15,7 +15,7 @@ import { EmailSignup } from "@/components/EmailSignup";
 
 function HomeContent() {
   const searchParams = useSearchParams();
-  
+
   // Initialize state from URL parameters
   const initialTool = (searchParams.get("tool") as AgentTool) || 'all';
   const initialType = (searchParams.get("type") as AgentType) || 'all';
@@ -31,12 +31,12 @@ function HomeContent() {
   // Update URL when filters change
   useEffect(() => {
     const params = new URLSearchParams();
-    
+
     if (searchQuery) params.set("q", searchQuery);
     if (selectedTool !== 'all') params.set("tool", selectedTool);
     if (selectedType !== 'all') params.set("type", selectedType);
     if (currentSort !== 'newest') params.set("sort", currentSort);
-    
+
     const newUrl = params.toString() ? `?${params.toString()}` : '/';
     window.history.replaceState({}, '', newUrl);
   }, [searchQuery, selectedTool, selectedType, currentSort]);
@@ -102,10 +102,7 @@ function HomeContent() {
 
   return (
     <div className="min-h-screen pb-20">
-      {/* Subtle Social Proof Badge - Top Right */}
-      <div className="fixed top-4 right-4 z-50 text-xs text-gray-400 bg-black/80 backdrop-blur-md px-3 py-1.5 rounded-full border border-white/10 hover:border-white/20 transition-colors">
-        ✓ {agents.filter(a => a.stats?.downloads).reduce((acc, a) => acc + (a.stats?.downloads || 0), 0).toLocaleString()}+ downloads
-      </div>
+
 
       {/* Fixed Submit CTA - Bottom Right */}
       <a
@@ -145,10 +142,10 @@ function HomeContent() {
           <div className="text-center mb-12 space-y-6">
             {/* Main Title with Gradient */}
             <div className="space-y-3">
-              <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight pb-2">
+              <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight">
                 AgentDepot
               </h1>
-              
+
               {/* Subtitle with Glass Badge */}
               <div className="flex items-center justify-center gap-3">
                 <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide">
@@ -160,7 +157,7 @@ function HomeContent() {
 
           {/* Search Bar - Primary Action */}
           <div className="mb-6">
-            <SearchFilters 
+            <SearchFilters
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
               selectedTool={selectedTool}
@@ -177,15 +174,15 @@ function HomeContent() {
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
             <div className="flex items-center gap-4">
-              <h2 className="text-xl font-semibold text-white">
+              <h2 className="text-xl font-semibold text-white whitespace-nowrap">
                 {isFiltering ? `Search Results (${filteredAgents.length})` : "All Agents"}
               </h2>
               <span className="text-sm text-gray-500 font-mono bg-white/5 px-2 py-0.5 rounded-md">
                 {filteredAgents.length}
               </span>
             </div>
-            
-            <div className="flex items-center gap-3">
+
+            <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
               <ShareFiltersButton />
               <SortDropdown currentSort={currentSort} onSortChange={setCurrentSort} />
             </div>
@@ -202,7 +199,7 @@ function HomeContent() {
           ) : (
             <div className="text-center py-32 glass-panel rounded-3xl">
               <p className="text-xl text-gray-400">No matching agents. Maybe build one?</p>
-              <button 
+              <button
                 onClick={() => { setSearchQuery(""); setSelectedTool("all"); setSelectedType("all"); }}
                 className="mt-4 text-primary hover:text-white transition-colors"
               >
@@ -214,10 +211,10 @@ function HomeContent() {
       </main>
 
       {/* Agent Modal */}
-      <AgentModal 
-        agent={selectedAgent} 
-        isOpen={!!selectedAgent} 
-        onClose={() => setSelectedAgent(null)} 
+      <AgentModal
+        agent={selectedAgent}
+        isOpen={!!selectedAgent}
+        onClose={() => setSelectedAgent(null)}
       />
 
       {/* Footer */}
@@ -225,7 +222,7 @@ function HomeContent() {
         <div className="container mx-auto px-4 space-y-12">
           {/* Email Signup */}
           <EmailSignup />
-          
+
           {/* Platform Support & Copyright */}
           <div className="text-center space-y-4">
             <p className="text-sm text-gray-500">

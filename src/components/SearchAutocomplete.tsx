@@ -207,7 +207,7 @@ export function SearchAutocomplete({
           </button>
         )}
 
-        <div className="flex items-center gap-1 px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 ml-2 shrink-0">
+        <div className="hidden sm:flex items-center gap-1 px-3 py-1.5 bg-white/5 rounded-lg border border-white/5 ml-2 shrink-0">
           <Command className="w-3 h-3 text-gray-400" />
           <span className="text-xs text-gray-400 font-mono">K</span>
         </div>

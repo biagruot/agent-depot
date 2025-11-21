@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
-import { Github, Plus } from "lucide-react";
+import { Github, Plus, Download } from "lucide-react";
+import { agents } from "@/data/agents";
 
 export function Navbar() {
   const pathname = usePathname();
@@ -21,21 +22,33 @@ export function Navbar() {
 
         {/* Right Actions */}
         <div className="flex items-center gap-3">
-          <Link
-            href="/submit"
-            className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white text-black text-sm font-medium hover:bg-gray-200 transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            <span className="hidden sm:inline">Submit Agent</span>
-          </Link>
+          {/* Downloads Counter */}
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 text-xs font-medium text-gray-400 hover:bg-white/10 transition-colors cursor-default whitespace-nowrap">
+            <Download className="w-3.5 h-3.5" />
+            <span>{agents.reduce((acc, a) => acc + (a.stats?.downloads || 0), 0).toLocaleString()}</span>
+            <span className="hidden sm:inline">downloads</span>
+          </div>
+
+
           <a
             href="https://github.com/agentdepot/directory"
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden lg:flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+            className="group flex items-center gap-2 px-3 py-2 rounded-lg bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300"
           >
-            <Github className="w-4 h-4" />
-            <span>Star on GitHub</span>
+            <div className="flex items-center gap-2">
+              <Github className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors" />
+              <span className="text-sm font-medium text-gray-300 group-hover:text-white hidden lg:inline">Star on GitHub</span>
+              <span className="text-sm font-medium text-gray-300 group-hover:text-white lg:hidden">Star</span>
+            </div>
+
+            {/* Separator */}
+            <div className="w-px h-4 bg-white/10 mx-1" />
+
+            {/* Star Count */}
+            <div className="flex items-center gap-1 text-xs font-mono text-gray-400 group-hover:text-yellow-400 transition-colors">
+              <span className="font-bold">142</span>
+            </div>
           </a>
         </div>
       </div>

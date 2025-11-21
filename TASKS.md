@@ -62,6 +62,12 @@
 - [ ] **Social Proof Section** (Removed per user request)
 - [x] **Copy Rewrite** (Dev voice: "Ship It", "Weekly Drop", etc.)
 - [x] **Submit Page UI Polish** (Glassmorphism, premium inputs, better cards)
+- [x] **Mobile UI Optimization** (Responsive hero text, hidden Cmd+K on mobile)
+- [x] **Mobile Filter & Layout Fixes** (Horizontal scroll filters, fixed badge overlap)
+- [x] **Mobile Sort Alignment & Dropdown Fix** (Justified layout, custom dropdown, header text wrap fix)
+- [x] **Navbar Download Counter & GitHub Icon** (Always visible, responsive text)
+- [x] **Premium GitHub Star Button** (Pill design, hover effects, trust signal)
+- [x] **Navbar Simplification** (Removed Submit button)
 
 ---
 

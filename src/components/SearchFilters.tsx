@@ -78,13 +78,13 @@ export function SearchFilters({
       />
 
       {/* Tool Filters */}
-      <div className="flex flex-wrap justify-center gap-2">
+      <div className="flex overflow-x-auto pb-2 md:pb-0 md:flex-wrap md:justify-center gap-2 no-scrollbar">
         <button
           onClick={() => {
             setSelectedTool('all');
             setSelectedType('all');
           }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             selectedTool === 'all'
               ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
               : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
@@ -97,7 +97,7 @@ export function SearchFilters({
             setSelectedTool('cursor');
             setSelectedType('all');
           }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             selectedTool === 'cursor'
               ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
               : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
@@ -110,7 +110,7 @@ export function SearchFilters({
             setSelectedTool('windsurf');
             setSelectedType('all');
           }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             selectedTool === 'windsurf'
               ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
               : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
@@ -123,7 +123,7 @@ export function SearchFilters({
             setSelectedTool('mcp');
             setSelectedType('all');
           }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             selectedTool === 'mcp'
               ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
               : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
@@ -136,7 +136,7 @@ export function SearchFilters({
             setSelectedTool('claude-code');
             setSelectedType('all');
           }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             selectedTool === 'claude-code'
               ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
               : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
@@ -149,7 +149,7 @@ export function SearchFilters({
             setSelectedTool('replit');
             setSelectedType('all');
           }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 ${
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
             selectedTool === 'replit'
               ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
               : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
@@ -161,12 +161,12 @@ export function SearchFilters({
 
       {/* Type Filters (Context-Aware) */}
       {availableTypes.length > 1 && (
-        <div className="flex flex-wrap justify-center gap-2">
+        <div className="flex overflow-x-auto pb-2 md:pb-0 md:flex-wrap md:justify-center gap-2 no-scrollbar">
           {availableTypes.map((type) => (
             <button
               key={type.id}
               onClick={() => setSelectedType(type.id)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 ${
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 whitespace-nowrap ${
                 selectedType === type.id
                   ? "bg-primary/20 text-primary border border-primary/30"
                   : "bg-white/5 text-gray-500 hover:bg-white/10 hover:text-gray-300 border border-transparent"

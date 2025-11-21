@@ -10,15 +10,15 @@ export const metadata = {
 export default function SubmitPage() {
   return (
     <main className="min-h-screen relative pb-32">
-      
+
       <div className="container mx-auto px-4 pt-12 max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-12 space-y-6">
           <div className="space-y-3">
-            <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight pb-2">
+            <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight">
               Ship It.
             </h1>
-            
+
             <div className="flex items-center justify-center gap-3">
               <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
                 Don't let your agent gather dust. Share it with 10k+ devs.
@@ -33,15 +33,15 @@ export default function SubmitPage() {
         {/* Alternative Methods */}
         <div className="mt-24 pt-16 border-t border-white/10">
           <h2 className="text-2xl font-bold text-center text-white mb-8">Other Submission Methods</h2>
-          
+
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            <Link 
+            <Link
               href="https://github.com/agentdepot/directory/issues/new?template=agent_submission.md"
               target="_blank"
               className="group glass-panel p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] flex flex-col items-center relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
+
               <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/10 group-hover:border-purple-500/30 shadow-lg">
                 <Github className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors" />
               </div>
@@ -54,7 +54,7 @@ export default function SubmitPage() {
               </div>
             </Link>
 
-            <Link 
+            <Link
               href="mailto:submit@agentdepot.dev"
               className="group glass-panel p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] flex flex-col items-center relative overflow-hidden"
             >
