@@ -58,6 +58,10 @@
 - [x] **Sort Dropdown** (newest, popular, trending, alphabetical)
 - [x] **URL Parameters** (all filters in URL: `?q=`, `?tool=`, `?type=`, `?sort=`)
 - [x] **Share Filters Button** (copy current filtered view)
+- [x] **Search Autocomplete** (suggestions for agents, authors, tags + keyboard nav)
+- [ ] **Social Proof Section** (Removed per user request)
+- [x] **Copy Rewrite** (Dev voice: "Ship It", "Weekly Drop", etc.)
+- [x] **Submit Page UI Polish** (Glassmorphism, premium inputs, better cards)
 
 ---
 
@@ -85,37 +89,23 @@
 
 ## 📋 **HIGH PRIORITY BACKLOG**
 
-### 1. Search Autocomplete (Task #6.3)
-**Impact:** High - Improves search UX significantly  
-**Effort:** 2-3 hours
+### 1. Analytics Event Tracking
+**Impact:** High - Data-driven decisions  
+**Effort:** 2 hours
 
-**Implementation:**
-- [ ] Show suggestions as user types
-- [ ] Group by: Agents, Authors, Tags
-- [ ] Highlight matching text
-- [ ] Keyboard navigation (arrow keys, enter)
-- [ ] Mobile-friendly dropdown
+**Events to track:**
+- [ ] `agent_copy` (agent_id, tool, type)
+- [ ] `agent_share` (platform: twitter/link)
+- [ ] `email_signup`
+- [ ] `modal_open` (agent_id)
+- [ ] `filter_applied` (filter type + value)
+- [ ] `search_query` (query string)
 
-**Files to create:**
-- `src/components/SearchAutocomplete.tsx`
-
----
-
-### 2. Social Proof Section (Task #3.4)
-**Impact:** High - +20% trust & conversion  
-**Effort:** 1-2 hours
-
-**Implementation:**
-- [ ] Add section after hero or in footer
-- [ ] Options:
-  - "Trusted by 10K+ developers"
-  - Company logos (if available)
-  - Testimonials (2-3 max)
-  - Usage stats visualization
-- [ ] Keep it subtle and non-salesy
-
-**Files to create:**
-- `src/components/SocialProof.tsx`
+**Setup:**
+- [ ] Choose analytics (Vercel Analytics, PostHog, or Plausible)
+- [ ] Add tracking calls to components
+- [ ] Set up dashboard
+- [ ] Track North Star Metric: **Time to First Copy (TTFC)**
 
 ---
 

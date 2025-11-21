@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { Send, CheckCircle, AlertCircle } from "lucide-react";
+import { Send, CheckCircle, AlertCircle, Box, Terminal, Link as LinkIcon, User } from "lucide-react";
+
+const inputClasses = "w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:bg-white/10 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20 transition-all duration-200 backdrop-blur-sm";
+const labelClasses = "block text-sm font-medium text-gray-400 mb-2 ml-1";
+const sectionHeaderClasses = "text-xl font-semibold text-white mb-6 flex items-center gap-2";
 
 interface FormData {
   agentName: string;
@@ -159,12 +163,15 @@ Submitted via AgentDepot.directory
       )}
 
       {/* Agent Details */}
-      <div className="glass-panel rounded-3xl p-8">
-        <h2 className="text-2xl font-bold text-white mb-6">Agent Details</h2>
+      <div className="glass-panel rounded-3xl p-8 border border-white/10">
+        <h2 className={sectionHeaderClasses}>
+          <Box className="w-5 h-5 text-blue-400" />
+          Agent Details
+        </h2>
         
         <div className="space-y-6">
           <div>
-            <label htmlFor="agentName" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="agentName" className={labelClasses}>
               Agent Name <span className="text-red-400">*</span>
             </label>
             <input
@@ -174,13 +181,13 @@ Submitted via AgentDepot.directory
               required
               value={formData.agentName}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors"
+              className={inputClasses}
               placeholder="e.g., React Pro Agent"
             />
           </div>
 
           <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="description" className={labelClasses}>
               Short Description <span className="text-red-400">*</span>
             </label>
             <input
@@ -190,14 +197,14 @@ Submitted via AgentDepot.directory
               required
               value={formData.description}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors"
+              className={inputClasses}
               placeholder="Brief one-line description (max 150 characters)"
               maxLength={150}
             />
           </div>
 
           <div>
-            <label htmlFor="fullDescription" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="fullDescription" className={labelClasses}>
               Full Description (Markdown supported)
             </label>
             <textarea
@@ -206,58 +213,68 @@ Submitted via AgentDepot.directory
               value={formData.fullDescription}
               onChange={handleChange}
               rows={6}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors resize-none"
+              className={`${inputClasses} resize-none`}
               placeholder="Detailed description with features, usage examples, etc."
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="tool" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="tool" className={labelClasses}>
                 Tool <span className="text-red-400">*</span>
               </label>
-              <select
-                id="tool"
-                name="tool"
-                required
-                value={formData.tool}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:border-primary focus:outline-none transition-colors"
-              >
-                <option value="">Select a tool...</option>
-                <option value="claude">Claude Code</option>
-                <option value="windsurf">Windsurf</option>
-                <option value="cursor">Cursor</option>
-                <option value="replit">Replit</option>
-              </select>
+              <div className="relative">
+                <select
+                  id="tool"
+                  name="tool"
+                  required
+                  value={formData.tool}
+                  onChange={handleChange}
+                  className={`${inputClasses} appearance-none`}
+                >
+                  <option value="" className="bg-gray-900">Select a tool...</option>
+                  <option value="claude" className="bg-gray-900">Claude Code</option>
+                  <option value="windsurf" className="bg-gray-900">Windsurf</option>
+                  <option value="cursor" className="bg-gray-900">Cursor</option>
+                  <option value="replit" className="bg-gray-900">Replit</option>
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                  ▼
+                </div>
+              </div>
             </div>
 
             <div>
-              <label htmlFor="category" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="category" className={labelClasses}>
                 Category <span className="text-red-400">*</span>
               </label>
-              <select
-                id="category"
-                name="category"
-                required
-                value={formData.category}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:border-primary focus:outline-none transition-colors"
-              >
-                <option value="">Select a category...</option>
-                <option value="coding">Coding</option>
-                <option value="debugging">Debugging</option>
-                <option value="testing">Testing</option>
-                <option value="productivity">Productivity</option>
-                <option value="data">Data</option>
-                <option value="web">Web</option>
-                <option value="other">Other</option>
-              </select>
+              <div className="relative">
+                <select
+                  id="category"
+                  name="category"
+                  required
+                  value={formData.category}
+                  onChange={handleChange}
+                  className={`${inputClasses} appearance-none`}
+                >
+                  <option value="" className="bg-gray-900">Select a category...</option>
+                  <option value="coding" className="bg-gray-900">Coding</option>
+                  <option value="debugging" className="bg-gray-900">Debugging</option>
+                  <option value="testing" className="bg-gray-900">Testing</option>
+                  <option value="productivity" className="bg-gray-900">Productivity</option>
+                  <option value="data" className="bg-gray-900">Data</option>
+                  <option value="web" className="bg-gray-900">Web</option>
+                  <option value="other" className="bg-gray-900">Other</option>
+                </select>
+                <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                  ▼
+                </div>
+              </div>
             </div>
           </div>
 
           <div>
-            <label htmlFor="tags" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="tags" className={labelClasses}>
               Tags (comma-separated)
             </label>
             <input
@@ -266,7 +283,7 @@ Submitted via AgentDepot.directory
               name="tags"
               value={formData.tags}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors"
+              className={inputClasses}
               placeholder="e.g., react, typescript, hooks"
             />
           </div>
@@ -274,30 +291,38 @@ Submitted via AgentDepot.directory
       </div>
 
       {/* Installation */}
-      <div className="glass-panel rounded-3xl p-8">
-        <h2 className="text-2xl font-bold text-white mb-6">Installation</h2>
+      <div className="glass-panel rounded-3xl p-8 border border-white/10">
+        <h2 className={sectionHeaderClasses}>
+          <Terminal className="w-5 h-5 text-purple-400" />
+          Installation
+        </h2>
         
         <div className="space-y-6">
           <div>
-            <label htmlFor="install ationType" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="installationType" className={labelClasses}>
               Installation Type
             </label>
-            <select
-              id="installationType"
-              name="installationType"
-              value={formData.installationType}
-              onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white focus:border-primary focus:outline-none transition-colors"
-            >
-              <option value="manual">Manual</option>
-              <option value="npm">NPM</option>
-              <option value="git">Git</option>
-              <option value="extension">Extension</option>
-            </select>
+            <div className="relative">
+              <select
+                id="installationType"
+                name="installationType"
+                value={formData.installationType}
+                onChange={handleChange}
+                className={`${inputClasses} appearance-none`}
+              >
+                <option value="manual" className="bg-gray-900">Manual</option>
+                <option value="npm" className="bg-gray-900">NPM</option>
+                <option value="git" className="bg-gray-900">Git</option>
+                <option value="extension" className="bg-gray-900">Extension</option>
+              </select>
+              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+                ▼
+              </div>
+            </div>
           </div>
 
           <div>
-            <label htmlFor="installationCommand" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="installationCommand" className={labelClasses}>
               Installation Command
             </label>
             <input
@@ -306,13 +331,13 @@ Submitted via AgentDepot.directory
               name="installationCommand"
               value={formData.installationCommand}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors font-mono text-sm"
+              className={`${inputClasses} font-mono text-sm`}
               placeholder="e.g., /plugin install my-agent or npm install my-agent"
             />
           </div>
 
           <div>
-            <label htmlFor="installationInstructions" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="installationInstructions" className={labelClasses}>
               Installation Instructions
             </label>
             <textarea
@@ -321,7 +346,7 @@ Submitted via AgentDepot.directory
               value={formData.installationInstructions}
               onChange={handleChange}
               rows={4}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors resize-none"
+              className={`${inputClasses} resize-none`}
               placeholder="Step-by-step installation instructions..."
             />
           </div>
@@ -329,12 +354,15 @@ Submitted via AgentDepot.directory
       </div>
 
       {/* Links & Author */}
-      <div className="glass-panel rounded-3xl p-8">
-        <h2 className="text-2xl font-bold text-white mb-6">Links & Author Info</h2>
+      <div className="glass-panel rounded-3xl p-8 border border-white/10">
+        <h2 className={sectionHeaderClasses}>
+          <User className="w-5 h-5 text-pink-400" />
+          Links & Author Info
+        </h2>
         
         <div className="space-y-6">
           <div>
-            <label htmlFor="githubUrl" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="githubUrl" className={labelClasses}>
               GitHub URL
             </label>
             <input
@@ -343,13 +371,13 @@ Submitted via AgentDepot.directory
               name="githubUrl"
               value={formData.githubUrl}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors"
+              className={inputClasses}
               placeholder="https://github.com/username/repo"
             />
           </div>
 
           <div>
-            <label htmlFor="authorName" className="block text-sm font-medium text-gray-300 mb-2">
+            <label htmlFor="authorName" className={labelClasses}>
               Your Name <span className="text-red-400">*</span>
             </label>
             <input
@@ -359,14 +387,14 @@ Submitted via AgentDepot.directory
               required
               value={formData.authorName}
               onChange={handleChange}
-              className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors"
+              className={inputClasses}
               placeholder="Your name or username"
             />
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
-              <label htmlFor="authorGithub" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="authorGithub" className={labelClasses}>
                 Your GitHub
               </label>
               <input
@@ -375,13 +403,13 @@ Submitted via AgentDepot.directory
                 name="authorGithub"
                 value={formData.authorGithub}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors"
+                className={inputClasses}
                 placeholder="https://github.com/username"
               />
             </div>
 
             <div>
-              <label htmlFor="authorTwitter" className="block text-sm font-medium text-gray-300 mb-2">
+              <label htmlFor="authorTwitter" className={labelClasses}>
                 Your Twitter/X
               </label>
               <input
@@ -390,7 +418,7 @@ Submitted via AgentDepot.directory
                 name="authorTwitter"
                 value={formData.authorTwitter}
                 onChange={handleChange}
-                className="w-full px-4 py-3 rounded-lg bg-black/40 border border-white/10 text-white placeholder-gray-500 focus:border-primary focus:outline-none transition-colors"
+                className={inputClasses}
                 placeholder="@username"
               />
             </div>
@@ -403,9 +431,9 @@ Submitted via AgentDepot.directory
         <button
           type="submit"
           disabled={status === "loading"}
-          className="inline-flex items-center gap-2 px-8 py-4 rounded-lg bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-500 hover:to-purple-500 text-white font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40"
+          className="group relative inline-flex items-center gap-2 px-8 py-4 rounded-xl bg-white text-black font-bold text-lg transition-all hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
         >
-          <Send size={18} />
+          <Send size={18} className="group-hover:translate-x-1 transition-transform" />
           {status === "loading" ? "Preparing..." : "Submit Agent"}
         </button>
       </div>

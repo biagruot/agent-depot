@@ -1,6 +1,6 @@
 "use client";
 
-import { Search, Command } from "lucide-react";
+import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 import { AgentTool, AgentType } from "@/types/agent";
 
 interface SearchFiltersProps {
@@ -72,26 +72,10 @@ export function SearchFilters({
   return (
     <div className="space-y-6">
       {/* Command Palette Style Search */}
-      <div className="relative max-w-2xl mx-auto group">
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-purple-500/20 to-orange-500/20 rounded-2xl opacity-50 group-hover:opacity-100 blur transition duration-500" />
-        <div className="relative bg-[#0A0A0A] rounded-xl border border-white/10 flex items-center p-2 shadow-2xl">
-          <div className="p-3 text-gray-500">
-            <Search className="w-5 h-5" />
-          </div>
-          <input
-            type="text"
-            className="w-full bg-transparent border-none text-lg text-white placeholder-gray-500 focus:ring-0 px-2 py-1"
-            placeholder="Search agents, rules, plugins..."
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            autoFocus
-          />
-          <div className="hidden md:flex items-center gap-1 px-3 py-1.5 bg-white/5 rounded-lg border border-white/5">
-            <Command className="w-3 h-3 text-gray-500" />
-            <span className="text-xs text-gray-500 font-mono">K</span>
-          </div>
-        </div>
-      </div>
+      <SearchAutocomplete 
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
 
       {/* Tool Filters */}
       <div className="flex flex-wrap justify-center gap-2">

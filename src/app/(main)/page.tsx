@@ -172,8 +172,8 @@ function HomeContent() {
         </div>
       </section>
 
-      {/* Main Grid */}
-      <section id="browse" className="px-4 pb-16">
+      {/* Main Content */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <div className="container mx-auto max-w-7xl">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
             <div className="flex items-center gap-4">
@@ -201,7 +201,7 @@ function HomeContent() {
             </div>
           ) : (
             <div className="text-center py-32 glass-panel rounded-3xl">
-              <p className="text-xl text-gray-400">No agents found.</p>
+              <p className="text-xl text-gray-400">No matching agents. Maybe build one?</p>
               <button 
                 onClick={() => { setSearchQuery(""); setSelectedTool("all"); setSelectedType("all"); }}
                 className="mt-4 text-primary hover:text-white transition-colors"
@@ -211,7 +211,7 @@ function HomeContent() {
             </div>
           )}
         </div>
-      </section>
+      </main>
 
       {/* Agent Modal */}
       <AgentModal 

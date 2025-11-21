@@ -11,22 +11,20 @@ export default function SubmitPage() {
   return (
     <main className="min-h-screen relative pb-32">
       
-      <div className="container mx-auto px-4 pt-32 max-w-5xl relative z-10">
+      <div className="container mx-auto px-4 pt-12 max-w-4xl relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs font-medium text-gray-400 mb-6">
-            <CheckCircle size={14} className="text-green-400" />
-            Free & Open to All
+        <div className="text-center mb-12 space-y-6">
+          <div className="space-y-3">
+            <h1 className="text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight pb-2">
+              Ship It.
+            </h1>
+            
+            <div className="flex items-center justify-center gap-3">
+              <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
+                Don't let your agent gather dust. Share it with 10k+ devs.
+              </p>
+            </div>
           </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 tracking-tight bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-            Submit an Agent
-          </h1>
-          
-          <p className="text-xl text-gray-400 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Help the community discover the best AI coding agents. 
-            We review every submission to ensure quality and safety.
-          </p>
         </div>
 
         {/* Main Form */}
@@ -40,16 +38,16 @@ export default function SubmitPage() {
             <Link 
               href="https://github.com/agentdepot/directory/issues/new?template=agent_submission.md"
               target="_blank"
-              className="group glass-panel p-8 rounded-3xl hover:border-white/20 transition-all hover:shadow-2xl hover:shadow-purple-500/10 flex flex-col items-center relative overflow-hidden"
+              className="group glass-panel p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] flex flex-col items-center relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               
-              <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-white/10">
-                <Github className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/10 group-hover:border-purple-500/30 shadow-lg">
+                <Github className="w-8 h-8 text-white group-hover:text-purple-400 transition-colors" />
               </div>
-              <h3 className="text-xl font-bold mb-2 text-white">Submit via GitHub</h3>
+              <h3 className="text-xl font-bold mb-2 text-white">The Git Way</h3>
               <p className="text-gray-400 text-sm mb-6 text-center">
-                Create an issue with your agent details. Best for developers.
+                Push to GitHub. Open an issue, we'll merge it.
               </p>
               <div className="mt-auto flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
                 Open Issue <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -58,16 +56,16 @@ export default function SubmitPage() {
 
             <Link 
               href="mailto:submit@agentdepot.dev"
-              className="group glass-panel p-8 rounded-3xl hover:border-white/20 transition-all hover:shadow-2xl hover:shadow-blue-500/10 flex flex-col items-center relative overflow-hidden"
+              className="group glass-panel p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] flex flex-col items-center relative overflow-hidden"
             >
-              <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform border border-white/10">
-                <Mail className="w-8 h-8 text-white" />
+              <div className="w-16 h-16 bg-white/5 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300 border border-white/10 group-hover:border-blue-500/30 shadow-lg">
+                <Mail className="w-8 h-8 text-white group-hover:text-blue-400 transition-colors" />
               </div>
-              <h3 className="text-xl font-bold mb-2 text-white">Submit via Email</h3>
+              <h3 className="text-xl font-bold mb-2 text-white">Email Us</h3>
               <p className="text-gray-400 text-sm mb-6 text-center">
-                Send us your agent details directly. We'll handle the rest.
+                Old school? That works too. Send us the details.
               </p>
               <div className="mt-auto flex items-center text-sm font-medium text-blue-400 group-hover:text-blue-300">
                 Send Email <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
@@ -78,26 +76,29 @@ export default function SubmitPage() {
 
         {/* Guidelines */}
         <div className="mt-16">
-          <div className="p-8 glass-panel rounded-3xl border-l-4 border-l-blue-500">
-            <h3 className="font-bold text-white mb-6 text-xl">Submission Guidelines</h3>
+          <div className="p-8 glass-panel rounded-3xl border border-white/10 bg-blue-500/5">
+            <h3 className="font-bold text-white mb-6 text-xl flex items-center gap-2">
+              <div className="w-1.5 h-6 bg-blue-500 rounded-full" />
+              Submission Guidelines
+            </h3>
             <div className="grid md:grid-cols-2 gap-6">
-              <ul className="space-y-3 text-gray-400 text-sm">
+              <ul className="space-y-4 text-gray-400 text-sm">
                 <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
                   <span>Agent must be relevant to AI coding (Claude, Windsurf, Cursor, Replit).</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
                   <span>Must have a public repository or download link.</span>
                 </li>
               </ul>
-              <ul className="space-y-3 text-gray-400 text-sm">
+              <ul className="space-y-4 text-gray-400 text-sm">
                 <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
                   <span>Include clear installation instructions.</span>
                 </li>
                 <li className="flex items-start gap-3">
-                  <span className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                  <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
                   <span>No malicious code or obfuscated scripts.</span>
                 </li>
               </ul>

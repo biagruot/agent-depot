@@ -46,10 +46,10 @@ export function EmailSignup() {
     <div className="w-full max-w-md mx-auto">
       <div className="text-center mb-4">
         <h3 className="text-lg font-semibold text-white mb-2">
-          New agents every week
+          Weekly Drop.
         </h3>
         <p className="text-sm text-gray-400">
-          Get the latest AI coding agents delivered to your inbox
+          No spam. Just high-signal agents.
         </p>
       </div>
 
@@ -89,7 +89,7 @@ export function EmailSignup() {
           ) : (
             <>
               <Mail className="w-4 h-4" />
-              <span>Subscribe</span>
+              <span>Join</span>
             </>
           )}
         </button>
