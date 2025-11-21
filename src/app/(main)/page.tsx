@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
 import Fuse from "fuse.js";
 import { AgentCard } from "@/components/AgentCard";
 import { SearchFilters } from "@/components/SearchFilters";
@@ -13,7 +13,7 @@ import { SortDropdown, SortOption } from "@/components/SortDropdown";
 import { ShareFiltersButton } from "@/components/ShareFiltersButton";
 import { EmailSignup } from "@/components/EmailSignup";
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams();
   
   // Initialize state from URL parameters
@@ -238,5 +238,13 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  );
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-gray-400">Loading...</div></div>}>
+      <HomeContent />
+    </Suspense>
   );
 }

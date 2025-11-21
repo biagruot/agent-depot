@@ -1,3 +1,5 @@
+"use client";
+
 import { Agent } from "@/types/agent";
 import Link from "next/link";
 import { SpotlightCard } from "./SpotlightCard";

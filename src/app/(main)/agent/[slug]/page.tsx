@@ -32,10 +32,11 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
   }
 
   const toolColors = {
-    claude: "text-[#d97757] border-[#d97757]/20 bg-[#d97757]/10",
+    "claude-code": "text-[#d97757] border-[#d97757]/20 bg-[#d97757]/10",
     windsurf: "text-[#3b82f6] border-[#3b82f6]/20 bg-[#3b82f6]/10",
     cursor: "text-[#a855f7] border-[#a855f7]/20 bg-[#a855f7]/10",
     replit: "text-[#f97316] border-[#f97316]/20 bg-[#f97316]/10",
+    mcp: "text-[#22c55e] border-[#22c55e]/20 bg-[#22c55e]/10",
   };
 
   return (
@@ -53,7 +54,7 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
 
         <div className="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/50 relative overflow-hidden">
           {/* Background Glow */}
-          <div className={`absolute top-0 right-0 w-[500px] h-[500px] bg-${agent.tool === 'claude' ? 'orange' : agent.tool === 'windsurf' ? 'blue' : agent.tool === 'cursor' ? 'purple' : 'orange'}-500/10 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3`} />
+          <div className={`absolute top-0 right-0 w-[500px] h-[500px] bg-${agent.tool === 'claude-code' ? 'orange' : agent.tool === 'windsurf' ? 'blue' : agent.tool === 'cursor' ? 'purple' : 'orange'}-500/10 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3`} />
 
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12 border-b border-white/5 pb-12 relative">
