@@ -6,6 +6,7 @@ import { SpotlightCard } from "./SpotlightCard";
 import { Check, Copy } from "lucide-react";
 import { useState } from "react";
 import { AgentStats } from "./AgentStats";
+import { useOpenPanel } from "@openpanel/nextjs";
 
 const ToolBadge = ({ tool }: { tool: Agent['tool'] }) => {
   const styles = {
@@ -55,12 +56,23 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
     mcp: "rgba(34, 197, 94, 0.2)",
   };
 
+  const { track } = useOpenPanel();
+
   const handleCopy = (e: React.MouseEvent) => {
     e.preventDefault(); // Prevent opening modal/link
     e.stopPropagation();
     if (agent.installation.command) {
       navigator.clipboard.writeText(agent.installation.command);
       setCopied(true);
+
+      // Track copy event
+      track('agent_copy', {
+        agent_id: agent.id,
+        agent_name: agent.name,
+        tool: agent.tool,
+        type: agent.type
+      });
+
       setTimeout(() => setCopied(false), 2000);
     }
   };
@@ -74,7 +86,7 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
 
   return (
     <Link href={`/agent/${agent.id}`} className="block h-full" onClick={handleClick}>
-      <SpotlightCard 
+      <SpotlightCard
         className="h-full flex flex-col p-3 transition-transform duration-300 hover:-translate-y-1 justify-between relative group"
         spotlightColor={spotlightColors[agent.tool]}
       >
@@ -102,39 +114,39 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
         </p>
 
         <div className="mt-4 flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded-full border border-white/5">
-                {agent.type}
-              </span>
-              <AgentStats downloads={agent.stats?.downloads} stars={agent.stats?.stars} />
-            </div>
-            
-            {/* Copy Button (Visible on Hover) */}
-            {agent.installation.command && (
-              <button
-                onClick={handleCopy}
-                className={`
-                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200
-                  ${copied 
-                    ? "bg-green-500/20 text-green-400 border border-green-500/30" 
-                    : "bg-white text-black hover:bg-gray-200 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
-                  }
-                `}
-              >
-                {copied ? (
-                  <>
-                    <Check className="w-3 h-3" />
-                    <span>Copied</span>
-                  </>
-                ) : (
-                  <>
-                    <Copy className="w-3 h-3" />
-                    <span>Copy</span>
-                  </>
-                )}
-              </button>
-            )}
+          <div className="flex items-center gap-2">
+            <span className="text-xs text-gray-500 bg-white/5 px-2 py-1 rounded-full border border-white/5">
+              {agent.type}
+            </span>
+            <AgentStats downloads={agent.stats?.downloads} stars={agent.stats?.stars} />
           </div>
+
+          {/* Copy Button (Visible on Hover) */}
+          {agent.installation.command && (
+            <button
+              onClick={handleCopy}
+              className={`
+                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200
+                  ${copied
+                  ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                  : "bg-white text-black hover:bg-gray-200 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
+                }
+                `}
+            >
+              {copied ? (
+                <>
+                  <Check className="w-3 h-3" />
+                  <span>Copied</span>
+                </>
+              ) : (
+                <>
+                  <Copy className="w-3 h-3" />
+                  <span>Copy</span>
+                </>
+              )}
+            </button>
+          )}
+        </div>
       </SpotlightCard>
     </Link>
   );

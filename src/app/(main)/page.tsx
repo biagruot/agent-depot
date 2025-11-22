@@ -20,7 +20,7 @@ function HomeContent() {
   const initialTool = (searchParams.get("tool") as AgentTool) || 'all';
   const initialType = (searchParams.get("type") as AgentType) || 'all';
   const initialQuery = searchParams.get("q") || "";
-  const initialSort = (searchParams.get("sort") as SortOption) || 'newest';
+  const initialSort = (searchParams.get("sort") as SortOption) || 'popular';
 
   const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
   const [selectedTool, setSelectedTool] = useState<AgentTool | 'all'>(initialTool);
@@ -35,7 +35,7 @@ function HomeContent() {
     if (searchQuery) params.set("q", searchQuery);
     if (selectedTool !== 'all') params.set("tool", selectedTool);
     if (selectedType !== 'all') params.set("type", selectedType);
-    if (currentSort !== 'newest') params.set("sort", currentSort);
+    if (currentSort !== 'popular') params.set("sort", currentSort);
 
     const newUrl = params.toString() ? `?${params.toString()}` : '/';
     window.history.replaceState({}, '', newUrl);

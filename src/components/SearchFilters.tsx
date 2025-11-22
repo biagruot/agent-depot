@@ -3,6 +3,8 @@
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 import { AgentTool, AgentType } from "@/types/agent";
 
+import { useOpenPanel } from "@openpanel/nextjs";
+
 interface SearchFiltersProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -12,14 +14,26 @@ interface SearchFiltersProps {
   setSelectedType: (type: AgentType | 'all') => void;
 }
 
-export function SearchFilters({ 
-  searchQuery, 
-  setSearchQuery, 
-  selectedTool, 
+export function SearchFilters({
+  searchQuery,
+  setSearchQuery,
+  selectedTool,
   setSelectedTool,
   selectedType,
   setSelectedType
 }: SearchFiltersProps) {
+  const { track } = useOpenPanel();
+
+  const handleToolChange = (tool: AgentTool | 'all') => {
+    setSelectedTool(tool);
+    setSelectedType('all');
+    track('filter_tool_change', { tool });
+  };
+
+  const handleTypeChange = (type: AgentType | 'all') => {
+    setSelectedType(type);
+    track('filter_type_change', { type, tool: selectedTool });
+  };
   const tools: { id: AgentTool | 'all'; label: string }[] = [
     { id: 'all', label: 'All Tools' },
     { id: 'windsurf', label: 'Windsurf' },
@@ -31,7 +45,7 @@ export function SearchFilters({
   // Context-aware types based on selected tool
   const getAvailableTypes = (): { id: AgentType | 'all'; label: string; icon: string }[] => {
     const baseTypes = [{ id: 'all' as const, label: 'All Types', icon: '🎯' }];
-    
+
     if (selectedTool === 'all') {
       return [
         ...baseTypes,
@@ -42,11 +56,11 @@ export function SearchFilters({
         { id: 'skill', label: 'Skills', icon: '📚' },
       ];
     }
-    
+
     if (selectedTool === 'cursor' || selectedTool === 'windsurf') {
       return [...baseTypes, { id: 'rule', label: 'Rules', icon: '📝' }];
     }
-    
+
     if (selectedTool === 'replit') {
       return [
         ...baseTypes,
@@ -54,7 +68,7 @@ export function SearchFilters({
         { id: 'agent', label: 'Agents', icon: '🤖' },
       ];
     }
-    
+
     if (selectedTool === 'claude-code') {
       return [
         ...baseTypes,
@@ -63,7 +77,7 @@ export function SearchFilters({
         { id: 'agent', label: 'Agents', icon: '🤖' },
       ];
     }
-    
+
     return baseTypes;
   };
 
@@ -72,7 +86,7 @@ export function SearchFilters({
   return (
     <div className="space-y-6">
       {/* Command Palette Style Search */}
-      <SearchAutocomplete 
+      <SearchAutocomplete
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
@@ -80,80 +94,56 @@ export function SearchFilters({
       {/* Tool Filters */}
       <div className="flex overflow-x-auto pb-2 md:pb-0 md:flex-wrap md:justify-center gap-2 no-scrollbar">
         <button
-          onClick={() => {
-            setSelectedTool('all');
-            setSelectedType('all');
-          }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-            selectedTool === 'all'
-              ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-          }`}
+          onClick={() => handleToolChange('all')}
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'all'
+            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            }`}
         >
           All Tools
         </button>
         <button
-          onClick={() => {
-            setSelectedTool('cursor');
-            setSelectedType('all');
-          }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-            selectedTool === 'cursor'
-              ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-          }`}
+          onClick={() => handleToolChange('cursor')}
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'cursor'
+            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            }`}
         >
           Cursor
         </button>
         <button
-          onClick={() => {
-            setSelectedTool('windsurf');
-            setSelectedType('all');
-          }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-            selectedTool === 'windsurf'
-              ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-          }`}
+          onClick={() => handleToolChange('windsurf')}
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'windsurf'
+            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            }`}
         >
           Windsurf
         </button>
         <button
-          onClick={() => {
-            setSelectedTool('mcp');
-            setSelectedType('all');
-          }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-            selectedTool === 'mcp'
-              ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-          }`}
+          onClick={() => handleToolChange('mcp')}
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'mcp'
+            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            }`}
         >
           MCP
         </button>
         <button
-          onClick={() => {
-            setSelectedTool('claude-code');
-            setSelectedType('all');
-          }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-            selectedTool === 'claude-code'
-              ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-          }`}
+          onClick={() => handleToolChange('claude-code')}
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'claude-code'
+            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            }`}
         >
           Claude
         </button>
         <button
-          onClick={() => {
-            setSelectedTool('replit');
-            setSelectedType('all');
-          }}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
-            selectedTool === 'replit'
-              ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
-              : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
-          }`}
+          onClick={() => handleToolChange('replit')}
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'replit'
+            ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
+            : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
+            }`}
         >
           Replit
         </button>
@@ -165,12 +155,11 @@ export function SearchFilters({
           {availableTypes.map((type) => (
             <button
               key={type.id}
-              onClick={() => setSelectedType(type.id)}
-              className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 whitespace-nowrap ${
-                selectedType === type.id
-                  ? "bg-primary/20 text-primary border border-primary/30"
-                  : "bg-white/5 text-gray-500 hover:bg-white/10 hover:text-gray-300 border border-transparent"
-              }`}
+              onClick={() => handleTypeChange(type.id)}
+              className={`px-3 py-1 rounded-full text-xs font-medium transition-all duration-300 flex items-center gap-1.5 whitespace-nowrap ${selectedType === type.id
+                ? "bg-primary/20 text-primary border border-primary/30"
+                : "bg-white/5 text-gray-500 hover:bg-white/10 hover:text-gray-300 border border-transparent"
+                }`}
             >
               <span>{type.icon}</span>
               <span>{type.label}</span>

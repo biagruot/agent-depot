@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
+import { Resend } from "resend";
 
-// TODO: Integrate with your email service provider
-// Examples: Resend, SendGrid, Mailchimp, ConvertKit, etc.
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,27 +15,38 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Add email to your database/email service
-    // For now, just log it (replace with actual service integration)
-    console.log("New subscription:", email);
-    
-    // Example integration with Resend:
-    // const resend = new Resend(process.env.RESEND_API_KEY);
-    // await resend.contacts.create({
-    //   email: email,
-    //   audienceId: process.env.RESEND_AUDIENCE_ID!,
-    // });
+    const audienceId = process.env.RESEND_AUDIENCE_ID;
 
-    // Example integration with Mailchimp:
-    // const mailchimp = require('@mailchimp/mailchimp_marketing');
-    // mailchimp.setConfig({
-    //   apiKey: process.env.MAILCHIMP_API_KEY,
-    //   server: process.env.MAILCHIMP_SERVER_PREFIX,
-    // });
-    // await mailchimp.lists.addListMember(process.env.MAILCHIMP_LIST_ID, {
-    //   email_address: email,
-    //   status: 'subscribed',
-    // });
+    if (!audienceId) {
+      console.warn("RESEND_AUDIENCE_ID is not set. Skipping contact creation.");
+      // Fallback: You could send an email to yourself here if you wanted
+      return NextResponse.json(
+        { success: true, message: "Subscribed (Mocked - Audience ID missing)" },
+        { status: 200 }
+      );
+    }
+
+    try {
+      await resend.contacts.create({
+        email: email,
+        audienceId: audienceId,
+      });
+      
+      // Optional: Send a welcome email
+      // await resend.emails.send({
+      //   from: 'AgentDepot <onboarding@resend.dev>',
+      //   to: email,
+      //   subject: 'Welcome to AgentDepot!',
+      //   html: '<p>Thanks for subscribing!</p>'
+      // });
+
+    } catch (error) {
+      console.error("Resend API error:", error);
+      return NextResponse.json(
+        { error: "Failed to process subscription" },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json(
       { success: true, message: "Successfully subscribed!" },

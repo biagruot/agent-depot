@@ -85,6 +85,8 @@ export const metadata: Metadata = {
   },
 };
 
+import { OpenPanelComponent } from "@openpanel/nextjs";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -97,13 +99,14 @@ export default function RootLayout({
         {/* Uncomment and add your Plausible domain when ready:
         <script defer data-domain="agentdepot.dev" src="https://plausible.io/js/script.js"></script>
         */}
-        
+
         {/* Alternative: Umami Analytics */}
         {/* <script async src="https://analytics.umami.is/script.js" data-website-id="your-website-id"></script> */}
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-black text-white selection:bg-blue-500/30`}
       >
+        <OpenPanelComponent clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID!} trackScreenViews={true} />
         {children}
       </body>
     </html>
