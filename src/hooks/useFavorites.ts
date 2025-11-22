@@ -22,7 +22,7 @@ export function useFavorites() {
     };
     getUser();
 
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       setUser(session?.user ?? null);
       if (session?.user) {
         fetchFavorites(session.user.id);
@@ -41,7 +41,7 @@ export function useFavorites() {
       .eq("user_id", userId);
 
     if (!error && data) {
-      setFavorites(data.map((f) => f.agent_id));
+      setFavorites(data.map((f: any) => f.agent_id));
     }
     setIsLoading(false);
   };
