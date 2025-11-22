@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { Check, Mail } from "lucide-react";
+import { useOpenPanel } from "@openpanel/nextjs";
 
 export function EmailSignup() {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const { track } = useOpenPanel();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -30,6 +32,7 @@ export function EmailSignup() {
       if (response.ok) {
         setStatus("success");
         setMessage("Thanks! You're on the list 🎉");
+        track('email_signup', { email });
         setEmail("");
         setTimeout(() => setStatus("idle"), 5000);
       }

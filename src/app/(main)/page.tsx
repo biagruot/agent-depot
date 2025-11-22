@@ -13,6 +13,10 @@ import { useSearchParams } from "next/navigation";
 import { SortDropdown, SortOption } from "@/components/SortDropdown";
 import { ShareFiltersButton } from "@/components/ShareFiltersButton";
 import { EmailSignup } from "@/components/EmailSignup";
+import { Breadcrumbs } from "@/components/Breadcrumbs";
+import { ClearFiltersButton } from "@/components/ClearFiltersButton";
+import { BackToTop } from "@/components/BackToTop";
+import { NoResults } from "@/components/NoResults";
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -43,13 +47,26 @@ function HomeContent() {
   }, [searchQuery, selectedTool, selectedType, currentSort]);
 
 
-  // Configure Fuse.js
+  // Configure Fuse.js with optimized settings for 100+ agents
   const fuse = useMemo(() => {
     return new Fuse(agents, {
-      keys: ["name", "description", "tags", "category", "author.name"],
-      threshold: 0.3,
+      keys: [
+        { name: "name", weight: 0.3 },
+        { name: "description", weight: 0.2 },
+        { name: "tags", weight: 0.4 }, // higher weight for tags
+        { name: "category", weight: 0.15 },
+        { name: "author.name", weight: 0.1 },
+      ],
+      threshold: 0.1, // very strict matching for high relevance
+      ignoreLocation: true,
+      minMatchCharLength: 2,
+      includeScore: true,
+      shouldSort: true,
     });
   }, []);
+
+  // Max score threshold for relevance (lower score = better match)
+  const MAX_SCORE = 0.5;
 
   // Filter agents
   const filteredAgents = useMemo(() => {
@@ -65,31 +82,64 @@ function HomeContent() {
       result = result.filter((agent) => agent.type === selectedType);
     }
 
-    // 3. Filter by Search Query
+    // 3. Filter by Search Query using Fuse results directly for higher relevance
     if (searchQuery.trim()) {
-      const searchResults = fuse.search(searchQuery);
-      const fuseItems = searchResults.map((res) => res.item);
-      result = result.filter(agent => fuseItems.includes(agent));
+      const fuseResults = fuse.search(searchQuery);
+      const maxScore = 0.4; // Discard results with low relevance (higher score)
+      const matchedAgents = fuseResults
+        .filter((res) => (res.score ?? 1) <= maxScore)
+        .map((res) => res.item);
+      result = result.filter((agent) => matchedAgents.includes(agent));
     }
 
     // 4. Sort
-    result = [...result].sort((a, b) => {
-      switch (currentSort) {
-        case 'newest':
-          return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-        case 'popular':
-          return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
-        case 'trending':
-          // Simple trending logic: recent + high stars
-          const scoreA = (a.stats?.stars || 0) + (new Date(a.createdAt).getTime() / 1000000000);
-          const scoreB = (b.stats?.stars || 0) + (new Date(b.createdAt).getTime() / 1000000000);
-          return scoreB - scoreA;
-        case 'alphabetical':
-          return a.name.localeCompare(b.name);
-        default:
-          return 0;
-      }
-    });
+    if (searchQuery.trim()) {
+      // When searching, sort by Fuse relevance score (lower is better)
+      const fuseResults = fuse.search(searchQuery);
+      const scoreMap = new Map<string, number>();
+      fuseResults.forEach((res) => {
+        // @ts-ignore - res.item has id
+        scoreMap.set(res.item.id, res.score ?? 0);
+      });
+      result = [...result].sort((a, b) => {
+        const scoreA = scoreMap.get(a.id) ?? Infinity;
+        const scoreB = scoreMap.get(b.id) ?? Infinity;
+        if (scoreA !== scoreB) return scoreA - scoreB;
+        // Fallback to current sort option
+        switch (currentSort) {
+          case 'newest':
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          case 'popular':
+            return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
+          case 'trending':
+            const scoreA2 = (a.stats?.stars || 0) + new Date(a.createdAt).getTime() / 1e9;
+            const scoreB2 = (b.stats?.stars || 0) + new Date(b.createdAt).getTime() / 1e9;
+            return scoreB2 - scoreA2;
+          case 'alphabetical':
+            return a.name.localeCompare(b.name);
+          default:
+            return 0;
+        }
+      });
+    } else {
+      // No search query – use existing sort logic
+      result = [...result].sort((a, b) => {
+        switch (currentSort) {
+          case 'newest':
+            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+          case 'popular':
+            return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
+          case 'trending':
+            const scoreA = (a.stats?.stars || 0) + new Date(a.createdAt).getTime() / 1e9;
+            const scoreB = (b.stats?.stars || 0) + new Date(b.createdAt).getTime() / 1e9;
+            return scoreB - scoreA;
+          case 'alphabetical':
+            return a.name.localeCompare(b.name);
+          default:
+            return 0;
+        }
+      });
+    }
 
     return result;
   }, [searchQuery, selectedTool, selectedType, fuse, currentSort]);
@@ -104,6 +154,9 @@ function HomeContent() {
   return (
     <div className="min-h-screen pb-20">
 
+
+      {/* Back to Top Button */}
+      <BackToTop />
 
       {/* Fixed Submit CTA - Bottom Right */}
       <a
@@ -196,6 +249,18 @@ function HomeContent() {
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-24">
         <div className="container mx-auto max-w-7xl">
+          {/* Breadcrumbs */}
+          <Breadcrumbs
+            searchQuery={searchQuery}
+            selectedTool={selectedTool}
+            selectedType={selectedType}
+            onNavigate={(filters) => {
+              if (filters.tool !== undefined) setSelectedTool(filters.tool);
+              if (filters.type !== undefined) setSelectedType(filters.type);
+              if (filters.query !== undefined) setSearchQuery(filters.query);
+            }}
+          />
+
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4">
             <div className="flex items-center gap-4">
               <h2 className="text-xl font-semibold text-white whitespace-nowrap">
@@ -207,6 +272,16 @@ function HomeContent() {
             </div>
 
             <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+              <ClearFiltersButton
+                searchQuery={searchQuery}
+                selectedTool={selectedTool}
+                selectedType={selectedType}
+                onClear={() => {
+                  setSearchQuery("");
+                  setSelectedTool("all");
+                  setSelectedType("all");
+                }}
+              />
               <ShareFiltersButton />
               <SortDropdown currentSort={currentSort} onSortChange={setCurrentSort} />
             </div>
@@ -221,16 +296,16 @@ function HomeContent() {
               ))}
             </div>
           ) : (
-            <div className="text-center py-32 glass-panel rounded-3xl">
-              <p className="text-xl text-gray-400 font-mono">404_AGENT_NOT_FOUND</p>
-              <p className="text-gray-500 mt-2">You should build this one.</p>
-              <button
-                onClick={() => { setSearchQuery(""); setSelectedTool("all"); setSelectedType("all"); }}
-                className="mt-4 text-primary hover:text-white transition-colors"
-              >
-                Clear filters
-              </button>
-            </div>
+            <NoResults
+              searchQuery={searchQuery}
+              selectedTool={selectedTool}
+              selectedType={selectedType}
+              onClearFilters={() => {
+                setSearchQuery("");
+                setSelectedTool("all");
+                setSelectedType("all");
+              }}
+            />
           )}
 
           {/* Submit CTA */}
@@ -261,6 +336,13 @@ function HomeContent() {
         <div className="container mx-auto px-4 space-y-12">
           {/* Email Signup */}
           <EmailSignup />
+
+          {/* Legal Links */}
+          <nav className="flex justify-center space-x-6 mb-8">
+            <Link href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
+            <Link href="/terms" className="text-sm text-gray-400 hover:text-white transition-colors">Terms of Service</Link>
+            <Link href="/cookies" className="text-sm text-gray-400 hover:text-white transition-colors">Cookie Policy</Link>
+          </nav>
 
           {/* Platform Support & Copyright */}
           <div className="text-center space-y-4">
