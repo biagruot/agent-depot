@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 export async function POST(request: NextRequest) {
   try {
     const { email } = await request.json();
@@ -21,10 +19,13 @@ export async function POST(request: NextRequest) {
       console.warn("RESEND_AUDIENCE_ID is not set. Skipping contact creation.");
       // Fallback: You could send an email to yourself here if you wanted
       return NextResponse.json(
-        { success: true, message: "Subscribed (Mocked - Audience ID missing)" },
+        { success: true, message: "Subscription confirmed. We'll keep it signal, no noise." },
         { status: 200 }
       );
     }
+
+    // Initialize Resend client at runtime
+    const resend = new Resend(process.env.RESEND_API_KEY);
 
     try {
       await resend.contacts.create({
