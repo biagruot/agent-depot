@@ -21,10 +21,10 @@ interface Suggestion {
   value: string; // The value to set when selected
 }
 
-export function SearchAutocomplete({ 
-  searchQuery, 
+export function SearchAutocomplete({
+  searchQuery,
   setSearchQuery,
-  placeholder = "Search agents, rules, plugins..." 
+  placeholder = "Search agents, rules, plugins..."
 }: SearchAutocompleteProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -110,7 +110,7 @@ export function SearchAutocomplete({
 
     document.addEventListener("mousedown", handleClickOutside);
     document.addEventListener("keydown", handleGlobalKeyDown);
-    
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
       document.removeEventListener("keydown", handleGlobalKeyDown);
@@ -145,7 +145,7 @@ export function SearchAutocomplete({
     setSearchQuery(suggestion.value);
     setIsOpen(false);
     setSelectedIndex(-1);
-    
+
     // Optional: If it's an agent, we could navigate directly, but for now let's just filter
     // If you wanted to navigate: router.push(`/agent/${suggestion.id.replace('agent-', '')}`);
   };
@@ -153,11 +153,11 @@ export function SearchAutocomplete({
   // Highlight matching text
   const HighlightedText = ({ text, highlight }: { text: string, highlight: string }) => {
     if (!highlight.trim()) return <span>{text}</span>;
-    
+
     const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
     return (
       <span>
-        {parts.map((part, i) => 
+        {parts.map((part, i) =>
           part.toLowerCase() === highlight.toLowerCase() ? (
             <span key={i} className="text-white font-semibold">{part}</span>
           ) : (
@@ -172,7 +172,7 @@ export function SearchAutocomplete({
     <div ref={containerRef} className="relative max-w-2xl mx-auto group z-50">
       {/* Glow Effect */}
       <div className="absolute -inset-0.5 bg-gradient-to-r from-primary/20 via-purple-500/20 to-orange-500/20 rounded-2xl opacity-50 group-hover:opacity-100 blur transition duration-500" />
-      
+
       {/* Input Container */}
       <div className="relative bg-[#0A0A0A] rounded-xl border border-white/10 flex items-center p-2 shadow-2xl">
         <div className="p-3 text-gray-500">
@@ -193,9 +193,9 @@ export function SearchAutocomplete({
           onKeyDown={handleKeyDown}
           autoComplete="off"
         />
-        
+
         {searchQuery && (
-          <button 
+          <button
             onClick={() => {
               setSearchQuery("");
               setIsOpen(false);
@@ -222,16 +222,14 @@ export function SearchAutocomplete({
                 key={suggestion.id}
                 onClick={() => handleSelect(suggestion)}
                 onMouseEnter={() => setSelectedIndex(index)}
-                className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors ${
-                  index === selectedIndex ? "bg-white/10" : "hover:bg-white/5"
-                }`}
+                className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors ${index === selectedIndex ? "bg-white/10" : "hover:bg-white/5"
+                  }`}
               >
                 {/* Icon based on type */}
-                <div className={`p-2 rounded-lg ${
-                  suggestion.type === 'agent' ? 'bg-blue-500/10 text-blue-400' :
-                  suggestion.type === 'author' ? 'bg-purple-500/10 text-purple-400' :
-                  'bg-orange-500/10 text-orange-400'
-                }`}>
+                <div className={`p-2 rounded-lg ${suggestion.type === 'agent' ? 'bg-blue-500/10 text-blue-400' :
+                    suggestion.type === 'author' ? 'bg-purple-500/10 text-purple-400' :
+                      'bg-orange-500/10 text-orange-400'
+                  }`}>
                   {suggestion.type === 'agent' && <Bot className="w-4 h-4" />}
                   {suggestion.type === 'author' && <User className="w-4 h-4" />}
                   {suggestion.type === 'tag' && <Tag className="w-4 h-4" />}

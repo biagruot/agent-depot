@@ -2,8 +2,11 @@
 
 import { SearchAutocomplete } from "@/components/SearchAutocomplete";
 import { AgentTool, AgentType } from "@/types/agent";
+import { useEffect } from "react";
 
 import { useOpenPanel } from "@openpanel/nextjs";
+import { SiReplit, SiAnthropic } from "react-icons/si";
+import { Wind, Server, LayoutGrid, MousePointer2 } from "lucide-react";
 
 interface SearchFiltersProps {
   searchQuery: string;
@@ -23,6 +26,17 @@ export function SearchFilters({
   setSelectedType
 }: SearchFiltersProps) {
   const { track } = useOpenPanel();
+
+  // Track search queries with debounce
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (searchQuery.length > 2) {
+        track('search_query', { query: searchQuery });
+      }
+    }, 1000); // Wait 1s after typing stops
+
+    return () => clearTimeout(timer);
+  }, [searchQuery, track]);
 
   const handleToolChange = (tool: AgentTool | 'all') => {
     setSelectedTool(tool);
@@ -95,56 +109,63 @@ export function SearchFilters({
       <div className="flex overflow-x-auto pb-2 md:pb-0 md:flex-wrap md:justify-center gap-2 no-scrollbar">
         <button
           onClick={() => handleToolChange('all')}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'all'
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedTool === 'all'
             ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
             }`}
         >
+          <LayoutGrid className="w-4 h-4" />
           All Tools
         </button>
         <button
           onClick={() => handleToolChange('cursor')}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'cursor'
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedTool === 'cursor'
             ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
             }`}
         >
+          {/* Cursor Icon - Using MousePointer2 as fallback since SiCursor is missing */}
+          <MousePointer2 className="w-4 h-4" />
           Cursor
         </button>
         <button
           onClick={() => handleToolChange('windsurf')}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'windsurf'
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedTool === 'windsurf'
             ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
             }`}
         >
+          <Wind className="w-4 h-4" />
           Windsurf
         </button>
         <button
           onClick={() => handleToolChange('mcp')}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'mcp'
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedTool === 'mcp'
             ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
             }`}
         >
+          <Server className="w-4 h-4" />
           MCP
         </button>
         <button
           onClick={() => handleToolChange('claude-code')}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'claude-code'
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedTool === 'claude-code'
             ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
             }`}
         >
+          <SiAnthropic className="w-4 h-4" />
           Claude
         </button>
         <button
           onClick={() => handleToolChange('replit')}
-          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${selectedTool === 'replit'
+          className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap flex items-center gap-2 ${selectedTool === 'replit'
             ? "bg-white text-black shadow-[0_0_20px_rgba(255,255,255,0.3)]"
             : "bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white"
             }`}
         >
+          <SiReplit className="w-4 h-4" />
           Replit
         </button>
       </div>

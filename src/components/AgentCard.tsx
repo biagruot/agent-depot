@@ -56,6 +56,14 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
     mcp: "rgba(34, 197, 94, 0.2)",
   };
 
+  const borderColors = {
+    "claude-code": "group-hover:border-orange-500/50",
+    windsurf: "group-hover:border-blue-500/50",
+    cursor: "group-hover:border-purple-500/50",
+    replit: "group-hover:border-orange-600/50",
+    mcp: "group-hover:border-green-500/50",
+  };
+
   const { track } = useOpenPanel();
 
   const handleCopy = (e: React.MouseEvent) => {
@@ -87,7 +95,7 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
   return (
     <Link href={`/agent/${agent.id}`} className="block h-full" onClick={handleClick}>
       <SpotlightCard
-        className="h-full flex flex-col p-3 transition-transform duration-300 hover:-translate-y-1 justify-between relative group"
+        className={`h-full flex flex-col p-3 transition-all duration-300 hover:-translate-y-1 justify-between relative group border border-white/10 ${borderColors[agent.tool]}`}
         spotlightColor={spotlightColors[agent.tool]}
       >
         {/* Tool Badge - Top Right */}
@@ -97,7 +105,7 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
 
         {/* Header with Type Icon */}
         <div className="mb-3 pr-24">
-          <div className="flex items-start gap-2 mb-1">
+          <div className="flex items-center gap-2 mb-1">
             <span className="flex-shrink-0 w-5 flex items-center justify-center">
               <TypeIcon type={agent.type} />
             </span>
@@ -121,15 +129,15 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
             <AgentStats downloads={agent.stats?.downloads} stars={agent.stats?.stars} />
           </div>
 
-          {/* Copy Button (Visible on Hover) */}
+          {/* Copy Button (Always Visible & Prominent) */}
           {agent.installation.command && (
             <button
               onClick={handleCopy}
               className={`
-                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200
+                  flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-200 border border-white/10 z-20
                   ${copied
-                  ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                  : "bg-white text-black hover:bg-gray-200 opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0"
+                  ? "bg-green-500/20 text-green-400 border-green-500/30"
+                  : "bg-white/5 text-gray-300 hover:bg-white/10 hover:text-white hover:border-white/20"
                 }
                 `}
             >

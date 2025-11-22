@@ -69,6 +69,12 @@
 - [x] **Premium GitHub Star Button** (Pill design, hover effects, trust signal)
 - [x] **Navbar Simplification** (Removed Submit button)
 
+### Phase 0.5: Differentiation & UX Polish (Completed)
+- [x] **Multi-Tool Visual Identity** (Hero Glow with tool colors)
+- [x] **Logo-Based Filters** (Replaced text buttons with official tool icons)
+- [x] **Premium Card Design** (Glassmorphism, tool-specific hover glow, prominent copy button)
+- [x] **Context-Aware Install Instructions** (Custom instructions for Cursor, Windsurf, Replit, etc.)
+
 ---
 
 ## 🚧 **IN PROGRESS**
@@ -324,11 +330,11 @@ npx agentdepot trending
 ### This Week (Nov 21-27)
 **Focus:** Complete high-impact conversion features
 
-- [ ] Connect email service (30 min) - HIGH PRIORITY
+- [x] Connect email service (30 min) - HIGH PRIORITY
 - [x] Add search autocomplete (2 hrs)
 - [ ] Add social proof section (1 hr)
 - [ ] Rewrite copy in dev voice (1 hr)
-- [ ] Set up analytics tracking (2 hrs)
+- [x] Set up analytics tracking (2 hrs)
 
 **Goal:** Ready for next marketing push
 
@@ -447,8 +453,8 @@ npx agentdepot trending
 ## 🚨 **BLOCKERS & RISKS**
 
 ### Current Blockers
-- ❌ Email service not connected (blocks retention strategy)
-- ⚠️ No analytics tracking (can't measure success)
+- ❌ Email service not connected (blocks retention strategy) -> **RESOLVED** ✅
+- ⚠️ No analytics tracking (can't measure success) -> **RESOLVED** ✅
 - ⚠️ No distribution channels yet (only website traffic)
 
 ### Mitigations
@@ -460,9 +466,9 @@ npx agentdepot trending
 
 ## **NEXT 3 ACTIONS**
 
-1. **Connect email service to /api/subscribe** (30 min) ✅
-2. **Add search autocomplete** (2 hours) ✅
-3. **Set up analytics tracking** (2 hours) ✅
+1. **Rewrite copy in dev voice** (1 hr) ⚡
+2. **Add social proof section** (1 hr) ⚡
+3. **Build CLI tool (Phase 2)** (1 day) ⚡
 
 ---
 

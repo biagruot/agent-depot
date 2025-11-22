@@ -11,7 +11,7 @@ export default function SubmitPage() {
   return (
     <main className="min-h-screen relative pb-32">
 
-      <div className="container mx-auto px-4 pt-12 max-w-4xl relative z-10">
+      <div className="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-12 space-y-6">
           <div className="space-y-3">

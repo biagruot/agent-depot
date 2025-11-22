@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
     }
 
     return NextResponse.json(
-      { success: true, message: "Successfully subscribed!" },
+      { success: true, message: "Subscription confirmed. We'll keep it signal, no noise." },
       { status: 200 }
     );
   } catch (error) {
