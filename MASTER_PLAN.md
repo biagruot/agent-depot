@@ -58,25 +58,34 @@
 All phases below (launch, growth, monetization) are **BLOCKED** until we have real content.
 
 ### Immediate Priorities (Revised)
+
+**✅ COMPLETED:**
+- [x] Public repository created (`agentdepot-agents`)
+- [x] Repository strategy decided (separate public repo + sync script)
+
+**🚧 IN PROGRESS:**
 1. **Week 1: Manual Seed (50 real agents)** - Source, test, verify
-   - 15 Cursor rules (from cursor.directory + community)
-   - 10 Windsurf rules (market gap - high priority)
-   - 10 Claude Code agents (from GitHub, Discord)
-   - 10 MCP servers (official list + smithery.ai)
-   - 5 Replit templates (official + community)
+   - [ ] 15 Cursor rules (from cursor.directory + community)
+   - [ ] 10 Windsurf rules (market gap - high priority)
+   - [ ] 10 Claude Code agents (from GitHub, Discord)
+   - [ ] 10 MCP servers (official list + smithery.ai)
+   - [ ] 5 Replit templates (official + community)
 
 2. **Week 2: GitHub Setup** - Enable community contributions
-   - Split agents.ts into tool-specific files
-   - Create CONTRIBUTING.md (like cursor.directory)
-   - Set up PR validation (GitHub Actions)
-   - Automated schema validation
+   - [ ] Complete public repo structure (agents/, types/, README, CONTRIBUTING)
+   - [ ] Create sync script in private repo
+   - [ ] Test sync workflow
+   - [ ] Set up PR validation (GitHub Actions)
+   - [ ] Automated schema validation
 
 3. **Week 3: Soft Launch (75-100 agents)**
-   - Launch when we have 75+ real, verified agents
-   - GitHub-based submissions ready
-   - All mock data removed
+   - [ ] Launch when we have 75+ real, verified agents
+   - [ ] GitHub-based submissions ready
+   - [ ] All mock data removed
 
-**NOTHING ELSE MATTERS until we have real content.**
+**CURRENT FOCUS: Start sourcing real agents (Cursor first)**
+
+**Public Repo:** [Your agentdepot-agents GitHub URL]
 
 ---
 
@@ -689,6 +698,18 @@ Staggered posts to avoid spam detection:
 | **Discord Members** | N/A | 100+ | 500+ | 0 (not created) |
 | **Newsletter Subs** | 1,000 | 2,500 | 5,000 | 0 |
 
+#### 🆕 Content Acquisition Metrics (PRIORITY)
+| Metric | Week 1 Target | Week 2 Target | Week 3 Target | Current |
+|--------|---------------|---------------|---------------|---------|
+| **Real Agents** | 50 | 75 | 100+ | 0 |
+| **Cursor Rules** | 15 | 20 | 25 | 0 |
+| **Windsurf Rules** | 10 | 15 | 20 | 0 |
+| **Claude Code Agents** | 10 | 15 | 20 | 0 |
+| **MCP Servers** | 10 | 15 | 20 | 0 |
+| **Replit Templates** | 5 | 10 | 15 | 0 |
+| **Mock Data Removed** | 100% | 100% | 100% | 0% (46 mock agents) |
+| **Community PRs** | 0 | 5-10 | 10-20 | 0 (repo just created) |
+
 ### Weekly Review Checklist
 Every Monday:
 - [ ] Review traffic sources (what's working?)
@@ -1035,9 +1056,41 @@ This document is now the **single source of truth.** All other documents are arc
 ---
 
 **Document Status:** APPROVED
-**Next Review:** After Launch (Day 4)
+**Next Review:** After 50 Real Agents Added
 **Owner:** Product Manager
-**Last Updated:** 2025-11-22
+**Last Updated:** 2025-11-22 (Updated after public repo creation)
+
+---
+
+## 📝 RECENT CHANGES
+
+### November 22, 2025 - Late Afternoon
+**Major Repository Strategy Implementation**
+- ✅ Created public `agentdepot-agents` repository
+- ✅ Decided on architecture: Separate public repo + sync script
+- ✅ Updated MASTER_PLAN with content acquisition metrics
+- 🚧 Next: Create sync script in private repo
+- 🚧 Next: Start sourcing first 15 Cursor agents
+
+**Files Created:**
+- `REPOSITORY_STRATEGY.md` - Complete guide for public/private repo setup
+- Public repo: `agentdepot-agents` (structure ready for contributions)
+
+**Status Change:** From "planning content strategy" to "ready to acquire content"
+
+### November 22, 2025 - Afternoon
+**Critical Discovery: Zero Real Content**
+- 🚨 Discovered all 46 agents are mock data
+- ✅ Created CONTENT_STRATEGY.md with acquisition plan
+- ✅ Revised MASTER_PLAN with accurate status
+- ✅ Updated timeline: Week 1 = Content Seed, Week 3 = Launch
+
+### November 22, 2025 - Morning
+**Initial Documentation**
+- ✅ Created MASTER_PLAN.md (initial version based on false assumption)
+- ✅ Created CLAUDE.md for technical documentation
+- ✅ Cleaned up repository (removed TASKS.md, MARKETING_PLAN.md)
+- ✅ Updated README.md with project-specific content
 
 ---
 
@@ -1053,10 +1106,17 @@ The following documents are archived and superseded by this Master Plan:
 These files remain in the repository for historical reference but are no longer actively maintained. All updates should be made to MASTER_PLAN.md.
 
 ### Quick Reference Links
-- Product: https://agentdepot.dev (live site)
-- GitHub: [Your repo URL]
-- Analytics: OpenPanel Dashboard
-- Domain: agentdepot.dev (agentstack.directory was discarded due to naming collision)
+- **Product:** https://agentdepot.dev (UI ready, awaiting content)
+- **Private Repo:** agent-depot (code, UI, proprietary features)
+- **Public Repo:** agentdepot-agents (community contributions)
+- **Analytics:** OpenPanel Dashboard
+- **Domain:** agentdepot.dev (agentstack.directory was discarded due to naming collision)
+
+### Active Planning Documents
+1. **MASTER_PLAN.md** (this file) - Overall roadmap and status
+2. **CONTENT_STRATEGY.md** - How to acquire and manage agent content
+3. **REPOSITORY_STRATEGY.md** - Public/private repo architecture
+4. **CLAUDE.md** - Technical implementation guide
 
 ---
 
