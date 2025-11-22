@@ -86,6 +86,7 @@ export const metadata: Metadata = {
 };
 
 import { OpenPanelComponent } from "@openpanel/nextjs";
+import { FavoritesProvider } from "@/components/providers/FavoritesProvider";
 
 export default function RootLayout({
   children,
@@ -107,7 +108,9 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-black text-white selection:bg-blue-500/30`}
       >
         <OpenPanelComponent clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID!} trackScreenViews={true} />
-        {children}
+        <FavoritesProvider>
+          {children}
+        </FavoritesProvider>
       </body>
     </html>
   );

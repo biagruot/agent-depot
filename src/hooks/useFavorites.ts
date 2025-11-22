@@ -1,0 +1,74 @@
+"use client";
+
+import { useState, useEffect, useCallback } from "react";
+import { createClient } from "@/lib/supabase/client";
+import { User } from "@supabase/supabase-js";
+
+export function useFavorites() {
+  const [favorites, setFavorites] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [user, setUser] = useState<User | null>(null);
+  const supabase = createClient();
+
+  useEffect(() => {
+    const getUser = async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      setUser(user);
+      if (user) {
+        fetchFavorites(user.id);
+      } else {
+        setIsLoading(false);
+      }
+    };
+    getUser();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        fetchFavorites(session.user.id);
+      } else {
+        setFavorites([]);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [supabase.auth]);
+
+  const fetchFavorites = async (userId: string) => {
+    const { data, error } = await supabase
+      .from("favorites")
+      .select("agent_id")
+      .eq("user_id", userId);
+
+    if (!error && data) {
+      setFavorites(data.map((f) => f.agent_id));
+    }
+    setIsLoading(false);
+  };
+
+  const toggleFavorite = useCallback(async (agentId: string) => {
+    if (!user) return false;
+
+    // Optimistic update
+    const isFavorited = favorites.includes(agentId);
+    setFavorites((prev) =>
+      isFavorited ? prev.filter((id) => id !== agentId) : [...prev, agentId]
+    );
+
+    if (isFavorited) {
+      await supabase
+        .from("favorites")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("agent_id", agentId);
+    } else {
+      await supabase
+        .from("favorites")
+        .insert({ user_id: user.id, agent_id: agentId });
+    }
+
+    return true;
+  }, [favorites, user, supabase]);
+
+  return { favorites, toggleFavorite, isLoading, user };
+}

@@ -1,5 +1,5 @@
 # AgentDepot Master Plan - Single Source of Truth
-**Last Updated:** 2025-11-22 (MAJOR REVISION)
+**Last Updated:** 2025-11-22 18:41 (Latest Updates: Auth System + Navbar Redesign)
 **Document Owner:** Product Manager
 **Status:** 🚨 CRITICAL BLOCKER - CONTENT ACQUISITION PHASE
 
@@ -287,6 +287,80 @@ All phases below (launch, growth, monetization) are **BLOCKED** until we have re
 **Root Cause:** Not launched, no users, no monetization features exposed.
 **Owner:** Business Lead
 **Action Required:** Launch first, then enable monetization in Month 2.
+
+---
+
+## 🆕 NEW REQUIREMENTS (USER REQUESTED)
+
+### 1. User Authentication & Favorites
+**Goal:** Allow users to mark tools as favorites and create personal lists.
+**Technical Strategy:**
+- **Auth:** Supabase Auth (Email Magic Link + GitHub).
+- **Data:** Supabase Database (`favorites` table).
+- **UI:** Heart icon on cards, `/favorites` page, Auth Modal.
+- **Status:** ✅ Implemented (Requires Supabase Setup - see `SUPABASE_SETUP.md`).
+
+### 2. Blog & SEO Engine
+**Goal:** Create a content engine for SEO and backlinks.
+**Technical Strategy:**
+- **Stack:** Next.js + React Markdown (No database required).
+- **Structure:** `/blog` index and `/blog/[slug]` posts.
+- **Content:** Initial seed content added.
+- **Status:** ✅ Completed.
+
+### 3. Professional Footer
+**Goal:** Professionalize footer with SEO links, backlinks, and better structure.
+**Requirements:**
+- Multi-column layout (Product, Resources, Company, Legal).
+- Social links (GitHub, Twitter, Discord).
+- **Status:** ✅ Completed.
+
+
+### 4. Newsletter Prominence
+**Goal:** Make the newsletter form more visible.
+**Strategy:**
+- Created dedicated `NewsletterSection` above footer.
+- High-visibility glassmorphism design.
+- **Status:** ✅ Completed.
+
+### 5. Authentication System Upgrade ✅ NEW (Nov 22, 2025)
+**Goal:** Improve user authentication convenience and security.
+**Changes Made:**
+- **Migrated from Magic Link to Username/Password:**
+  - Removed `signInWithOtp()` authentication
+  - Implemented `signInWithPassword()` for existing users
+  - Implemented `signUp()` for new user registration
+  - Added password input fields with show/hide toggle
+  - Added confirm password field for sign-up
+  - Added password validation (minimum 6 characters, passwords match)
+  - Removed magic link success screen
+- **Kept GitHub OAuth:** Maintained one-click GitHub authentication
+- **Email Templates:** Updated Supabase email templates documentation
+- **Documentation:** Created `AUTH_MIGRATION.md` with complete details
+- **Status:** ✅ Completed and deployed.
+
+### 6. Navbar Redesign ✅ NEW (Nov 22, 2025)
+**Goal:** Create a more modern, minimal, and effective navigation.
+**Changes Made:**
+- **Glassmorphic Design:**
+  - Ultra-transparent background (black/40 instead of black/80)
+  - Enhanced backdrop blur with saturation
+  - Subtler borders (8% opacity)
+  - More premium, modern appearance
+- **Better Organization:**
+  - Added navigation links: Browse, Blog, MCP
+  - Active state highlighting
+  - Mobile-responsive menu
+- **Logo Simplification:**
+  - Removed complex logo designs
+  - Clean text-only branding: "AgentDepot"
+  - Minimal and effective
+- **Improved GitHub CTA:**
+  - More compact design
+  - Gradient hover effects
+  - Star count badge
+- **Documentation:** Created `NAVBAR_REDESIGN.md` with technical details
+- **Status:** ✅ Completed and deployed.
 
 ---
 

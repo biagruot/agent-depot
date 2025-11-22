@@ -9,6 +9,65 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 **Domain:** agentdepot.dev
 **Status:** 98% MVP Complete, Production-Ready
 
+## Repository Structure
+
+This project uses a **dual-repository architecture** with both repos located in the same parent folder for easier development:
+
+```
+agentdepot/                          # Parent folder (working directory)
+├── agentdepot-core/                 # THIS REPO (Private)
+│   ├── src/                         # Next.js application code
+│   ├── public/                      # Static assets
+│   ├── CLAUDE.md                    # This file
+│   ├── MASTER_PLAN.md               # Single source of truth
+│   ├── CONTENT_STRATEGY.md          # Content acquisition strategy
+│   └── package.json
+├── agentdepot-agents/               # Public Repository
+│   ├── agents/                      # Agent definition files
+│   │   ├── cursor/                  # Cursor-specific agents
+│   │   ├── windsurf/                # Windsurf-specific agents
+│   │   ├── claude-code/             # Claude Code agents
+│   │   └── mcp/                     # MCP servers
+│   ├── types/                       # TypeScript type definitions
+│   ├── CONTRIBUTING.md              # Community contribution guide
+│   └── README.md                    # Public-facing documentation
+└── knowledge-base.md                # Original market research
+```
+
+### Repository Purposes
+
+**agentdepot-core (Private):**
+- The main Next.js web application
+- Proprietary business logic and marketing strategies
+- Build configuration and deployment settings
+- Analytics and monetization code
+- All planning documents (MASTER_PLAN.md, CONTENT_STRATEGY.md)
+
+**agentdepot-agents (Public):**
+- Community-contributed agent definitions
+- Open-source agent database
+- Accepts pull requests from the community
+- Maintains agent quality standards
+- Separate from core app for security and collaboration
+
+### Working with Both Repositories
+
+**When to access each repo:**
+- **Core app changes (UI, features, pages):** Work in `agentdepot-core/`
+- **Agent data (adding/editing agents):** Work in `agentdepot-agents/`
+- **Agent types/schemas:** Coordinate changes across both repos
+
+**Coordination points:**
+- Agent type definitions exist in both repos - keep them in sync
+- Core app imports agent data from the public repo (or eventually via API)
+- Both repos share the same parent folder for easier cross-repo development
+
+**Benefits of this structure:**
+- Claude Code can access both repositories simultaneously
+- Easier to keep agent data separate from proprietary code
+- Community can contribute agents without accessing core business logic
+- Maintains security while enabling open collaboration
+
 ## ⚠️ CRITICAL: Master Plan Updates
 
 **IMPORTANT:** This project uses `MASTER_PLAN.md` as the single source of truth for all strategic planning, feature tracking, and project status.
@@ -69,10 +128,12 @@ Always run `npm run build` before committing major changes. The build must compl
 - **Email:** Resend (infrastructure ready, not yet connected)
 - **Animations:** Framer Motion
 
-### Directory Structure
+### Core Repository Directory Structure
+
+**Note:** This is the structure of the `agentdepot-core` repository (private). See "Repository Structure" section above for the full dual-repo layout.
 
 ```
-agent-depot/
+agentdepot-core/
 ├── src/
 │   ├── app/                  # Next.js App Router pages
 │   │   ├── (main)/          # Main layout group
@@ -96,14 +157,20 @@ agent-depot/
 │   │   ├── Navbar.tsx       # Top navigation
 │   │   └── ... (20+ components)
 │   ├── data/
-│   │   ├── agents.ts        # 115+ agent definitions
+│   │   ├── agents.ts        # 115+ agent definitions (will migrate to agentdepot-agents)
 │   │   └── collections.ts   # Curated agent collections
 │   ├── lib/
 │   │   ├── utils.ts         # Utility functions (cn, formatters)
 │   │   └── analytics.ts     # OpenPanel tracking helpers
 │   └── types/
-│       ├── agent.ts         # Agent type definitions
+│       ├── agent.ts         # Agent type definitions (sync with agentdepot-agents/types)
 │       └── collection.ts    # Collection type definitions
+├── public/                   # Static assets (logos, images)
+├── scripts/                  # Build and utility scripts
+├── CLAUDE.md                 # This file
+├── MASTER_PLAN.md            # Project roadmap and status
+├── CONTENT_STRATEGY.md       # Content acquisition guide
+└── package.json
 ```
 
 ### Data Model
@@ -239,25 +306,33 @@ Applied via:
 ## Common Development Tasks
 
 ### Adding a New Agent
-1. Open `src/data/agents.ts`
+
+**Current approach (temporary):**
+1. Open `agentdepot-core/src/data/agents.ts`
 2. Add new object to `agents` array following the `Agent` type
 3. Ensure `id` is unique and URL-safe
 4. Test with `npm run build`
 
+**Future approach (when migration complete):**
+1. Add agent definition to `agentdepot-agents/agents/[tool]/agent-name.json`
+2. Follow the schema in `agentdepot-agents/types/`
+3. Submit PR to the public repo
+4. Core app will sync agent data automatically
+
 ### Adding a New Collection
-1. Open `src/data/collections.ts`
+1. Open `agentdepot-core/src/data/collections.ts`
 2. Add new `Collection` object with `agentIds` array
 3. Choose an icon from `lucide-react`
 4. Create gradient using tool colors
 
 ### Creating a New Page
-1. Create in `src/app/(main)/[name]/page.tsx` for main layout
+1. Create in `agentdepot-core/src/app/(main)/[name]/page.tsx` for main layout
 2. Use `export const metadata: Metadata = {...}` for SEO
 3. Always include proper TypeScript types
 4. Test mobile responsiveness
 
 ### Modifying Search Behavior
-Search config in `src/components/SearchFilters.tsx`:
+Search config in `agentdepot-core/src/components/SearchFilters.tsx`:
 ```typescript
 const fuse = new Fuse(agents, {
   keys: ['name', 'description', 'tags', 'author.name'],
@@ -265,6 +340,28 @@ const fuse = new Fuse(agents, {
   minMatchCharLength: 2
 });
 ```
+
+### Working Across Both Repositories
+
+**Scenario 1: Updating Agent Type Definitions**
+1. Update type in `agentdepot-core/src/types/agent.ts` first
+2. Copy changes to `agentdepot-agents/types/agent.ts`
+3. Test builds in both repos
+4. Commit to both repos (separate commits)
+
+**Scenario 2: Migrating Agents to Public Repo**
+1. Export agent from `agentdepot-core/src/data/agents.ts`
+2. Create corresponding file in `agentdepot-agents/agents/[tool]/`
+3. Update import path in core app
+4. Test that agent displays correctly
+5. Commit to both repos
+
+**Scenario 3: Adding a New Tool Category**
+1. Add tool type to both `agentdepot-core/src/types/agent.ts` and `agentdepot-agents/types/agent.ts`
+2. Create folder in `agentdepot-agents/agents/[new-tool]/`
+3. Update tool filters in `agentdepot-core/src/components/SearchFilters.tsx`
+4. Add tool logo to `agentdepot-core/public/logos/`
+5. Test across both repos
 
 ## Deployment
 
@@ -352,6 +449,8 @@ When adding features:
 ## Contact & Support
 
 For questions about this codebase, refer to:
+
+**Core Repository (agentdepot-core):**
 - **`MASTER_PLAN.md`** - **PRIMARY: Single source of truth for all planning, status, and priorities**
 - **`CONTENT_STRATEGY.md`** - **CRITICAL: How to acquire real agents (current blocker)**
 - `CLAUDE.md` (this file) - Technical architecture and development guide
@@ -359,7 +458,16 @@ For questions about this codebase, refer to:
 - `TASKS.md` - Archived: Superseded by MASTER_PLAN.md
 - `MARKETING_PLAN.md` - Archived: Integrated into MASTER_PLAN.md
 
+**Public Repository (agentdepot-agents):**
+- `README.md` - Public-facing documentation and setup instructions
+- `CONTRIBUTING.md` - Guidelines for community contributions
+- `types/` - TypeScript definitions (must sync with core)
+
+**Parent Folder:**
+- `knowledge-base.md` - Original market research and project genesis
+
 **Priority Order:**
-1. **CONTENT_STRATEGY.md** - Start here if working on content acquisition
-2. **MASTER_PLAN.md** - Overall roadmap and status
-3. **CLAUDE.md** - Technical implementation details
+1. **CONTENT_STRATEGY.md** (core) - Start here if working on content acquisition
+2. **MASTER_PLAN.md** (core) - Overall roadmap and status
+3. **CLAUDE.md** (core) - Technical implementation details
+4. **CONTRIBUTING.md** (agents) - Community contribution workflow

@@ -17,6 +17,8 @@ import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ClearFiltersButton } from "@/components/ClearFiltersButton";
 import { BackToTop } from "@/components/BackToTop";
 import { NoResults } from "@/components/NoResults";
+import { NewsletterSection } from "@/components/NewsletterSection";
+import { FloatingSubscribe } from "@/components/FloatingSubscribe";
 
 function HomeContent() {
   const searchParams = useSearchParams();
@@ -33,7 +35,20 @@ function HomeContent() {
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
   const [currentSort, setCurrentSort] = useState<SortOption>(initialSort);
 
-  // Update URL when filters change
+  // Sync state with URL params when they change (e.g. navigation)
+  useEffect(() => {
+    const tool = (searchParams.get("tool") as AgentTool) || 'all';
+    const type = (searchParams.get("type") as AgentType) || 'all';
+    const query = searchParams.get("q") || "";
+    const sort = (searchParams.get("sort") as SortOption) || 'popular';
+
+    setSelectedTool(tool);
+    setSelectedType(type);
+    setSearchQuery(query);
+    setCurrentSort(sort);
+  }, [searchParams]);
+
+  // Update URL when filters change (user interaction)
   useEffect(() => {
     const params = new URLSearchParams();
 
@@ -43,7 +58,11 @@ function HomeContent() {
     if (currentSort !== 'popular') params.set("sort", currentSort);
 
     const newUrl = params.toString() ? `?${params.toString()}` : '/';
-    window.history.replaceState({}, '', newUrl);
+
+    // Only update URL if it's different to avoid loops/redundant updates
+    if (window.location.search !== `?${params.toString()}` && (window.location.search !== '' || params.toString() !== '')) {
+      window.history.replaceState({}, '', newUrl);
+    }
   }, [searchQuery, selectedTool, selectedType, currentSort]);
 
 
@@ -190,7 +209,7 @@ function HomeContent() {
       />
 
       {/* Centered Hero - Glass & Vercel-Inspired */}
-      <section className="pt-2 pb-2 px-4">
+      <section className="pt-2 pb-8 px-4">
         <div className="container mx-auto max-w-4xl">
           {/* Centered Header with Glass Effect */}
           <div className="text-center mb-8 space-y-6 relative">
@@ -308,19 +327,7 @@ function HomeContent() {
             />
           )}
 
-          {/* Submit CTA */}
-          <div className="mt-24 text-center py-16 border-t border-white/10">
-            <h2 className="text-3xl font-bold mb-4">Built something cool?</h2>
-            <p className="text-gray-400 mb-8 max-w-md mx-auto">
-              Share your agent with the community. We review every submission.
-            </p>
-            <Link
-              href="/submit"
-              className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors"
-            >
-              Ship It <span className="text-xl">→</span>
-            </Link>
-          </div>
+          <FloatingSubscribe />
         </div>
       </main>
 
@@ -331,30 +338,8 @@ function HomeContent() {
         onClose={() => setSelectedAgent(null)}
       />
 
-      {/* Footer */}
-      <footer className="border-t border-white/5 py-16 mt-20 bg-black/20 backdrop-blur-lg">
-        <div className="container mx-auto px-4 space-y-12">
-          {/* Email Signup */}
-          <EmailSignup />
-
-          {/* Legal Links */}
-          <nav className="flex justify-center space-x-6 mb-8">
-            <Link href="/privacy" className="text-sm text-gray-400 hover:text-white transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="text-sm text-gray-400 hover:text-white transition-colors">Terms of Service</Link>
-            <Link href="/cookies" className="text-sm text-gray-400 hover:text-white transition-colors">Cookie Policy</Link>
-          </nav>
-
-          {/* Platform Support & Copyright */}
-          <div className="text-center space-y-4">
-            <p className="text-sm text-gray-500">
-              Works with <strong className="text-gray-400">Claude</strong>, <strong className="text-gray-400">Cursor</strong>, <strong className="text-gray-400">Windsurf</strong>, <strong className="text-gray-400">Replit</strong>, <strong className="text-gray-400">MCP</strong> & more
-            </p>
-            <p className="text-gray-500 text-sm font-mono">
-              Open source. Built by devs, for devs. <span className="text-primary/60">git push --force</span> your productivity.
-            </p>
-          </div>
-        </div>
-      </footer>
+      {/* Newsletter Section */}
+      <NewsletterSection />
     </div>
   );
 }
