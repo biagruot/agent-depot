@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, MouseEvent } from "react";
-import { motion } from "framer-motion";
+
 
 interface SpotlightCardProps {
   children: React.ReactNode;
@@ -9,10 +9,10 @@ interface SpotlightCardProps {
   spotlightColor?: string;
 }
 
-export function SpotlightCard({ 
-  children, 
-  className = "", 
-  spotlightColor = "rgba(255, 255, 255, 0.15)" 
+export function SpotlightCard({
+  children,
+  className = "",
+  spotlightColor = "rgba(255, 255, 255, 0.15)"
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });

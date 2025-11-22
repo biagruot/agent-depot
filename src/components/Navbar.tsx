@@ -1,13 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { Github, Plus, Download } from "lucide-react";
+import { Github, Download } from "lucide-react";
 import { agents } from "@/data/agents";
 
 export function Navbar() {
-  const pathname = usePathname();
 
   return (
     <nav className="sticky top-0 left-0 right-0 z-50 border-b border-white/10 bg-black/80 backdrop-blur-xl">

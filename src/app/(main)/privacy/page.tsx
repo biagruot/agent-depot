@@ -10,7 +10,7 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen relative pb-32">
       <Navbar />
-      
+
       <div className="container mx-auto px-4 pt-32 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Privacy Policy</h1>
         <p className="text-gray-400 mb-12">Last updated: November 20, 2025</p>
@@ -19,8 +19,8 @@ export default function PrivacyPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Introduction</h2>
             <p className="text-gray-300 leading-relaxed">
-              AgentDepot ("we", "our", or "us") operates agentdepot.dev (the "Site"). 
-              This Privacy Policy explains how we collect, use, disclose, and safeguard your information 
+              AgentDepot (&quot;we&quot;, &quot;our&quot;, or &quot;us&quot;) operates agentdepot.dev (the &quot;Site&quot;).
+              This Privacy Policy explains how we collect, use, disclose, and safeguard your information
               when you visit our website.
             </p>
             <p className="text-gray-300 leading-relaxed mt-4">
@@ -30,7 +30,7 @@ export default function PrivacyPage() {
 
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Information We Collect</h2>
-            
+
             <h3 className="text-xl font-semibold text-white mt-6 mb-3">Information You Provide</h3>
             <p className="text-gray-300 leading-relaxed mb-4">
               When you submit an agent through our submission form, we collect:
@@ -72,8 +72,8 @@ export default function PrivacyPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Analytics</h2>
             <p className="text-gray-300 leading-relaxed">
-              We use privacy-focused analytics tools (such as Plausible or Umami) that do not use cookies 
-              and do not collect personally identifiable information. These tools help us understand how 
+              We use privacy-focused analytics tools (such as Plausible or Umami) that do not use cookies
+              and do not collect personally identifiable information. These tools help us understand how
               visitors use our Site without compromising your privacy.
             </p>
           </section>
@@ -81,7 +81,7 @@ export default function PrivacyPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Cookies</h2>
             <p className="text-gray-300 leading-relaxed">
-              Our Site does not use cookies for tracking or advertising purposes. We may use essential 
+              Our Site does not use cookies for tracking or advertising purposes. We may use essential
               cookies only for basic site functionality (such as remembering your preferences).
             </p>
           </section>
@@ -101,8 +101,8 @@ export default function PrivacyPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Data Security</h2>
             <p className="text-gray-300 leading-relaxed">
-              We implement appropriate technical and organizational security measures to protect your 
-              personal information. However, no method of transmission over the Internet is 100% secure, 
+              We implement appropriate technical and organizational security measures to protect your
+              personal information. However, no method of transmission over the Internet is 100% secure,
               and we cannot guarantee absolute security.
             </p>
           </section>
@@ -125,9 +125,9 @@ export default function PrivacyPage() {
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
-            <h2 className="text-2xl font-bold text-white mb-4">Children's Privacy</h2>
+            <h2 className="text-2xl font-bold text-white mb-4">Children&apos;s Privacy</h2>
             <p className="text-gray-300 leading-relaxed">
-              Our Site is not intended for children under 13 years of age. We do not knowingly collect 
+              Our Site is not intended for children under 13 years of age. We do not knowingly collect
               personal information from children under 13.
             </p>
           </section>
@@ -135,8 +135,8 @@ export default function PrivacyPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Changes to This Policy</h2>
             <p className="text-gray-300 leading-relaxed">
-              We may update this Privacy Policy from time to time. We will notify you of any changes by 
-              posting the new Privacy Policy on this page and updating the "Last updated" date.
+              We may update this Privacy Policy from time to time. We will notify you of any changes by
+              posting the new Privacy Policy on this page and updating the &quot;Last updated&quot; date.
             </p>
           </section>
 

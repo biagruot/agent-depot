@@ -21,7 +21,7 @@ export default function SubmitPage() {
 
             <div className="flex items-center justify-center gap-3">
               <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
-                Don't let your agent gather dust. Share it with 10k+ devs.
+                Don&apos;t let your agent gather dust. Share it with 10k+ devs.
               </p>
             </div>
           </div>
@@ -47,7 +47,7 @@ export default function SubmitPage() {
               </div>
               <h3 className="text-xl font-bold mb-2 text-white">The Git Way</h3>
               <p className="text-gray-400 text-sm mb-6 text-center">
-                Push to GitHub. Open an issue, we'll merge it.
+                Push to GitHub. Open an issue, we&apos;ll merge it.
               </p>
               <div className="mt-auto flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
                 Open Issue <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />

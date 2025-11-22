@@ -8,6 +8,7 @@ import { AgentModal } from "@/components/AgentModal";
 import { agents } from "@/data/agents";
 import { AgentTool, AgentType, Agent } from "@/types/agent";
 
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SortDropdown, SortOption } from "@/components/SortDropdown";
 import { ShareFiltersButton } from "@/components/ShareFiltersButton";
@@ -231,6 +232,20 @@ function HomeContent() {
               </button>
             </div>
           )}
+
+          {/* Submit CTA */}
+          <div className="mt-24 text-center py-16 border-t border-white/10">
+            <h2 className="text-3xl font-bold mb-4">Built something cool?</h2>
+            <p className="text-gray-400 mb-8 max-w-md mx-auto">
+              Share your agent with the community. We review every submission.
+            </p>
+            <Link
+              href="/submit"
+              className="inline-flex items-center gap-2 bg-white text-black px-8 py-3 rounded-full font-bold hover:bg-gray-200 transition-colors"
+            >
+              Ship It <span className="text-xl">→</span>
+            </Link>
+          </div>
         </div>
       </main>
 

@@ -132,7 +132,7 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
                         {agent.tool === 'replit' && (
                           <>
                             <span>🤖</span>
-                            <span>Copy this prompt and paste it into Replit's <strong>"Start with AI"</strong> agent:</span>
+                            <span>Copy this prompt and paste it into Replit&apos;s <strong>&quot;Start with AI&quot;</strong> agent:</span>
                           </>
                         )}
                         {agent.tool === 'claude-code' && (

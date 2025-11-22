@@ -3,8 +3,6 @@
 import { useState, useEffect, useRef, useMemo } from "react";
 import { Search, Command, X, User, Tag, Bot } from "lucide-react";
 import { agents } from "@/data/agents";
-import { useRouter } from "next/navigation";
-
 interface SearchAutocompleteProps {
   searchQuery: string;
   setSearchQuery: (query: string) => void;
@@ -30,7 +28,6 @@ export function SearchAutocomplete({
   const [selectedIndex, setSelectedIndex] = useState(-1);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
-  const router = useRouter();
 
   // Extract unique authors and tags
   const uniqueAuthors = useMemo(() => {
@@ -227,8 +224,8 @@ export function SearchAutocomplete({
               >
                 {/* Icon based on type */}
                 <div className={`p-2 rounded-lg ${suggestion.type === 'agent' ? 'bg-blue-500/10 text-blue-400' :
-                    suggestion.type === 'author' ? 'bg-purple-500/10 text-purple-400' :
-                      'bg-orange-500/10 text-orange-400'
+                  suggestion.type === 'author' ? 'bg-purple-500/10 text-purple-400' :
+                    'bg-orange-500/10 text-orange-400'
                   }`}>
                   {suggestion.type === 'agent' && <Bot className="w-4 h-4" />}
                   {suggestion.type === 'author' && <User className="w-4 h-4" />}

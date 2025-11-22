@@ -4,7 +4,7 @@ import { Collection } from "@/types/collection";
 import { cn } from "@/lib/utils";
 
 // Map string icon names to Lucide components
-const iconMap: Record<string, any> = {
+const iconMap: Record<string, React.ElementType> = {
   Zap,
   Database,
   Shield,
@@ -19,10 +19,10 @@ interface CollectionShelfProps {
   onSelectCollection: (id: string | null) => void;
 }
 
-export function CollectionShelf({ 
-  collections, 
-  selectedCollectionId, 
-  onSelectCollection 
+export function CollectionShelf({
+  collections,
+  selectedCollectionId,
+  onSelectCollection
 }: CollectionShelfProps) {
   return (
     <div className="flex gap-4 overflow-x-auto pb-6 -mx-4 px-4 snap-x scrollbar-hide">
@@ -39,20 +39,20 @@ export function CollectionShelf({
             onClick={() => onSelectCollection(isSelected ? null : collection.id)}
             className={cn(
               "relative group overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 border min-w-[280px] w-[280px] snap-start",
-              isSelected 
-                ? "border-white/20 shadow-[0_0_30px_-5px_rgba(255,255,255,0.1)]" 
+              isSelected
+                ? "border-white/20 shadow-[0_0_30px_-5px_rgba(255,255,255,0.1)]"
                 : "border-white/5 hover:border-white/10 hover:bg-white/5"
             )}
           >
             {/* Dynamic Gradient Background */}
-            <div 
+            <div
               className="absolute inset-0 opacity-20 transition-opacity duration-500 group-hover:opacity-30"
               style={{ background: collection.gradient }}
             />
-            
+
             {/* Active State Glow */}
             {isSelected && (
-              <motion.div 
+              <motion.div
                 layoutId="active-glow"
                 className="absolute inset-0 bg-white/5 backdrop-blur-[1px]"
                 transition={{ duration: 0.2 }}
@@ -77,7 +77,7 @@ export function CollectionShelf({
               <h3 className="text-lg font-semibold text-white mb-1 group-hover:text-primary transition-colors">
                 {collection.name}
               </h3>
-              
+
               <p className="text-sm text-gray-400 line-clamp-2 mb-4 flex-grow">
                 {collection.description}
               </p>

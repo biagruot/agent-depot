@@ -48,13 +48,7 @@ export function SearchFilters({
     setSelectedType(type);
     track('filter_type_change', { type, tool: selectedTool });
   };
-  const tools: { id: AgentTool | 'all'; label: string }[] = [
-    { id: 'all', label: 'All Tools' },
-    { id: 'windsurf', label: 'Windsurf' },
-    { id: 'claude-code', label: 'Claude' },
-    { id: 'cursor', label: 'Cursor' },
-    { id: 'replit', label: 'Replit' },
-  ];
+
 
   // Context-aware types based on selected tool
   const getAvailableTypes = (): { id: AgentType | 'all'; label: string; icon: string }[] => {
