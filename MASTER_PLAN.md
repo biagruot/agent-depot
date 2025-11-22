@@ -364,136 +364,558 @@ All phases below (launch, growth, monetization) are **BLOCKED** until we have re
 
 ---
 
-## 🎯 REVISED STRATEGIC ROADMAP
+## 🎯 REVISED STRATEGIC ROADMAP (Product-First Approach)
 
-### Phase 0: IMMEDIATE LAUNCH PREP (Days 1-2)
-**Objective:** Final polish and launch readiness
-**Owner:** Engineering + Marketing
-
-#### Day 1 Tasks (4 hours)
-- [ ] **Homepage Messaging Update**
-  - Update hero copy to emphasize "Only multi-tool directory"
-  - Add "100% Verified" trust badge
-  - Strengthen value proposition
-- [ ] **Pre-Launch Content**
-  - Write Product Hunt post (title, description, first comment)
-  - Write Hacker News post (Show HN format)
-  - Draft Twitter launch thread (7 tweets)
-  - Prepare Reddit posts (customize for 7 subreddits)
-- [ ] **Analytics Verification**
-  - Verify OpenPanel tracking works
-  - Test all event types fire correctly
-  - Set up dashboard alerts
-- [ ] **Final QA**
-  - Test on 3 devices (desktop, tablet, mobile)
-  - Verify all links work
-  - Check SEO meta tags
-  - Test email signup form
-
-#### Day 2 Tasks (4 hours)
-- [ ] **Visual Assets**
-  - Create Product Hunt thumbnail (1200x630)
-  - Create Twitter card image
-  - Take screenshots for launch posts
-  - Record 30-second demo video
-- [ ] **Community Prep**
-  - Join target subreddits if not already member
-  - Set up Twitter/X account posting schedule
-  - Prepare Discord community messages
-  - Draft email to micro-influencers (10 people)
-- [ ] **Launch Logistics**
-  - Set Product Hunt alarm (12:01 AM PST)
-  - Schedule Hacker News post (9 AM PST)
-  - Schedule Reddit posts (staggered throughout day)
-  - Prepare response templates
-- [ ] **Backup Plan**
-  - Document rollback procedure if critical bugs found
-  - Prepare "maintenance mode" message
-  - Have monitoring alerts set up
-
-**Success Criteria:** All launch materials ready, team briefed, go/no-go decision made.
+**Philosophy:** Build it right, then launch it. No marketing until product is complete.
 
 ---
 
-### Phase 1: LAUNCH DAY (Day 3)
-**Objective:** Execute coordinated launch across all channels
-**Owner:** Marketing Lead
+### 🚨 PHASE 0: CONTENT ACQUISITION (CRITICAL BLOCKER)
+**Timeline:** Week 1-3  
+**Objective:** Acquire 75-100 REAL agents to replace all mock data  
+**Owner:** Product Manager  
+**Status:** 🔴 BLOCKING ALL OTHER PHASES
+
+**See [CONTENT_STRATEGY.md](./CONTENT_STRATEGY.md) for detailed acquisition plan.**
+
+#### Week 1: Manual Seed (Target: 50 real agents)
+- [ ] **Cursor Rules (15 agents)**
+  - Source from cursor.directory
+  - Test each rule in Cursor IDE
+  - Verify installation steps
+  - Document authors and sources
+  
+- [ ] **Windsurf Rules (10 agents)**  
+  - Source from community Discord
+  - Manual curation (market gap - high value)
+  - Test in Windsurf
+  - Create detailed descriptions
+  
+- [ ] **Claude Code Agents (10 agents)**
+  - Source from Anthropic Discord
+  - GitHub repositories
+  - Community submissions
+  - Verify compatibility
+  
+- [ ] **MCP Servers (10 agents)**
+  - Official Anthropic MCP list
+  - smithery.ai directory
+  - GitHub trending MCP servers
+  - Test installation
+  
+- [ ] **Replit Templates (5 agents)**
+  - Official Replit templates
+  - Community contributions
+  - Test deployments
+  - Document setup steps
+
+#### Week 2: GitHub Setup + Continue Sourcing (Target: 75 agents)
+- [ ] **Public Repository Structure**
+  - Complete agentdepot-agents repo setup
+  - Add agents/ directory with JSON files
+  - Create comprehensive README.md
+  - Write CONTRIBUTING.md guide
+  - Add issue templates
+  
+- [ ] **Sync Infrastructure**
+  - Build sync script in private repo
+  - Automate public → private data flow
+  - Test sync workflow end-to-end
+  - Document sync process
+  
+- [ ] **PR Validation System**
+  - GitHub Actions for schema validation
+  - Automated testing of agent metadata
+  - Link checking
+  - Duplicate detection
+  
+- [ ] **Continue Manual Curation**
+  - Add 25 more agents across all tools
+  - Focus on quality verification
+  - Improve metadata completeness
+
+#### Week 3: Final Push (Target: 100+ agents)
+- [ ] **Remove ALL Mock Data**
+  - Delete all 46 mock agents
+  - Verify no "mock-" prefixes remain
+  - Update agent count displays
+  - Test empty states if categories empty
+  
+- [ ] **Quality Audit**
+  - Every agent tested and verified
+  - All installation instructions accurate
+  - All links working
+  - All metadata complete
+  
+- [ ] **GitHub Community Prep**
+  - Enable discussions
+  - Create first PR template examples
+  - Promote repository in communities
+  - Target: 10-20 community PRs in week 3
+
+**Success Criteria:**
+- ✅ 100+ real, verified agents
+- ✅ Zero mock data remaining
+- ✅ Public repo live and accepting PRs
+- ✅ Sync workflow operational
+- ✅ All agents tested
+
+**BLOCKER LIFTED WHEN:** We have 75+ real agents and mock data removed.
+
+---
+
+### 📝 PHASE 1: PRODUCT COMPLETION (Pre-Launch Polish)
+**Timeline:** Week 4-5 (2 weeks)  
+**Objective:** Finish all product features, SEO, infrastructure  
+**Owner:** Engineering Lead  
+**Status:** ⏸️ BLOCKED by Phase 0
+
+**This phase MUST be completed before any marketing/launch activities.**
+
+#### Week 4: SEO & Metadata Foundation
+
+**Day 1-2: SEO Optimization**
+- [ ] **Meta Tags Audit**
+  - Review all page meta descriptions
+  - Ensure unique title tags per page
+  - Add Open Graph images for all pages
+  - Twitter Card meta tags
+  - Canonical URLs set correctly
+  
+- [ ] **Structured Data (JSON-LD)**
+  - Add Organization schema to homepage
+  - Add SoftwareApplication schema for agents
+  - Add BreadcrumbList schema
+  - Add FAQPage schema
+  - Validate with Google Rich Results Test
+  
+- [ ] **Sitemap Enhancement**
+  - Generate dynamic sitemap.xml
+  - Include all agent pages
+  - Include blog posts
+  - Include tool pages
+  - Submit to Google Search Console
+  
+- [ ] **Robots.txt Optimization**
+  - Allow all important pages
+  - Block admin/test pages
+  - Add sitemap reference
+
+**Day 3-4: On-Page SEO**
+- [ ] **Keyword Optimization**
+  - Homepage: "AI coding agents directory"
+  - Tool pages: "[tool] agents directory"
+  - Blog: Target long-tail keywords
+  - Agent pages: "[agent name] installation"
+  
+- [ ] **Internal Linking**
+  - Cross-link related agents
+  - Link from blog to relevant agents
+  - Add "Related Agents" section
+  - Breadcrumb navigation everywhere
+  
+- [ ] **Image Optimization**
+  - Add alt text to all images
+  - Optimize file sizes
+  - Use WebP format where possible
+  - Lazy loading implementation
+  
+- [ ] **Performance Optimization**
+  - Run Lighthouse audit
+  - Achieve 90+ performance score
+  - Optimize bundle size
+  - Enable compression
+
+**Day 5: Content & Copy Polish**
+- [ ] **Homepage Copy**
+  - Strengthen value proposition
+  - Add social proof elements
+  - Clarify multi-tool advantage
+  - Add trust badges
+  
+- [ ] **Tool Pages Copy**
+  - Unique descriptions per tool
+  - Feature highlights
+  - Installation guides
+  - Comparison sections
+  
+- [ ] **About/FAQ Pages**
+  - Create comprehensive FAQ
+  - Add "About AgentDepot" page
+  - Team/creator info
+  - Mission statement
+
+#### Week 5: Infrastructure & Forms
+
+**Day 1-2: Submit Flow**
+- [ ] **Submit Agent Form**
+  - Build user-friendly submission form
+  - Fields: name, description, tool, type, installation, links
+  - GitHub PR option
+  - Manual form option
+  - Email confirmation
+  
+- [ ] **Submission Review Process**
+  - Admin review dashboard
+  - Approve/reject workflow
+  - Auto-create GitHub PR from form
+  - Notification system
+  
+- [ ] **Guidelines Page**
+  - Submission requirements
+  - Quality standards
+  - Verification process
+  - Examples of good submissions
+
+**Day 3: Newsletter & Email**
+- [ ] **Connect Newsletter Service**
+  - Set up Resend API (already in code)
+  - Test email sending
+  - Create email templates
+  - Set up list management
+  
+- [ ] **Welcome Email Sequence**
+  - Email 1: Welcome + top 5 agents
+  - Email 2: How to use agents (Day 2)
+  - Email 3: Submit your own agent (Day 5)
+  
+- [ ] **Newsletter Page**
+  - Dedicated /newsletter page
+  - Past issues archive
+  - Subscription benefits
+  - Privacy policy link
+  
+- [ ] **Test All Forms**
+  - Email signup form (footer)
+  - Newsletter section
+  - Submit agent form
+  - Verify data flow
+
+**Day 4: Authentication Polish**
+- [ ] **Supabase Setup**
+  - Configure Supabase project
+  - Set up auth providers (Email, GitHub)
+  - Configure email templates
+  - Test auth flow end-to-end
+  
+- [ ] **User Experience**
+  - Test sign up flow
+  - Test sign in flow
+  - Test password reset
+  - Test GitHub OAuth
+  - Test favorites feature
+  
+- [ ] **Email Templates**
+  - Confirm email template
+  - Reset password template
+  - Welcome email template
+  - Match brand design
+
+**Day 5: Final Polish & QA**
+- [ ] **Cross-Browser Testing**
+  - Chrome
+  - Firefox
+  - Safari
+  - Edge
+  - Mobile browsers
+  
+- [ ] **Mobile Responsiveness**
+  - Test all pages on mobile
+  - Test forms on mobile
+  - Test navigation on mobile
+  - Fix any layout issues
+  
+- [ ] **Accessibility Audit**
+  - Run axe DevTools scan
+  - Fix critical accessibility issues
+  - Add ARIA labels where needed
+  - Keyboard navigation test
+  
+- [ ] **Link Audit**
+  - Test ALL internal links
+  - Test ALL external links
+  - Fix broken links
+  - Update outdated links
+  
+- [ ] **Analytics Verification**
+  - Verify OpenPanel tracking
+  - Test all event types
+  - Set up conversion goals
+  - Create dashboards
+
+**Success Criteria:**
+- ✅ Lighthouse score: 90+ (Performance, SEO, Accessibility)
+- ✅ All forms functional and tested
+- ✅ Newsletter connected and sending
+- ✅ Submit flow complete and tested
+- ✅ Authentication working perfectly
+- ✅ Zero broken links
+- ✅ All meta tags optimized
+- ✅ Structured data validated
+- ✅ Mobile-responsive 100%
+
+---
+
+### 🔗 PHASE 2: BACKLINKS & INITIAL SEO (Pre-Launch)
+**Timeline:** Week 6 (1 week)  
+**Objective:** Build initial backlink profile and SEO foundation  
+**Owner:** Marketing Lead  
+**Status:** ⏸️ BLOCKED by Phase 1
+
+**Building authority BEFORE launch for better day-1 visibility.**
+
+#### Manual Backlink Building
+- [ ] **Directory Submissions (High Priority)**
+  - Submit to alternativeto.com
+  - Submit to Product Hunt (ship page, not launch)
+  - Submit to Indie Hackers (profile)
+  - Submit to BetaList
+  - Submit to launching.today
+  - Submit to uneed.best
+  - Submit to startupbuffer.com
+  - Submit to saashub.com
+  
+- [ ] **GitHub Backlinks**
+  - Add to awesome-ai-tools lists
+  - Add to awesome-cursor lists
+  - Add to awesome-claude lists
+  - Add to awesome-developer-tools
+  - Add to awesome-replit
+  - Target: 10+ awesome list additions
+  
+- [ ] **Community Backlinks**
+  - Add to Cursor community resources
+  - Add to Windsurf documentation
+  - Add to Claude Code resources
+  - Add to dev.to profile
+  - Add to Hashnode profile
+  
+- [ ] **Resource Page Outreach**
+  - Find "AI tools" resource pages
+  - Find "Developer tools" roundups
+  - Personalized outreach emails
+  - Offer to be featured
+  - Target: 5-10 resource page mentions
+
+#### Initial Content SEO
+- [ ] **Publish 5 SEO Blog Posts**
+  - "50 Best AI Coding Agents in 2025"
+  - "Complete Guide to Cursor Rules"
+  - "Windsurf vs Cursor: Agent Comparison"
+  - "How to Install Claude Code Plugins"
+  - "MCP Server Directory: Complete Guide"
+  
+- [ ] **Optimize for Keywords**
+  - windsurf agents directory
+  - cursor rules directory
+  - ai coding agents 2025
+  - best claude code plugins
+  - mcp server list
+  
+- [ ] **Content Distribution**
+  - Post on dev.to
+  - Post on Hashnode
+  - Post on Medium
+  - Submit to relevant subreddits (educational, not promotional)
+  - Share in Discord communities (helpful, not spammy)
+
+#### Technical SEO
+- [ ] **Google Search Console**
+  - Verify ownership
+  - Submit sitemap
+  - Check index coverage
+  - Fix any crawl errors
+  
+- [ ] **Bing Webmaster Tools**
+  - Verify ownership
+  - Submit sitemap
+  - Check index status
+  
+- [ ] **Schema Markup Validation**
+  - Test with Google Rich Results
+  - Test with Schema.org validator
+  - Fix any errors
+
+**Success Criteria:**
+- ✅ 20+ quality backlinks
+- ✅ 5+ awesome list additions
+- ✅ 5 SEO blog posts live
+- ✅ Indexed by Google (<48 hours)
+- ✅ 10+ directory submissions
+
+**When Phase 2 Complete:** Product is launch-ready with SEO foundation.
+
+---
+
+### 🎉 PHASE 3: LAUNCH PREPARATION (Pre-Launch Week)
+**Timeline:** Week 7 (1 week)  
+**Objective:** Prepare all launch materials and assets  
+**Owner:** Marketing Lead  
+**Status:** ⏸️ BLOCKED by Phase 2
+
+**DO NOT LAUNCH YET. This is PREPARATION only.**
+
+#### Launch Content Creation
+- [ ] **Product Hunt Assets**
+  - Write Product Hunt description
+  - Create thumbnail image (1200x630)
+  - Prepare first comment
+  - Schedule for Tuesday launch
+  - Recruit supporters for upvotes
+  
+- [ ] **Hacker News Post**
+  - Write "Show HN" post
+  - Highlight: multi-tool, verified, tech stack
+  - Prepare for community questions
+  - Have demo ready
+  
+- [ ] **Twitter Launch Thread**
+  - Write 7-tweet thread
+  - Create visual assets
+  - Schedule tweets
+  - Prepare hashtags
+  
+- [ ] **Reddit Posts (7 subreddits)**
+  - Customize post for each subreddit
+  - r/ClaudeAI
+  - r/Cursor
+  - r/Replit
+  - r/LocalLLaMA
+  - r/ArtificialIntelligence
+  - r/SideProject
+  - r/ChatGPT
+
+#### Visual Assets
+- [ ] **Screenshots**
+  - Homepage hero
+  - Agent cards
+  - Agent detail modal
+  - Filters in action
+  - Mobile view
+  - Submit flow
+  
+- [ ] **Demo Video (30-60 seconds)**
+  - Screen recording
+  - Show key features
+  - Upload to YouTube
+  - Create GIF version
+  
+- [ ] **Social Media Images**
+  - Twitter card (1200x675)
+  - LinkedIn image (1200x627)
+  - Facebook image (1200x630)
+  - Instagram story (1080x1920)
+
+#### Community Preparation
+- [ ] **Join Communities**
+  - Join target subreddits (if not member)
+  - Active in Discord servers
+  - Engage before promoting
+  - Build karma/reputation
+  
+- [ ] **Influencer List**
+  - Identify 10 micro-influencers (500-5K followers)
+  - Developers who use AI tools
+  - Prepare personalized emails
+  - Offer early access
+  
+- [ ] **Response Templates**
+  - FAQs prepared
+  - Common objections addressed
+  - Thank you messages
+  - Bug report responses
+
+#### Launch Logistics
+- [ ] **Monitoring Setup**
+  - OpenPanel dashboard ready
+  - Google Analytics (if using)
+  - Error monitoring (Sentry or similar)
+  - Uptime monitoring
+  
+- [ ] **Backup Plans**
+  - Rollback procedure documented
+  - Maintenance mode message ready
+  - Critical bug triage process
+  - Team availability confirmed
+
+**Success Criteria:**
+- ✅ All launch content written and approved
+- ✅ All visual assets created
+- ✅ Product Hunt scheduled
+- ✅ Reddit posts drafted
+- ✅ Twitter thread ready
+- ✅ Demo video complete
+- ✅ Monitoring tools set up
+- ✅ Team briefed and ready
+
+**When Phase 3 Complete:** Ready to launch on designated day.
+
+---
+
+### 🚀 PHASE 4: LAUNCH DAY
+**Timeline:** Day 1 (Tuesday recommended)  
+**Objective:** Execute coordinated launch across all channels  
+**Owner:** Marketing Lead  
 **Target:** 1,000 visitors, 100 email signups, Product Hunt Top 10
 
-#### Launch Day Timeline (Tuesday Recommended)
+#### Launch Day Timeline
 
 **12:01 AM PST - Product Hunt**
 - [ ] Submit to Product Hunt
-  - Title: "AgentDepot – Every AI Agent, Every Tool, One Place"
-  - Tagline: "The only premium directory covering Claude, Windsurf, Cursor & Replit"
-  - First comment explaining multi-tool advantage
-- [ ] Share on personal social media for upvotes
-- [ ] Monitor and respond to every comment within 1 hour
-
-**8:00 AM PST - Team Check-In**
-- [ ] Review overnight Product Hunt performance
-- [ ] Final go/no-go for Hacker News launch
-- [ ] Brief team on response strategy
+- [ ] Post first comment
+- [ ] Share with supporters
+- [ ] Monitor and respond to every comment
 
 **9:00 AM PST - Hacker News**
-- [ ] Post "Show HN: AgentDepot – Multi-tool AI agent directory"
-- [ ] Body copy emphasizes: multi-tool, 100% verified, premium UX, tech stack
-- [ ] Monitor and respond to all comments within 30 minutes
-- [ ] Fix any bugs immediately and comment "Fixed!"
+- [ ] Post "Show HN: AgentDepot"
+- [ ] Monitor front page
+- [ ] Respond to all comments
+- [ ] Fix bugs immediately
 
 **10:00 AM - 6:00 PM PST - Reddit Campaign**
-Staggered posts to avoid spam detection:
-- [ ] 10:00 AM - r/ClaudeAI
-- [ ] 11:00 AM - r/Cursor
-- [ ] 12:00 PM - r/Replit
-- [ ] 1:00 PM - r/LocalLLaMA
-- [ ] 2:00 PM - r/ArtificialIntelligence
-- [ ] 3:00 PM - r/SideProject
-- [ ] 4:00 PM - r/ChatGPT
+- [ ] Staggered posts across 7 subreddits
+- [ ] Engage with comments
+- [ ] Provide value, not just promotion
 
-**10:00 AM PST - Twitter/X Launch**
-- [ ] Post launch thread (7 tweets)
-- [ ] Use hashtags: #AI #coding #AIAgents #developers
-- [ ] Tag relevant accounts (@AnthropicAI, @cursor_ai, @codeiumdev, @Replit)
-- [ ] Retweet and engage with every mention
-- [ ] Quote tweet anyone who shares
+**10:00 AM PST - Twitter/X**
+- [ ] Post launch thread
+- [ ] Tag relevant accounts
+- [ ] Engage with mentions
+- [ ] Share milestones
 
 **2:00 PM PST - Discord Communities**
-- [ ] Post in Anthropic Discord (Claude Code channel)
-- [ ] Post in Cursor Discord (#show-and-tell)
-- [ ] Post in Codeium/Windsurf Discord
-- [ ] Post in Indie Hackers (#show-ih)
+- [ ] Post in relevant Discords
+- [ ] Anthropic, Cursor, Codeium, Indie Hackers
 
 **4:00 PM PST - Dev.to & LinkedIn**
-- [ ] Publish launch post on Dev.to
-- [ ] Share on LinkedIn with personal story
-- [ ] Cross-post to Hashnode
+- [ ] Publish launch post
+- [ ] Share personal story
 
-**6:00 PM PST - Micro-Influencer Outreach**
-- [ ] Email 10 developers (500-5K followers)
+**6:00 PM PST - Influencer Emails**
+- [ ] Email 10 micro-influencers
 - [ ] Personal, helpful tone
-- [ ] Ask for feedback, not promotion
-- [ ] Offer featured placement for their agents
 
-**All Day - Community Engagement**
-- [ ] Respond to EVERY comment, mention, DM
-- [ ] Share milestones on Twitter ("Just hit 100 visitors!")
-- [ ] Fix any reported bugs immediately
-- [ ] Thank everyone who shares
-- [ ] Track analytics in real-time
-
-**End of Day Review (9:00 PM PST)**
-- [ ] Analyze traffic sources
-- [ ] Document what worked / didn't work
-- [ ] Plan Day 2 priorities
-- [ ] Celebrate wins with team
+**All Day - Engagement**
+- [ ] Respond to EVERY comment
+- [ ] Fix bugs immediately
+- [ ] Track analytics
+- [ ] Thank supporters
 
 **Success Criteria:**
-- ✅ Product Hunt: Top 15 of the day (300+ upvotes)
-- ✅ Hacker News: Front page (top 30)
+- ✅ Product Hunt: Top 15
+- ✅ Hacker News: Front page
 - ✅ 1,000+ visitors
 - ✅ 100+ email signups
-- ✅ Zero critical bugs reported
+- ✅ Zero critical bugs
+
+---
+
+### 📈 PHASE 5: POST-LAUNCH GROWTH
+**Timeline:** Weeks 8-12 (Month 2)  
+**Objective:** Maintain momentum, content distribution, community building  
+**Target:** 10,000 monthly visitors, 1,000 email subscribers
+
+**(This phase comes AFTER successful launch - details in original plan)**
 
 ---
 
