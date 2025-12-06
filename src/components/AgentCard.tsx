@@ -137,7 +137,7 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
 
           {/* Main Content */}
           <div className="mb-4">
-            <h3 className="font-bold text-lg text-gray-100 group-hover:text-white transition-colors line-clamp-2 mb-2 leading-tight">
+            <h3 className="font-bold text-lg text-gray-100 group-hover:text-white transition-colors line-clamp-1 mb-2 leading-tight">
               {agent.name}
             </h3>
             <p className="text-sm text-gray-400 line-clamp-2 leading-relaxed h-[40px]">
@@ -146,7 +146,7 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between mt-auto pt-4 border-t border-white/5">
+          <div className="flex items-center justify-between mt-auto pt-2 border-t border-white/5">
             <div className="flex items-center gap-3 text-xs text-gray-500">
               <span className="flex items-center gap-1">
                 <TypeIcon type={agent.type} />

@@ -1,10 +1,12 @@
 import { agents } from "@/data/agents";
 import { Navbar } from "@/components/Navbar";
-import { ArrowLeft, Github, Globe, Terminal, Copy, Check, ExternalLink } from "lucide-react";
+import { ArrowLeft, Github, Globe, Check, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
+import { InstallationBlock } from "@/components/InstallationBlock";
+import { RuleBlock } from "@/components/RuleBlock";
 
 // Generate static params for all agents
 export async function generateStaticParams() {
@@ -102,7 +104,17 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
                <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">
                   <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Author</div>
                   <div className="font-medium text-white flex items-center gap-2">
-                    {agent.author.name}
+                    {agent.author.url || agent.author.github ? (
+                      <Link 
+                        href={agent.author.url || agent.author.github || '#'} 
+                        target="_blank"
+                        className="hover:text-blue-400 transition-colors"
+                      >
+                        {agent.author.name}
+                      </Link>
+                    ) : (
+                      agent.author.name
+                    )}
                     {agent.verified && <Check className="w-3.5 h-3.5 text-blue-400" />}
                   </div>
                </div>
@@ -117,38 +129,26 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
             {/* Main Content */}
             <div className="lg:col-span-2 space-y-10">
               {/* Installation */}
-              <section>
-                <h2 className="text-lg font-semibold mb-4 flex items-center gap-2 text-white">
-                  <Terminal className="w-5 h-5 text-gray-400" />
-                  Installation
-                </h2>
-                <div className="bg-[#0A0A0A] rounded-xl border border-white/10 p-5 font-mono text-sm relative group shadow-inner">
-                  <div className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity">
-                    <button className="p-2 bg-white/10 rounded-md hover:bg-white/20 text-gray-400 hover:text-white transition-colors">
-                      <Copy className="w-4 h-4" />
-                    </button>
-                  </div>
-                  {agent.installation.command ? (
-                    <div className="flex items-start gap-3">
-                      <span className="text-gray-600 select-none">$</span>
-                      <code className="text-green-400 break-all">
-                        {agent.installation.command}
-                      </code>
-                    </div>
-                  ) : (
-                    <div className="text-gray-300 whitespace-pre-wrap leading-relaxed">
-                      {agent.installation.instructions || "See documentation for installation."}
-                    </div>
-                  )}
-                </div>
-              </section>
+              <InstallationBlock installation={agent.installation} />
 
               {/* Description */}
-              <section className="prose prose-invert max-w-none prose-p:text-gray-400 prose-headings:text-white prose-a:text-blue-400 prose-code:text-pink-300 prose-code:bg-white/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
-                <h2 className="text-lg font-semibold mb-4 text-white">About this Agent</h2>
-                <ReactMarkdown>
-                  {agent.fullDescription || agent.description}
-                </ReactMarkdown>
+              <section className="space-y-8">
+                <div className="prose prose-invert max-w-none prose-p:text-gray-400 prose-headings:text-white prose-a:text-blue-400 prose-code:text-pink-300 prose-code:bg-white/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
+                  <h2 className="text-lg font-semibold mb-4 text-white">About this Agent</h2>
+                  <ReactMarkdown>
+                    {agent.description}
+                  </ReactMarkdown>
+                </div>
+
+                {agent.fullDescription && (
+                  agent.type === 'rule' ? (
+                    <RuleBlock content={agent.fullDescription} />
+                  ) : (
+                    <div className="text-gray-400 whitespace-pre-wrap leading-relaxed pt-4 border-t border-white/5 font-sans">
+                      {agent.fullDescription}
+                    </div>
+                  )
+                )}
               </section>
             </div>
 

@@ -2,11 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, Copy, Check, ExternalLink, Github } from "lucide-react";
+import { X, Github, ExternalLink } from "lucide-react";
 import { Agent } from "@/types/agent";
 import ReactMarkdown from "react-markdown";
 import { ShareButton } from "./ShareButton";
 import { useOpenPanel } from "@openpanel/nextjs";
+import { InstallationBlock } from "./InstallationBlock";
+import { RuleBlock } from "./RuleBlock";
 
 interface AgentModalProps {
   agent: Agent | null;
@@ -15,7 +17,7 @@ interface AgentModalProps {
 }
 
 export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
-  const [copied, setCopied] = useState(false);
+
 
   const { track } = useOpenPanel();
 
@@ -48,13 +50,7 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
     };
   }, [isOpen, agent, track]);
 
-  const handleCopy = () => {
-    if (agent?.installation.command) {
-      navigator.clipboard.writeText(agent.installation.command);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
-  };
+
 
   if (!agent) return null;
 
@@ -92,7 +88,21 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
                       </span>
                     )}
                   </div>
-                  <p className="text-gray-400">by {agent.author.name}</p>
+                  <p className="text-gray-400">
+                    by{' '}
+                    {agent.author.url || agent.author.github ? (
+                      <a 
+                        href={agent.author.url || agent.author.github} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="hover:text-white transition-colors border-b border-transparent hover:border-gray-400"
+                      >
+                        {agent.author.name}
+                      </a>
+                    ) : (
+                      agent.author.name
+                    )}
+                  </p>
                 </div>
                 <div className="flex items-center gap-2">
                   <ShareButton agent={agent} />
@@ -108,61 +118,24 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
               {/* Content */}
               <div className="p-6 space-y-8">
                 {/* Description */}
-                <div className="prose prose-invert max-w-none">
-                  <ReactMarkdown>{agent.description}</ReactMarkdown>
+                <div className="space-y-6">
+                  <div className="prose prose-invert max-w-none">
+                    <ReactMarkdown>{agent.description}</ReactMarkdown>
+                  </div>
+
+                  {agent.fullDescription && (
+                    agent.type === 'rule' ? (
+                      <RuleBlock content={agent.fullDescription} />
+                    ) : (
+                      <div className="text-gray-400 whitespace-pre-wrap leading-relaxed pt-4 border-t border-white/5 font-sans">
+                        {agent.fullDescription}
+                      </div>
+                    )
+                  )}
                 </div>
 
                 {/* Installation */}
-                {agent.installation.command && (
-                  <div className="bg-black/30 rounded-xl p-4 border border-white/5 space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-400 font-medium flex items-center gap-2">
-                        {agent.tool === 'cursor' && (
-                          <>
-                            <span>📝</span>
-                            <span>Create a file in <code className="text-primary">.cursor/rules/</code> (e.g. <code className="text-gray-300">agent.mdc</code>) and paste:</span>
-                          </>
-                        )}
-                        {agent.tool === 'windsurf' && (
-                          <>
-                            <span>📝</span>
-                            <span>Create a <code className="text-primary">.windsurfrules</code> file in your project root and paste:</span>
-                          </>
-                        )}
-                        {agent.tool === 'replit' && (
-                          <>
-                            <span>🤖</span>
-                            <span>Copy this prompt and paste it into Replit&apos;s <strong>&quot;Start with AI&quot;</strong> agent:</span>
-                          </>
-                        )}
-                        {agent.tool === 'claude-code' && (
-                          <>
-                            <span>⚙️</span>
-                            <span>Add this to your <code className="text-primary">claude_desktop_config.json</code> (or run command):</span>
-                          </>
-                        )}
-                        {agent.tool === 'mcp' && (
-                          <>
-                            <span>🔌</span>
-                            <span>Run this command to install the MCP server:</span>
-                          </>
-                        )}
-                      </span>
-                    </div>
-                    <div className="flex gap-2">
-                      <code className="flex-1 font-mono text-sm bg-black/50 p-3 rounded-lg text-green-400 overflow-x-auto whitespace-pre-wrap max-h-[200px] overflow-y-auto">
-                        {agent.installation.command}
-                      </code>
-                      <button
-                        onClick={handleCopy}
-                        className="bg-white text-black px-4 py-2 rounded-lg font-semibold hover:bg-gray-200 transition-colors flex items-center gap-2 whitespace-nowrap h-fit"
-                      >
-                        {copied ? <Check className="w-4 h-4" /> : <Copy className="w-4 h-4" />}
-                        {copied ? "Copied" : "Copy"}
-                      </button>
-                    </div>
-                  </div>
-                )}
+                <InstallationBlock installation={agent.installation} />
 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2">

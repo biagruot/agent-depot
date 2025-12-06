@@ -58,10 +58,10 @@ export function SearchFilters({
       return [
         ...baseTypes,
         { id: 'rule', label: 'Rules', icon: '📝' },
-        { id: 'template', label: 'Templates', icon: '📦' },
         { id: 'plugin', label: 'Plugins', icon: '🔌' },
         { id: 'agent', label: 'Agents', icon: '🤖' },
         { id: 'skill', label: 'Skills', icon: '📚' },
+        { id: 'template', label: 'Frameworks', icon: '📦' },
       ];
     }
 
@@ -72,8 +72,7 @@ export function SearchFilters({
     if (selectedTool === 'replit') {
       return [
         ...baseTypes,
-        { id: 'template', label: 'Templates', icon: '📦' },
-        { id: 'agent', label: 'Agents', icon: '🤖' },
+        { id: 'template', label: 'Frameworks', icon: '📦' },
       ];
     }
 
