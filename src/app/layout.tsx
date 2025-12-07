@@ -107,7 +107,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-black text-white selection:bg-blue-500/30`}
       >
-        <OpenPanelComponent clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID!} trackScreenViews={true} />
+        {process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID && (
+          <OpenPanelComponent clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID} trackScreenViews={true} />
+        )}
         <FavoritesProvider>
           {children}
         </FavoritesProvider>

@@ -18,14 +18,14 @@ export function Footer() {
                             Discover, install, and ship faster with curated rules for Cursor, Windsurf, and Claude.
                         </p>
                         <div className="flex items-center gap-4 pt-2">
-                            <a href="https://github.com/agentdepot" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
-                                <Github className="w-5 h-5" />
+                            <a href="https://github.com/agentdepot" target="_blank" rel="noopener noreferrer" aria-label="Visit our GitHub" className="text-gray-500 hover:text-white transition-colors">
+                                <Github className="w-5 h-5" aria-hidden="true" />
                             </a>
-                            <a href="https://twitter.com/agentdepot" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-white transition-colors">
-                                <Twitter className="w-5 h-5" />
+                            <a href="https://twitter.com/agentdepot" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="text-gray-500 hover:text-white transition-colors">
+                                <Twitter className="w-5 h-5" aria-hidden="true" />
                             </a>
-                            <a href="#" className="text-gray-500 hover:text-white transition-colors">
-                                <Disc className="w-5 h-5" /> {/* Discord icon workaround if needed, using Disc for now */}
+                            <a href="#" aria-label="Join our Discord community" className="text-gray-500 hover:text-white transition-colors">
+                                <Disc className="w-5 h-5" aria-hidden="true" /> {/* Discord icon workaround if needed, using Disc for now */}
                             </a>
                         </div>
                     </div>

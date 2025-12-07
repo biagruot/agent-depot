@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@openpanel/nextjs": "^1.0.17",
+    "@react-email/components": "^1.0.1",
+    "@react-email/render": "^2.0.0",
     "@supabase/ssr": "^0.7.0",
     "@supabase/supabase-js": "^2.84.0",
     "clsx": "^2.1.1",

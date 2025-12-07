@@ -29,16 +29,23 @@ export function EmailSignup() {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setStatus("success");
-        setMessage("Thanks! You're on the list 🎉");
+        // Use the message from the API or fallback
+        setMessage(data.message || "Thanks! You're on the list 🎉");
         track('email_signup', { email });
         setEmail("");
         setTimeout(() => setStatus("idle"), 5000);
+      } else {
+        setStatus("error");
+        setMessage(data.error || "Something went wrong. Try again?");
+        setTimeout(() => setStatus("idle"), 3000);
       }
     } catch {
       setStatus("error");
-      setMessage("Something went wrong. Try again?");
+      setMessage("Network error. Please check your connection.");
       setTimeout(() => setStatus("idle"), 3000);
     }
   };

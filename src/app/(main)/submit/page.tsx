@@ -14,15 +14,39 @@ export default function SubmitPage() {
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}
         <div className="text-center mb-12 space-y-6">
-          <div className="space-y-3">
+          <div className="space-y-4">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-purple-500/10 to-pink-500/10 border border-purple-500/20 text-sm text-purple-300 mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-purple-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-purple-500"></span>
+              </span>
+              Join 70+ agents in the directory
+            </div>
+            
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight">
               Ship It.
             </h1>
 
-            <div className="flex items-center justify-center gap-3">
-              <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
-                Don&apos;t let your agent gather dust. Share it with 10k+ devs.
-              </p>
+            <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
+              Don&apos;t let your agent gather dust. Share it with 10k+ devs and grow your community.
+            </p>
+          </div>
+          
+          {/* Quick stats */}
+          <div className="flex items-center justify-center gap-8 pt-4">
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">24h</div>
+              <div className="text-xs text-gray-500">Review Time</div>
+            </div>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">Free</div>
+              <div className="text-xs text-gray-500">Forever</div>
+            </div>
+            <div className="w-px h-8 bg-white/10" />
+            <div className="text-center">
+              <div className="text-2xl font-bold text-white">10k+</div>
+              <div className="text-xs text-gray-500">Monthly Visitors</div>
             </div>
           </div>
         </div>

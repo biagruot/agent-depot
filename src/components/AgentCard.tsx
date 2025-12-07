@@ -126,6 +126,7 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
 
             <button
               onClick={handleFavorite}
+              aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
               className={`p-1.5 -mr-1.5 -mt-1.5 rounded-full transition-colors z-20 ${isFavorited
                 ? "text-pink-500 bg-pink-500/10"
                 : "text-gray-500 hover:text-pink-400 hover:bg-white/10"

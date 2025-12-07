@@ -56,12 +56,42 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 Create a `.env.local` file:
 
 ```bash
-# Analytics (Optional but recommended)
+# ===========================================
+# Required: Authentication (Supabase)
+# ===========================================
+# Get from: https://supabase.com/dashboard/project/_/settings/api
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+
+# ===========================================
+# Required: Analytics (OpenPanel)
+# ===========================================
+# Get from: https://openpanel.dev/dashboard
 NEXT_PUBLIC_OPENPANEL_CLIENT_ID=your_client_id
 
-# Email service (Optional - for newsletter)
-RESEND_API_KEY=your_resend_api_key
+# ===========================================
+# Required: Newsletter Service (Resend)
+# ===========================================
+# Get from: https://resend.com/api-keys
+RESEND_API_KEY=re_your_api_key
+
+# Get from: https://resend.com/audiences
+RESEND_AUDIENCE_ID=your-audience-id
+
+# Optional: Custom "from" email (must be verified in Resend)
+# Default uses Resend sandbox: "AgentDepot <onboarding@resend.dev>"
+# RESEND_FROM_EMAIL=AgentDepot <hello@agentdepot.dev>
 ```
+
+#### Setting up Resend for Newsletter
+
+1. **Create account** at [resend.com](https://resend.com)
+2. **Generate API key** at [resend.com/api-keys](https://resend.com/api-keys)
+3. **Create Audience** at [resend.com/audiences](https://resend.com/audiences)
+   - Name: "AgentDepot Newsletter"
+   - Copy the Audience ID
+4. **(Production)** Verify your domain at [resend.com/domains](https://resend.com/domains)
+   - Required for custom "from" addresses
 
 ---
 
