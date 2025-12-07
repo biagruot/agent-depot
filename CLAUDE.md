@@ -18,9 +18,9 @@ agentdepot/                          # Parent folder (working directory)
 ├── agentdepot-core/                 # THIS REPO (Private)
 │   ├── src/                         # Next.js application code
 │   ├── public/                      # Static assets
-│   ├── CLAUDE.md                    # This file
-│   ├── MASTER_PLAN.md               # Single source of truth
-│   ├── CONTENT_STRATEGY.md          # Content acquisition strategy
+│   ├── PROJECT.md                   # Single source of truth (project status & roadmap)
+│   ├── CLAUDE.md                    # This file (technical documentation)
+│   ├── archive/                     # Archived planning documents
 │   └── package.json
 ├── agentdepot-agents/               # Public Repository
 │   ├── agents/                      # Agent definition files
@@ -41,7 +41,7 @@ agentdepot/                          # Parent folder (working directory)
 - Proprietary business logic and marketing strategies
 - Build configuration and deployment settings
 - Analytics and monetization code
-- All planning documents (MASTER_PLAN.md, CONTENT_STRATEGY.md)
+- Project management (PROJECT.md)
 
 **agentdepot-agents (Public):**
 - Community-contributed agent definitions
@@ -68,33 +68,32 @@ agentdepot/                          # Parent folder (working directory)
 - Community can contribute agents without accessing core business logic
 - Maintains security while enabling open collaboration
 
-## ⚠️ CRITICAL: Master Plan Updates
+## ⚠️ CRITICAL: Project Dashboard Updates
 
-**IMPORTANT:** This project uses `MASTER_PLAN.md` as the single source of truth for all strategic planning, feature tracking, and project status.
+**IMPORTANT:** This project uses `PROJECT.md` as the single source of truth for all strategic planning, feature tracking, and project status.
 
 ### Mandatory Workflow
-Whenever you make ANY of the following changes, you MUST update `MASTER_PLAN.md`:
+Whenever you make ANY of the following changes, you MUST update `PROJECT.md`:
 
-1. **Complete a feature or task** → Mark it as complete in the appropriate phase
-2. **Add a new feature** → Add it to the roadmap with owner, timeline, and success criteria
-3. **Change project status** → Update the Executive Summary section
-4. **Launch or reach a milestone** → Update success metrics and current status
-5. **Identify a blocker or risk** → Add to Risk Assessment section
-6. **Shift priorities** → Update the Immediate Action Plan
-7. **Change timeline or deadlines** → Update phase timelines
-8. **Achieve metrics** → Update the Monthly Tracking Dashboard with actual numbers
+1. **Complete a feature or task** → Mark it as complete in the "Completed" section
+2. **Start working on a task** → Move it to "In Progress"
+3. **Change project status** → Update the "Current Status" section
+4. **Launch or reach a milestone** → Update success metrics and key numbers
+5. **Identify a blocker** → Add to "Current Blockers" section
+6. **Shift priorities** → Update "This Week's Priorities"
+7. **Achieve metrics** → Update "Key Metrics" table with actual numbers
 
-### How to Update the Master Plan
-1. Read the current `MASTER_PLAN.md` to understand context
+### How to Update the Project Dashboard
+1. Read the current `PROJECT.md` to understand context
 2. Make your code/content changes
-3. Update the relevant section(s) in `MASTER_PLAN.md`
+3. Update the relevant section(s) in `PROJECT.md`
 4. Update the "Last Updated" date at the top
-5. If significant changes, add to "Recent Changes" section at bottom
+5. Add significant changes to "Recent Changes" section at bottom
 
 ### Why This Matters
-The Master Plan coordinates work across multiple specialized agents (engineering, marketing, SEO, content, growth). Without updates, teams work with stale information and duplicate effort.
+PROJECT.md is the product manager's dashboard that tracks what's done, what's in progress, and what's next. Without updates, the team loses visibility into project status.
 
-**Think of MASTER_PLAN.md as the product manager's dashboard - keep it current.**
+**Keep PROJECT.md current - it's your single source of truth.**
 
 ---
 
@@ -392,13 +391,13 @@ RESEND_API_KEY=your_key                          # Email (optional)
 
 ## Future Development Notes
 
-### High Priority (from MASTER_PLAN.md)
-1. **LAUNCH** - Execute launch within 72 hours (Product Hunt, Hacker News, Reddit)
-2. **CLI Tool** - `npx agentdepot search "react"` (Month 2 priority)
-3. **VS Code Extension** - Searchable agent directory in editor (Month 2 priority)
-4. **Email Service Connection** - Currently infrastructure ready, needs Resend API key
+### High Priority (from PROJECT.md)
+1. **GitHub Setup** - Complete public repo and sync infrastructure (Week 2)
+2. **Soft Launch** - Execute when 75+ agents ready (Week 3)
+3. **CLI Tool** - `npx agentdepot search "react"` (Month 2)
+4. **VS Code Extension** - Searchable agent directory in editor (Month 2)
 
-**See MASTER_PLAN.md for complete roadmap, timelines, and success metrics.**
+**See PROJECT.md for complete roadmap, current status, and next priorities.**
 
 ### Architecture Decisions
 - **Why no database?** Static data = faster builds, easier contributions via Git, free hosting
@@ -415,7 +414,7 @@ This project is designed for viral growth through multiple channels:
 - **Embed Widgets** (implemented - `/embed/[id]`)
 - **Social Sharing** (Twitter, email, links)
 
-**See `MASTER_PLAN.md` for complete marketing roadmap and execution strategy.**
+**See `PROJECT.md` for complete roadmap and execution strategy.**
 
 ## Troubleshooting
 
@@ -441,33 +440,26 @@ When adding features:
 2. Maintain TypeScript strict mode compliance
 3. Add analytics tracking for new user actions
 4. Test mobile responsiveness
-5. **Update MASTER_PLAN.md with completed tasks and status changes** ⚠️
+5. **Update PROJECT.md with completed tasks and status changes** ⚠️
 6. Update this CLAUDE.md if architecture changes
 
-**Remember:** MASTER_PLAN.md is the single source of truth. Always update it when completing tasks, changing status, or shifting priorities.
+**Remember:** PROJECT.md is the single source of truth. Always update it when completing tasks, changing status, or shifting priorities.
 
 ## Contact & Support
 
 For questions about this codebase, refer to:
 
 **Core Repository (agentdepot-core):**
-- **`MASTER_PLAN.md`** - **PRIMARY: Single source of truth for all planning, status, and priorities**
-- **`CONTENT_STRATEGY.md`** - **CRITICAL: How to acquire real agents (current blocker)**
+- **`PROJECT.md`** - **PRIMARY: Single source of truth for project status, roadmap, and priorities**
 - `CLAUDE.md` (this file) - Technical architecture and development guide
-- `agentstack-knowledge-base.md` - Historical: Original market research (archived)
-- `TASKS.md` - Archived: Superseded by MASTER_PLAN.md
-- `MARKETING_PLAN.md` - Archived: Integrated into MASTER_PLAN.md
+- `archive/` - Historical planning documents (reference only)
 
 **Public Repository (agentdepot-agents):**
 - `README.md` - Public-facing documentation and setup instructions
 - `CONTRIBUTING.md` - Guidelines for community contributions
 - `types/` - TypeScript definitions (must sync with core)
 
-**Parent Folder:**
-- `knowledge-base.md` - Original market research and project genesis
-
 **Priority Order:**
-1. **CONTENT_STRATEGY.md** (core) - Start here if working on content acquisition
-2. **MASTER_PLAN.md** (core) - Overall roadmap and status
-3. **CLAUDE.md** (core) - Technical implementation details
-4. **CONTRIBUTING.md** (agents) - Community contribution workflow
+1. **PROJECT.md** (core) - Project status, roadmap, and current priorities
+2. **CLAUDE.md** (core) - Technical implementation details
+3. **CONTRIBUTING.md** (agents) - Community contribution workflow

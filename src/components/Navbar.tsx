@@ -12,6 +12,7 @@ export function Navbar() {
     { href: "/browse", label: "Browse" },
     { href: "/blog", label: "Blog" },
     { href: "/mcp", label: "MCP" },
+    { href: "/faq", label: "FAQ" },
   ];
 
   const isActive = (href: string) => {

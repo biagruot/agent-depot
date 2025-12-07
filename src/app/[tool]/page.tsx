@@ -23,23 +23,85 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: ToolPageProps) {
   const { tool } = await params;
-  
+
   if (!VALID_TOOLS.includes(tool as Tool)) {
     return {
       title: "Tool Not Found - AgentDepot",
     };
   }
 
-  const toolNames: Record<Tool, string> = {
-    claude: "Claude Code",
-    windsurf: "Windsurf",
-    cursor: "Cursor",
-    replit: "Replit",
+  const toolMetadata: Record<Tool, {
+    name: string;
+    title: string;
+    description: string;
+    keywords: string[];
+  }> = {
+    claude: {
+      name: "Claude Code",
+      title: "Claude Code Plugins & Agents Directory - AgentDepot",
+      description: "Discover 15+ verified Claude Code plugins, agents, and skills. Premium directory of AI coding tools for Anthropic's Claude Code. Tested and curated for developers.",
+      keywords: ["claude code plugins", "claude code agents", "claude code skills", "claude code directory", "anthropic claude code", "ai coding claude"],
+    },
+    windsurf: {
+      name: "Windsurf",
+      title: "Windsurf Agents & Rules Directory - AgentDepot",
+      description: "Browse 15+ verified Windsurf rules and agents for Codeium's agentic IDE. The most comprehensive Windsurf agents directory with installation guides and examples.",
+      keywords: ["windsurf agents directory", "windsurf rules", "windsurf cascade", "codeium windsurf", "windsurf ai", "windsurf configurations"],
+    },
+    cursor: {
+      name: "Cursor",
+      title: "Cursor Rules Directory - Best AI Coding Rules - AgentDepot",
+      description: "Find 15+ high-quality Cursor rules for React, Python, TypeScript, and more. Curated directory of the best Cursor AI editor rules with one-click installation.",
+      keywords: ["cursor rules directory", "best cursor rules", "cursor ai rules", "cursor editor rules", "cursor rules react", "cursor rules python"],
+    },
+    replit: {
+      name: "Replit",
+      title: "Replit Templates & Agents Directory - AgentDepot",
+      description: "Explore 16+ Replit templates, agents, and extensions. Deploy-ready templates for React, Python, Node.js, and more. Start coding instantly.",
+      keywords: ["replit templates", "replit agents", "replit extensions", "replit directory", "replit starter templates"],
+    },
   };
 
+  const metadata = toolMetadata[tool as Tool];
+  const baseUrl = 'https://agentdepot.dev';
+
   return {
-    title: `${toolNames[tool as Tool]} Agents - AgentDepot`,
-    description: `Discover and browse verified AI coding agents for ${toolNames[tool as Tool]}. Curated collection of plugins, rules, and extensions.`,
+    title: metadata.title,
+    description: metadata.description,
+    keywords: metadata.keywords,
+    openGraph: {
+      title: metadata.title,
+      description: metadata.description,
+      url: `${baseUrl}/${tool}`,
+      siteName: "AgentDepot",
+      images: [
+        {
+          url: `${baseUrl}/og-${tool}.png`,
+          width: 1200,
+          height: 630,
+          alt: `${metadata.name} Agents Directory`,
+        },
+      ],
+      type: "website",
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: metadata.title,
+      description: metadata.description,
+      images: [`${baseUrl}/og-${tool}.png`],
+    },
+    alternates: {
+      canonical: `${baseUrl}/${tool}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+      googleBot: {
+        index: true,
+        follow: true,
+      },
+    },
   };
 }
 
@@ -79,8 +141,43 @@ export default async function ToolPage({ params }: ToolPageProps) {
 
   const currentTool = toolInfo[tool as Tool];
 
+  // JSON-LD Structured Data for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": `${currentTool.name} Agents`,
+    "description": currentTool.description,
+    "url": `https://agentdepot.dev/${tool}`,
+    "about": {
+      "@type": "SoftwareApplication",
+      "name": currentTool.name,
+      "applicationCategory": "DeveloperApplication",
+    },
+    "mainEntity": {
+      "@type": "ItemList",
+      "numberOfItems": toolAgents.length,
+      "itemListElement": toolAgents.slice(0, 10).map((agent, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "item": {
+          "@type": "SoftwareApplication",
+          "name": agent.name,
+          "description": agent.description,
+          "url": `https://agentdepot.dev/agent/${agent.id}`,
+          "applicationCategory": "DeveloperApplication",
+        },
+      })),
+    },
+  };
+
   return (
     <main className="min-h-screen relative">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <Navbar />
 
       {/* Hero Section */}

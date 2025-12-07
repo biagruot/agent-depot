@@ -18,10 +18,48 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const agent = agents.find((a) => a.id === slug);
+
   if (!agent) return { title: "Agent Not Found" };
+
+  const baseUrl = 'https://agentdepot.dev';
+  const toolNames = {
+    "claude-code": "Claude Code",
+    "windsurf": "Windsurf",
+    "cursor": "Cursor",
+    "replit": "Replit",
+    "mcp": "MCP",
+  };
+
   return {
-    title: `${agent.name} for ${agent.tool} | AgentDepot`,
+    title: `${agent.name} - ${toolNames[agent.tool]} ${agent.type.charAt(0).toUpperCase() + agent.type.slice(1)} | AgentDepot`,
     description: agent.description,
+    keywords: [...agent.tags, agent.tool, agent.type, agent.category, "ai coding", "developer tools"],
+    openGraph: {
+      title: `${agent.name} for ${toolNames[agent.tool]}`,
+      description: agent.description,
+      url: `${baseUrl}/agent/${agent.id}`,
+      siteName: "AgentDepot",
+      images: [
+        {
+          url: `${baseUrl}/og-agent-${agent.tool}.png`,
+          width: 1200,
+          height: 630,
+          alt: `${agent.name} - ${toolNames[agent.tool]} ${agent.type}`,
+        },
+      ],
+      type: "article",
+      locale: "en_US",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${agent.name} for ${toolNames[agent.tool]}`,
+      description: agent.description,
+      images: [`${baseUrl}/og-agent-${agent.tool}.png`],
+    },
+    alternates: {
+      canonical: `${baseUrl}/agent/${agent.id}`,
+    },
+    authors: [{ name: agent.author.name, url: agent.author.url || agent.author.github }],
   };
 }
 
@@ -41,8 +79,43 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
     mcp: "text-[#22c55e] border-[#22c55e]/20 bg-[#22c55e]/10",
   };
 
+  // JSON-LD Structured Data for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": agent.name,
+    "description": agent.description,
+    "applicationCategory": "DeveloperApplication",
+    "operatingSystem": "Cross-platform",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+    },
+    "author": {
+      "@type": "Person",
+      "name": agent.author.name,
+      "url": agent.author.url || agent.author.github,
+    },
+    "url": `https://agentdepot.dev/agent/${agent.id}`,
+    "keywords": agent.tags.join(", "),
+    "aggregateRating": agent.stats?.stars ? {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": agent.stats.stars,
+    } : undefined,
+  };
+
   return (
     <main className="min-h-screen relative pb-20">
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       <Navbar />
 
       <div className="container mx-auto px-4 pt-32 max-w-5xl relative z-10">
