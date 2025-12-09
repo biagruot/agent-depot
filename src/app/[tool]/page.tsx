@@ -6,7 +6,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
-const VALID_TOOLS = ["claude", "windsurf", "cursor", "replit"] as const;
+const VALID_TOOLS = ["claude-code", "windsurf", "cursor", "replit"] as const;
 type Tool = typeof VALID_TOOLS[number];
 
 interface ToolPageProps {
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: ToolPageProps) {
     description: string;
     keywords: string[];
   }> = {
-    claude: {
+    "claude-code": {
       name: "Claude Code",
       title: "Claude Code Plugins & Agents Directory - AgentDepot",
       description: "Discover 15+ verified Claude Code plugins, agents, and skills. Premium directory of AI coding tools for Anthropic's Claude Code. Tested and curated for developers.",
@@ -117,7 +117,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
   const featuredCount = toolAgents.filter((a) => a.featured).length;
 
   const toolInfo: Record<Tool, { name: string; gradient: string; description: string }> = {
-    claude: {
+    "claude-code": {
       name: "Claude Code",
       gradient: "from-orange-600 to-red-600",
       description: "Powerful plugins and agents for Anthropic's Claude Code. Build, debug, and deploy with AI assistance.",

@@ -68,6 +68,44 @@ agentdepot/                          # Parent folder (working directory)
 - Community can contribute agents without accessing core business logic
 - Maintains security while enabling open collaboration
 
+### Agent Sync Process
+
+**How it works:**
+
+1. **Community submits PRs** to `agentdepot-agents` (public repo)
+2. **GitHub Actions validates** the submission automatically
+   - TypeScript compilation
+   - Schema validation
+   - Duplicate ID detection
+   - Required fields check
+3. **Manual review** by maintainers (24-48 hours)
+4. **PR merged** to main branch
+5. **Sync to core** using `scripts/sync-agents.sh`
+6. **Deploy** to production on Netlify
+
+**Running the sync manually:**
+
+```bash
+# Dry run (see what would sync)
+./scripts/sync-agents.sh --dry-run
+
+# Actually sync
+./scripts/sync-agents.sh
+
+# Then build and test
+npm run build
+```
+
+**What gets synced:**
+- All agent files: `agents/*.ts` (cursor, windsurf, claude-code, mcp, replit)
+- Type definitions: `types/agent.ts`
+- Direction: Public repo → Private repo (one-way sync)
+
+**Important:**
+- Always run the sync script from the core repo root
+- The script expects both repos to be in the same parent directory
+- After syncing, always test with `npm run build` before committing
+
 ## ⚠️ CRITICAL: Project Dashboard Updates
 
 **IMPORTANT:** This project uses `PROJECT.md` as the single source of truth for all strategic planning, feature tracking, and project status.

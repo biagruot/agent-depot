@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Github, Twitter, Disc, BookOpen } from "lucide-react";
+import { Github, Twitter } from "lucide-react";
 
 export function Footer() {
     return (
@@ -23,9 +23,6 @@ export function Footer() {
                             </a>
                             <a href="https://twitter.com/agentdepot" target="_blank" rel="noopener noreferrer" aria-label="Follow us on Twitter" className="text-gray-500 hover:text-white transition-colors">
                                 <Twitter className="w-5 h-5" aria-hidden="true" />
-                            </a>
-                            <a href="#" aria-label="Join our Discord community" className="text-gray-500 hover:text-white transition-colors">
-                                <Disc className="w-5 h-5" aria-hidden="true" /> {/* Discord icon workaround if needed, using Disc for now */}
                             </a>
                         </div>
                     </div>
@@ -61,8 +58,7 @@ export function Footer() {
                             <li><Link href="/blog" className="text-sm text-gray-400 hover:text-white transition-colors">Blog</Link></li>
                             <li><Link href="/faq" className="text-sm text-gray-400 hover:text-white transition-colors">FAQ</Link></li>
                             <li><Link href="/submit" className="text-sm text-gray-400 hover:text-white transition-colors">Submit Agent</Link></li>
-                            <li><Link href="/docs" className="text-sm text-gray-400 hover:text-white transition-colors">Documentation</Link></li>
-                            <li><Link href="/changelog" className="text-sm text-gray-400 hover:text-white transition-colors">Changelog</Link></li>
+                            <li><a href="https://github.com/agentdepot" target="_blank" rel="noopener noreferrer" className="text-sm text-gray-400 hover:text-white transition-colors">GitHub</a></li>
                         </ul>
                     </div>
 

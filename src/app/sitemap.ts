@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
 import { agents } from '@/data/agents';
+import { blogPosts } from '@/data/blog-posts';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://agentdepot.dev';
@@ -11,6 +12,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: new Date(),
       changeFrequency: 'daily' as const,
       priority: 1.0,
+    },
+    {
+      url: `${baseUrl}/browse`,
+      lastModified: new Date(),
+      changeFrequency: 'daily' as const,
+      priority: 0.8,
     },
     {
       url: `${baseUrl}/submit`,
@@ -31,10 +38,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     },
     {
-      url: `${baseUrl}/jobs`,
+      url: `${baseUrl}/faq`,
       lastModified: new Date(),
-      changeFrequency: 'weekly' as const,
-      priority: 0.6,
+      changeFrequency: 'monthly' as const,
+      priority: 0.7,
     },
     {
       url: `${baseUrl}/privacy`,
@@ -48,10 +55,16 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly' as const,
       priority: 0.3,
     },
+    {
+      url: `${baseUrl}/cookies`,
+      lastModified: new Date(),
+      changeFrequency: 'yearly' as const,
+      priority: 0.3,
+    },
   ];
 
   // Tool pages
-  const toolPages = ['claude', 'windsurf', 'cursor', 'replit'].map((tool) => ({
+  const toolPages = ['claude-code', 'windsurf', 'cursor', 'replit'].map((tool) => ({
     url: `${baseUrl}/${tool}`,
     lastModified: new Date(),
     changeFrequency: 'weekly' as const,
@@ -66,5 +79,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  return [...staticPages, ...toolPages, ...agentPages];
+  // Blog post pages
+  const blogPostPages = blogPosts.map((post) => ({
+    url: `${baseUrl}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: 'monthly' as const,
+    priority: 0.7,
+  }));
+
+  return [...staticPages, ...toolPages, ...agentPages, ...blogPostPages];
 }
