@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "AI Coding Agents FAQ - Frequently Asked Questions",
+  title: "FAQ - Frequently Asked Questions",
   description: "Get answers to common questions about Cursor Rules, Windsurf Cascade, Claude Plugins & Skills, Replit Templates, and MCP Servers. Learn how to install and create custom AI tools.",
   keywords: [
     "AI coding agents FAQ",
@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     "AgentDepot FAQ",
   ],
   openGraph: {
-    title: "AI Coding Agents FAQ - Everything You Need to Know",
+    title: "FAQ - Frequently Asked Questions",
     description: "Complete guide to Cursor Rules, Claude Plugins, Replit Templates, and MCP Servers.",
     type: "website",
   },
@@ -100,6 +100,56 @@ const faqs: FAQItem[] = [
     category: "Technical Questions",
     question: "How do I update an MCP Server or Plugin?",
     answer: "Updates depend on the installation method. For npm-based tools, run `npm update -g <package-name>`. For Cursor Rules, you simply update the text in your `.cursorrules` file. AgentDepot lists version information so you can check if a newer version of a tool is available.",
+  },
+  {
+    category: "Troubleshooting",
+    question: "My Cursor Rule isn't working. What should I check?",
+    answer: "First, verify your `.cursorrules` file is in the root directory of your project. Check for syntax errors—rules should be plain text instructions, not code. Restart Cursor after adding the rule. If issues persist, try with a simple rule first (e.g., 'Always use TypeScript') to confirm rules are being read. Make sure you're using the latest version of Cursor.",
+  },
+  {
+    category: "Troubleshooting",
+    question: "An MCP Server won't connect. How do I fix it?",
+    answer: "Common fixes: 1) Verify the server is installed correctly (`npm list -g <server-name>`). 2) Check your Claude Desktop configuration file (usually at `~/Library/Application Support/Claude/` on Mac). 3) Restart Claude Desktop after configuration changes. 4) Check the server's GitHub repository for specific setup requirements. 5) Look for port conflicts if the server uses a specific port.",
+  },
+  {
+    category: "Troubleshooting",
+    question: "I can't find a specific agent. How do I search effectively?",
+    answer: "Use our search bar with specific keywords (e.g., 'react typescript' instead of just 'react'). Use the tool filters (Cursor, Windsurf, etc.) to narrow results. Try the category filters (Web, Coding, Data). Check the tags on similar agents for alternative search terms. If you still can't find it, email us at hello@agentdepot.dev with details about what you're looking for.",
+  },
+  {
+    category: "Troubleshooting",
+    question: "An agent has a bug or security issue. How do I report it?",
+    answer: "Email us immediately at hello@agentdepot.dev with: 1) The agent name and URL, 2) Description of the issue, 3) Steps to reproduce (if applicable), 4) Impact/severity. For security issues, we respond within 48 hours and remove problematic agents immediately. You can also report via the agent's GitHub repository if available.",
+  },
+  {
+    category: "Submitting & Contributing",
+    question: "How do I submit my agent to AgentDepot?",
+    answer: "Visit our Submit page (/submit) and choose one of three methods: 1) **GitHub PR** (recommended): Fork our agentdepot-agents repository, add your agent to the appropriate file (cursor.ts, mcp.ts, etc.), and submit a PR. 2) **GitHub Issue**: Open an 'Agent Submission' issue with details. 3) **Email**: Send agent details to hello@agentdepot.dev. Include: agent name, description, tool type, installation instructions, GitHub URL (if applicable), and your contact info.",
+  },
+  {
+    category: "Submitting & Contributing",
+    question: "What are the requirements for agent approval?",
+    answer: "We review all submissions within 24-48 hours. Requirements: 1) **Works correctly** - we test each agent, 2) **Clear documentation** - installation instructions must be detailed, 3) **Safe** - no malicious code or obfuscated scripts, 4) **Original or properly attributed** - respect licenses and give credit, 5) **Relevant** - must be for AI coding tools (Cursor, Windsurf, Claude, MCP, Replit). High-quality submissions with public GitHub repos are prioritized.",
+  },
+  {
+    category: "Submitting & Contributing",
+    question: "Can I update or remove my submitted agent?",
+    answer: "Yes! For updates: submit a new PR to the agentdepot-agents repository or email us at hello@agentdepot.dev with the changes. For removal: email us with the agent name and reason for removal. We'll process updates within 24-48 hours. You retain all rights to your submissions.",
+  },
+  {
+    category: "Contact & Support",
+    question: "How do I contact AgentDepot support?",
+    answer: "Email us at hello@agentdepot.dev for all inquiries: agent submissions, bug reports, feature requests, partnership opportunities, or general questions. We respond within 24-48 hours during business days. For urgent security issues, mark your email subject with [URGENT].",
+  },
+  {
+    category: "Contact & Support",
+    question: "Where can I report copyright infringement?",
+    answer: "If you believe content on AgentDepot infringes your copyright, send a DMCA takedown notice to hello@agentdepot.dev. Include: 1) Identification of your copyrighted work, 2) URL of the infringing content, 3) Your contact information, 4) A statement that you have a good faith belief the use is unauthorized, 5) Your physical or electronic signature. We respond to valid DMCA notices within 48-72 hours.",
+  },
+  {
+    category: "Contact & Support",
+    question: "Do you have a Discord or community forum?",
+    answer: "We're currently focused on building the core directory. A Discord community or forum may be launched in the future based on user demand. For now, connect with us via email (hello@agentdepot.dev) or through our GitHub repository for discussions and contributions.",
   }
 ];
 
@@ -150,7 +200,7 @@ export default function FAQPage() {
             {/* Main Title */}
             <div className="space-y-3 relative z-10">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent leading-tight">
-                AI Coding Tools FAQ
+                FAQ - Frequently Asked Questions
               </h1>
 
               <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
@@ -161,7 +211,7 @@ export default function FAQPage() {
               <div className="flex flex-wrap items-center justify-center gap-3 text-xs font-mono text-gray-500 pt-4">
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
                   <span className="text-blue-400">📚</span>
-                  <span>20 Questions Answered</span>
+                  <span>23 Questions Answered</span>
                 </div>
                 <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/5 border border-white/5">
                   <span className="text-green-400">✓</span>

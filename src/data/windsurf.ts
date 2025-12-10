@@ -156,7 +156,7 @@ Rules:
     },
     installation: {
       type: 'extension',
-      instructions: 'Search "GitLens" in Windsurf Extensions marketplace and install.',
+      instructions: '1. Open Windsurf\n2. Click Extensions icon (Ctrl/Cmd+Shift+X)\n3. Search for "GitLens"\n4. Click Install on "GitLens — Git supercharged" by GitKraken\n\nDirect link: https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens',
     },
     verified: true,
     createdAt: '2025-12-06',
@@ -176,7 +176,7 @@ Rules:
     },
     installation: {
       type: 'extension',
-      instructions: 'Install via Extensions view. Requires Snyk account.',
+      instructions: '1. Create free Snyk account at https://snyk.io/signup\n2. Open Windsurf Extensions (Ctrl/Cmd+Shift+X)\n3. Search "Snyk Security"\n4. Install "Snyk Security - Code, Open Source Dependencies, IaC Configurations"\n5. Authenticate with your Snyk account when prompted\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=snyk-security.snyk-vulnerability-scanner',
     },
     verified: true,
     createdAt: '2025-12-06',
@@ -196,7 +196,7 @@ Rules:
     },
     installation: {
       type: 'extension',
-      instructions: 'Install from Marketplace.',
+      instructions: '1. Open Windsurf\n2. Press Ctrl/Cmd+Shift+X to open Extensions\n3. Search "SonarLint"\n4. Click Install on "SonarLint" by SonarSource\n5. Restart Windsurf if prompted\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode',
     },
     verified: true,
     createdAt: '2025-12-06',
@@ -216,7 +216,7 @@ Rules:
     },
     installation: {
       type: 'extension',
-      instructions: 'Install from Marketplace.',
+      instructions: '1. Open Extensions in Windsurf (Ctrl/Cmd+Shift+X)\n2. Search "Error Lens"\n3. Install "Error Lens" by Alexander (usernamehw)\n4. Errors/warnings will now appear inline immediately\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens',
     },
     verified: true,
     createdAt: '2025-12-06',
@@ -236,7 +236,7 @@ Rules:
     },
     installation: {
       type: 'extension',
-      instructions: 'Install via Windsurf Extensions marketplace.',
+      instructions: '1. Open Windsurf Extensions (Ctrl/Cmd+Shift+X)\n2. Search "Python"\n3. Install "Python" by Microsoft\n4. Reload when prompted\n5. Select Python interpreter when working with .py files\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=ms-python.python',
     },
     verified: true,
     createdAt: '2025-12-06',
@@ -330,7 +330,7 @@ Action: Scans routes, updates openapi.yaml.`,
     },
     installation: {
       type: 'manual',
-      instructions: 'Configure GitHub MCP server in Windsurf settings.',
+      instructions: '1. Install MCP server: npm install -g @modelcontextprotocol/server-github\n2. Create GitHub Personal Access Token at https://github.com/settings/tokens\n3. Open Windsurf Settings → Extensions → MCP\n4. Add server configuration:\n   {\n     "github": {\n       "command": "mcp-server-github",\n       "env": { "GITHUB_TOKEN": "your_token_here" }\n     }\n   }\n\nGitHub: https://github.com/modelcontextprotocol/servers',
     },
     verified: true,
     createdAt: '2025-12-06',
@@ -350,7 +350,7 @@ Action: Scans routes, updates openapi.yaml.`,
     },
     installation: {
       type: 'manual',
-      instructions: 'Add PostgreSQL MCP configuration in Windsurf.',
+      instructions: '1. Install: npm install -g @modelcontextprotocol/server-postgres\n2. Open Windsurf Settings → Extensions → MCP\n3. Add configuration:\n   {\n     "postgres": {\n       "command": "mcp-server-postgres",\n       "env": { "DATABASE_URL": "postgresql://user:pass@localhost:5432/dbname" }\n     }\n   }\n4. Replace DATABASE_URL with your actual PostgreSQL connection string\n\nGitHub: https://github.com/modelcontextprotocol/servers',
     },
     verified: true,
     createdAt: '2025-12-06',

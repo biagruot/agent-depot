@@ -13,7 +13,7 @@ export default function PrivacyPage() {
 
       <div className="container mx-auto px-4 pt-32 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Privacy Policy</h1>
-        <p className="text-gray-400 mb-12">Last updated: November 20, 2025</p>
+        <p className="text-gray-400 mb-12">Last updated: December 10, 2025</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <section className="glass-panel rounded-3xl p-8">
@@ -72,9 +72,9 @@ export default function PrivacyPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Analytics</h2>
             <p className="text-gray-300 leading-relaxed">
-              We use privacy-focused analytics tools (such as Plausible or Umami) that do not use cookies
-              and do not collect personally identifiable information. These tools help us understand how
-              visitors use our Site without compromising your privacy.
+              We use OpenPanel, a privacy-focused analytics tool that collects minimal data
+              and respects your privacy. OpenPanel helps us understand how visitors use our Site
+              without compromising your privacy or collecting personally identifiable information.
             </p>
           </section>
 
@@ -93,8 +93,8 @@ export default function PrivacyPage() {
             </p>
             <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
               <li><strong>GitHub:</strong> For repository links and source code hosting</li>
-              <li><strong>Vercel:</strong> For website hosting and deployment</li>
-              <li><strong>Analytics:</strong> Privacy-focused analytics (no personal data)</li>
+              <li><strong>Netlify:</strong> For website hosting and deployment</li>
+              <li><strong>OpenPanel:</strong> Privacy-focused analytics (no personal data)</li>
             </ul>
           </section>
 
@@ -120,7 +120,7 @@ export default function PrivacyPage() {
               <li>Request data portability</li>
             </ul>
             <p className="text-gray-300 leading-relaxed mt-4">
-              To exercise these rights, contact us at <a href="mailto:privacy@agentdepot.dev" className="text-primary hover:underline">privacy@agentdepot.dev</a>
+              To exercise these rights, contact us at <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a>
             </p>
           </section>
 
@@ -146,7 +146,7 @@ export default function PrivacyPage() {
               If you have questions about this Privacy Policy, please contact us:
             </p>
             <ul className="text-gray-300 space-y-2">
-              <li>Email: <a href="mailto:privacy@agentdepot.dev" className="text-primary hover:underline">privacy@agentdepot.dev</a></li>
+              <li>Email: <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a></li>
               <li>GitHub: <a href="https://github.com/agentdepot/directory" className="text-primary hover:underline" target="_blank">github.com/agentdepot/directory</a></li>
             </ul>
           </section>

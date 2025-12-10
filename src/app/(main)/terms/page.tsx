@@ -13,7 +13,7 @@ export default function TermsPage() {
       
       <div className="container mx-auto px-4 pt-32 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Terms of Service</h1>
-        <p className="text-gray-400 mb-12">Last updated: November 20, 2025</p>
+        <p className="text-gray-400 mb-12">Last updated: December 10, 2025</p>
 
         <div className="prose prose-invert max-w-none space-y-8">
           <section className="glass-panel rounded-3xl p-8">
@@ -122,7 +122,7 @@ export default function TermsPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Intellectual Property</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              The Site design, logo, and original content are owned by AgentDepot and protected by 
+              The Site design, logo, and original content are owned by AgentDepot and protected by
               copyright laws. You may not:
             </p>
             <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
@@ -130,6 +130,45 @@ export default function TermsPage() {
               <li>Use our branding or logo without authorization</li>
               <li>Create derivative works based on the Site</li>
             </ul>
+          </section>
+
+          <section className="glass-panel rounded-3xl p-8">
+            <h2 className="text-2xl font-bold text-white mb-4">DMCA Copyright Policy</h2>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              We respect the intellectual property rights of others and expect our users to do the same.
+            </p>
+
+            <h3 className="text-xl font-semibold text-white mt-6 mb-3">Copyright Infringement Notification</h3>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              If you believe that content on our Site infringes your copyright, please send a DMCA takedown
+              notice to <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a> with:
+            </p>
+            <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
+              <li>Identification of the copyrighted work claimed to have been infringed</li>
+              <li>Identification of the material that is claimed to be infringing (URL or description)</li>
+              <li>Your contact information (name, address, email, phone number)</li>
+              <li>A statement that you have a good faith belief that the use is not authorized</li>
+              <li>A statement that the information in the notification is accurate</li>
+              <li>Your physical or electronic signature</li>
+            </ul>
+
+            <h3 className="text-xl font-semibold text-white mt-6 mb-3">Counter-Notification</h3>
+            <p className="text-gray-300 leading-relaxed mb-4">
+              If you believe your content was removed in error, you may send a counter-notification to the
+              same email address containing:
+            </p>
+            <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
+              <li>Identification of the material that was removed</li>
+              <li>Your contact information</li>
+              <li>A statement under penalty of perjury that you have a good faith belief the material was removed in error</li>
+              <li>Your consent to jurisdiction of the federal court in your district</li>
+              <li>Your physical or electronic signature</li>
+            </ul>
+
+            <p className="text-gray-300 leading-relaxed mt-4">
+              We will respond to valid DMCA notices within 48-72 hours and will remove infringing content
+              promptly upon verification.
+            </p>
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
@@ -162,7 +201,7 @@ export default function TermsPage() {
               If you have questions about these Terms, please contact us:
             </p>
             <ul className="text-gray-300 space-y-2">
-              <li>Email: <a href="mailto:legal@agentdepot.dev" className="text-primary hover:underline">legal@agentdepot.dev</a></li>
+              <li>Email: <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a></li>
               <li>GitHub: <a href="https://github.com/agentdepot/directory" className="text-primary hover:underline" target="_blank">github.com/agentdepot/directory</a></li>
             </ul>
           </section>

@@ -267,7 +267,7 @@ All analytics are privacy-focused (OpenPanel, GDPR compliant).
 
 - 🐛 **Bug Reports:** [GitHub Issues]
 - 💡 **Feature Requests:** [GitHub Issues]
-- 📧 **Contact:** support@agentdepot.dev
+- 📧 **Contact:** hello@agentdepot.dev
 
 ---
 

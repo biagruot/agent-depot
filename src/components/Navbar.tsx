@@ -4,16 +4,32 @@ import Link from "next/link";
 import { Github } from "lucide-react";
 import { AuthButton } from "./auth/AuthButton";
 import { usePathname } from "next/navigation";
+import { useState, useEffect } from "react";
 
 export function Navbar() {
   const pathname = usePathname();
+  const [starCount, setStarCount] = useState<number>(0);
 
   const navLinks = [
     { href: "/browse", label: "Browse" },
     { href: "/blog", label: "Blog" },
-    { href: "/mcp", label: "MCP" },
     { href: "/faq", label: "FAQ" },
   ];
+
+  useEffect(() => {
+    // Fetch GitHub star count
+    fetch("https://api.github.com/repos/biagruot/agentdepot-agents")
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.stargazers_count) {
+          setStarCount(data.stargazers_count);
+        }
+      })
+      .catch(() => {
+        // Fallback to 0 if fetch fails
+        setStarCount(0);
+      });
+  }, []);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -63,7 +79,7 @@ export function Navbar() {
 
             {/* GitHub Button */}
             <a
-              href="https://github.com/agentdepot/directory"
+              href="https://github.com/biagruot/agentdepot-agents"
               target="_blank"
               rel="noopener noreferrer"
               className="group relative px-3 py-1.5 rounded-lg bg-white/[0.03] border border-white/[0.08] hover:bg-white/[0.06] hover:border-white/[0.12] transition-all duration-200 overflow-hidden"
@@ -77,11 +93,13 @@ export function Navbar() {
                 </span>
 
                 {/* Star Count */}
-                <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">
-                  <span className="text-xs font-mono font-semibold text-gray-300 group-hover:text-yellow-400 transition-colors">
-                    142
-                  </span>
-                </div>
+                {starCount > 0 && (
+                  <div className="flex items-center gap-1 px-1.5 py-0.5 rounded bg-white/[0.05] border border-white/[0.08]">
+                    <span className="text-xs font-mono font-semibold text-gray-300 group-hover:text-yellow-400 transition-colors">
+                      {starCount}
+                    </span>
+                  </div>
+                )}
               </div>
             </a>
           </div>

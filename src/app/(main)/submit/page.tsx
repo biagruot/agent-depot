@@ -79,7 +79,7 @@ export default function SubmitPage() {
             </Link>
 
             <Link
-              href="mailto:submit@agentdepot.dev"
+              href="mailto:hello@agentdepot.dev"
               className="group glass-panel p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] flex flex-col items-center relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

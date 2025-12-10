@@ -10,17 +10,13 @@ export const metadata: Metadata = {
 
 export default function BlogIndexPage() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-black via-gray-900 to-black">
-            <div className="container mx-auto px-4 py-24 max-w-6xl">
-                <div className="text-center mb-20 space-y-6">
-                    <div className="inline-block px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/20 to-purple-500/20 border border-blue-500/30 text-blue-300 text-sm font-semibold mb-4">
-                        AI Coding Insights
-                    </div>
-                    <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-br from-white via-gray-100 to-gray-400 bg-clip-text text-transparent">
-                        The Agent Log
+        <div className="container mx-auto px-4 py-12 max-w-6xl">
+                <div className="text-center mb-16 space-y-4">
+                    <h1 className="text-4xl md:text-5xl font-bold text-white">
+                        Blog
                     </h1>
-                    <p className="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
-                        Deep dives into AI coding workflows, agent configurations, and the future of software development.
+                    <p className="text-lg text-gray-400 max-w-2xl mx-auto">
+                        Guides, tutorials, and insights on AI coding agents, Cursor rules, and developer productivity.
                     </p>
                 </div>
 
@@ -72,7 +68,6 @@ export default function BlogIndexPage() {
                         </Link>
                     ))}
                 </div>
-            </div>
         </div>
     );
 }

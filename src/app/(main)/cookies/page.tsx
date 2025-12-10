@@ -35,7 +35,7 @@ export default function CookiesPage() {
 
             <div className="container mx-auto px-4 pt-32 max-w-4xl">
                 <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Cookie Policy</h1>
-                <p className="text-gray-400 mb-12">Last updated: November 22, 2025</p>
+                <p className="text-gray-400 mb-12">Last updated: December 10, 2025</p>
 
                 <div className="prose prose-invert max-w-none space-y-8">
                     <section className="glass-panel rounded-3xl p-8">
@@ -162,7 +162,7 @@ export default function CookiesPage() {
                             If you have questions about our Cookie Policy, please contact us:
                         </p>
                         <ul className="text-gray-300 space-y-2">
-                            <li>Email: <a href="mailto:privacy@agentdepot.dev" className="text-primary hover:underline">privacy@agentdepot.dev</a></li>
+                            <li>Email: <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a></li>
                             <li>GitHub: <a href="https://github.com/agentdepot/directory" className="text-primary hover:underline" target="_blank">github.com/agentdepot/directory</a></li>
                         </ul>
                     </section>

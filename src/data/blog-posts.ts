@@ -1121,5 +1121,793 @@ Try one today. Master all seven, and you'll ship **10x faster** with **better qu
 
 Find the [best agents for your stack on AgentDepot →](https://agentdepot.dev)
     `
+  },
+  {
+    slug: "complete-guide-replit-templates",
+    title: "Replit Templates: The Complete Guide to Instant Development Environments",
+    excerpt: "Learn how Replit templates can get you from idea to running code in 30 seconds. Perfect for prototyping, education, and rapid development.",
+    author: "AgentDepot Team",
+    date: "2025-12-08",
+    readTime: "7 min read",
+    tags: ["Replit", "Templates", "Beginners"],
+    content: `
+# Replit Templates: The Complete Guide
+
+Want to start coding **immediately** without setting up Node, Python, databases, or dependencies? Replit templates are your answer.
+
+## What are Replit Templates?
+
+A **Replit template** is a pre-configured development environment that runs entirely in your browser. Click a link, and you're coding in seconds.
+
+No more:
+- "Works on my machine" problems
+- Dependency hell
+- Environment setup
+- Installation headaches
+
+## Why Use Replit Templates?
+
+### 1. Speed
+From idea to running code in **30 seconds**.
+
+### 2. Perfect for Learning
+Students can start coding without installing anything.
+
+### 3. Great for Prototyping
+Test ideas quickly without committing to a full project setup.
+
+### 4. Collaboration
+Share a link, and your team is in the same environment instantly.
+
+### 5. AI-Powered
+Replit has built-in AI assistance for code generation and debugging.
+
+## Popular Replit Templates
+
+### 1. Next.js Starter
+Full Next.js 14 setup with App Router, TypeScript, and Tailwind CSS.
+
+**Use case:** Build and deploy a React app in minutes.
+
+### 2. Python Flask API
+Complete Flask backend with SQLite, auth, and API routes.
+
+**Use case:** Build a REST API for a hackathon project.
+
+### 3. Discord Bot
+Pre-configured Discord bot with examples.
+
+**Use case:** Learn bot development without setup hassle.
+
+### 4. Full-Stack PERN
+PostgreSQL + Express + React + Node.js all configured.
+
+**Use case:** Build a production-ready full-stack app.
+
+### 5. HTML/CSS/JS Playground
+Simple 3-file starter for web fundamentals.
+
+**Use case:** Teaching or quick UI experiments.
+
+## How to Use a Replit Template
+
+### Step 1: Find a Template
+Browse [AgentDepot's Replit collection](https://agentdepot.dev/replit) or search Replit directly.
+
+### Step 2: Fork It
+Click "Use Template" or "Fork" to create your own copy.
+
+### Step 3: Start Coding
+The environment is ready. Edit files and see changes live.
+
+### Step 4: Deploy (Optional)
+Replit can host your project with one click.
+
+## Creating Your Own Template
+
+### 1. Build Your Project
+Create a working project in Replit.
+
+### 2. Add a README
+Explain what your template does and how to use it.
+
+### 3. Configure .replit File
+\`\`\`toml
+run = "npm start"
+language = "nodejs"
+
+[nix]
+channel = "stable-22_11"
+\`\`\`
+
+### 4. Publish
+Click "Publish" and mark it as a template.
+
+### 5. Share
+Share the template link or submit it to AgentDepot!
+
+## Replit vs Traditional Setup
+
+| Feature | Replit | Traditional |
+|---------|--------|-------------|
+| Setup time | 30 seconds | 30 minutes |
+| Requires installation | No | Yes |
+| Works on any device | Yes | No (Chromebooks, tablets, etc.) |
+| Collaboration | Built-in | Complex (Git, VS Code Live Share, etc.) |
+| Hosting | One-click | Manual deployment |
+| AI assistance | Built-in | Install extensions |
+
+## Best Use Cases
+
+### ✅ Perfect For:
+- Learning and education
+- Quick prototypes
+- Hackathons
+- Code interviews
+- Sharing reproducible examples
+- Client demos
+
+### ❌ Not Ideal For:
+- Large production apps (use local dev)
+- Monorepos (performance issues)
+- Projects requiring specific system tools
+- Heavy computational tasks
+
+## Advanced Replit Features
+
+### Secrets Management
+Store API keys securely in Replit's Secrets tab.
+
+### Database
+Get a free PostgreSQL or Firebase database.
+
+### Custom Domains
+Point your own domain to your Replit project.
+
+### Always-On
+Keep your project running 24/7 (paid feature).
+
+### Multiplayer
+Multiple people can code simultaneously, Google Docs style.
+
+## Replit + AI Coding
+
+Replit's AI (called "Ghostwriter") can:
+- Generate code from prompts
+- Explain existing code
+- Debug errors
+- Suggest improvements
+- Write tests
+
+Combine this with templates for **instant AI-powered development**.
+
+## Common Issues & Solutions
+
+### Issue: Slow Performance
+**Solution:** Replit can lag with large projects. Use for smaller projects or prototypes.
+
+### Issue: Free Tier Limits
+**Solution:** Upgrade to Replit Core for more resources and always-on projects.
+
+### Issue: Template Outdated
+**Solution:** Check when it was last updated. Fork it and update dependencies yourself.
+
+### Issue: Missing Dependencies
+**Solution:** Install them via the shell: \`npm install [package]\`
+
+## Contributing Templates to AgentDepot
+
+We're always looking for great templates!
+
+**Requirements:**
+- Works out of the box (no configuration needed)
+- Clear README with instructions
+- Up-to-date dependencies
+- Useful for developers
+
+**Submit:** Visit [agentdepot.dev/submit](https://agentdepot.dev/submit)
+
+## Conclusion
+
+Replit templates remove the friction between "idea" and "running code".
+
+Whether you're teaching, learning, prototyping, or building, templates get you started in seconds instead of hours.
+
+[Browse Replit templates on AgentDepot →](https://agentdepot.dev/replit)
+    `
+  },
+  {
+    slug: "security-best-practices-ai-agents",
+    title: "Security Best Practices for AI Coding Agents: What You Need to Know",
+    excerpt: "AI agents can access your code, run commands, and modify files. Here's how to use them safely without compromising your projects or data.",
+    author: "AgentDepot Team",
+    date: "2025-12-09",
+    readTime: "10 min read",
+    tags: ["Security", "Best Practices", "Important"],
+    content: `
+# Security Best Practices for AI Coding Agents
+
+AI coding agents are powerful - they read your code, run commands, and make changes. But with great power comes great responsibility.
+
+Here's how to use AI agents **safely** without compromising your projects or data.
+
+## The Security Risks
+
+### 1. Code Exposure
+AI agents send your code to cloud services for processing.
+
+**Risk:** Proprietary code, secrets, or sensitive data could be exposed.
+
+### 2. Malicious Agents
+Not all agents are trustworthy. Malicious ones could inject backdoors or steal data.
+
+**Risk:** Installing a bad agent could compromise your entire project.
+
+### 3. Accidental Command Execution
+AI can run terminal commands. What if it runs \`rm -rf /\`?
+
+**Risk:** Data loss or system damage from AI mistakes.
+
+### 4. Dependency Vulnerabilities
+Agents that install packages could introduce security vulnerabilities.
+
+**Risk:** Supply chain attacks via malicious dependencies.
+
+## Security Best Practices
+
+### 1. Review Before Installing
+
+**❌ Don't:** Install agents blindly
+**✅ Do:** Review the agent's code/instructions before using
+
+For Cursor rules:
+\`\`\`bash
+# Read the .cursorrules file completely
+# Look for suspicious patterns:
+# - Requests to send data externally
+# - Commands that modify system files
+# - Obfuscated or encoded text
+\`\`\`
+
+For MCP servers:
+\`\`\`bash
+# Check the npm package or GitHub repo
+# Read the code (especially network requests)
+# Check for known vulnerabilities
+npm audit
+\`\`\`
+
+### 2. Never Commit Secrets
+
+**❌ Don't:** Put API keys in your .cursorrules or code
+**✅ Do:** Use environment variables
+
+Bad:
+\`\`\`typescript
+const API_KEY = "sk-1234567890abcdef"
+\`\`\`
+
+Good:
+\`\`\`typescript
+const API_KEY = process.env.OPENAI_API_KEY
+\`\`\`
+
+### 3. Use .gitignore
+
+Exclude sensitive files from AI access:
+
+\`\`\`gitignore
+.env
+.env.local
+*.key
+*.pem
+secrets/
+config/private/
+\`\`\`
+
+### 4. Limit Agent Permissions
+
+For MCP servers, only grant necessary permissions:
+
+\`\`\`json
+{
+  "github": {
+    "permissions": ["read:repo"],  // Not "admin:all"
+    "token": "limited-scope-token"
+  }
+}
+\`\`\`
+
+### 5. Sandbox Testing Environments
+
+Test new agents in isolated environments first:
+
+\`\`\`bash
+# Create a test project
+mkdir test-agent && cd test-agent
+# Copy the agent/rule
+# Test thoroughly
+# Only then use in real projects
+\`\`\`
+
+### 6. Review AI-Generated Code
+
+**Treat AI like a junior developer's PR:**
+- Review every line
+- Look for security issues
+- Don't trust blindly
+
+Common issues to watch for:
+- SQL injection vulnerabilities
+- XSS vulnerabilities
+- Hardcoded credentials
+- Insecure authentication
+- Missing input validation
+
+### 7. Keep Dependencies Updated
+
+AI might suggest outdated packages with known vulnerabilities.
+
+\`\`\`bash
+# Check for vulnerabilities
+npm audit
+
+# Update dependencies
+npm update
+
+# Check package age
+npx npm-check-updates
+\`\`\`
+
+### 8. Use Private Repos
+
+For proprietary projects:
+- Use private GitHub repos
+- Don't paste sensitive code in AI chats
+- Consider self-hosted AI solutions for sensitive work
+
+### 9. Monitor Agent Activity
+
+Keep track of what AI is doing:
+- Review git diffs before committing
+- Monitor network requests (use tools like Wireshark if paranoid)
+- Check for unexpected file changes
+
+### 10. Verify Agent Sources
+
+**Only install agents from trusted sources:**
+
+✅ **Trusted:**
+- Official tool documentation
+- Verified GitHub repos with many stars
+- AgentDepot (we test all submissions)
+- Well-known developers
+
+❌ **Suspicious:**
+- Random Discord/Reddit links
+- Repos with no stars or activity
+- Obfuscated code
+- No clear author attribution
+
+## Red Flags to Watch For
+
+### 🚩 Obfuscated Code
+If you can't easily read what an agent does, don't use it.
+
+### 🚩 Network Requests
+Agents shouldn't make unexpected network calls.
+
+### 🚩 File System Access
+Be wary of agents that read/write files outside your project.
+
+### 🚩 Credential Requests
+Legitimate agents don't ask for passwords in plain text.
+
+### 🚩 No Source Code
+If you can't see the source, you can't trust it.
+
+## AgentDepot's Security Standards
+
+We take security seriously. Every agent on AgentDepot:
+
+1. **Is manually reviewed** by our team
+2. **Has source code available** (GitHub or inline)
+3. **Is tested** in a sandboxed environment
+4. **Has clear attribution** to the original author
+5. **Can be reported** if issues are found
+
+If you find a security issue with any agent, email us immediately: **hello@agentdepot.dev**
+
+## Company/Enterprise Considerations
+
+### Policy Recommendations
+
+1. **Whitelist approved agents** - Only allow tested agents
+2. **Require review** - PRs must be reviewed, even if AI-generated
+3. **Disable in sensitive repos** - Turn off AI for repos with secrets
+4. **Self-host if needed** - Use local LLMs for top-secret projects
+5. **Audit trail** - Log all AI interactions for compliance
+
+### Tools to Consider
+
+- **GitHub Copilot for Business** (enterprise controls)
+- **Self-hosted Cursor** (if available)
+- **Private Claude API** (Anthropic enterprise)
+- **Local LLMs** (Ollama, LM Studio)
+
+## What If You're Compromised?
+
+If you suspect an agent has done something malicious:
+
+1. **Stop using it immediately**
+2. **Review recent commits** for suspicious changes
+3. **Rotate all credentials** (API keys, passwords, tokens)
+4. **Scan for vulnerabilities** (\`npm audit\`, \`pip-audit\`)
+5. **Report it** to AgentDepot and the community
+6. **Notify your team** if it's a work project
+
+## The Balance
+
+Security doesn't mean paranoia. AI agents are safe **if you follow best practices**.
+
+**Be cautious but not fearful:**
+- Review what you install
+- Use trusted sources
+- Monitor changes
+- Keep secrets secret
+
+## Conclusion
+
+AI coding agents are incredibly powerful tools. Used responsibly, they're safe and transformative.
+
+Follow these practices:
+✅ Review before installing
+✅ Never commit secrets
+✅ Review AI-generated code
+✅ Use trusted sources (like AgentDepot)
+✅ Monitor for suspicious activity
+
+Code smarter, not more dangerously.
+
+[Find vetted agents on AgentDepot →](https://agentdepot.dev)
+    `
+  },
+  {
+    slug: "python-ai-agents-complete-guide",
+    title: "Best AI Agents for Python Developers: Complete 2025 Guide",
+    excerpt: "From Django to FastAPI, data science to automation, here are the must-have AI agents every Python developer should install.",
+    author: "AgentDepot Team",
+    date: "2025-12-10",
+    readTime: "9 min read",
+    tags: ["Python", "Best Of", "Django"],
+    content: `
+# Best AI Agents for Python Developers: Complete 2025 Guide
+
+Python developers have unique needs - from web frameworks to data science, automation to AI/ML. Here are the **best AI agents** tailored for Python workflows.
+
+## Why Python Needs Custom Agents
+
+Python is versatile, which means generic AI often gets it wrong:
+- Suggests Django when you need FastAPI
+- Uses pandas when NumPy is better
+- Ignores PEP 8 and type hints
+- Misses Python 3.12+ features
+
+**Custom agents solve this.**
+
+## Best Agents by Use Case
+
+### 1. Web Development
+
+#### Django Expert
+Enforces Django best practices, ORM optimization, and security.
+
+**What it does:**
+- Uses class-based views correctly
+- Implements proper middleware
+- Follows Django project structure
+- Adds security hardening (CSRF, XSS protection)
+
+**Install from:** [AgentDepot Django collection](https://agentdepot.dev)
+
+#### FastAPI Pro
+Modern async Python API development.
+
+**What it does:**
+- Uses proper type hints and Pydantic models
+- Implements async/await correctly
+- Adds proper error handling
+- Includes OpenAPI documentation
+
+### 2. Data Science & ML
+
+#### Pandas Performance Optimizer
+Writes efficient pandas code that doesn't kill your RAM.
+
+**What it does:**
+- Uses vectorized operations instead of loops
+- Suggests appropriate dtypes
+- Implements chunking for large datasets
+- Avoids common anti-patterns
+
+#### NumPy Expert
+Scientific computing with proper NumPy usage.
+
+**What it does:**
+- Uses broadcasting correctly
+- Suggests efficient array operations
+- Implements proper indexing
+- Avoids copying when slicing
+
+#### Scikit-learn Guide
+Machine learning with best practices.
+
+**What it does:**
+- Proper train/test splits
+- Pipeline usage
+- Hyperparameter tuning patterns
+- Model evaluation metrics
+
+### 3. Code Quality
+
+#### PEP 8 Enforcer
+Ensures your Python follows official style guidelines.
+
+**What it does:**
+- Enforces proper naming conventions
+- Manages imports correctly
+- Sets appropriate line lengths
+- Uses f-strings over .format()
+
+**Example rule:**
+\`\`\`
+Always follow PEP 8:
+- snake_case for functions/variables
+- PascalCase for classes
+- UPPER_CASE for constants
+- 4-space indentation
+- Max 88 characters per line (Black standard)
+\`\`\`
+
+#### Type Hint Master
+Adds proper type hints (Python 3.10+ syntax).
+
+**What it does:**
+- Uses modern type syntax (\`list[str]\` not \`List[str]\`)
+- Adds return type hints
+- Uses TypedDict for structured dicts
+- Implements proper Optional/Union usage
+
+\`\`\`python
+# What this agent generates:
+def process_users(
+    users: list[dict[str, str | int]],
+    active_only: bool = False
+) -> list[str]:
+    """Process user data and return names."""
+    return [u["name"] for u in users if not active_only or u.get("active")]
+\`\`\`
+
+### 4. Testing
+
+#### Pytest Pro
+Write comprehensive tests automatically.
+
+**What it does:**
+- Creates fixtures properly
+- Uses parametrize for multiple test cases
+- Implements proper mocking
+- Adds docstrings to tests
+
+\`\`\`python
+# AI-generated test with this agent:
+import pytest
+from myapp.services import UserService
+
+@pytest.fixture
+def user_service():
+    """Fixture for UserService with mocked database."""
+    return UserService(db=MockDatabase())
+
+@pytest.mark.parametrize("username,expected", [
+    ("john", True),
+    ("", False),
+    ("x" * 100, False),
+])
+def test_validate_username(user_service, username, expected):
+    """Test username validation with various inputs."""
+    assert user_service.validate(username) == expected
+\`\`\`
+
+### 5. Async Python
+
+#### Asyncio Expert
+Proper async/await patterns.
+
+**What it does:**
+- Uses asyncio correctly
+- Avoids blocking the event loop
+- Implements proper error handling in async code
+- Uses async context managers
+
+**Example pattern:**
+\`\`\`python
+async def fetch_data(session: aiohttp.ClientSession, url: str) -> dict:
+    """Fetch data from URL with proper error handling."""
+    try:
+        async with session.get(url) as response:
+            response.raise_for_status()
+            return await response.json()
+    except aiohttp.ClientError as e:
+        logger.error(f"Failed to fetch {url}: {e}")
+        raise
+\`\`\`
+
+### 6. DevOps & Automation
+
+#### Python CLI Builder
+Create professional CLI tools with argparse/Click/Typer.
+
+**What it does:**
+- Proper argument parsing
+- Help text generation
+- Error handling
+- Progress bars for long operations
+
+#### Docker Python Expert
+Containerize Python apps correctly.
+
+**What it does:**
+- Multi-stage builds
+- Proper base images (slim, alpine)
+- Security best practices
+- Caching optimization
+
+\`\`\`dockerfile
+# AI-generated Dockerfile with this agent:
+FROM python:3.12-slim as builder
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+FROM python:3.12-slim
+WORKDIR /app
+COPY --from=builder /usr/local/lib/python3.12/site-packages /usr/local/lib/python3.12/site-packages
+COPY . .
+RUN useradd -m appuser && chown -R appuser:appuser /app
+USER appuser
+CMD ["python", "main.py"]
+\`\`\`
+
+## Installing Python Agents
+
+### For Cursor
+
+1. Browse [AgentDepot's Python collection](https://agentdepot.dev)
+2. Copy the rule you want
+3. Create \`.cursorrules\` in your project root
+4. Paste the rule
+5. Start coding!
+
+### For Claude Code
+
+\`\`\`bash
+# Install MCP server for Python tools
+npx @anthropic-ai/mcp install python-tools
+
+# Configure in settings
+\`\`\`
+
+## Combining Multiple Agents
+
+Example \`.cursorrules\` for a Django project:
+
+\`\`\`
+You are an expert Python developer specializing in Django.
+
+Language & Style:
+- Python 3.12+
+- Type hints everywhere
+- Follow PEP 8 (Black formatting, 88 char lines)
+- Use f-strings, not .format()
+
+Django Specifics:
+- Use class-based views (not function views)
+- Implement proper permissions and authentication
+- Follow Django project structure
+- Use Django ORM efficiently (select_related, prefetch_related)
+- Add security middleware
+
+Testing:
+- Write tests with pytest-django
+- Use fixtures for test data
+- Test happy path and edge cases
+- Aim for 80%+ coverage
+
+Never:
+- Use \`any\` type
+- Skip type hints
+- Write code without tests
+- Ignore security (CSRF, SQL injection, XSS)
+\`\`\`
+
+## Python-Specific Tips
+
+### Tip 1: Specify Python Version
+\`\`\`
+Use Python 3.12 features including:
+- PEP 695 type parameter syntax
+- PEP 701 f-string improvements
+- Enhanced error messages
+\`\`\`
+
+### Tip 2: Mention Your Stack
+\`\`\`
+Tech stack:
+- Django 5.0
+- PostgreSQL
+- Redis for caching
+- Celery for async tasks
+- pytest for testing
+\`\`\`
+
+### Tip 3: Define Performance Goals
+\`\`\`
+Optimize for:
+- Database queries (minimize N+1)
+- Memory usage (use generators for large datasets)
+- Response time (< 200ms for API endpoints)
+\`\`\`
+
+## Common Python Pitfalls (That Agents Fix)
+
+### ❌ Mutable Default Arguments
+\`\`\`python
+# Bad (AI without agents might do this)
+def append_to(element, list=[]):
+    list.append(element)
+    return list
+
+# Good (Python agent fixes this)
+def append_to(element, list=None):
+    if list is None:
+        list = []
+    list.append(element)
+    return list
+\`\`\`
+
+### ❌ Late Binding Closures
+\`\`\`python
+# Bad
+functions = [lambda: i for i in range(3)]
+
+# Good (agent knows this pattern)
+functions = [lambda i=i: i for i in range(3)]
+\`\`\`
+
+### ❌ Inefficient String Concatenation
+\`\`\`python
+# Bad
+result = ""
+for item in items:
+    result += str(item)
+
+# Good
+result = "".join(str(item) for item in items)
+\`\`\`
+
+## Conclusion
+
+Python AI agents transform how you code:
+- ✅ Enforce best practices automatically
+- ✅ Avoid common pitfalls
+- ✅ Write tests alongside code
+- ✅ Maintain consistent style
+- ✅ Ship production-ready code faster
+
+Start with 2-3 agents that match your current project, then explore more.
+
+[Browse Python agents on AgentDepot →](https://agentdepot.dev)
+    `
   }
 ];

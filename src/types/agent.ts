@@ -27,7 +27,7 @@ export interface Agent {
   tags: string[];
   author: AgentAuthor;
   installation: AgentInstallation;
-  verified: boolean;
+  verified?: boolean;
   featured?: boolean;
   trending?: boolean;
   stats?: {
@@ -39,6 +39,7 @@ export interface Agent {
     website?: string;
     demo?: string; // Video URL
   };
+  license?: string; // e.g., "MIT", "Apache-2.0", "GPL-3.0", "Proprietary", etc.
   createdAt: string;
   updatedAt?: string;
 }

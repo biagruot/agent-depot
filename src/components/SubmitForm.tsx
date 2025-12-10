@@ -198,7 +198,7 @@ ${formData.authorTwitter ? `Twitter: ${formData.authorTwitter}\n` : ''}
 Submitted via AgentDepot.dev
       `);
 
-      window.location.href = `mailto:submit@agentdepot.dev?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:hello@agentdepot.dev?subject=${subject}&body=${body}`;
       
       // Track completion
       trackSubmitComplete();
