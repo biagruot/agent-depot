@@ -5,6 +5,7 @@ import { SearchFilters } from "@/components/SearchFilters";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
+import { PageTracker } from "@/components/PageTracker";
 
 const VALID_TOOLS = ["claude-code", "windsurf", "cursor", "replit"] as const;
 type Tool = typeof VALID_TOOLS[number];
@@ -176,6 +177,9 @@ export default async function ToolPage({ params }: ToolPageProps) {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Analytics Tracking */}
+      <PageTracker tool={tool} />
 
       <Navbar />
 

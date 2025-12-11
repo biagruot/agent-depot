@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { Metadata } from "next";
 import { InstallationBlock } from "@/components/InstallationBlock";
 import { RuleBlock } from "@/components/RuleBlock";
+import { PageTracker } from "@/components/PageTracker";
 
 // Generate static params for all agents
 export async function generateStaticParams() {
@@ -114,6 +115,9 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+
+      {/* Analytics Tracking */}
+      <PageTracker agentId={agent.id} tool={agent.tool} />
 
       <div className="container mx-auto px-4 pt-32 max-w-5xl relative z-10">
         <Link 

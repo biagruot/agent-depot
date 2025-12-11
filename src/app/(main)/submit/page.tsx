@@ -1,6 +1,7 @@
 import { SubmitForm } from "@/components/SubmitForm";
 import { Github, Mail, ArrowRight, CheckCircle } from "lucide-react";
 import Link from "next/link";
+import { PageTracker } from "@/components/PageTracker";
 
 export const metadata = {
   title: "Submit an Agent - AgentDepot",
@@ -10,6 +11,8 @@ export const metadata = {
 export default function SubmitPage() {
   return (
     <main className="min-h-screen relative pb-32">
+      <PageTracker />
+
 
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}

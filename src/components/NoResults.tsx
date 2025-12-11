@@ -2,8 +2,10 @@
 
 import { Agent, AgentTool, AgentType } from "@/types/agent";
 import { agents } from "@/data/agents";
-import { useMemo } from "react";
+import { useMemo, useEffect } from "react";
 import Link from "next/link";
+import { useOpenPanel } from "@openpanel/nextjs";
+import { analyticsEvents } from "@/lib/analytics";
 
 interface NoResultsProps {
     searchQuery: string;
@@ -18,6 +20,19 @@ export function NoResults({
     selectedType,
     onClearFilters,
 }: NoResultsProps) {
+    const { track } = useOpenPanel();
+
+    // Track no results event
+    useEffect(() => {
+        const [eventName, data] = analyticsEvents.noResults({
+            query: searchQuery,
+            tool: selectedTool,
+            type: selectedType,
+        });
+
+        track(eventName, data);
+    }, [searchQuery, selectedTool, selectedType, track]);
+
     // Get smart suggestions based on context
     const suggestions = useMemo(() => {
         const allAgents = agents;

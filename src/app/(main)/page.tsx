@@ -19,9 +19,20 @@ import { BackToTop } from "@/components/BackToTop";
 import { NoResults } from "@/components/NoResults";
 import { NewsletterSection } from "@/components/NewsletterSection";
 import { FloatingSubscribe } from "@/components/FloatingSubscribe";
+import { usePageTracking } from "@/hooks/usePageTracking";
+import { useScrollTracking } from "@/hooks/useScrollTracking";
+import { useTimeTracking } from "@/hooks/useTimeTracking";
+import { useOpenPanel } from "@openpanel/nextjs";
+import { analyticsEvents } from "@/lib/analytics";
 
 function HomeContent() {
   const searchParams = useSearchParams();
+  const { track } = useOpenPanel();
+
+  // Analytics tracking
+  usePageTracking();
+  useScrollTracking();
+  useTimeTracking();
 
   // Initialize state from URL parameters
   const initialTool = (searchParams.get("tool") as AgentTool) || 'all';
@@ -165,6 +176,21 @@ function HomeContent() {
 
   const isFiltering = searchQuery.trim() !== "" || selectedTool !== 'all' || selectedType !== 'all';
 
+  // Track search results viewed
+  useEffect(() => {
+    if (isFiltering) {
+      const [eventName, data] = analyticsEvents.searchResultsViewed({
+        query: searchQuery,
+        tool: selectedTool,
+        type: selectedType,
+        results_count: filteredAgents.length,
+        has_results: filteredAgents.length > 0,
+      });
+
+      track(eventName, data);
+    }
+  }, [searchQuery, selectedTool, selectedType, filteredAgents.length, isFiltering, track]);
+
   // Get Featured Agents (for the top row) - Only show if not filtering
   const featuredAgents = useMemo(() => {
     return agents.filter(a => a.featured).slice(0, 4);
@@ -295,14 +321,27 @@ function HomeContent() {
                 searchQuery={searchQuery}
                 selectedTool={selectedTool}
                 selectedType={selectedType}
+                resultsCount={filteredAgents.length}
                 onClear={() => {
                   setSearchQuery("");
                   setSelectedTool("all");
                   setSelectedType("all");
                 }}
               />
-              <ShareFiltersButton />
-              <SortDropdown currentSort={currentSort} onSortChange={setCurrentSort} />
+              <ShareFiltersButton
+                searchQuery={searchQuery}
+                selectedTool={selectedTool}
+                selectedType={selectedType}
+                currentSort={currentSort}
+                resultsCount={filteredAgents.length}
+              />
+              <SortDropdown
+                currentSort={currentSort}
+                onSortChange={setCurrentSort}
+                searchQuery={searchQuery}
+                selectedTool={selectedTool}
+                resultsCount={filteredAgents.length}
+              />
             </div>
           </div>
 

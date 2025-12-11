@@ -1,12 +1,18 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
 import { ArrowUpDown, Check } from "lucide-react";
+import { useOpenPanel } from "@openpanel/nextjs";
+import { analyticsEvents } from "@/lib/analytics";
 
 export type SortOption = 'newest' | 'popular' | 'trending' | 'alphabetical';
 
 interface SortDropdownProps {
   currentSort: SortOption;
   onSortChange: (sort: SortOption) => void;
+  // Analytics context
+  searchQuery?: string;
+  selectedTool?: string;
+  resultsCount?: number;
 }
 
 const sortLabels: Record<SortOption, string> = {
@@ -16,9 +22,16 @@ const sortLabels: Record<SortOption, string> = {
   alphabetical: "Alphabetical"
 };
 
-export function SortDropdown({ currentSort, onSortChange }: SortDropdownProps) {
+export function SortDropdown({
+  currentSort,
+  onSortChange,
+  searchQuery = '',
+  selectedTool = 'all',
+  resultsCount = 0
+}: SortDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const { track } = useOpenPanel();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -30,6 +43,22 @@ export function SortDropdown({ currentSort, onSortChange }: SortDropdownProps) {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+
+  const handleSortChange = (option: SortOption) => {
+    // Track sort change
+    const [eventName, data] = analyticsEvents.sortChanged({
+      sort_option: option,
+      tool: selectedTool,
+      query: searchQuery,
+      results_count: resultsCount,
+    });
+
+    track(eventName, data);
+
+    // Apply the sort change
+    onSortChange(option);
+    setIsOpen(false);
+  };
 
   return (
     <div className="flex items-center gap-2 relative" ref={dropdownRef}>
@@ -50,10 +79,7 @@ export function SortDropdown({ currentSort, onSortChange }: SortDropdownProps) {
             {(Object.keys(sortLabels) as SortOption[]).map((option) => (
               <button
                 key={option}
-                onClick={() => {
-                  onSortChange(option);
-                  setIsOpen(false);
-                }}
+                onClick={() => handleSortChange(option)}
                 className={`w-full flex items-center justify-between px-3 py-2 text-sm rounded-lg transition-colors ${
                   currentSort === option
                     ? "bg-white/10 text-white"

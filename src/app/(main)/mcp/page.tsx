@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { PageTracker } from "@/components/PageTracker";
 
 export const metadata: Metadata = {
   title: "MCP Servers | AgentDepot",
@@ -8,6 +9,7 @@ export const metadata: Metadata = {
 export default function MCPPage() {
   return (
     <div className="container mx-auto px-4 py-12">
+      <PageTracker tool="mcp" />
       <div className="max-w-4xl mx-auto text-center space-y-6">
         <h1 className="text-4xl font-bold text-white">Model Context Protocol (MCP) Servers</h1>
         <p className="text-xl text-gray-400">
