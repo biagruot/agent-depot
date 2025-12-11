@@ -113,7 +113,6 @@ export default async function ToolPage({ params }: ToolPageProps) {
   }
 
   const toolAgents = agents.filter((agent) => agent.tool === tool);
-  const verifiedCount = toolAgents.filter((a) => a.verified).length;
   const featuredCount = toolAgents.filter((a) => a.featured).length;
 
   const toolInfo: Record<Tool, { name: string; gradient: string; description: string }> = {
@@ -210,10 +209,6 @@ export default async function ToolPage({ params }: ToolPageProps) {
               <div className="flex items-center gap-2">
                 <span className="text-3xl font-bold text-white">{toolAgents.length}</span>
                 <span className="text-gray-500 text-sm">Total Agents</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-3xl font-bold text-green-400">{verifiedCount}</span>
-                <span className="text-gray-500 text-sm">Verified</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-3xl font-bold text-yellow-400">{featuredCount}</span>

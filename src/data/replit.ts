@@ -19,7 +19,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/Python-Data-Science',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -40,7 +39,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/OpenAI-Python-GPT-4',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -61,7 +59,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/OpenAI-Python-GPT-35-Turbo',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -82,7 +79,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/HTML-CSS-JS-Static',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -103,7 +99,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/React-Javascript',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -124,7 +119,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/HTML-CSS-JS-Auto-Refresh',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -145,7 +139,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/Python-with-Turtle',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -166,7 +159,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/p5js',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -187,7 +179,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/tkinter',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -208,7 +199,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/Pygame',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -229,7 +219,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/Kaboom',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -250,7 +239,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/Phaserjs-Game-Starter',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -271,7 +259,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/Python-Discord-Bot',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -292,7 +279,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@Lord_Poseidon/discordgo',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -313,7 +299,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@Prodia/AI-Discord-Bot',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -334,7 +319,6 @@ export const replitAgents: Agent[] = [
       instructions: 'Click "Use Template" on the Replit project page.',
       url: 'https://replit.com/@replit/OpenAI-Nodejs-GPT-4',
     },
-    verified: true,
     createdAt: '2025-12-06',
   }
 ];

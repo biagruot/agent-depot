@@ -276,7 +276,7 @@ export default function FAQPage() {
         <div className="mt-20 p-8 glass-panel rounded-3xl border border-white/10 bg-gradient-to-br from-blue-500/5 to-purple-500/5 text-center">
           <h2 className="text-2xl font-bold text-white mb-4">Still have questions?</h2>
           <p className="text-gray-400 mb-6 max-w-xl mx-auto">
-            Can&apos;t find what you&apos;re looking for? Browse our full directory of 120+ verified rules, plugins, and templates or submit your question.
+            Can&apos;t find what you&apos;re looking for? Browse our full directory of 70+ verified rules, plugins, and templates or submit your question.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link

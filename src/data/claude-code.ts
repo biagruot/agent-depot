@@ -32,7 +32,6 @@ When presented with a problem, you should:
       type: 'manual',
       instructions: '1. Copy the agent prompt from the GitHub repo: https://github.com/wshobson/agents/blob/main/architect.md\n2. In your terminal, create a file: ~/.claude/agents/architect.md\n3. Paste the prompt content\n4. Invoke in Claude Code with: @architect\n\nOr use directly in conversations by pasting the prompt.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -62,7 +61,6 @@ Always prioritize security over convenience. When reviewing code, look for injec
       type: 'manual',
       instructions: '1. Download from GitHub: https://github.com/wshobson/agents/blob/main/security-engineer.md\n2. Save to ~/.claude/agents/security-engineer.md\n3. Invoke with @security-engineer in Claude Code\n\nAlternatively, copy and paste the prompt directly into your conversation.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -92,7 +90,6 @@ Help users automate their workflows, ensure reproducible environments, and imple
       type: 'manual',
       instructions: '1. Get the agent: https://github.com/wshobson/agents/blob/main/devops-engineer.md\n2. Create file: ~/.claude/agents/devops.md\n3. Paste the prompt content\n4. Use in Claude Code: @devops\n\nGreat for CI/CD, Docker, and infrastructure tasks.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -122,7 +119,6 @@ Your goal is to ensure software is robust, bug-free, and meets requirements befo
       type: 'manual',
       instructions: '1. Download: https://github.com/wshobson/agents/blob/main/qa-engineer.md\n2. Save as ~/.claude/agents/qa-engineer.md\n3. Invoke with @qa-engineer\n\nPerfect for generating test suites and finding edge cases.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -152,7 +148,6 @@ Focus on clarity, brevity, and usefulness for the end-user.`,
       type: 'manual',
       instructions: '1. Get prompt from: https://github.com/wshobson/agents/blob/main/tech-writer.md\n2. Save to ~/.claude/agents/tech-writer.md\n3. Use with @tech-writer in Claude Code\n\nIdeal for README files, API docs, and user guides.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -181,7 +176,6 @@ Features:
       command: 'npx repomix',
       instructions: 'Run npx repomix in your project root to generate a packed file.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -211,7 +205,6 @@ This plugin enables Claude to act as an intelligent coding assistant with direct
       type: 'manual',
       instructions: '1. Create GitHub Personal Access Token: https://github.com/settings/tokens (needs repo scope)\n2. Edit ~/.config/claude/claude_desktop_config.json (Mac/Linux) or %APPDATA%\\Claude\\claude_desktop_config.json (Windows)\n3. Add:\n{\n  "mcpServers": {\n    "github": {\n      "command": "npx",\n      "args": ["-y", "@modelcontextprotocol/server-github"],\n      "env": {\n        "GITHUB_TOKEN": "your_token_here"\n      }\n    }\n  }\n}\n4. Restart Claude Desktop\n\nGitHub: https://github.com/modelcontextprotocol/servers',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -240,7 +233,6 @@ Perfect for data analysis workflows and debugging applications with database dep
       type: 'manual',
       instructions: '1. Edit claude_desktop_config.json (see GitHub MCP for location)\n2. Add PostgreSQL configuration:\n{\n  "mcpServers": {\n    "postgres": {\n      "command": "npx",\n      "args": ["-y", "@modelcontextprotocol/server-postgres"],\n      "env": {\n        "DATABASE_URL": "postgresql://user:password@localhost:5432/dbname"\n      }\n    }\n  }\n}\n3. Replace DATABASE_URL with your actual connection string\n4. Restart Claude Desktop\n\nGitHub: https://github.com/modelcontextprotocol/servers',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -269,7 +261,6 @@ Streamlines administrative and personal productivity tasks by connecting your pr
       type: 'manual',
       instructions: '1. Set up Google Cloud OAuth credentials: https://console.cloud.google.com/apis/credentials\n2. Download credentials JSON file\n3. Edit claude_desktop_config.json:\n{\n  "mcpServers": {\n    "google-workspace": {\n      "command": "npx",\n      "args": ["-y", "@modelcontextprotocol/server-google-workspace"],\n      "env": {\n        "GOOGLE_APPLICATION_CREDENTIALS": "/path/to/credentials.json"\n      }\n    }\n  }\n}\n4. Restart Claude Desktop\n\nDocs: https://github.com/modelcontextprotocol/servers',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -298,7 +289,6 @@ Essential for testing agents and web automation tasks.`,
       type: 'manual',
       instructions: '1. Edit claude_desktop_config.json\n2. Add Puppeteer server:\n{\n  "mcpServers": {\n    "puppeteer": {\n      "command": "npx",\n      "args": ["-y", "@modelcontextprotocol/server-puppeteer"]\n    }\n  }\n}\n3. Restart Claude Desktop\n4. Claude can now control a headless browser for testing and automation\n\nGitHub: https://github.com/modelcontextprotocol/servers',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -328,7 +318,6 @@ Ideal for data analysis reports, financial models, and structured data exports.`
       type: 'manual',
       instructions: '1. Clone skills repository: git clone https://github.com/anthropics/skills\n2. Copy the xlsx skill:\n   cp -r skills/xlsx ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/xlsx && npm install\n4. Restart Claude Desktop\n5. Invoke with: "Create an Excel spreadsheet with..."\n\nGitHub: https://github.com/anthropics/skills',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -358,7 +347,6 @@ Perfect for generating reports, proposals, whitepapers, and documentation.`,
       type: 'manual',
       instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy Word skill:\n   cp -r skills/docx ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/docx && npm install\n4. Restart Claude Desktop\n5. Use with: "Create a Word document with..."\n\nGitHub: https://github.com/anthropics/skills',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -387,7 +375,6 @@ Essential for research, legal document review, and data extraction pipelines.`,
       type: 'manual',
       instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy PDF skill:\n   cp -r skills/pdf ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/pdf && npm install\n4. Restart Claude Desktop\n5. Ask Claude to "Extract data from this PDF..." or "Analyze this PDF document"\n\nGitHub: https://github.com/anthropics/skills',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -417,7 +404,6 @@ Use this skill to quickly extend Claude's capabilities with your own custom tool
       type: 'manual',
       instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy MCP generator skill:\n   cp -r skills/mcp-generator ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/mcp-generator && npm install\n4. Restart Claude Desktop\n5. Ask: "Create a new MCP server for [your use case]"\n\nGitHub: https://github.com/anthropics/skills',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -447,7 +433,6 @@ Combine with the Puppeteer MCP plugin for a complete testing workflow.`,
       type: 'manual',
       instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy testing skill:\n   cp -r skills/testing ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/testing && npm install\n4. Restart Claude Desktop\n5. Use with: "Create Playwright tests for..." or "Generate a test plan for..."\n\nGitHub: https://github.com/anthropics/skills',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
 ];

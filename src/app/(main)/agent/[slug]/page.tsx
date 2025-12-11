@@ -1,6 +1,5 @@
 import { agents } from "@/data/agents";
-import { Navbar } from "@/components/Navbar";
-import { ArrowLeft, Github, Globe, Check, ExternalLink } from "lucide-react";
+import { ArrowLeft, Github, Globe, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
@@ -116,8 +115,6 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <Navbar />
-
       <div className="container mx-auto px-4 pt-32 max-w-5xl relative z-10">
         <Link 
           href="/" 
@@ -178,8 +175,8 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
                   <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Author</div>
                   <div className="font-medium text-white flex items-center gap-2">
                     {agent.author.url || agent.author.github ? (
-                      <Link 
-                        href={agent.author.url || agent.author.github || '#'} 
+                      <Link
+                        href={agent.author.url || agent.author.github || '#'}
                         target="_blank"
                         className="hover:text-blue-400 transition-colors"
                       >
@@ -188,7 +185,6 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
                     ) : (
                       agent.author.name
                     )}
-                    {agent.verified && <Check className="w-3.5 h-3.5 text-blue-400" />}
                   </div>
                </div>
                <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">

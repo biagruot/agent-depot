@@ -82,11 +82,6 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
                 <div>
                   <div className="flex items-center gap-3 mb-2">
                     <h2 className="text-2xl font-bold text-white">{agent.name}</h2>
-                    {agent.verified && (
-                      <span className="bg-blue-500/10 text-blue-400 text-xs px-2 py-0.5 rounded-full border border-blue-500/20">
-                        Verified
-                      </span>
-                    )}
                   </div>
                   <p className="text-gray-400">
                     by{' '}

@@ -258,14 +258,7 @@ export function WelcomeEmail({
                           </a>
                           {" · "}
                           <a 
-                            href="https://twitter.com/agentdepot" 
-                            style={{ color: "#71717A", textDecoration: "underline" }}
-                          >
-                            Twitter
-                          </a>
-                          {" · "}
-                          <a 
-                            href="https://github.com/agentdepot" 
+                            href="https://github.com/biagruot/agentdepot-agents" 
                             style={{ color: "#71717A", textDecoration: "underline" }}
                           >
                             GitHub

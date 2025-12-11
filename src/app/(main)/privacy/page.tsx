@@ -147,7 +147,7 @@ export default function PrivacyPage() {
             </p>
             <ul className="text-gray-300 space-y-2">
               <li>Email: <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a></li>
-              <li>GitHub: <a href="https://github.com/agentdepot/directory" className="text-primary hover:underline" target="_blank">github.com/agentdepot/directory</a></li>
+              <li>GitHub: <a href="https://github.com/biagruot/agentdepot-agents" className="text-primary hover:underline" target="_blank">github.com/biagruot/agentdepot-agents</a></li>
             </ul>
           </section>
 

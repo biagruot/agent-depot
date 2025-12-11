@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 import { render } from "@react-email/render";
 import { WelcomeEmail } from "@/emails/WelcomeEmail";
+import { RESEND_CONFIG } from "@/lib/resend";
 
 // Simple email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -32,7 +33,8 @@ export async function POST(request: NextRequest) {
     const audienceId = process.env.RESEND_AUDIENCE_ID;
     // Optional: Set this after verifying your domain in Resend
     // Example: RESEND_FROM_EMAIL="AgentDepot <hello@agentdepot.dev>"
-    const fromEmail = process.env.RESEND_FROM_EMAIL;
+    // Use configured email or fallback
+    const fromEmail = RESEND_CONFIG.fromEmail;
 
     if (!apiKey) {
       console.error("RESEND_API_KEY is not set");

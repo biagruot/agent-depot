@@ -60,7 +60,7 @@ export default function SubmitPage() {
 
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             <Link
-              href="https://github.com/agentdepot/directory/issues/new?template=agent_submission.md"
+              href="https://github.com/biagruot/agentdepot-agents/issues/new?template=agent_submission.yml"
               target="_blank"
               className="group glass-panel p-8 rounded-3xl border border-white/10 hover:border-white/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(168,85,247,0.15)] flex flex-col items-center relative overflow-hidden"
             >

@@ -18,7 +18,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-github',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -38,7 +37,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-postgres <database-url>',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -58,7 +56,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-filesystem <allowed-paths>',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -78,7 +75,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-gdrive',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -98,7 +94,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-slack',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
 
@@ -122,7 +117,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-puppeteer',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -142,7 +136,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-brave-search',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -162,7 +155,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-sqlite <file-path>',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -182,7 +174,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y @modelcontextprotocol/server-memory',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -202,7 +193,6 @@ export const mcpAgents: Agent[] = [
       type: 'npm',
       instructions: 'npx -y mcp-server-gitlab',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
 ];

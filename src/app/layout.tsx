@@ -18,7 +18,7 @@ export const metadata: Metadata = {
     default: "AgentDepot | Every AI Agent, Every Tool, One Place",
     template: "%s | AgentDepot"
   },
-  description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 100+ verified AI coding agents, plugins, and rules in one place.",
+  description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 70+ verified AI coding agents, plugins, and rules in one place.",
   keywords: [
     "AI agents",
     "coding agents",
@@ -51,7 +51,7 @@ export const metadata: Metadata = {
     url: "https://agentdepot.dev",
     siteName: "AgentDepot",
     title: "AgentDepot | Every AI Agent, Every Tool, One Place",
-    description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 100+ verified AI coding agents, plugins, and rules.",
+    description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 70+ verified AI coding agents, plugins, and rules.",
     images: [
       {
         url: "/og-image.png",

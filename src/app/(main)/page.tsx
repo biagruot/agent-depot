@@ -229,14 +229,14 @@ function HomeContent() {
               {/* Subtitle with Glass Badge */}
               <div className="flex flex-col items-center justify-center gap-6">
                 <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
-                  100+ drop-in rules and agents for your next project.
+                  70+ drop-in rules and agents for your next project.
                 </p>
 
                 {/* Social Proof / Stats Line - Space Neutral */}
                 <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs font-mono text-gray-500 animate-fade-in" style={{ animationDelay: '0.2s' }}>
                   <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
-                    <span>120+ Agents</span>
+                    <span>70+ Agents</span>
                   </div>
                   <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/5">
                     <span className="text-blue-400">⚡️</span>

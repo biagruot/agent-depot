@@ -52,7 +52,6 @@ if you don't know the answer to a request, say so instead of making something up
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -144,7 +143,6 @@ if you don't know the answer to a request, say so instead of making something up
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -244,7 +242,6 @@ const searchParams = await props.searchParams
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -282,7 +279,6 @@ Don't be lazy, write all the code to implement features I ask for.`,
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -339,7 +335,6 @@ Where:
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -387,7 +382,6 @@ Leverage the power and simplicity of Go's standard library to create efficient a
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -437,7 +431,6 @@ Remember to adhere to the specified coding standards, development guidelines, an
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -483,7 +476,6 @@ from pytest_mock.plugin import MockerFixture`,
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -520,7 +512,6 @@ Design for Interaction: Incorporate gestures (swipes, long presses), haptic feed
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -607,7 +598,6 @@ Testing and Quality Assurance`,
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -680,7 +670,6 @@ Follow these guidelines to produce high-quality code and improve your coding ski
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -738,7 +727,6 @@ const additionalInstructions = \`
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -770,7 +758,6 @@ Remember to thoroughly test all modifications to ensure they work correctly with
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -827,7 +814,6 @@ const additionalInstructions = \`
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
   {
@@ -868,7 +854,6 @@ public class GlobalExceptionHandler {
       type: 'manual',
       instructions: 'Copy the content to .cursorrules in your project root.',
     },
-    verified: true,
     createdAt: '2025-12-06',
   },
 ];

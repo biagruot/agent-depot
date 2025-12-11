@@ -85,7 +85,7 @@ export default function Error({
                     <p className="text-sm text-gray-500">
                         If this keeps happening, please{" "}
                         <a
-                            href="https://github.com/agentdepot/agentdepot/issues"
+                            href="https://github.com/biagruot/agentdepot-agents/agentdepot/issues"
                             target="_blank"
                             rel="noopener noreferrer"
                             className="text-blue-400 hover:text-blue-300 underline"

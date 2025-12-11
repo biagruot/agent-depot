@@ -29,11 +29,6 @@ export default async function EmbedPage({ params }: PageProps) {
           <div>
             <h1 className="text-lg font-bold text-white flex items-center gap-2">
               {agent.name}
-              {agent.verified && (
-                <span className="bg-blue-500/10 text-blue-400 text-[10px] px-1.5 py-0.5 rounded-full border border-blue-500/20">
-                  Verified
-                </span>
-              )}
             </h1>
             <p className="text-xs text-gray-400">by {agent.author.name}</p>
           </div>
