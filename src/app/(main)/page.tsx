@@ -206,7 +206,7 @@ function HomeContent() {
       {/* Fixed Submit CTA - Bottom Right */}
       <a
         href="/submit"
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
+        className="fixed bottom-20 sm:bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
       >
         <span>+</span>
         <span>Submit Agent</span>

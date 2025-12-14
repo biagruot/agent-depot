@@ -30,7 +30,7 @@ When presented with a problem, you should:
     },
     installation: {
       type: 'manual',
-      instructions: '1. Copy the agent prompt from the GitHub repo: https://github.com/wshobson/agents/blob/main/architect.md\n2. In your terminal, create a file: ~/.claude/agents/architect.md\n3. Paste the prompt content\n4. Invoke in Claude Code with: @architect\n\nOr use directly in conversations by pasting the prompt.',
+      instructions: '1. Copy the agent prompt from the GitHub repo: https://github.com/wshobson/agents/blob/main/plugins/backend-development/agents/backend-architect.md\n2. In your terminal, create a file: ~/.claude/agents/architect.md\n3. Paste the prompt content\n4. Invoke in Claude Code with: @architect\n\nOr use directly in conversations by pasting the prompt.',
     },
     createdAt: '2025-12-06',
   },
@@ -59,7 +59,7 @@ Always prioritize security over convenience. When reviewing code, look for injec
     },
     installation: {
       type: 'manual',
-      instructions: '1. Download from GitHub: https://github.com/wshobson/agents/blob/main/security-engineer.md\n2. Save to ~/.claude/agents/security-engineer.md\n3. Invoke with @security-engineer in Claude Code\n\nAlternatively, copy and paste the prompt directly into your conversation.',
+      instructions: '1. Download from GitHub: https://github.com/wshobson/agents/blob/main/plugins/full-stack-orchestration/agents/security-auditor.md\n2. Save to ~/.claude/agents/security-engineer.md\n3. Invoke with @security-engineer in Claude Code\n\nAlternatively, copy and paste the prompt directly into your conversation.',
     },
     createdAt: '2025-12-06',
   },
@@ -88,7 +88,7 @@ Help users automate their workflows, ensure reproducible environments, and imple
     },
     installation: {
       type: 'manual',
-      instructions: '1. Get the agent: https://github.com/wshobson/agents/blob/main/devops-engineer.md\n2. Create file: ~/.claude/agents/devops.md\n3. Paste the prompt content\n4. Use in Claude Code: @devops\n\nGreat for CI/CD, Docker, and infrastructure tasks.',
+      instructions: '1. Get the agent: https://github.com/wshobson/agents/blob/main/plugins/cicd-automation/agents/deployment-engineer.md\n2. Create file: ~/.claude/agents/devops.md\n3. Paste the prompt content\n4. Use in Claude Code: @devops\n\nGreat for CI/CD, Docker, and infrastructure tasks.',
     },
     createdAt: '2025-12-06',
   },
@@ -117,7 +117,7 @@ Your goal is to ensure software is robust, bug-free, and meets requirements befo
     },
     installation: {
       type: 'manual',
-      instructions: '1. Download: https://github.com/wshobson/agents/blob/main/qa-engineer.md\n2. Save as ~/.claude/agents/qa-engineer.md\n3. Invoke with @qa-engineer\n\nPerfect for generating test suites and finding edge cases.',
+      instructions: '1. Download: https://github.com/wshobson/agents/blob/main/plugins/unit-testing/agents/test-automator.md\n2. Save as ~/.claude/agents/qa-engineer.md\n3. Invoke with @qa-engineer\n\nPerfect for generating test suites and finding edge cases.',
     },
     createdAt: '2025-12-06',
   },
@@ -146,7 +146,7 @@ Focus on clarity, brevity, and usefulness for the end-user.`,
     },
     installation: {
       type: 'manual',
-      instructions: '1. Get prompt from: https://github.com/wshobson/agents/blob/main/tech-writer.md\n2. Save to ~/.claude/agents/tech-writer.md\n3. Use with @tech-writer in Claude Code\n\nIdeal for README files, API docs, and user guides.',
+      instructions: '1. Get prompt from: https://github.com/wshobson/agents/blob/main/plugins/code-documentation/agents/docs-architect.md\n2. Save to ~/.claude/agents/tech-writer.md\n3. Use with @tech-writer in Claude Code\n\nIdeal for README files, API docs, and user guides.',
     },
     createdAt: '2025-12-06',
   },
@@ -402,7 +402,7 @@ Use this skill to quickly extend Claude's capabilities with your own custom tool
     },
     installation: {
       type: 'manual',
-      instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy MCP generator skill:\n   cp -r skills/mcp-generator ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/mcp-generator && npm install\n4. Restart Claude Desktop\n5. Ask: "Create a new MCP server for [your use case]"\n\nGitHub: https://github.com/anthropics/skills',
+      instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy MCP generator skill:\n   cp -r skills/mcp-builder ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/mcp-builder && npm install\n4. Restart Claude Desktop\n5. Ask: "Create a new MCP server for [your use case]"\n\nGitHub: https://github.com/anthropics/skills',
     },
     createdAt: '2025-12-06',
   },
@@ -431,7 +431,7 @@ Combine with the Puppeteer MCP plugin for a complete testing workflow.`,
     },
     installation: {
       type: 'manual',
-      instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy testing skill:\n   cp -r skills/testing ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/testing && npm install\n4. Restart Claude Desktop\n5. Use with: "Create Playwright tests for..." or "Generate a test plan for..."\n\nGitHub: https://github.com/anthropics/skills',
+      instructions: '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy testing skill:\n   cp -r skills/webapp-testing ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/webapp-testing && npm install\n4. Restart Claude Desktop\n5. Use with: "Create Playwright tests for..." or "Generate a test plan for..."\n\nGitHub: https://github.com/anthropics/skills',
     },
     createdAt: '2025-12-06',
   },
