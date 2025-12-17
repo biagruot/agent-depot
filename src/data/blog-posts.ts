@@ -1909,5 +1909,416 @@ Start with 2-3 agents that match your current project, then explore more.
 
 [Browse Python agents on AgentDepot →](https://agentdepot.dev)
     `
+  },
+  {
+    slug: "deepseek-r1-vs-claude-3-5-sonnet",
+    title: "DeepSeek R1 vs Claude 3.5 Sonnet: The Open Source Showdown",
+    excerpt: "Can the new open-weights champion DeepSeek R1 dethrone Anthropic's coding king? We tested both on real-world coding tasks.",
+    author: "AgentDepot Team",
+    date: "2025-12-08",
+    readTime: "9 min read",
+    tags: ["DeepSeek", "Claude", "Comparison"],
+    content: `
+# DeepSeek R1 vs Claude 3.5 Sonnet: The Open Source Showdown
+
+For months, **Claude 3.5 Sonnet** has been the undisputed king of AI coding. It's fast, smart, and understands complex context better than GPT-4o.
+
+But a new challenger has appeared: **DeepSeek R1**.
+
+It's open-weights, massive, and claiming to beat Sonnet on coding benchmarks. We put both to the test in real-world development scenarios.
+
+## 1. The Specs
+
+### Claude 3.5 Sonnet
+- **Provider:** Anthropic
+- **Type:** Closed Source (API)
+- **Strengths:** Context window (200k), reasoning, instruction following
+- **Cost:** ~$15/M input tokens
+
+### DeepSeek R1
+- **Provider:** DeepSeek
+- **Type:** Open Weights (Run locally or via API)
+- **Strengths:** Math, logic, code generation
+- **Cost:** ~$0.55/M input tokens (API) - **27x Cheaper!**
+
+## 2. Test 1: Refactoring a Legacy React Component
+
+We gave both models a messy 300-line React class component and asked them to:
+1. Convert it to Functional Component
+2. Use TypeScript
+3. Implement React Query V5
+
+**Claude 3.5 Sonnet:**
+- Flawless conversion.
+- Correctly identified 3 edge cases in the state logic.
+- Code ran immediately without errors.
+
+**DeepSeek R1:**
+- Good conversion.
+- Missed one obscure dependency in \`useEffect\`.
+- Used slightly older React Query syntax initially, but corrected it after one prompt.
+
+**Winner:** Claude (Narrowly), but DeepSeek was shockingly close.
+
+## 3. Test 2: Writing complex SQL Queries
+
+We asked for a complex PostgreSQL query involving 4 joins, a window function, and common table expressions (CTEs).
+
+**Claude 3.5 Sonnet:**
+- Valid SQL. Explained the logic well.
+
+**DeepSeek R1:**
+- Valid SQL. Actually optimized the query better by suggesting an index we didn't have.
+
+**Winner:** Tie (DeepSeek for performance, Claude for explanation).
+
+## 4. The "Agent" Factor
+
+Here is the kicker: **DeepSeek R1 is cheap.**
+
+If you are building an agent loop (like with Windsurf or Cursor) that runs 50 times to fix a bug:
+- **Claude Cost:** $0.50
+- **DeepSeek Cost:** $0.02
+
+For autonomous agents that need to "think" for a long time, DeepSeek changes the economics completely.
+
+## Conclusion
+
+**Claude 3.5 Sonnet** is still the smartest model for "one-shot" prompts where you need it to be right the first time.
+
+**DeepSeek R1** is the future of **autonomous agents**. Its low cost and high capability mean we can let agents loop, think, and retry until they solve the problem, without breaking the bank.
+
+### Recommendation
+- **Daily Driver:** Continue using Claude 3.5 Sonnet in Cursor.
+- **Heavy Lifting:** If you are running local agents or batch processing, switch to DeepSeek.
+
+[Find DeepSeek powered agents on AgentDepot →](https://agentdepot.dev)
+    `
+  },
+  {
+    slug: "mastering-ai-context-files",
+    title: "Mastering Context: How to Feed Your AI Agent the Right Files",
+    excerpt: "The #1 reason AI fails is missing context. Learn the art of selecting the perfect file mix for your Cursor or Windsurf sessions.",
+    author: "AgentDepot Team",
+    date: "2025-12-09",
+    readTime: "7 min read",
+    tags: ["Productivity", "Tips", "Context"],
+    content: `
+# Mastering Context: How to Feed Your AI Agent
+
+You prompt: *"Fix the login bug."*
+The AI says: *"I don't see a login file."*
+You sigh.
+
+The difference between a "Junior" AI result and a "Senior" AI result is almost always **Context**.
+
+AI models like Claude and GPT-4 have massive context windows (200k+ tokens), but filling them with garbage leads to garbage results. Here is how to curate context like a pro.
+
+## The "Onion" Strategy of Context
+
+Think of your codebase as an onion. When asking for a change, you need layers.
+
+### Layer 1: The Target (Must Have)
+The file you strictly want to edit.
+- e.g. \`src/auth/LoginComponent.tsx\`
+
+### Layer 2: The Direct Dependencies (Should Have)
+The data structures and utilities the target uses.
+- e.g. \`src/types/auth.ts\` (Interfaces)
+- e.g. \`src/utils/api-client.ts\` (How you fetch data)
+
+**Without Layer 2**, the AI hallucinates types and functions that don't exist.
+
+### Layer 3: The Patterns (Nice to Have)
+A *similar* file that is already working correctly.
+- e.g. \`src/auth/RegisterComponent.tsx\`
+
+**This is the secret weapon.** By showing the AI a "correct" example from your own codebase, it instantly mimics your style, naming conventions, and error handling patterns.
+
+## Managing Context in Cursor
+
+Cursor makes this easy with \`@symbols\`.
+
+1. **Don't just add folders.** Adding \`@src\` is lazy and fills the context with noise.
+2. **Use \`@Codebase\` sparingly.** It searches reasonably well, but manually adding the 3-4 exact files is always 10x better.
+3. **The .cursorrules file.** This is your "Permanent Context". Put your global rules here (stack, style guide) so you don't have to repeat them.
+
+## The "Context Dump" Technique
+
+Before starting a big refactor, create a temporary file called \`CONTEXT.md\`.
+Paste relevant snippets, database schemas, and business logic requirements into it.
+Add \`@CONTEXT.md\` to your chat.
+
+This gives the AI a "brain" to refer to that is cleaner than reading 50 raw code files.
+
+## Summary
+
+- **Be surgical:** Add specific files, not whole folders.
+- **Show examples:** Always provide a "reference" file.
+- **Use .cursorrules:** For improved baseline performance.
+
+Better input = Better output.
+
+[Check out our Context Optimization Rules →](https://agentdepot.dev)
+    `
+  },
+  {
+    slug: "python-fastapi-cursor-rules",
+    title: "Essential Cursor Rules for Python & FastAPI Developers",
+    excerpt: "Stop writing boilerplate. These 5 Cursor rules will force your AI to write type-safe, production-ready Python code.",
+    author: "AgentDepot Team",
+    date: "2025-12-10",
+    readTime: "6 min read",
+    tags: ["Python", "FastAPI", "Cursor"],
+    content: `
+# Essential Cursor Rules for Python & FastAPI
+
+While the Javascript ecosystem gets a lot of AI love, Python developers are silently building massive backends with agents.
+
+If you are using **FastAPI**, **Pydantic**, or **Django**, you need to configure your Cursor rules to handle Python's flexibility without creating a mess.
+
+## Rule 1: The "Type Hinting" Enforcer
+
+Python's dynamic nature is a double-edged sword for AI. Force it to be strict.
+
+\`\`\`markdown
+You are a Python expert.
+- ALWAYS use type hints (PEP 484).
+- Use 'typing' module or modern python 3.10+ syntax (list[str] | None).
+- Never leave function arguments untyped.
+- If a variable type is ambiguous, use explicit modification.
+\`\`\`
+
+## Rule 2: FastAPI Best Practices
+
+FastAPI is great, but AI often mixes up Pydantic V1 and V2, or dependency injection patterns.
+
+\`\`\`markdown
+Context: FastAPI Project
+- Use Pydantic V2 (\`model_config\`, \`field_validator\`).
+- Use \`Annotated\` for dependency injection: \`db: Annotated[Session, Depends(get_db)]\`.
+- Group routes using APIRouter.
+- Always return Pydantic models, not raw dicts.
+\`\`\`
+
+## Rule 3: The Docstring Standard
+
+AI writes great code but terrible docs. Standardize it.
+
+\`\`\`markdown
+- Use Google Style Python Docstrings.
+- Every public function must have a docstring with Args, Returns, and Raises.
+- Comments should explain WHY, not WHAT.
+\`\`\`
+
+## Rule 4: Pytest Only
+
+Don't let it use \`unittest\`.
+
+\`\`\`markdown
+- Use \`pytest\` for all testing.
+- Use \`conftest.py\` for fixtures.
+- Avoid class-based tests; use functions.
+- Mock external APIs using \`respx\` or \`unittest.mock\`.
+\`\`\`
+
+## How to use these
+
+Combine these into your \`.cursorrules\` file at the root of your repository. Your AI will go from writing "script-kiddie" Python to senior engineering code instantly.
+
+[Download the full Python Rule Pack on AgentDepot →](https://agentdepot.dev/python)
+    `
+  },
+  {
+    slug: "5-mistakes-ai-coding-agents",
+    title: "5 Common Mistakes When Using AI Coding Agents",
+    excerpt: "Are you wasting time with AI? Here are the top 5 pitfalls developers fall into when using tools like Cursor and Windsurf.",
+    author: "AgentDepot Team",
+    date: "2025-12-11",
+    readTime: "5 min read",
+    tags: ["Productivity", "Mistakes", "Guide"],
+    content: `
+# 5 Common Mistakes When Using AI Coding Agents
+
+We have analyzed thousands of developer interactions with AI agents. The same patterns emerge over and over again—habits that turn a 10x tool into a frustration factory.
+
+## 1. The "Magic Wand" Syndrome
+**Mistake:** Typing "Make it work" and hitting enter.
+**Reality:** AI is a probabilistic word predictor, not a magician. It needs clear constraints.
+**Fix:** Use the **Role-Task-Constraint** framework. "You are a [Role]. Your task is [Task]. You must use [Constraint]."
+
+## 2. Context Overload
+**Mistake:** Adding the entire codebase to the context window "just in case."
+**Reality:** This dilutes the signal. The AI gets distracted by irrelevant files.
+**Fix:** Only add files relevant to the specific feature you are building. See our [Guide on Context](/blog/mastering-ai-context-files).
+
+## 3. Ignoring the "Apply" Loop
+**Mistake:** Copy-pasting code manually from the chat.
+**Reality:** Tools like Cursor (Cmd+K) and Windsurf can write directly to the file. Manual copying breaks flow and validation.
+**Fix:** Learn the keyboard shortcuts for "Apply to File".
+
+## 4. Skipping the Code Review
+**Mistake:** Assuming the AI code is bug-free because it looks neat.
+**Reality:** AI creates subtle bugs, security vulnerabilities, and logic errors.
+**Fix:** Review AI code *more* strictly than human code. It lacks "common sense."
+
+## 5. Not Using Custom Rules
+**Mistake:** Using the default "raw" model.
+**Reality:** The model doesn't know you use Tailwind, or hate semicolons, or use a specific folder structure. You are correcting it every time.
+**Fix:** Set up your \`.cursorrules\` or System Prompt once. It pays dividends forever.
+
+## Conclusion
+
+AI agents are multipliers. If you have bad habits, they multiply your bad habits. If you have disciplined workflows, they make you unstoppable.
+
+[Optimize your workflow with our Rules →](https://agentdepot.dev)
+    `
+  },
+  {
+    slug: "glm-4-6-vs-claude-agent-showdown",
+    title: "Why GLM-4.6 is the New King of Autonomous Agents (Sorry, Claude)",
+    excerpt: "Zhipu AI just dropped GLM-4.6 and it changes everything for agentic workflows. We tested its tool-use capabilities against Claude 3.5 Sonnet.",
+    author: "AgentDepot Team",
+    date: "2025-12-12",
+    readTime: "8 min read",
+    tags: ["GLM-4", "Agents", "Trending"],
+    content: `
+# Why GLM-4.6 is the New King of Autonomous Agents (Sorry, Claude)
+
+While everyone was watching OpenAI and Anthropic, Zhipu AI quietly released **GLM-4.6**, and it is a monster for agentic workflows.
+
+If you are building autonomous agents that need to use tools (like searching the web, running code, or querying databases), you need to pay attention.
+
+## What is GLM-4.6?
+
+Released in late 2025, GLM-4.6 is an open-weight model with a massive **200k context window** and a specific architecture designed for **Tool Use**.
+
+Unlike other models where "function calling" feels like an afterthought, GLM-4.6 treats external tools as native extensions of its brain.
+
+## The Benchmark: "The Travel Agent Test"
+
+We devised a complex test to see how well the models could handle a real-world agent task.
+
+**The Prompt:**
+> "Find me a flight from NY to London for under $600 next Tuesday, then find a hotel near the airport with a gym, and draft an itinerary email to my boss."
+
+This requires:
+1.  **Tool 1:** Flight Search API
+2.  **Tool 2:** Hotel Search API
+3.  **reasoning:** Filtering results based on constraints (price, location, amenities)
+4.  **Generation:** Writing the email
+
+### Claude 3.5 Sonnet Performance
+*   **Result:** Success.
+*   **Steps:** It called the flight tool, got results. Then called the hotel tool. Then wrote the email.
+*   **Issues:** It initially tried to call both tools at once (parallel calling), which is good, but failed to pass the *date* from the flight to the hotel search correctly. It needed a self-correction step.
+
+### GLM-4.6 Performance
+*   **Result:** Flawless Success.
+*   **Steps:** It understood the dependency immediately. It searched for the flight first to confirm the *arrival date* (since a flight might land the next day), *then* used that correct date for the hotel search.
+*   **The "Aha!" Moment:** This subtle reasoning—realizing that "next Tuesday flight" might mean a "Wednesday hotel check-in"—is what separates a script from an Agent.
+
+## Why GLM-4.6 Wins on "Agentic Feel"
+
+### 1. Structured Output consistency
+GLM-4.6 follows JSON schemas for tool calls with near 100% accuracy. We threw nested, complex JSON structures at it, and it didn't hallucinate a single field.
+
+### 2. Cost
+It is significantly cheaper than Claude 3.5 Sonnet (approx 10x cheaper per token). For an agent that might run in a loop 100 times to solve a coding bug, this cost difference is the difference between a viable product and a bankruptcy.
+
+### 3. Open Weights
+You can host GLM-4.6 yourself. For enterprise agents dealing with sensitive data (PII, healthcare), this is a non-negotiable feature that Claude cannot match.
+
+## How to use GLM-4.6 today
+
+It is not yet integrated into Cursor by default, but you can use it via:
+1.  **OpenRouter:** Select \`zhipu/glm-4.6\` in your API settings.
+2.  **Local Hosting:** If you have the GPU VRAM (it's a big model, ~355B params), you can run the quantized version.
+
+## Conclusion
+
+Claude 3.5 Sonnet is still better at writing creative poetry or explaining philosophy. But if you are building a **worker agent**—one that needs to execute strict logic, handle tools, and obey schemas—GLM-4.6 is the new state of the art.
+
+[Check out our GLM-4.6 Agent Templates →](https://agentdepot.dev)
+    `
+  },
+  {
+    slug: "opencode-cli-agent-review",
+    title: "OpenCode: The Terminal-Based AI Agent That Puts You in Control",
+    excerpt: "Tired of bloated AI extensions? OpenCode is a lightning-fast, open-source CLI agent that works with any model (including local LLaMA).",
+    author: "AgentDepot Team",
+    date: "2025-12-13",
+    readTime: "6 min read",
+    tags: ["CLI", "Open Source", "Tools"],
+    content: `
+# OpenCode: The Terminal-Based AI Agent
+
+If you live in the terminal, you know the pain of switching context. You are deep in \`neovim\` or managing servers, and suddenly you need to open a heavy GUI just to ask an AI a question about your code.
+
+Enter **OpenCode**.
+
+It's a new open-source CLI tool that brings the power of Agentic AI directly to your command line, and it might just be the fastest way to code with AI.
+
+## What makes OpenCode special?
+
+### 1. Model Agnostic (Freedom!)
+Most AI tools lock you into a specific provider. 
+- GitHub Copilot = OpenAI models.
+- Cursor = Mostly Claude/GPT.
+
+OpenCode lets you bring **any** model.
+- Want to use **Claude 3.5 Sonnet** for logic? ✅
+- Want to use **DeepSeek V3** for cost savings? ✅
+- Want to use a **Local Ollama Model** for privacy? ✅
+
+### 2. The TUI (Terminal User Interface)
+It's not just a chat. It's a full TUI with:
+- **Diff Views:** See exactly what code the AI changes before agreeing.
+- **File Picker:** Quickly select context without leaving the keyboard.
+- **Command Execution:** Let the agent run \`npm test\` or \`git status\` directly.
+
+## How it works
+
+Once installed (it's a Go binary, so it's tiny and fast), you just run:
+
+\`\`\`bash
+opencode
+\`\`\`
+
+You are dropped into a session. You can type:
+> "Read main.go and add a logger middleware."
+
+OpenCode will:
+1.  Read the file.
+2.  Plan the change.
+3.  Show you the diff.
+4.  Apply it if you approve.
+
+## Ideal Use Cases
+
+**1. The "Quick Fix" on a Remote Server**
+Ever broke production and needed to fix a bug over SSH? You can't run VS Code there. But you *can* run OpenCode. It's a lifesaver for DevOps usage.
+
+**2. Privacy-First Development**
+Since it supports local models natively, you can point it at your local Ollama instance running Llama 3. No code ever leaves your machine.
+
+**3. Vim/Neovim Users**
+If you already possess the muscle memory for the terminal, OpenCode feels like a natural extension of your workflow, not a disruption.
+
+## Comparisons
+
+| Feature | OpenCode | Cursor | Copilot CLI |
+| :--- | :--- | :--- | :--- |
+| **Interface** | Terminal (TUI) | VS Code Fork | Terminal (Basic) |
+| **Local Models** | ✅ Native | ❌ (Hard to setup) | ❌ |
+| **Speed** | ⚡️ Instant | 🐢 Heavy | ⚡️ Fast |
+| **Cost** | Free (Open Source) | $20/mo | $10/mo |
+
+## Conclusion
+
+OpenCode isn't trying to replace Cursor for full project development. But for quick tasks, server management, and terminal junkies, it is the best tool we have seen this year.
+
+[Get started with OpenCode →](https://github.com/opencode-ai/opencode)
+    `
   }
 ];

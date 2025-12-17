@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Calendar, Clock, User } from "lucide-react";
+import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 
 interface BlogPostPageProps {
@@ -99,6 +100,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           {/* Article Content */}
           <div className="prose prose-invert prose-lg max-w-none">
             <ReactMarkdown
+              remarkPlugins={[remarkGfm]}
               components={{
                 // Headings
                 h1: ({ children }) => (

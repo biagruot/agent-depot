@@ -249,13 +249,13 @@ function HomeContent() {
             {/* Main Title with Gradient */}
             <div className="space-y-3 relative z-10">
               <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight">
-                Copy. Paste. Ship.
+                The Open Source<br />AI Agent Directory
               </h1>
 
               {/* Subtitle with Glass Badge */}
               <div className="flex flex-col items-center justify-center gap-6">
                 <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
-                  70+ drop-in rules and agents for your next project.
+                  Copy. Paste. Ship. 70+ drop-in rules and agents for your next project.
                 </p>
 
                 {/* Social Proof / Stats Line - Space Neutral */}
