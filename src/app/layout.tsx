@@ -13,12 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://agentdepot.dev'),
+  metadataBase: new URL("https://agentdepot.dev"),
   title: {
     default: "AgentDepot | Every AI Agent, Every Tool, One Place",
-    template: "%s | AgentDepot"
+    template: "%s | AgentDepot",
   },
-  description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 70+ verified AI coding agents, plugins, and rules in one place.",
+  description:
+    "An open directory of AI coding tools for Claude Code, Windsurf, Cursor, Replit, and MCP. Discover 70+ curated agents, plugins, rules, and skills in one place.",
   keywords: [
     "AI agents",
     "coding agents",
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     "agent directory",
     "AI tools",
     "code generation",
-    "developer productivity"
+    "developer productivity",
   ],
   authors: [{ name: "AgentDepot Team" }],
   creator: "AgentDepot",
@@ -51,7 +52,8 @@ export const metadata: Metadata = {
     url: "https://agentdepot.dev",
     siteName: "AgentDepot",
     title: "AgentDepot | Every AI Agent, Every Tool, One Place",
-    description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. Discover 70+ verified AI coding agents, plugins, and rules.",
+    description:
+      "An open directory of AI coding tools for Claude Code, Windsurf, Cursor, Replit, and MCP. 70+ curated agents, plugins, and rules.",
     images: [
       {
         url: "/og-image.png",
@@ -64,7 +66,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "AgentDepot | Every AI Agent, Every Tool, One Place",
-    description: "The only premium directory covering Claude Code, Windsurf, Cursor, and Replit. 100% Verified.",
+    description:
+      "An open directory of AI coding tools for Claude Code, Windsurf, Cursor, Replit, and MCP — 70+ curated tools.",
     images: ["/og-image.png"],
     creator: "@agentdepot",
   },
@@ -74,9 +77,9 @@ export const metadata: Metadata = {
     googleBot: {
       index: true,
       follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
     },
   },
   verification: {
@@ -108,11 +111,12 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col bg-black text-white selection:bg-blue-500/30`}
       >
         {process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID && (
-          <OpenPanelComponent clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID} trackScreenViews={true} />
+          <OpenPanelComponent
+            clientId={process.env.NEXT_PUBLIC_OPENPANEL_CLIENT_ID}
+            trackScreenViews={true}
+          />
         )}
-        <FavoritesProvider>
-          {children}
-        </FavoritesProvider>
+        <FavoritesProvider>{children}</FavoritesProvider>
       </body>
     </html>
   );

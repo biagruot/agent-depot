@@ -1,14 +1,13 @@
 import { agents } from "@/data/agents";
 import { AgentCard } from "@/components/AgentCard";
 import { Navbar } from "@/components/Navbar";
-import { SearchFilters } from "@/components/SearchFilters";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { PageTracker } from "@/components/PageTracker";
 
 const VALID_TOOLS = ["claude-code", "windsurf", "cursor", "replit"] as const;
-type Tool = typeof VALID_TOOLS[number];
+type Tool = (typeof VALID_TOOLS)[number];
 
 interface ToolPageProps {
   params: Promise<{
@@ -31,40 +30,74 @@ export async function generateMetadata({ params }: ToolPageProps) {
     };
   }
 
-  const toolMetadata: Record<Tool, {
-    name: string;
-    title: string;
-    description: string;
-    keywords: string[];
-  }> = {
+  const toolMetadata: Record<
+    Tool,
+    {
+      name: string;
+      title: string;
+      description: string;
+      keywords: string[];
+    }
+  > = {
     "claude-code": {
       name: "Claude Code",
       title: "Claude Code Plugins & Agents Directory - AgentDepot",
-      description: "Discover 15+ verified Claude Code plugins, agents, and skills. Premium directory of AI coding tools for Anthropic's Claude Code. Tested and curated for developers.",
-      keywords: ["claude code plugins", "claude code agents", "claude code skills", "claude code directory", "anthropic claude code", "ai coding claude"],
+      description:
+        "Discover 15+ curated Claude Code plugins, agents, and skills for Anthropic's Claude Code — each with clear installation instructions.",
+      keywords: [
+        "claude code plugins",
+        "claude code agents",
+        "claude code skills",
+        "claude code directory",
+        "anthropic claude code",
+        "ai coding claude",
+      ],
     },
     windsurf: {
       name: "Windsurf",
       title: "Windsurf Agents & Rules Directory - AgentDepot",
-      description: "Browse 15+ verified Windsurf rules and agents for Codeium's agentic IDE. The most comprehensive Windsurf agents directory with installation guides and examples.",
-      keywords: ["windsurf agents directory", "windsurf rules", "windsurf cascade", "codeium windsurf", "windsurf ai", "windsurf configurations"],
+      description:
+        "Browse 15+ curated Windsurf rules and agents for Codeium's agentic IDE, with installation guides and examples.",
+      keywords: [
+        "windsurf agents directory",
+        "windsurf rules",
+        "windsurf cascade",
+        "codeium windsurf",
+        "windsurf ai",
+        "windsurf configurations",
+      ],
     },
     cursor: {
       name: "Cursor",
       title: "Cursor Rules Directory - Best AI Coding Rules - AgentDepot",
-      description: "Find 15+ high-quality Cursor rules for React, Python, TypeScript, and more. Curated directory of the best Cursor AI editor rules with one-click installation.",
-      keywords: ["cursor rules directory", "best cursor rules", "cursor ai rules", "cursor editor rules", "cursor rules react", "cursor rules python"],
+      description:
+        "Find 15+ high-quality Cursor rules for React, Python, TypeScript, and more. Curated directory of the best Cursor AI editor rules with one-click installation.",
+      keywords: [
+        "cursor rules directory",
+        "best cursor rules",
+        "cursor ai rules",
+        "cursor editor rules",
+        "cursor rules react",
+        "cursor rules python",
+      ],
     },
     replit: {
       name: "Replit",
       title: "Replit Templates & Agents Directory - AgentDepot",
-      description: "Explore 16+ Replit templates, agents, and extensions. Deploy-ready templates for React, Python, Node.js, and more. Start coding instantly.",
-      keywords: ["replit templates", "replit agents", "replit extensions", "replit directory", "replit starter templates"],
+      description:
+        "Explore 16+ Replit templates, agents, and extensions. Deploy-ready templates for React, Python, Node.js, and more. Start coding instantly.",
+      keywords: [
+        "replit templates",
+        "replit agents",
+        "replit extensions",
+        "replit directory",
+        "replit starter templates",
+      ],
     },
   };
 
   const metadata = toolMetadata[tool as Tool];
-  const baseUrl = 'https://agentdepot.dev';
+  const baseUrl = "https://agentdepot.dev";
 
   return {
     title: metadata.title,
@@ -120,22 +153,26 @@ export default async function ToolPage({ params }: ToolPageProps) {
     "claude-code": {
       name: "Claude Code",
       gradient: "from-orange-600 to-red-600",
-      description: "Powerful plugins and agents for Anthropic's Claude Code. Build, debug, and deploy with AI assistance.",
+      description:
+        "Powerful plugins and agents for Anthropic's Claude Code. Build, debug, and deploy with AI assistance.",
     },
     windsurf: {
       name: "Windsurf",
       gradient: "from-blue-600 to-cyan-600",
-      description: "Agentic IDE rules and configurations for Windsurf by Codeium. Intelligent code generation and workflows.",
+      description:
+        "Agentic IDE rules and configurations for Windsurf by Codeium. Intelligent code generation and workflows.",
     },
     cursor: {
       name: "Cursor",
       gradient: "from-purple-600 to-pink-600",
-      description: "Cursor rules and integrations for the AI-first code editor. Customize your AI coding experience.",
+      description:
+        "Cursor rules and integrations for the AI-first code editor. Customize your AI coding experience.",
     },
     replit: {
       name: "Replit",
       gradient: "from-orange-600 to-yellow-600",
-      description: "Templates and extensions for Replit. Build and deploy directly from your browser.",
+      description:
+        "Templates and extensions for Replit. Build and deploy directly from your browser.",
     },
   };
 
@@ -145,26 +182,26 @@ export default async function ToolPage({ params }: ToolPageProps) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CollectionPage",
-    "name": `${currentTool.name} Agents`,
-    "description": currentTool.description,
-    "url": `https://agentdepot.dev/${tool}`,
-    "about": {
+    name: `${currentTool.name} Agents`,
+    description: currentTool.description,
+    url: `https://agentdepot.dev/${tool}`,
+    about: {
       "@type": "SoftwareApplication",
-      "name": currentTool.name,
-      "applicationCategory": "DeveloperApplication",
+      name: currentTool.name,
+      applicationCategory: "DeveloperApplication",
     },
-    "mainEntity": {
+    mainEntity: {
       "@type": "ItemList",
-      "numberOfItems": toolAgents.length,
-      "itemListElement": toolAgents.slice(0, 10).map((agent, index) => ({
+      numberOfItems: toolAgents.length,
+      itemListElement: toolAgents.slice(0, 10).map((agent, index) => ({
         "@type": "ListItem",
-        "position": index + 1,
-        "item": {
+        position: index + 1,
+        item: {
           "@type": "SoftwareApplication",
-          "name": agent.name,
-          "description": agent.description,
-          "url": `https://agentdepot.dev/agent/${agent.id}`,
-          "applicationCategory": "DeveloperApplication",
+          name: agent.name,
+          description: agent.description,
+          url: `https://agentdepot.dev/agent/${agent.id}`,
+          applicationCategory: "DeveloperApplication",
         },
       })),
     },
@@ -186,7 +223,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
       {/* Hero Section */}
       <section className="pt-32 pb-12 px-4 relative z-10">
         <div className="container mx-auto max-w-7xl">
-          <Link 
+          <Link
             href="/"
             className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors mb-8 group"
           >
@@ -199,11 +236,13 @@ export default async function ToolPage({ params }: ToolPageProps) {
               <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
               {toolAgents.length} Agents Available
             </div>
-            
-            <h1 className={`text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-gradient-to-r ${currentTool.gradient} bg-clip-text text-transparent`}>
+
+            <h1
+              className={`text-5xl md:text-7xl font-bold mb-6 tracking-tight bg-gradient-to-r ${currentTool.gradient} bg-clip-text text-transparent`}
+            >
               {currentTool.name} Agents
             </h1>
-            
+
             <p className="text-xl text-gray-400 mb-8 leading-relaxed max-w-2xl">
               {currentTool.description}
             </p>
@@ -235,7 +274,7 @@ export default async function ToolPage({ params }: ToolPageProps) {
           ) : (
             <div className="text-center py-32 glass-panel rounded-3xl">
               <p className="text-xl text-gray-400">No agents found for {currentTool.name}.</p>
-              <Link 
+              <Link
                 href="/"
                 className="mt-4 inline-block text-primary hover:text-white transition-colors"
               >
