@@ -253,23 +253,12 @@ const searchParams = await props.searchParams
       "Focused rules for clear, readable React and TypeScript code using the latest stable versions.",
     fullDescription: `You are an expert AI programming assistant that primarily focuses on producing clear, readable React and TypeScript code.
 
-You always use the latest stable version of TypeScript, JavaScript, React, Node.js, Next.js App Router, Shadcn UI, Tailwind CSS and you are familiar with the latest features and best practices.
+You always use the latest stable version of TypeScript, JavaScript, React, Node.js, Next.js App Router, Shadcn UI, and Tailwind CSS, and you are familiar with the latest features and best practices.
 
-You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning AI to chat, to generate code.
+You carefully provide accurate, factual, thoughtful answers, and are a genius at reasoning.
 
-Style and Structure
-
-Naming Conventions
-
-TypeScript Usage
-
-UI and Styling
-
-Performance Optimization
-
-Other Rules need to follow:
-
-Don't be lazy, write all the code to implement features I ask for.`,
+Other rules to follow:
+- Don't be lazy — write all the code to implement the features I ask for.`,
     tool: "cursor",
     type: "rule",
     category: "web",
@@ -746,17 +735,9 @@ const additionalInstructions = \`
       "Automation scripts and workflows for Deno projects, focused on consistency and efficiency.",
     fullDescription: `This project contains automation scripts and workflows for the @findhow packages, based on the original Deno automation repository. The goal is to provide consistent and efficient automation for the @findhow ecosystem.
 
-The purpose of this project is to refactor and adapt the automation scripts from @https://github.com/denoland/automation for use with the @findhow packages found at @https://github.com/zhorton34/findhow.
+The purpose of this project is to refactor and adapt the automation scripts from https://github.com/denoland/automation for use with the @findhow packages found at https://github.com/zhorton34/findhow.
 
-When working on this project, Cursor AI should:
-
-When making changes:
-
-When updating documentation:
-
-When creating or modifying automation scripts:
-
-Remember to thoroughly test all modifications to ensure they work correctly with the @findhow ecosystem before merging changes into the main branch.`,
+When working on this project, Cursor AI should keep changes consistent with the existing scripts, update documentation alongside code, and thoroughly test all modifications to ensure they work correctly with the @findhow ecosystem before merging into the main branch.`,
     tool: "cursor",
     type: "rule",
     category: "web",
@@ -868,5 +849,49 @@ public class GlobalExceptionHandler {
       instructions: "Copy the content to .cursorrules in your project root.",
     },
     createdAt: "2025-12-06",
+  },
+  {
+    id: "cursor-vue3-nuxt3",
+    name: "Vue 3 & Nuxt 3 Expert",
+    description:
+      "Cursor rules for idiomatic Vue 3 + Nuxt 3 with the Composition API and TypeScript.",
+    fullDescription: `Guides Cursor to write modern Vue 3 and Nuxt 3 code: the Composition API with the script-setup syntax, TypeScript, auto-imports, composables, and Nuxt's file-based routing and server routes.
+
+Encourages SOLID component design, correct reactivity, and Nuxt best practices for SSR and data fetching.`,
+    tool: "cursor",
+    type: "rule",
+    category: "web",
+    tags: ["Vue", "Nuxt", "TypeScript"],
+    author: {
+      name: "Awesome Cursor Rules Community",
+      url: "https://github.com/PatrickJS/awesome-cursorrules/blob/main/rules/vue-3-nuxt-3-development-cursorrules-prompt-file/.cursorrules",
+    },
+    installation: {
+      type: "manual",
+      instructions: "Copy the content to .cursorrules in your project root.",
+    },
+    createdAt: "2026-05-30",
+  },
+  {
+    id: "cursor-python-fastapi",
+    name: "Python FastAPI Expert",
+    description:
+      "Cursor rules for building scalable, async FastAPI services with clean structure and type hints.",
+    fullDescription: `Steers Cursor toward production-grade FastAPI: async endpoints, Pydantic models, dependency injection, and clear router/service separation.
+
+Emphasizes type hints, proper error handling with HTTPException, and idiomatic Python so generated APIs stay clean and maintainable.`,
+    tool: "cursor",
+    type: "rule",
+    category: "coding",
+    tags: ["Python", "FastAPI", "API"],
+    author: {
+      name: "Awesome Cursor Rules Community",
+      url: "https://github.com/PatrickJS/awesome-cursorrules/blob/main/rules/python-fastapi-cursorrules-prompt-file/.cursorrules",
+    },
+    installation: {
+      type: "manual",
+      instructions: "Copy the content to .cursorrules in your project root.",
+    },
+    createdAt: "2026-05-30",
   },
 ];

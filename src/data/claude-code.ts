@@ -333,7 +333,7 @@ Ideal for data analysis reports, financial models, and structured data exports.`
     installation: {
       type: "manual",
       instructions:
-        '1. Clone skills repository: git clone https://github.com/anthropics/skills\n2. Copy the xlsx skill:\n   cp -r skills/xlsx ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/xlsx && npm install\n4. Restart Claude Desktop\n5. Invoke with: "Create an Excel spreadsheet with..."\n\nGitHub: https://github.com/anthropics/skills',
+        '1. Clone the skills repository: git clone https://github.com/anthropics/skills\n2. Copy the xlsx skill:\n   cp -r skills/xlsx ~/.claude/skills/\n3. Restart Claude Desktop\n4. Invoke with: "Create an Excel spreadsheet with..."\n\nGitHub: https://github.com/anthropics/skills',
     },
     createdAt: "2025-12-06",
   },
@@ -364,14 +364,14 @@ Perfect for generating reports, proposals, whitepapers, and documentation.`,
     installation: {
       type: "manual",
       instructions:
-        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy Word skill:\n   cp -r skills/docx ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/docx && npm install\n4. Restart Claude Desktop\n5. Use with: "Create a Word document with..."\n\nGitHub: https://github.com/anthropics/skills',
+        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy the Word skill:\n   cp -r skills/docx ~/.claude/skills/\n3. Restart Claude Desktop\n4. Use with: "Create a Word document with..."\n\nGitHub: https://github.com/anthropics/skills',
     },
     createdAt: "2025-12-06",
   },
   {
     id: "pdf-processing-skill",
     name: "PDF Processor",
-    description: "Advanced skill for regarding, analyzing, and extracting data from PDF files.",
+    description: "Advanced skill for reading, analyzing, and extracting data from PDF files.",
     fullDescription: `A comprehensive skill for PDF interaction.
 
 Allows Claude to:
@@ -393,7 +393,7 @@ Essential for research, legal document review, and data extraction pipelines.`,
     installation: {
       type: "manual",
       instructions:
-        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy PDF skill:\n   cp -r skills/pdf ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/pdf && npm install\n4. Restart Claude Desktop\n5. Ask Claude to "Extract data from this PDF..." or "Analyze this PDF document"\n\nGitHub: https://github.com/anthropics/skills',
+        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy the PDF skill:\n   cp -r skills/pdf ~/.claude/skills/\n3. Restart Claude Desktop\n4. Ask Claude to "Extract data from this PDF..." or "Analyze this PDF document"\n\nGitHub: https://github.com/anthropics/skills',
     },
     createdAt: "2025-12-06",
   },
@@ -424,7 +424,7 @@ Use this skill to quickly extend Claude's capabilities with your own custom tool
     installation: {
       type: "manual",
       instructions:
-        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy MCP generator skill:\n   cp -r skills/mcp-builder ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/mcp-builder && npm install\n4. Restart Claude Desktop\n5. Ask: "Create a new MCP server for [your use case]"\n\nGitHub: https://github.com/anthropics/skills',
+        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy the MCP generator skill:\n   cp -r skills/mcp-builder ~/.claude/skills/\n3. Restart Claude Desktop\n4. Ask: "Create a new MCP server for [your use case]"\n\nGitHub: https://github.com/anthropics/skills',
     },
     createdAt: "2025-12-06",
   },
@@ -454,7 +454,7 @@ Combine with the Puppeteer MCP plugin for a complete testing workflow.`,
     installation: {
       type: "manual",
       instructions:
-        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy testing skill:\n   cp -r skills/webapp-testing ~/.claude/skills/\n3. Install dependencies:\n   cd ~/.claude/skills/webapp-testing && npm install\n4. Restart Claude Desktop\n5. Use with: "Create Playwright tests for..." or "Generate a test plan for..."\n\nGitHub: https://github.com/anthropics/skills',
+        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy the testing skill:\n   cp -r skills/webapp-testing ~/.claude/skills/\n3. Restart Claude Desktop\n4. Use with: "Create Playwright tests for..." or "Generate a test plan for..."\n\nGitHub: https://github.com/anthropics/skills',
     },
     createdAt: "2025-12-06",
   },
@@ -491,5 +491,35 @@ Supported project types include: static websites, React, Next.js, Vue, Svelte, A
         '1. Clone: git clone https://github.com/hmohamed01/Claude-Code-Scaffolding-Skill\n2. Install the skill:\n   mkdir -p ~/.claude/skills/project-scaffolding\n   cp -r SKILL.md scripts/ references/ assets/ ~/.claude/skills/project-scaffolding/\n3. Verify installation:\n   ls ~/.claude/skills/project-scaffolding/\n4. Use with natural language: "Create a Next.js project with TypeScript and Tailwind" or "Set up a FastAPI backend with PostgreSQL"\n\nGitHub: https://github.com/hmohamed01/Claude-Code-Scaffolding-Skill',
     },
     createdAt: "2025-11-11",
+  },
+  {
+    id: "pptx-creation-skill",
+    name: "PowerPoint Creator",
+    description:
+      "Skill for creating polished PowerPoint presentations with layouts, charts, and images.",
+    fullDescription: `Enables Claude to build professional PowerPoint decks (.pptx).
+
+Features:
+- Slide layouts and master templates
+- Charts, tables, and diagrams
+- Image insertion and positioning
+- Speaker notes and consistent theming
+
+Great for pitch decks, status reports, and training material.`,
+    tool: "claude-code",
+    type: "skill",
+    category: "productivity",
+    tags: ["PowerPoint", "Presentation", "Slides", "Office"],
+    author: {
+      name: "Anthropic",
+      url: "https://github.com/anthropics/skills",
+      github: "https://github.com/anthropics/skills",
+    },
+    installation: {
+      type: "manual",
+      instructions:
+        '1. Clone: git clone https://github.com/anthropics/skills\n2. Copy the pptx skill:\n   cp -r skills/pptx ~/.claude/skills/\n3. Restart Claude Desktop\n4. Use with: "Create a PowerPoint presentation about..."\n\nGitHub: https://github.com/anthropics/skills',
+    },
+    createdAt: "2026-05-30",
   },
 ];

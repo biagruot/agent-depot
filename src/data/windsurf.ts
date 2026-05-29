@@ -155,8 +155,7 @@ Rules:
     },
     installation: {
       type: "extension",
-      instructions:
-        '1. Open Windsurf\n2. Click Extensions icon (Ctrl/Cmd+Shift+X)\n3. Search for "GitLens"\n4. Click Install on "GitLens — Git supercharged" by GitKraken\n\nDirect link: https://marketplace.visualstudio.com/items?itemName=eamodio.gitlens',
+      instructions: 'Search "GitLens" in Windsurf Extensions marketplace and install.',
     },
     createdAt: "2025-12-06",
   },
@@ -176,8 +175,7 @@ Rules:
     },
     installation: {
       type: "extension",
-      instructions:
-        '1. Create free Snyk account at https://snyk.io/signup\n2. Open Windsurf Extensions (Ctrl/Cmd+Shift+X)\n3. Search "Snyk Security"\n4. Install "Snyk Security - Code, Open Source Dependencies, IaC Configurations"\n5. Authenticate with your Snyk account when prompted\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=snyk-security.snyk-vulnerability-scanner',
+      instructions: "Install via Extensions view. Requires Snyk account.",
     },
     createdAt: "2025-12-06",
   },
@@ -197,8 +195,7 @@ Rules:
     },
     installation: {
       type: "extension",
-      instructions:
-        '1. Open Windsurf\n2. Press Ctrl/Cmd+Shift+X to open Extensions\n3. Search "SonarLint"\n4. Click Install on "SonarLint" by SonarSource\n5. Restart Windsurf if prompted\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=SonarSource.sonarlint-vscode',
+      instructions: "Install from Marketplace.",
     },
     createdAt: "2025-12-06",
   },
@@ -218,8 +215,7 @@ Rules:
     },
     installation: {
       type: "extension",
-      instructions:
-        '1. Open Extensions in Windsurf (Ctrl/Cmd+Shift+X)\n2. Search "Error Lens"\n3. Install "Error Lens" by Alexander (usernamehw)\n4. Errors/warnings will now appear inline immediately\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=usernamehw.errorlens',
+      instructions: "Install from Marketplace.",
     },
     createdAt: "2025-12-06",
   },
@@ -239,8 +235,7 @@ Rules:
     },
     installation: {
       type: "extension",
-      instructions:
-        '1. Open Windsurf Extensions (Ctrl/Cmd+Shift+X)\n2. Search "Python"\n3. Install "Python" by Microsoft\n4. Reload when prompted\n5. Select Python interpreter when working with .py files\n\nMarketplace: https://marketplace.visualstudio.com/items?itemName=ms-python.python',
+      instructions: "Install via Windsurf Extensions marketplace.",
     },
     createdAt: "2025-12-06",
   },
@@ -331,8 +326,7 @@ Action: Scans routes, updates openapi.yaml.`,
     },
     installation: {
       type: "manual",
-      instructions:
-        '1. Install MCP server: npm install -g @modelcontextprotocol/server-github\n2. Create GitHub Personal Access Token at https://github.com/settings/tokens\n3. Open Windsurf Settings → Extensions → MCP\n4. Add server configuration:\n   {\n     "github": {\n       "command": "mcp-server-github",\n       "env": { "GITHUB_TOKEN": "your_token_here" }\n     }\n   }\n\nGitHub: https://github.com/modelcontextprotocol/servers',
+      instructions: "Configure GitHub MCP server in Windsurf settings.",
     },
     createdAt: "2025-12-06",
   },
@@ -353,9 +347,49 @@ Action: Scans routes, updates openapi.yaml.`,
     },
     installation: {
       type: "manual",
-      instructions:
-        '1. Install: npm install -g @modelcontextprotocol/server-postgres\n2. Open Windsurf Settings → Extensions → MCP\n3. Add configuration:\n   {\n     "postgres": {\n       "command": "mcp-server-postgres",\n       "env": { "DATABASE_URL": "postgresql://user:pass@localhost:5432/dbname" }\n     }\n   }\n4. Replace DATABASE_URL with your actual PostgreSQL connection string\n\nGitHub: https://github.com/modelcontextprotocol/servers',
+      instructions: "Add PostgreSQL MCP configuration in Windsurf.",
     },
     createdAt: "2025-12-06",
+  },
+  {
+    id: "windsurf-prettier",
+    name: "Prettier - Code Formatter",
+    description:
+      "Opinionated formatter that keeps JavaScript, TypeScript, CSS, and more consistently styled on save.",
+    fullDescription:
+      "Prettier is the de facto standard code formatter for web projects. It enforces one consistent style across your whole team so formatting stops being a debate. Works in Windsurf out of the box — pair it with format-on-save.",
+    tool: "windsurf",
+    type: "plugin",
+    category: "productivity",
+    tags: ["Formatting", "Prettier", "Code Style"],
+    author: {
+      name: "Prettier",
+      url: "https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode",
+    },
+    installation: {
+      type: "extension",
+      instructions: 'Search "Prettier - Code formatter" in Windsurf Extensions and install.',
+    },
+    createdAt: "2026-05-30",
+  },
+  {
+    id: "windsurf-tailwind-intellisense",
+    name: "Tailwind CSS IntelliSense",
+    description: "Autocomplete, linting, and hover previews for Tailwind CSS utility classes.",
+    fullDescription:
+      "Tailwind CSS IntelliSense brings intelligent autocomplete, syntax highlighting, and linting for Tailwind classes, plus CSS previews on hover. Essential for any project using Tailwind CSS.",
+    tool: "windsurf",
+    type: "plugin",
+    category: "web",
+    tags: ["Tailwind", "CSS", "Autocomplete"],
+    author: {
+      name: "Tailwind Labs",
+      url: "https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss",
+    },
+    installation: {
+      type: "extension",
+      instructions: 'Search "Tailwind CSS IntelliSense" in Windsurf Extensions and install.',
+    },
+    createdAt: "2026-05-30",
   },
 ];
