@@ -24,6 +24,24 @@ import { useTimeTracking } from "@/hooks/useTimeTracking";
 import { useOpenPanel } from "@openpanel/nextjs";
 import { analyticsEvents } from "@/lib/analytics";
 
+function compareBySort(a: Agent, b: Agent, sort: SortOption): number {
+  switch (sort) {
+    case "newest":
+      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
+    case "popular":
+      return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
+    case "trending": {
+      const sa = (a.stats?.stars || 0) + new Date(a.createdAt).getTime() / 1e9;
+      const sb = (b.stats?.stars || 0) + new Date(b.createdAt).getTime() / 1e9;
+      return sb - sa;
+    }
+    case "alphabetical":
+      return a.name.localeCompare(b.name);
+    default:
+      return 0;
+  }
+}
+
 function HomeContent() {
   const searchParams = useSearchParams();
   const { track } = useOpenPanel();
@@ -100,79 +118,35 @@ function HomeContent() {
     });
   }, []);
 
-  // Filter agents
+  // Filter and sort agents
   const filteredAgents = useMemo(() => {
     let result = agents;
 
-    // 1. Filter by Tool
     if (selectedTool !== "all") {
       result = result.filter((agent) => agent.tool === selectedTool);
     }
-
-    // 2. Filter by Type
     if (selectedType !== "all") {
       result = result.filter((agent) => agent.type === selectedType);
     }
 
-    // 3. Filter by Search Query using Fuse results directly for higher relevance
-    if (searchQuery.trim()) {
-      const fuseResults = fuse.search(searchQuery);
-      const maxScore = 0.4; // Discard results with low relevance (higher score)
-      const matchedAgents = fuseResults
-        .filter((res) => (res.score ?? 1) <= maxScore)
-        .map((res) => res.item);
-      result = result.filter((agent) => matchedAgents.includes(agent));
+    const query = searchQuery.trim();
+    if (query) {
+      // Search once, then reuse the scores for both filtering and sorting.
+      const maxScore = 0.4; // higher Fuse score = weaker match; drop low-relevance hits
+      const scoreById = new Map<string, number>();
+      for (const res of fuse.search(query)) {
+        if ((res.score ?? 1) <= maxScore) scoreById.set(res.item.id, res.score ?? 0);
+      }
+      return result
+        .filter((agent) => scoreById.has(agent.id))
+        .sort((a, b) => {
+          const sa = scoreById.get(a.id) ?? Infinity;
+          const sb = scoreById.get(b.id) ?? Infinity;
+          return sa !== sb ? sa - sb : compareBySort(a, b, currentSort);
+        });
     }
 
-    // 4. Sort
-    if (searchQuery.trim()) {
-      // When searching, sort by Fuse relevance score (lower is better)
-      const fuseResults = fuse.search(searchQuery);
-      const scoreMap = new Map<string, number>();
-      fuseResults.forEach((res) => {
-        scoreMap.set(res.item.id, res.score ?? 0);
-      });
-      result = [...result].sort((a, b) => {
-        const scoreA = scoreMap.get(a.id) ?? Infinity;
-        const scoreB = scoreMap.get(b.id) ?? Infinity;
-        if (scoreA !== scoreB) return scoreA - scoreB;
-        // Fallback to current sort option
-        switch (currentSort) {
-          case "newest":
-            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-          case "popular":
-            return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
-          case "trending":
-            const scoreA2 = (a.stats?.stars || 0) + new Date(a.createdAt).getTime() / 1e9;
-            const scoreB2 = (b.stats?.stars || 0) + new Date(b.createdAt).getTime() / 1e9;
-            return scoreB2 - scoreA2;
-          case "alphabetical":
-            return a.name.localeCompare(b.name);
-          default:
-            return 0;
-        }
-      });
-    } else {
-      // No search query – use existing sort logic
-      result = [...result].sort((a, b) => {
-        switch (currentSort) {
-          case "newest":
-            return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-          case "popular":
-            return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
-          case "trending":
-            const scoreA = (a.stats?.stars || 0) + new Date(a.createdAt).getTime() / 1e9;
-            const scoreB = (b.stats?.stars || 0) + new Date(b.createdAt).getTime() / 1e9;
-            return scoreB - scoreA;
-          case "alphabetical":
-            return a.name.localeCompare(b.name);
-          default:
-            return 0;
-        }
-      });
-    }
-
-    return result;
+    return [...result].sort((a, b) => compareBySort(a, b, currentSort));
   }, [searchQuery, selectedTool, selectedType, fuse, currentSort]);
 
   const isFiltering = searchQuery.trim() !== "" || selectedTool !== "all" || selectedType !== "all";

@@ -35,7 +35,8 @@ export function EmailSignup() {
         setStatus("success");
         // Use the message from the API or fallback
         setMessage(data.message || "Thanks! You're on the list 🎉");
-        track("email_signup", { email });
+        // Count the signup without sending the address (no PII to analytics)
+        track("email_signup");
         setEmail("");
         setTimeout(() => setStatus("idle"), 5000);
       } else {
