@@ -11,9 +11,7 @@ export function NewsletterSection() {
             <h2 className="text-2xl font-bold text-white tracking-tight">
               Don&apos;t miss the next big thing.
             </h2>
-            <p className="text-gray-400">
-              Join 5,000+ developers getting the latest AI agents delivered weekly.
-            </p>
+            <p className="text-gray-400">Get the best new AI agents and tools, delivered weekly.</p>
           </div>
 
           <div className="w-full max-w-md">

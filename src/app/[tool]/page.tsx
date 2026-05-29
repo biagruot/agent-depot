@@ -110,7 +110,7 @@ export async function generateMetadata({ params }: ToolPageProps) {
       siteName: "AgentDepot",
       images: [
         {
-          url: `${baseUrl}/og-${tool}.png`,
+          url: `${baseUrl}/og-image.png`,
           width: 1200,
           height: 630,
           alt: `${metadata.name} Agents Directory`,
@@ -123,7 +123,7 @@ export async function generateMetadata({ params }: ToolPageProps) {
       card: "summary_large_image",
       title: metadata.title,
       description: metadata.description,
-      images: [`${baseUrl}/og-${tool}.png`],
+      images: [`${baseUrl}/og-image.png`],
     },
     alternates: {
       canonical: `${baseUrl}/${tool}`,

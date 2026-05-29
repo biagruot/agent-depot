@@ -274,7 +274,7 @@ function HomeContent() {
                   </div>
                   <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/5">
                     <span className="text-blue-400">⚡️</span>
-                    <span>5k+ Installs</span>
+                    <span>100% Free</span>
                   </div>
                   <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/5">
                     <span className="text-purple-400">🛡️</span>
