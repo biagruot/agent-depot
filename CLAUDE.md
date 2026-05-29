@@ -1,503 +1,146 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+Guidance for Claude Code (and other contributors) working in this repository.
 
-## Project Overview
+## Project overview
 
-**AgentDepot** is a premium directory for AI coding agents, plugins, skills, and rules across multiple tools (Claude Code, Windsurf, Cursor, Replit, MCP). Built with Next.js 16, TypeScript, and Tailwind CSS 4, this is a fast, modern web application focused on developer experience and conversion optimization.
+**AgentDepot** ([agentdepot.dev](https://agentdepot.dev)) is an open directory of AI coding
+tools — agents, rules, plugins, skills, templates, and MCP servers — across Cursor, Windsurf,
+Claude Code, Replit, and the Model Context Protocol. It is a statically-generated Next.js app
+with client-side search and filtering; there is no runtime database for the catalog.
 
-**Domain:** agentdepot.dev
-**Status:** 98% MVP Complete, Production-Ready
+## Repository layout
 
-## Repository Structure
+This is the **web app**. The catalog data is maintained in a companion public repo,
+[`agentdepot-agents`](https://github.com/biagruot/agentdepot-agents), which holds the
+agent definitions and the shared `Agent` schema. Both repos are public.
 
-This project uses a **dual-repository architecture** with both repos located in the same parent folder for easier development:
+- Contributors add/edit tools in `agentdepot-agents` via pull request.
+- `scripts/sync-agents.sh` copies `agents/*.ts` and `types/agent.ts` from that repo into this
+  app's `src/data/` and `src/types/`. Run it from the app root with both repos cloned under the
+  same parent directory:
 
-```
-agentdepot/                          # Parent folder (working directory)
-├── agentdepot-core/                 # THIS REPO (Private)
-│   ├── src/                         # Next.js application code
-│   ├── public/                      # Static assets
-│   ├── PROJECT.md                   # Single source of truth (project status & roadmap)
-│   ├── CLAUDE.md                    # This file (technical documentation)
-│   ├── archive/                     # Archived planning documents
-│   └── package.json
-├── agentdepot-agents/               # Public Repository
-│   ├── agents/                      # Agent definition files
-│   │   ├── cursor/                  # Cursor-specific agents
-│   │   ├── windsurf/                # Windsurf-specific agents
-│   │   ├── claude-code/             # Claude Code agents
-│   │   └── mcp/                     # MCP servers
-│   ├── types/                       # TypeScript type definitions
-│   ├── CONTRIBUTING.md              # Community contribution guide
-│   └── README.md                    # Public-facing documentation
-└── knowledge-base.md                # Original market research
-```
+  ```bash
+  ./scripts/sync-agents.sh --dry-run   # preview
+  ./scripts/sync-agents.sh             # copy, then `npm run build` to verify
+  ```
 
-### Repository Purposes
+## Tech stack
 
-**agentdepot-core (Private):**
-- The main Next.js web application
-- Proprietary business logic and marketing strategies
-- Build configuration and deployment settings
-- Analytics and monetization code
-- Project management (PROJECT.md)
-
-**agentdepot-agents (Public):**
-- Community-contributed agent definitions
-- Open-source agent database
-- Accepts pull requests from the community
-- Maintains agent quality standards
-- Separate from core app for security and collaboration
-
-### Working with Both Repositories
-
-**When to access each repo:**
-- **Core app changes (UI, features, pages):** Work in `agentdepot-core/`
-- **Agent data (adding/editing agents):** Work in `agentdepot-agents/`
-- **Agent types/schemas:** Coordinate changes across both repos
-
-**Coordination points:**
-- Agent type definitions exist in both repos - keep them in sync
-- Core app imports agent data from the public repo (or eventually via API)
-- Both repos share the same parent folder for easier cross-repo development
-
-**Benefits of this structure:**
-- Claude Code can access both repositories simultaneously
-- Easier to keep agent data separate from proprietary code
-- Community can contribute agents without accessing core business logic
-- Maintains security while enabling open collaboration
-
-### Agent Sync Process
-
-**How it works:**
-
-1. **Community submits PRs** to `agentdepot-agents` (public repo)
-2. **GitHub Actions validates** the submission automatically
-   - TypeScript compilation
-   - Schema validation
-   - Duplicate ID detection
-   - Required fields check
-3. **Manual review** by maintainers (24-48 hours)
-4. **PR merged** to main branch
-5. **Sync to core** using `scripts/sync-agents.sh`
-6. **Deploy** to production on Netlify
-
-**Running the sync manually:**
-
-```bash
-# Dry run (see what would sync)
-./scripts/sync-agents.sh --dry-run
-
-# Actually sync
-./scripts/sync-agents.sh
-
-# Then build and test
-npm run build
-```
-
-**What gets synced:**
-- All agent files: `agents/*.ts` (cursor, windsurf, claude-code, mcp, replit)
-- Type definitions: `types/agent.ts`
-- Direction: Public repo → Private repo (one-way sync)
-
-**Important:**
-- Always run the sync script from the core repo root
-- The script expects both repos to be in the same parent directory
-- After syncing, always test with `npm run build` before committing
-
-## ⚠️ CRITICAL: Project Dashboard Updates
-
-**IMPORTANT:** This project uses `PROJECT.md` as the single source of truth for all strategic planning, feature tracking, and project status.
-
-### Mandatory Workflow
-Whenever you make ANY of the following changes, you MUST update `PROJECT.md`:
-
-1. **Complete a feature or task** → Mark it as complete in the "Completed" section
-2. **Start working on a task** → Move it to "In Progress"
-3. **Change project status** → Update the "Current Status" section
-4. **Launch or reach a milestone** → Update success metrics and key numbers
-5. **Identify a blocker** → Add to "Current Blockers" section
-6. **Shift priorities** → Update "This Week's Priorities"
-7. **Achieve metrics** → Update "Key Metrics" table with actual numbers
-
-### How to Update the Project Dashboard
-1. Read the current `PROJECT.md` to understand context
-2. Make your code/content changes
-3. Update the relevant section(s) in `PROJECT.md`
-4. Update the "Last Updated" date at the top
-5. Add significant changes to "Recent Changes" section at bottom
-
-### Why This Matters
-PROJECT.md is the product manager's dashboard that tracks what's done, what's in progress, and what's next. Without updates, the team loses visibility into project status.
-
-**Keep PROJECT.md current - it's your single source of truth.**
-
----
-
-## Development Commands
-
-### Essential Commands
-```bash
-# Development server (runs on http://localhost:3000)
-npm run dev
-
-# Production build (must pass with zero errors before deployment)
-npm run build
-
-# Start production server
-npm start
-
-# Run linter
-npm run lint
-```
-
-### Testing Before Deployment
-Always run `npm run build` before committing major changes. The build must complete with **zero errors** - this project maintains strict code quality standards for Netlify deployments.
-
-## Architecture & Code Structure
-
-### Tech Stack
-- **Framework:** Next.js 16 (App Router, React 19.2)
-- **Styling:** Tailwind CSS 4 with custom glassmorphism components
+- **Framework:** Next.js 16 (App Router, React 19.2, React Compiler)
+- **Language:** TypeScript (strict mode)
+- **Styling:** Tailwind CSS 4 (custom glassmorphism utilities, dark theme)
 - **Search:** Fuse.js (client-side fuzzy search)
-- **Analytics:** OpenPanel (privacy-focused, configured)
-- **Email:** Resend (infrastructure ready, not yet connected)
-- **Animations:** Framer Motion
+- **Auth:** Supabase (GitHub OAuth) — powers the optional "favorites" feature
+- **Email:** Resend (newsletter signup)
+- **Analytics:** OpenPanel (privacy-focused)
+- **Animation:** Framer Motion
+- **Hosting:** Netlify
 
-### Core Repository Directory Structure
+All third-party integrations degrade gracefully when their env vars are absent, so the app
+runs locally with no configuration (auth/newsletter simply become no-ops).
 
-**Note:** This is the structure of the `agentdepot-core` repository (private). See "Repository Structure" section above for the full dual-repo layout.
+## Directory structure
 
 ```
-agentdepot-core/
-├── src/
-│   ├── app/                  # Next.js App Router pages
-│   │   ├── (main)/          # Main layout group
-│   │   │   ├── page.tsx     # Homepage with search/filters
-│   │   │   ├── agent/[slug]/page.tsx  # Agent detail pages
-│   │   │   ├── browse/      # Redirects to homepage
-│   │   │   ├── mcp/         # MCP-specific page
-│   │   │   ├── submit/      # Agent submission form
-│   │   │   └── jobs/        # Jobs page
-│   │   ├── [tool]/          # Dynamic tool pages (cursor, windsurf, etc.)
-│   │   ├── embed/[id]/      # Embeddable agent cards
-│   │   ├── api/
-│   │   │   └── subscribe/   # Email signup endpoint
-│   │   ├── layout.tsx       # Root layout with analytics
-│   │   ├── error.tsx        # Error boundary
-│   │   └── not-found.tsx    # 404 page
-│   ├── components/          # React components
-│   │   ├── AgentCard.tsx    # Main agent display card
-│   │   ├── AgentModal.tsx   # Quick-view modal
-│   │   ├── SearchFilters.tsx # Search + filter UI
-│   │   ├── Navbar.tsx       # Top navigation
-│   │   └── ... (20+ components)
-│   ├── data/
-│   │   ├── agents.ts        # 115+ agent definitions (will migrate to agentdepot-agents)
-│   │   └── collections.ts   # Curated agent collections
-│   ├── lib/
-│   │   ├── utils.ts         # Utility functions (cn, formatters)
-│   │   └── analytics.ts     # OpenPanel tracking helpers
-│   └── types/
-│       ├── agent.ts         # Agent type definitions (sync with agentdepot-agents/types)
-│       └── collection.ts    # Collection type definitions
-├── public/                   # Static assets (logos, images)
-├── scripts/                  # Build and utility scripts
-├── CLAUDE.md                 # This file
-├── MASTER_PLAN.md            # Project roadmap and status
-├── CONTENT_STRATEGY.md       # Content acquisition guide
-└── package.json
+src/
+├── app/
+│   ├── (main)/              # Main layout group
+│   │   ├── page.tsx         # Homepage: search + filters
+│   │   ├── agent/[slug]/    # Agent detail page
+│   │   ├── blog/            # Blog index + [slug]
+│   │   ├── mcp/             # MCP landing page
+│   │   ├── submit/          # Submission info/form
+│   │   ├── favorites/       # User's saved agents (requires auth)
+│   │   └── faq, privacy, terms, cookies, browse
+│   ├── [tool]/              # Per-tool pages (cursor, windsurf, ...)
+│   ├── embed/[id]/          # Embeddable agent card (iframe)
+│   ├── api/subscribe/       # Newsletter signup endpoint
+│   ├── auth/callback/       # Supabase OAuth callback
+│   ├── layout.tsx           # Root layout + analytics provider
+│   ├── error.tsx, global-error.tsx, not-found.tsx
+│   ├── sitemap.ts, robots.ts
+├── components/              # UI components (+ auth/, providers/)
+├── hooks/                   # Scroll/time/page tracking hooks
+├── lib/
+│   ├── analytics.ts         # OpenPanel event helpers
+│   ├── resend.ts            # Resend client config
+│   ├── utils.ts             # cn() and small helpers
+│   └── supabase/            # Browser/server/middleware clients
+├── data/                    # Catalog data (synced from agentdepot-agents) + collections, blog
+├── types/                   # Agent and Collection types
+└── emails/                  # React Email templates
 ```
 
-### Data Model
+## Data model
 
-**Agent Type Definition** (`src/types/agent.ts`):
+The `Agent` type lives in `src/types/agent.ts` (kept in sync with the companion repo):
+
 ```typescript
 interface Agent {
-  id: string;                    // Unique slug
-  name: string;                  // Display name
-  description: string;           // Short description (cards)
-  fullDescription?: string;      // Markdown (detail pages)
-  tool: AgentTool;               // 'cursor' | 'windsurf' | 'claude-code' | 'replit' | 'mcp'
-  type: AgentType;               // 'rule' | 'agent' | 'plugin' | 'skill' | 'template'
-  category: string;              // 'coding' | 'debugging' | 'testing' | 'data' | 'web' | etc.
-  tags: string[];                // Searchable tags
-  author: AgentAuthor;           // Name, URL, GitHub
-  installation: AgentInstallation; // Type, command, instructions
-  verified: boolean;             // Quality badge
-  featured?: boolean;            // Homepage featured
-  trending?: boolean;            // Trending badge
-  stats?: { downloads, stars };  // Social proof
-  links?: { github, website, demo };
-  createdAt: string;             // ISO date
+  id: string;                 // unique, URL-safe slug
+  name: string;
+  description: string;        // short, for cards
+  fullDescription?: string;   // markdown, for detail pages
+  tool: 'cursor' | 'windsurf' | 'claude-code' | 'replit' | 'mcp';
+  type: 'rule' | 'agent' | 'plugin' | 'skill' | 'template';
+  category: 'coding' | 'debugging' | 'testing' | 'productivity' | 'data' | 'web' | 'other';
+  tags: string[];
+  author: { name: string; url?: string; github?: string };
+  installation: { type?: ...; command?: string; instructions?: string; url?: string };
+  featured?: boolean;
+  trending?: boolean;
+  links?: { github?: string; website?: string; demo?: string };
+  license?: string;
+  createdAt: string;          // YYYY-MM-DD
   updatedAt?: string;
 }
 ```
 
-### Key Design Patterns
+## Key patterns
 
-1. **Static Data, Dynamic UI**: All agents stored in `src/data/agents.ts` as TypeScript objects - no database. This enables fast builds, version control, and easy contributions.
+1. **Static data, dynamic UI** — the catalog is plain TypeScript modules in `src/data/`,
+   bundled at build time. No catalog database; this keeps builds fast and contributions
+   reviewable as code.
+2. **URL as state** — search query and filters (tool/type/sort) are mirrored to URL params so
+   results are shareable: `/?q=react&tool=cursor&type=rule&sort=popular`.
+3. **Client-side search** — Fuse.js matches across `name`, `description`, `tags`, and
+   `author.name`. Fine for the current catalog size; revisit (e.g. a hosted index) past a few
+   hundred entries.
+4. **Analytics at the edges** — user actions are tracked via OpenPanel
+   (`useOpenPanel().track(...)`): copy, view, share, search, filter, signup.
 
-2. **URL State Management**: All filters (search query, tool, type, sort) are synced to URL params for shareability:
-   - `/?q=react&tool=cursor&type=rule&sort=popular`
+## Styling
 
-3. **Client-Side Search**: Fuse.js searches across `name`, `description`, `tags`, and `author.name` with fuzzy matching.
+Dark theme by default. Glassmorphism cards use a consistent recipe; compose classes with the
+`cn()` helper (`src/lib/utils.ts`):
 
-4. **Component Composition**: Heavy use of compound components (e.g., `AgentCard` + `AgentModal` + `ShareButton`).
-
-5. **Analytics First**: Every major user action is tracked via OpenPanel (copy, share, view, filter, search).
-
-## Component Guidelines
-
-### AgentCard Component
-The primary UI element for displaying agents. Features:
-- Glassmorphism styling with tool-specific hover glow
-- Prominent "Copy Install" button (tracks `agent_copy` event)
-- Click opens `AgentModal` (tracks `agent_view` event)
-- Stats display (downloads/stars)
-- Verified/Featured/Trending badges
-
-### SearchFilters Component
-Complex component handling:
-- Search input with autocomplete (dropdown suggestions)
-- Tool filter buttons (logo-based, not text)
-- Type filter dropdown
-- Sort dropdown (newest, popular, trending, alphabetical)
-- Mobile-responsive horizontal scroll
-
-### ShareButton Component
-Tracks all share events (`agent_share`) with platform data:
-- Twitter share (pre-populated tweet)
-- Email share (mailto link)
-- Copy link (clipboard API)
-- Embed code (copyable iframe)
-
-## Code Quality Standards
-
-### Linting Rules
-- **No unused variables or imports** - Build will fail
-- **No unescaped HTML entities** - Use `&apos;` `&quot;` etc.
-- **Next.js `Link` for all internal links** - Never use `<a>` for same-site
-- **TypeScript strict mode** - Avoid `any`, use proper types
-- **Consistent formatting** - 2-space indentation
-
-### Common Fixes
 ```tsx
-// ❌ Bad
-<a href="/submit">Submit</a>
-let unused = 'value';
-<p>Don't do this</p>
-
-// ✅ Good
-<Link href="/submit">Submit</Link>
-// Remove unused variables entirely
-<p>Don&apos;t do this</p>
+className={cn(
+  "bg-white/5 backdrop-blur-md border border-white/10 rounded-xl",
+  "hover:bg-white/10 hover:border-white/20 transition-all duration-300",
+)}
 ```
 
-## Analytics Events
+Each tool has an accent color (Cursor blue, Windsurf cyan, Claude Code purple, Replit orange,
+MCP green) used for hover glows.
 
-All events tracked via OpenPanel (`src/lib/analytics.ts`):
+## Conventions
 
-```typescript
-track('agent_copy', { agent_id, agent_name, tool, type })
-track('agent_view', { agent_id, agent_name, tool, type })
-track('agent_share', { platform, agent_id, agent_name, tool })
-track('agent_link_click', { type, agent_id, url })
-track('email_signup', { email })
-track('filter_tool_change', { tool })
-track('filter_type_change', { type, tool })
-track('search_query', { query })
-```
+- TypeScript strict mode; avoid `any`, prefer real types from the SDKs.
+- Use `next/link` for internal navigation (never a raw `<a>` for same-site links).
+- Escape HTML entities in JSX (`&apos;`, `&quot;`).
+- Run `npm run lint`, `npm run typecheck`, and `npm run build` before committing.
 
-## Styling System
+## Common tasks
 
-### Tailwind Utilities
-The project uses Tailwind CSS 4 with custom utilities:
-- `cn()` helper for conditional classes (from `src/lib/utils.ts`)
-- Dark mode by default (`className="dark"` on `<html>`)
-- Custom CSS variables in `globals.css`
-
-### Glassmorphism Pattern
-```tsx
-// Standard glass card
-className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl"
-
-// Interactive glass with hover
-className="bg-white/5 hover:bg-white/10 backdrop-blur-md border border-white/10
-           hover:border-white/20 transition-all duration-300"
-```
-
-### Tool-Specific Colors
-- Cursor: Blue (`#3b82f6`)
-- Windsurf: Cyan (`#06b6d4`)
-- Claude Code: Purple (`#8b5cf6`)
-- Replit: Orange (`#f97316`)
-- MCP: Green (`#10b981`)
-
-Applied via:
-```tsx
-{tool === 'cursor' && 'hover:shadow-[0_0_30px_rgba(59,130,246,0.3)]'}
-```
-
-## Common Development Tasks
-
-### Adding a New Agent
-
-**Current approach (temporary):**
-1. Open `agentdepot-core/src/data/agents.ts`
-2. Add new object to `agents` array following the `Agent` type
-3. Ensure `id` is unique and URL-safe
-4. Test with `npm run build`
-
-**Future approach (when migration complete):**
-1. Add agent definition to `agentdepot-agents/agents/[tool]/agent-name.json`
-2. Follow the schema in `agentdepot-agents/types/`
-3. Submit PR to the public repo
-4. Core app will sync agent data automatically
-
-### Adding a New Collection
-1. Open `agentdepot-core/src/data/collections.ts`
-2. Add new `Collection` object with `agentIds` array
-3. Choose an icon from `lucide-react`
-4. Create gradient using tool colors
-
-### Creating a New Page
-1. Create in `agentdepot-core/src/app/(main)/[name]/page.tsx` for main layout
-2. Use `export const metadata: Metadata = {...}` for SEO
-3. Always include proper TypeScript types
-4. Test mobile responsiveness
-
-### Modifying Search Behavior
-Search config in `agentdepot-core/src/components/SearchFilters.tsx`:
-```typescript
-const fuse = new Fuse(agents, {
-  keys: ['name', 'description', 'tags', 'author.name'],
-  threshold: 0.3, // Lower = stricter matching
-  minMatchCharLength: 2
-});
-```
-
-### Working Across Both Repositories
-
-**Scenario 1: Updating Agent Type Definitions**
-1. Update type in `agentdepot-core/src/types/agent.ts` first
-2. Copy changes to `agentdepot-agents/types/agent.ts`
-3. Test builds in both repos
-4. Commit to both repos (separate commits)
-
-**Scenario 2: Migrating Agents to Public Repo**
-1. Export agent from `agentdepot-core/src/data/agents.ts`
-2. Create corresponding file in `agentdepot-agents/agents/[tool]/`
-3. Update import path in core app
-4. Test that agent displays correctly
-5. Commit to both repos
-
-**Scenario 3: Adding a New Tool Category**
-1. Add tool type to both `agentdepot-core/src/types/agent.ts` and `agentdepot-agents/types/agent.ts`
-2. Create folder in `agentdepot-agents/agents/[new-tool]/`
-3. Update tool filters in `agentdepot-core/src/components/SearchFilters.tsx`
-4. Add tool logo to `agentdepot-core/public/logos/`
-5. Test across both repos
+- **Add/edit a tool:** do it in the `agentdepot-agents` repo, then run `sync-agents.sh`.
+- **Add a collection:** edit `src/data/collections.ts` (icon from `lucide-react`).
+- **Add a blog post:** append a `BlogPost` to `src/data/blog-posts.ts` (markdown stored as a
+  template-literal `content` field).
+- **Add a page:** create under `src/app/(main)/<name>/page.tsx` and export `metadata` for SEO.
 
 ## Deployment
 
-**Platform:** Netlify
-**Build Command:** `npm run build`
-**Publish Directory:** `.next`
-
-### Pre-Deployment Checklist
-1. Run `npm run build` locally - must complete with **zero errors**
-2. Test responsive design (mobile, tablet, desktop)
-3. Verify all internal links work
-4. Check analytics events fire correctly
-5. Ensure no console errors in browser
-
-### Environment Variables
-```bash
-NEXT_PUBLIC_OPENPANEL_CLIENT_ID=your_client_id  # Analytics
-RESEND_API_KEY=your_key                          # Email (optional)
-```
-
-## Performance Considerations
-
-- **Static Generation**: All pages pre-rendered at build time
-- **No Runtime Database**: All data bundled in build
-- **Client-Side Search**: Fast for <500 agents, consider Algolia at scale
-- **Image Optimization**: Use Next.js `Image` component for logos
-- **Code Splitting**: Next.js automatic, no manual intervention needed
-
-## Future Development Notes
-
-### High Priority (from PROJECT.md)
-1. **GitHub Setup** - Complete public repo and sync infrastructure (Week 2)
-2. **Soft Launch** - Execute when 75+ agents ready (Week 3)
-3. **CLI Tool** - `npx agentdepot search "react"` (Month 2)
-4. **VS Code Extension** - Searchable agent directory in editor (Month 2)
-
-**See PROJECT.md for complete roadmap, current status, and next priorities.**
-
-### Architecture Decisions
-- **Why no database?** Static data = faster builds, easier contributions via Git, free hosting
-- **Why Fuse.js?** Good enough for 100-500 agents, no backend needed
-- **Why OpenPanel?** Privacy-focused, GDPR compliant, no cookie banner required
-- **Why Next.js 16?** Latest features (React 19, improved caching, Turbopack)
-
-## Marketing & Distribution
-
-This project is designed for viral growth through multiple channels:
-- **Website** (primary)
-- **CLI Tool** (planned - highest growth lever)
-- **VS Code Extension** (planned)
-- **Embed Widgets** (implemented - `/embed/[id]`)
-- **Social Sharing** (Twitter, email, links)
-
-**See `PROJECT.md` for complete roadmap and execution strategy.**
-
-## Troubleshooting
-
-### Build Fails
-- Check for unescaped HTML entities (`'` → `&apos;`)
-- Remove unused imports/variables
-- Verify all `Link` components have proper `href`
-
-### Search Not Working
-- Verify Fuse.js threshold (lower = stricter)
-- Check agent data has searchable fields populated
-- Ensure URL params sync correctly
-
-### Analytics Not Tracking
-- Verify `NEXT_PUBLIC_OPENPANEL_CLIENT_ID` is set
-- Check browser console for errors
-- Ensure `track()` calls have correct event names
-
-## Contributing
-
-When adding features:
-1. Follow existing patterns (check similar components first)
-2. Maintain TypeScript strict mode compliance
-3. Add analytics tracking for new user actions
-4. Test mobile responsiveness
-5. **Update PROJECT.md with completed tasks and status changes** ⚠️
-6. Update this CLAUDE.md if architecture changes
-
-**Remember:** PROJECT.md is the single source of truth. Always update it when completing tasks, changing status, or shifting priorities.
-
-## Contact & Support
-
-For questions about this codebase, refer to:
-
-**Core Repository (agentdepot-core):**
-- **`PROJECT.md`** - **PRIMARY: Single source of truth for project status, roadmap, and priorities**
-- `CLAUDE.md` (this file) - Technical architecture and development guide
-- `archive/` - Historical planning documents (reference only)
-
-**Public Repository (agentdepot-agents):**
-- `README.md` - Public-facing documentation and setup instructions
-- `CONTRIBUTING.md` - Guidelines for community contributions
-- `types/` - TypeScript definitions (must sync with core)
-
-**Priority Order:**
-1. **PROJECT.md** (core) - Project status, roadmap, and current priorities
-2. **CLAUDE.md** (core) - Technical implementation details
-3. **CONTRIBUTING.md** (agents) - Community contribution workflow
+Netlify. Build command `npm run build`. The production build must pass with zero errors.
+Environment variables are documented in `README.md`.

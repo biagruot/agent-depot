@@ -1,285 +1,122 @@
 # AgentDepot
 
-**The only premium directory covering every AI coding tool in one place.**
+**An open directory of AI coding tools — agents, rules, plugins, skills, and MCP servers — for Cursor, Windsurf, Claude Code, Replit, and the Model Context Protocol.**
 
-🌐 **Live Site:** [agentdepot.dev](https://agentdepot.dev)
-📊 **Status:** Pre-Launch (Product Ready, Marketing Pending)
-🎯 **Mission:** Help developers discover, compare, and install the best AI coding agents
+[![CI](https://github.com/biagruot/agent-depot/actions/workflows/ci.yml/badge.svg)](https://github.com/biagruot/agent-depot/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Live](https://img.shields.io/badge/live-agentdepot.dev-10b981)](https://agentdepot.dev)
 
----
+🌐 **Live:** [agentdepot.dev](https://agentdepot.dev)
 
-## What is AgentDepot?
-
-AgentDepot is a curated directory of 115+ verified AI coding agents, plugins, skills, and rules across multiple tools:
-
-- 🟣 **Claude Code** - Agents and skills
-- 🔵 **Windsurf** - Rules and MCP servers
-- 🟢 **Cursor** - Rules and workflows
-- 🟠 **Replit** - Templates and extensions
-- 💚 **MCP** - Model Context Protocol servers
-
-### Why AgentDepot?
-
-✅ **Multi-Tool Coverage** - Only directory covering all major AI coding tools
-✅ **100% Verified** - Every agent manually tested and verified
-✅ **Premium UX** - Glassmorphism design, smooth animations, mobile-optimized
-✅ **Smart Search** - Fuzzy search with autocomplete across all agents
-✅ **Curated Collections** - Hand-picked bundles for different workflows
+![AgentDepot — search and filter AI coding tools](public/screenshot.png)
 
 ---
 
-## Quick Start
+## What it is
 
-### Development
+The AI coding ecosystem is fragmented: Cursor rules live in one place, Claude Code skills in
+another, MCP servers scattered across GitHub. AgentDepot pulls them into one searchable
+directory so you can find a tool, see how to install it, and copy the command — in seconds.
+
+- **70+ curated tools** across five platforms (Cursor, Windsurf, Claude Code, Replit, MCP)
+- **Instant fuzzy search** and filtering by tool, type, and category — all reflected in the URL so any view is shareable
+- **One-click install commands** and per-tool detail pages
+- **Open and community-driven** — anyone can add a tool with a pull request
+
+## Tech stack
+
+| Area | Choice |
+| --- | --- |
+| Framework | Next.js 16 (App Router, React 19.2, React Compiler) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS 4 (custom glassmorphism, dark theme) |
+| Search | Fuse.js (client-side fuzzy search) |
+| Auth | Supabase (GitHub OAuth — powers favorites) |
+| Email | Resend (newsletter) |
+| Analytics | OpenPanel (privacy-focused) |
+| Animation | Framer Motion |
+| Hosting | Netlify |
+
+## Architecture
+
+A few deliberate choices keep this fast and easy to contribute to:
+
+- **The catalog is data-as-code.** Tools are plain TypeScript modules in `src/data/`, bundled at
+  build time — no catalog database. Pages are statically generated, so the site is fast and every
+  change is reviewable as a normal diff.
+- **Catalog data lives in a companion repo.** The actual tool definitions and the shared `Agent`
+  schema are maintained in [`agentdepot-agents`](https://github.com/biagruot/agentdepot-agents),
+  where the community contributes via PR. `scripts/sync-agents.sh` copies that data into this
+  app's `src/data/`. This separates "the app" from "the catalog" so contributors never touch
+  application code.
+- **State lives in the URL.** Search query and filters are encoded as query params, so any
+  filtered view (`/?q=react&tool=cursor&type=rule`) is shareable and reloadable.
+- **Search is client-side.** Fuse.js indexes the catalog in the browser — no backend round-trips,
+  which is plenty fast at the current scale.
+
+```
+src/
+├── app/             # App Router: (main) pages, [tool] pages, embed, api, auth
+├── components/      # UI components (+ auth/, providers/)
+├── hooks/           # Scroll / time / page tracking hooks
+├── lib/             # analytics, resend, utils, supabase clients
+├── data/            # Catalog (synced from agentdepot-agents) + collections + blog
+└── types/           # Agent and Collection types
+```
+
+## Getting started
+
+**Prerequisites:** Node.js 20+ and npm.
 
 ```bash
-# Install dependencies
+git clone https://github.com/biagruot/agent-depot.git
+cd agent-depot
 npm install
-
-# Run development server
 npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm start
-
-# Run linter
-npm run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000). The app runs with **no configuration** —
+auth and the newsletter degrade to no-ops when their env vars are absent.
 
-### Environment Variables
+### Environment variables (optional)
 
-Create a `.env.local` file:
+To enable auth, analytics, and the newsletter, create `.env.local`:
 
 ```bash
-# ===========================================
-# Required: Authentication (Supabase)
-# ===========================================
-# Get from: https://supabase.com/dashboard/project/_/settings/api
+# Auth — Supabase (https://supabase.com/dashboard/project/_/settings/api)
 NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
 
-# ===========================================
-# Required: Analytics (OpenPanel)
-# ===========================================
-# Get from: https://openpanel.dev/dashboard
-NEXT_PUBLIC_OPENPANEL_CLIENT_ID=your_client_id
+# Analytics — OpenPanel (https://openpanel.dev)
+NEXT_PUBLIC_OPENPANEL_CLIENT_ID=your-client-id
 
-# ===========================================
-# Required: Newsletter Service (Resend)
-# ===========================================
-# Get from: https://resend.com/api-keys
+# Newsletter — Resend (https://resend.com/api-keys)
 RESEND_API_KEY=re_your_api_key
-
-# Get from: https://resend.com/audiences
 RESEND_AUDIENCE_ID=your-audience-id
-
-# Optional: Custom "from" email (must be verified in Resend)
-# Default uses Resend sandbox: "AgentDepot <onboarding@resend.dev>"
-# RESEND_FROM_EMAIL=AgentDepot <hello@agentdepot.dev>
+# RESEND_FROM_EMAIL="AgentDepot <hello@agentdepot.dev>"  # defaults to Resend sandbox
 ```
 
-#### Setting up Resend for Newsletter
+### Scripts
 
-1. **Create account** at [resend.com](https://resend.com)
-2. **Generate API key** at [resend.com/api-keys](https://resend.com/api-keys)
-3. **Create Audience** at [resend.com/audiences](https://resend.com/audiences)
-   - Name: "AgentDepot Newsletter"
-   - Copy the Audience ID
-4. **(Production)** Verify your domain at [resend.com/domains](https://resend.com/domains)
-   - Required for custom "from" addresses
-
----
-
-## Tech Stack
-
-- **Framework:** Next.js 16 (App Router, React 19.2)
-- **Styling:** Tailwind CSS 4 with custom glassmorphism
-- **Search:** Fuse.js (client-side fuzzy search)
-- **Analytics:** OpenPanel (privacy-focused)
-- **Animations:** Framer Motion
-- **Deployment:** Netlify
-
----
-
-## Project Documentation
-
-### For Developers
-📄 **[CLAUDE.md](./CLAUDE.md)** - Technical architecture, code patterns, development guidelines
-
-### For Product/Strategy
-📊 **[MASTER_PLAN.md](./MASTER_PLAN.md)** - **START HERE** - Complete roadmap, status, metrics, and execution plan
-
----
-
-## Project Structure
-
+```bash
+npm run dev          # start the dev server
+npm run build        # production build
+npm run lint         # ESLint
+npm run typecheck    # tsc --noEmit
+npm test             # Vitest
+npm run format       # Prettier (write)
 ```
-agent-depot/
-├── src/
-│   ├── app/              # Next.js App Router pages
-│   ├── components/       # React components
-│   ├── data/            # Agent and collection data (115+ agents)
-│   ├── lib/             # Utility functions
-│   └── types/           # TypeScript type definitions
-├── public/              # Static assets
-├── CLAUDE.md            # Technical documentation
-├── MASTER_PLAN.md       # Strategic roadmap (single source of truth)
-└── README.md            # This file
-```
-
----
-
-## Key Features
-
-### For Users
-- 🔍 **Advanced Search** - Find agents by name, description, tags, or author
-- 🎯 **Smart Filters** - Filter by tool, type, category, or sort by popularity
-- 📋 **Quick Copy** - One-click copy of install commands
-- 📤 **Share** - Share agents via Twitter, email, link, or embed code
-- 📱 **Mobile-First** - Fully responsive design
-- 🔔 **Email Updates** - Subscribe to weekly new agent roundups
-
-### For Developers
-- ✅ **100% TypeScript** - Full type safety
-- 🎨 **Tailwind CSS 4** - Utility-first styling
-- 📊 **Analytics Built-in** - OpenPanel tracking for all key events
-- 🚀 **Static Generation** - Lightning-fast page loads
-- 🔧 **Zero Config** - Deploy to Netlify with one click
-
----
 
 ## Contributing
 
-### Adding an Agent
-
-1. Open `src/data/agents.ts`
-2. Add your agent following the `Agent` type definition
-3. Ensure all required fields are filled
-4. Test locally with `npm run dev`
-5. Submit a pull request
-
-### Adding a Collection
-
-1. Open `src/data/collections.ts`
-2. Add your collection with `agentIds` array
-3. Choose an icon from `lucide-react`
-4. Create a gradient using tool colors
-
-### Code Guidelines
-
-- Follow TypeScript strict mode
-- No unused variables or imports
-- Use Next.js `Link` for internal navigation
-- Add analytics tracking for new user actions
-- Test mobile responsiveness
-- **Always update MASTER_PLAN.md when completing tasks** ⚠️
-
----
-
-## Deployment
-
-### Netlify (Recommended)
-
-1. Connect your repository
-2. Set build command: `npm run build`
-3. Set publish directory: `.next`
-4. Add environment variables
-5. Deploy!
-
-### Vercel (Alternative)
-
-```bash
-npm install -g vercel
-vercel --prod
-```
-
----
-
-## Current Status
-
-**Product:** ✅ 98% Complete, Production-Ready
-**Launch:** ❌ Not launched yet (coming soon!)
-**Agents:** 115+ verified across 5 tools
-**Collections:** 8 curated bundles
-
-**See [MASTER_PLAN.md](./MASTER_PLAN.md) for complete roadmap and launch timeline.**
-
----
-
-## Roadmap
-
-### Phase 1: Launch (Week 1)
-- Product Hunt submission
-- Hacker News launch
-- Reddit marketing
-- Target: 1,000 visitors, 100 signups
-
-### Phase 2: Growth (Month 1)
-- SEO content strategy
-- Partnership outreach
-- Newsletter launch
-- Target: 10,000 monthly visitors
-
-### Phase 3: Distribution (Month 2)
-- CLI tool (`npx agentdepot`)
-- VS Code extension
-- Browser extension
-- Target: 25,000 monthly visitors
-
-### Phase 4: Monetization (Month 3)
-- Sponsored listings
-- Affiliate programs
-- Premium features
-- Target: $500+ monthly revenue
-
-**Full details in [MASTER_PLAN.md](./MASTER_PLAN.md)**
-
----
-
-## Analytics & Metrics
-
-We track 8 key user events:
-- `agent_copy` - Install command copied
-- `agent_view` - Agent detail viewed
-- `agent_share` - Agent shared
-- `agent_link_click` - External link clicked
-- `email_signup` - Newsletter subscription
-- `filter_tool_change` - Tool filter selected
-- `filter_type_change` - Type filter selected
-- `search_query` - Search performed
-
-All analytics are privacy-focused (OpenPanel, GDPR compliant).
-
----
+- **Adding or editing a tool?** That happens in the catalog repo,
+  [`agentdepot-agents`](https://github.com/biagruot/agentdepot-agents) — see its
+  [CONTRIBUTING guide](https://github.com/biagruot/agentdepot-agents/blob/main/CONTRIBUTING.md).
+  Tools must be **free to use**. Maintainers sync approved changes here with
+  `scripts/sync-agents.sh`.
+- **Improving the app itself?** PRs welcome. Please run `npm run lint`, `npm run typecheck`, and
+  `npm run build` before opening one.
 
 ## License
 
-[Add your license here - MIT recommended for open source]
-
----
-
-## Support
-
-- 🐛 **Bug Reports:** [GitHub Issues]
-- 💡 **Feature Requests:** [GitHub Issues]
-- 📧 **Contact:** hello@agentdepot.dev
-
----
-
-## Acknowledgments
-
-Built with inspiration from:
-- **cursor.directory** - Proof that simple directories can reach 250K users
-- **Anthropic's decentralized approach** - Community marketplaces over centralized control
-- The amazing AI coding community
-
----
-
-**Ready to launch? See [MASTER_PLAN.md](./MASTER_PLAN.md) for the complete execution strategy.**
-
-Built with ❤️ for the AI coding community
+[MIT](LICENSE) © Biagio Ruotolo
