@@ -1,14 +1,16 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
-import { 
-  Send, 
-  CheckCircle, 
-  AlertCircle, 
-  Box, 
-  Terminal, 
-  User, 
-  ChevronRight, 
+import { useState, useEffect, useCallback, useRef } from "react";
+import Link from "next/link";
+import { useOpenPanel } from "@openpanel/nextjs";
+import {
+  Send,
+  CheckCircle,
+  AlertCircle,
+  Box,
+  Terminal,
+  User,
+  ChevronRight,
   ChevronLeft,
   Sparkles,
   Eye,
@@ -16,21 +18,47 @@ import {
   Tag,
   Link as LinkIcon,
   Github,
-  ExternalLink
+  ExternalLink,
 } from "lucide-react";
-import { trackSubmitForm, trackSubmitComplete } from "@/lib/analytics";
+import { analyticsEvents } from "@/lib/analytics";
 
-const inputClasses = "w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:bg-white/10 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20 transition-all duration-200 backdrop-blur-sm";
+const inputClasses =
+  "w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:bg-white/10 focus:border-white/20 focus:outline-none focus:ring-1 focus:ring-white/20 transition-all duration-200 backdrop-blur-sm";
 const labelClasses = "block text-sm font-medium text-gray-400 mb-2 ml-1";
 const sectionHeaderClasses = "text-xl font-semibold text-white mb-6 flex items-center gap-2";
 
 // Tool color mapping
 const toolColors: Record<string, { bg: string; border: string; text: string; glow: string }> = {
-  cursor: { bg: "bg-emerald-500/20", border: "border-emerald-500/30", text: "text-emerald-400", glow: "shadow-emerald-500/20" },
-  windsurf: { bg: "bg-cyan-500/20", border: "border-cyan-500/30", text: "text-cyan-400", glow: "shadow-cyan-500/20" },
-  "claude-code": { bg: "bg-orange-500/20", border: "border-orange-500/30", text: "text-orange-400", glow: "shadow-orange-500/20" },
-  replit: { bg: "bg-amber-500/20", border: "border-amber-500/30", text: "text-amber-400", glow: "shadow-amber-500/20" },
-  mcp: { bg: "bg-purple-500/20", border: "border-purple-500/30", text: "text-purple-400", glow: "shadow-purple-500/20" },
+  cursor: {
+    bg: "bg-emerald-500/20",
+    border: "border-emerald-500/30",
+    text: "text-emerald-400",
+    glow: "shadow-emerald-500/20",
+  },
+  windsurf: {
+    bg: "bg-cyan-500/20",
+    border: "border-cyan-500/30",
+    text: "text-cyan-400",
+    glow: "shadow-cyan-500/20",
+  },
+  "claude-code": {
+    bg: "bg-orange-500/20",
+    border: "border-orange-500/30",
+    text: "text-orange-400",
+    glow: "shadow-orange-500/20",
+  },
+  replit: {
+    bg: "bg-amber-500/20",
+    border: "border-amber-500/30",
+    text: "text-amber-400",
+    glow: "shadow-amber-500/20",
+  },
+  mcp: {
+    bg: "bg-purple-500/20",
+    border: "border-purple-500/30",
+    text: "text-purple-400",
+    glow: "shadow-purple-500/20",
+  },
 };
 
 interface FormData {
@@ -58,6 +86,91 @@ const STEPS = [
   { id: 4, title: "Preview", icon: Eye, description: "Review before submitting" },
 ];
 
+const CONFETTI_COLORS = ["#f43f5e", "#8b5cf6", "#3b82f6", "#22c55e", "#eab308", "#06b6d4"];
+const CONFETTI_PIECES = Array.from({ length: 50 }, () => ({
+  left: Math.random() * 100,
+  delay: Math.random() * 3,
+  duration: 3 + Math.random() * 2,
+  color: CONFETTI_COLORS[Math.floor(Math.random() * CONFETTI_COLORS.length)],
+}));
+
+function Confetti() {
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      {CONFETTI_PIECES.map((piece, i) => (
+        <div
+          key={i}
+          className="absolute animate-confetti"
+          style={{
+            left: `${piece.left}%`,
+            top: "-10px",
+            animationDelay: `${piece.delay}s`,
+            animationDuration: `${piece.duration}s`,
+          }}
+        >
+          <div className="w-3 h-3 rotate-45" style={{ backgroundColor: piece.color }} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function PreviewCard({ formData }: { formData: FormData }) {
+  const colors = toolColors[formData.tool] || toolColors.cursor;
+  const tags = formData.tags
+    .split(",")
+    .filter((t) => t.trim())
+    .slice(0, 4);
+
+  return (
+    <div
+      className={`glass-panel rounded-3xl p-6 border ${colors.border} ${colors.bg} shadow-lg ${colors.glow}`}
+    >
+      <div className="flex items-start justify-between mb-4">
+        <div className="flex-1">
+          <div className="flex items-center gap-2 mb-2">
+            <span
+              className={`text-xs px-2 py-0.5 rounded-full ${colors.bg} ${colors.text} border ${colors.border}`}
+            >
+              {formData.tool || "Tool"}
+            </span>
+            <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-gray-400 border border-white/10">
+              {formData.type || "Type"}
+            </span>
+          </div>
+          <h3 className="text-xl font-bold text-white mb-2">
+            {formData.agentName || "Agent Name"}
+          </h3>
+          <p className="text-gray-400 text-sm line-clamp-2">
+            {formData.description || "Short description of your agent will appear here..."}
+          </p>
+        </div>
+      </div>
+
+      {tags.length > 0 && (
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tags.map((tag, i) => (
+            <span
+              key={i}
+              className="text-xs px-2 py-1 rounded-lg bg-white/5 text-gray-400 border border-white/5"
+            >
+              {tag.trim()}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div className="flex items-center justify-between pt-4 border-t border-white/10">
+        <div className="flex items-center gap-2">
+          <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
+          <span className="text-sm text-gray-400">{formData.authorName || "Author"}</span>
+        </div>
+        <span className="text-xs text-gray-500">{formData.category || "Category"}</span>
+      </div>
+    </div>
+  );
+}
+
 export function SubmitForm() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
@@ -80,19 +193,23 @@ export function SubmitForm() {
 
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
-  const [hasTrackedStart, setHasTrackedStart] = useState(false);
   const [showConfetti, setShowConfetti] = useState(false);
+  const hasTrackedStart = useRef(false);
+  const { track } = useOpenPanel();
 
-  // Track form start
+  // Track form start once, when the user first enters details
   useEffect(() => {
-    if (!hasTrackedStart && (formData.agentName || formData.description)) {
-      trackSubmitForm();
-      setHasTrackedStart(true);
+    if (!hasTrackedStart.current && (formData.agentName || formData.description)) {
+      const [name, data] = analyticsEvents.submitFormStarted({
+        agent_name: formData.agentName || undefined,
+      });
+      track(name, data);
+      hasTrackedStart.current = true;
     }
-  }, [formData.agentName, formData.description, hasTrackedStart]);
+  }, [formData.agentName, formData.description, track]);
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     setFormData((prev) => ({
       ...prev,
@@ -101,43 +218,46 @@ export function SubmitForm() {
     setErrorMessage("");
   };
 
-  const validateStep = useCallback((step: number): boolean => {
-    switch (step) {
-      case 1:
-        if (!formData.agentName) {
-          setErrorMessage("Please enter an agent name.");
-          return false;
-        }
-        if (!formData.description) {
-          setErrorMessage("Please enter a short description.");
-          return false;
-        }
-        if (!formData.tool) {
-          setErrorMessage("Please select a tool.");
-          return false;
-        }
-        if (!formData.type) {
-          setErrorMessage("Please select an agent type.");
-          return false;
-        }
-        if (!formData.category) {
-          setErrorMessage("Please select a category.");
-          return false;
-        }
-        return true;
-      case 2:
-        // Installation is optional but if command is provided, instructions should be too
-        return true;
-      case 3:
-        if (!formData.authorName) {
-          setErrorMessage("Please enter your name.");
-          return false;
-        }
-        return true;
-      default:
-        return true;
-    }
-  }, [formData]);
+  const validateStep = useCallback(
+    (step: number): boolean => {
+      switch (step) {
+        case 1:
+          if (!formData.agentName) {
+            setErrorMessage("Please enter an agent name.");
+            return false;
+          }
+          if (!formData.description) {
+            setErrorMessage("Please enter a short description.");
+            return false;
+          }
+          if (!formData.tool) {
+            setErrorMessage("Please select a tool.");
+            return false;
+          }
+          if (!formData.type) {
+            setErrorMessage("Please select an agent type.");
+            return false;
+          }
+          if (!formData.category) {
+            setErrorMessage("Please select a category.");
+            return false;
+          }
+          return true;
+        case 2:
+          // Installation is optional but if command is provided, instructions should be too
+          return true;
+        case 3:
+          if (!formData.authorName) {
+            setErrorMessage("Please enter your name.");
+            return false;
+          }
+          return true;
+        default:
+          return true;
+      }
+    },
+    [formData],
+  );
 
   const nextStep = () => {
     if (validateStep(currentStep)) {
@@ -171,18 +291,18 @@ Type: ${formData.type}
 Category: ${formData.category}
 Description: ${formData.description}
 
-${formData.fullDescription ? `Full Description:\n${formData.fullDescription}\n\n` : ''}
+${formData.fullDescription ? `Full Description:\n${formData.fullDescription}\n\n` : ""}
 
 INSTALLATION
 ------------
 Type: ${formData.installationType}
-${formData.installationCommand ? `Command: ${formData.installationCommand}\n` : ''}
-${formData.installationInstructions ? `Instructions: ${formData.installationInstructions}\n` : ''}
+${formData.installationCommand ? `Command: ${formData.installationCommand}\n` : ""}
+${formData.installationInstructions ? `Instructions: ${formData.installationInstructions}\n` : ""}
 
 LINKS
 -----
-${formData.githubUrl ? `GitHub: ${formData.githubUrl}\n` : ''}
-${formData.websiteUrl ? `Website: ${formData.websiteUrl}\n` : ''}
+${formData.githubUrl ? `GitHub: ${formData.githubUrl}\n` : ""}
+${formData.websiteUrl ? `Website: ${formData.websiteUrl}\n` : ""}
 
 METADATA
 --------
@@ -191,56 +311,33 @@ Tags: ${formData.tags}
 AUTHOR
 ------
 Name: ${formData.authorName}
-${formData.authorGithub ? `GitHub: ${formData.authorGithub}\n` : ''}
-${formData.authorTwitter ? `Twitter: ${formData.authorTwitter}\n` : ''}
+${formData.authorGithub ? `GitHub: ${formData.authorGithub}\n` : ""}
+${formData.authorTwitter ? `Twitter: ${formData.authorTwitter}\n` : ""}
 
 ---
 Submitted via AgentDepot.dev
       `);
 
       window.location.href = `mailto:hello@agentdepot.dev?subject=${subject}&body=${body}`;
-      
+
       // Track completion
-      trackSubmitComplete();
-      
+      const [completeName, completeData] = analyticsEvents.submitFormCompleted({
+        tool: formData.tool,
+        type: formData.type,
+      });
+      track(completeName, completeData);
+
       setStatus("success");
       setShowConfetti(true);
-      
+
       // Cleanup confetti after animation
       setTimeout(() => setShowConfetti(false), 5000);
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (_error) {
       setStatus("error");
       setErrorMessage("Failed to prepare submission. Please try again.");
     }
   };
-
-  // Confetti component
-  const Confetti = () => (
-    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
-      {[...Array(50)].map((_, i) => (
-        <div
-          key={i}
-          className="absolute animate-confetti"
-          style={{
-            left: `${Math.random() * 100}%`,
-            top: "-10px",
-            animationDelay: `${Math.random() * 3}s`,
-            animationDuration: `${3 + Math.random() * 2}s`,
-          }}
-        >
-          <div
-            className="w-3 h-3 rotate-45"
-            style={{
-              backgroundColor: ["#f43f5e", "#8b5cf6", "#3b82f6", "#22c55e", "#eab308", "#06b6d4"][
-                Math.floor(Math.random() * 6)
-              ],
-            }}
-          />
-        </div>
-      ))}
-    </div>
-  );
 
   if (status === "success") {
     return (
@@ -259,7 +356,7 @@ Submitted via AgentDepot.dev
           <p className="text-gray-500 mb-8 text-sm">
             Just hit send and we&apos;ll review your agent within 2-3 business days.
           </p>
-          
+
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <button
               onClick={() => {
@@ -282,70 +379,23 @@ Submitted via AgentDepot.dev
                   authorGithub: "",
                   authorTwitter: "",
                 });
-                setHasTrackedStart(false);
+                hasTrackedStart.current = false;
               }}
               className="px-6 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-white transition-all hover:scale-105"
             >
               Submit Another Agent
             </button>
-            <a
+            <Link
               href="/"
               className="px-6 py-3 rounded-xl bg-white text-black font-semibold transition-all hover:scale-105 inline-flex items-center gap-2"
             >
               Browse Agents <ArrowRight className="w-4 h-4" />
-            </a>
+            </Link>
           </div>
         </div>
       </>
     );
   }
-
-  // Preview Card Component
-  const PreviewCard = () => {
-    const colors = toolColors[formData.tool] || toolColors.cursor;
-    const tags = formData.tags.split(",").filter(t => t.trim()).slice(0, 4);
-    
-    return (
-      <div className={`glass-panel rounded-3xl p-6 border ${colors.border} ${colors.bg} shadow-lg ${colors.glow}`}>
-        <div className="flex items-start justify-between mb-4">
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-2">
-              <span className={`text-xs px-2 py-0.5 rounded-full ${colors.bg} ${colors.text} border ${colors.border}`}>
-                {formData.tool || "Tool"}
-              </span>
-              <span className="text-xs px-2 py-0.5 rounded-full bg-white/5 text-gray-400 border border-white/10">
-                {formData.type || "Type"}
-              </span>
-            </div>
-            <h3 className="text-xl font-bold text-white mb-2">
-              {formData.agentName || "Agent Name"}
-            </h3>
-            <p className="text-gray-400 text-sm line-clamp-2">
-              {formData.description || "Short description of your agent will appear here..."}
-            </p>
-          </div>
-        </div>
-        
-        {tags.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-4">
-            {tags.map((tag, i) => (
-              <span key={i} className="text-xs px-2 py-1 rounded-lg bg-white/5 text-gray-400 border border-white/5">
-                {tag.trim()}
-              </span>
-            ))}
-          </div>
-        )}
-        
-        <div className="flex items-center justify-between pt-4 border-t border-white/10">
-          <div className="flex items-center gap-2">
-            <div className="w-6 h-6 rounded-full bg-gradient-to-br from-purple-500 to-pink-500" />
-            <span className="text-sm text-gray-400">{formData.authorName || "Author"}</span>
-          </div>
-          <span className="text-xs text-gray-500">{formData.category || "Category"}</span>
-        </div>
-      </div>
-    );
-  };
 
   return (
     <div className="max-w-4xl mx-auto space-y-8">
@@ -356,7 +406,7 @@ Submitted via AgentDepot.dev
             const StepIcon = step.icon;
             const isActive = currentStep === step.id;
             const isCompleted = currentStep > step.id;
-            
+
             return (
               <div key={step.id} className="flex-1 relative">
                 <div className="flex flex-col items-center">
@@ -380,17 +430,21 @@ Submitted via AgentDepot.dev
                       <StepIcon className="w-5 h-5" />
                     )}
                   </button>
-                  <span className={`mt-2 text-xs font-medium hidden sm:block ${isActive ? "text-white" : "text-gray-500"}`}>
+                  <span
+                    className={`mt-2 text-xs font-medium hidden sm:block ${isActive ? "text-white" : "text-gray-500"}`}
+                  >
                     {step.title}
                   </span>
                 </div>
-                
+
                 {/* Connector line */}
                 {index < STEPS.length - 1 && (
                   <div className="absolute top-6 left-1/2 w-full h-0.5 -translate-y-1/2">
-                    <div className={`h-full transition-all duration-500 ${
-                      isCompleted ? "bg-green-500/50" : "bg-white/10"
-                    }`} />
+                    <div
+                      className={`h-full transition-all duration-500 ${
+                        isCompleted ? "bg-green-500/50" : "bg-white/10"
+                      }`}
+                    />
                   </div>
                 )}
               </div>
@@ -415,7 +469,7 @@ Submitted via AgentDepot.dev
               <Sparkles className="w-5 h-5 text-blue-400" />
               Basic Information
             </h2>
-            
+
             <div className="space-y-6">
               <div>
                 <label htmlFor="agentName" className={labelClasses}>
@@ -438,7 +492,9 @@ Submitted via AgentDepot.dev
                   <label htmlFor="description" className={`${labelClasses} mb-0`}>
                     Short Description <span className="text-red-400">*</span>
                   </label>
-                  <span className={`text-xs ${formData.description.length > 140 ? "text-amber-400" : "text-gray-500"}`}>
+                  <span
+                    className={`text-xs ${formData.description.length > 140 ? "text-amber-400" : "text-gray-500"}`}
+                  >
                     {formData.description.length}/150
                   </span>
                 </div>
@@ -457,7 +513,8 @@ Submitted via AgentDepot.dev
 
               <div>
                 <label htmlFor="fullDescription" className={labelClasses}>
-                  Full Description <span className="text-gray-500 font-normal">(Markdown supported)</span>
+                  Full Description{" "}
+                  <span className="text-gray-500 font-normal">(Markdown supported)</span>
                 </label>
                 <textarea
                   id="fullDescription"
@@ -484,12 +541,24 @@ Submitted via AgentDepot.dev
                       onChange={handleChange}
                       className={`${inputClasses} appearance-none`}
                     >
-                      <option value="" className="bg-gray-900">Select tool...</option>
-                      <option value="cursor" className="bg-gray-900">Cursor</option>
-                      <option value="windsurf" className="bg-gray-900">Windsurf</option>
-                      <option value="claude-code" className="bg-gray-900">Claude Code</option>
-                      <option value="replit" className="bg-gray-900">Replit</option>
-                      <option value="mcp" className="bg-gray-900">MCP</option>
+                      <option value="" className="bg-gray-900">
+                        Select tool...
+                      </option>
+                      <option value="cursor" className="bg-gray-900">
+                        Cursor
+                      </option>
+                      <option value="windsurf" className="bg-gray-900">
+                        Windsurf
+                      </option>
+                      <option value="claude-code" className="bg-gray-900">
+                        Claude Code
+                      </option>
+                      <option value="replit" className="bg-gray-900">
+                        Replit
+                      </option>
+                      <option value="mcp" className="bg-gray-900">
+                        MCP
+                      </option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
                       ▼
@@ -510,12 +579,24 @@ Submitted via AgentDepot.dev
                       onChange={handleChange}
                       className={`${inputClasses} appearance-none`}
                     >
-                      <option value="" className="bg-gray-900">Select type...</option>
-                      <option value="rule" className="bg-gray-900">Rule</option>
-                      <option value="agent" className="bg-gray-900">Agent</option>
-                      <option value="plugin" className="bg-gray-900">Plugin</option>
-                      <option value="skill" className="bg-gray-900">Skill</option>
-                      <option value="template" className="bg-gray-900">Template</option>
+                      <option value="" className="bg-gray-900">
+                        Select type...
+                      </option>
+                      <option value="rule" className="bg-gray-900">
+                        Rule
+                      </option>
+                      <option value="agent" className="bg-gray-900">
+                        Agent
+                      </option>
+                      <option value="plugin" className="bg-gray-900">
+                        Plugin
+                      </option>
+                      <option value="skill" className="bg-gray-900">
+                        Skill
+                      </option>
+                      <option value="template" className="bg-gray-900">
+                        Template
+                      </option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
                       ▼
@@ -536,14 +617,30 @@ Submitted via AgentDepot.dev
                       onChange={handleChange}
                       className={`${inputClasses} appearance-none`}
                     >
-                      <option value="" className="bg-gray-900">Select category...</option>
-                      <option value="coding" className="bg-gray-900">Coding</option>
-                      <option value="debugging" className="bg-gray-900">Debugging</option>
-                      <option value="testing" className="bg-gray-900">Testing</option>
-                      <option value="productivity" className="bg-gray-900">Productivity</option>
-                      <option value="data" className="bg-gray-900">Data</option>
-                      <option value="web" className="bg-gray-900">Web</option>
-                      <option value="other" className="bg-gray-900">Other</option>
+                      <option value="" className="bg-gray-900">
+                        Select category...
+                      </option>
+                      <option value="coding" className="bg-gray-900">
+                        Coding
+                      </option>
+                      <option value="debugging" className="bg-gray-900">
+                        Debugging
+                      </option>
+                      <option value="testing" className="bg-gray-900">
+                        Testing
+                      </option>
+                      <option value="productivity" className="bg-gray-900">
+                        Productivity
+                      </option>
+                      <option value="data" className="bg-gray-900">
+                        Data
+                      </option>
+                      <option value="web" className="bg-gray-900">
+                        Web
+                      </option>
+                      <option value="other" className="bg-gray-900">
+                        Other
+                      </option>
                     </select>
                     <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
                       ▼
@@ -578,7 +675,7 @@ Submitted via AgentDepot.dev
               <Terminal className="w-5 h-5 text-purple-400" />
               Installation Details
             </h2>
-            
+
             <div className="space-y-6">
               <div>
                 <label htmlFor="installationType" className={labelClasses}>
@@ -589,12 +686,13 @@ Submitted via AgentDepot.dev
                     <button
                       key={type}
                       type="button"
-                      onClick={() => setFormData(prev => ({ ...prev, installationType: type }))}
+                      onClick={() => setFormData((prev) => ({ ...prev, installationType: type }))}
                       className={`
                         px-4 py-3 rounded-xl border text-sm font-medium transition-all
-                        ${formData.installationType === type 
-                          ? "bg-white/10 border-white/30 text-white" 
-                          : "bg-white/5 border-white/10 text-gray-400 hover:border-white/20"
+                        ${
+                          formData.installationType === type
+                            ? "bg-white/10 border-white/30 text-white"
+                            : "bg-white/5 border-white/10 text-gray-400 hover:border-white/20"
                         }
                       `}
                     >
@@ -644,7 +742,7 @@ Submitted via AgentDepot.dev
               <User className="w-5 h-5 text-pink-400" />
               Author & Links
             </h2>
-            
+
             <div className="space-y-6">
               <div>
                 <label htmlFor="authorName" className={labelClasses}>
@@ -700,7 +798,7 @@ Submitted via AgentDepot.dev
                   <LinkIcon className="w-4 h-4 text-blue-400" />
                   Project Links
                 </h3>
-                
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="githubUrl" className={labelClasses}>
@@ -750,16 +848,16 @@ Submitted via AgentDepot.dev
               <p className="text-gray-400 text-sm mb-6">
                 This is how your agent will appear in the directory.
               </p>
-              
+
               <div className="max-w-md mx-auto">
-                <PreviewCard />
+                <PreviewCard formData={formData} />
               </div>
             </div>
 
             {/* Summary */}
             <div className="glass-panel rounded-3xl p-8 border border-white/10">
               <h3 className="text-lg font-semibold text-white mb-4">Submission Summary</h3>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm">
                 <div className="flex justify-between py-2 border-b border-white/5">
                   <span className="text-gray-500">Agent Name</span>
@@ -775,7 +873,9 @@ Submitted via AgentDepot.dev
                 </div>
                 <div className="flex justify-between py-2 border-b border-white/5">
                   <span className="text-gray-500">Category</span>
-                  <span className="text-white font-medium capitalize">{formData.category || "-"}</span>
+                  <span className="text-white font-medium capitalize">
+                    {formData.category || "-"}
+                  </span>
                 </div>
                 <div className="flex justify-between py-2 border-b border-white/5">
                   <span className="text-gray-500">Author</span>
@@ -800,9 +900,10 @@ Submitted via AgentDepot.dev
             disabled={currentStep === 1}
             className={`
               flex items-center gap-2 px-6 py-3 rounded-xl border transition-all
-              ${currentStep === 1 
-                ? "opacity-0 pointer-events-none" 
-                : "border-white/10 text-gray-400 hover:bg-white/5 hover:text-white"
+              ${
+                currentStep === 1
+                  ? "opacity-0 pointer-events-none"
+                  : "border-white/10 text-gray-400 hover:bg-white/5 hover:text-white"
               }
             `}
           >

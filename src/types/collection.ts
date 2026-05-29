@@ -1,5 +1,3 @@
-import { AgentTool } from "./agent";
-
 export interface Collection {
   id: string;
   name: string;

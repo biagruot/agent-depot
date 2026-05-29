@@ -10,7 +10,7 @@ export default function TermsPage() {
   return (
     <main className="min-h-screen relative pb-32">
       <Navbar />
-      
+
       <div className="container mx-auto px-4 pt-32 max-w-4xl">
         <h1 className="text-4xl md:text-5xl font-bold mb-6 text-white">Terms of Service</h1>
         <p className="text-gray-400 mb-12">Last updated: December 10, 2025</p>
@@ -19,26 +19,24 @@ export default function TermsPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Agreement to Terms</h2>
             <p className="text-gray-300 leading-relaxed">
-              By accessing or using AgentDepot ("the Site"), you agree to be bound by these Terms of Service 
-              and all applicable laws and regulations. If you do not agree with any of these terms, you are 
-              prohibited from using or accessing this Site.
+              By accessing or using AgentDepot (&quot;the Site&quot;), you agree to be bound by
+              these Terms of Service and all applicable laws and regulations. If you do not agree
+              with any of these terms, you are prohibited from using or accessing this Site.
             </p>
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Description of Service</h2>
             <p className="text-gray-300 leading-relaxed">
-              AgentDepot is a free, community-driven directory of AI coding agents for tools including 
-              Claude Code, Windsurf, Cursor, and Replit. We curate and display agent submissions from 
-              the developer community.
+              AgentDepot is a free, community-driven directory of AI coding agents for tools
+              including Claude Code, Windsurf, Cursor, and Replit. We curate and display agent
+              submissions from the developer community.
             </p>
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">User Responsibilities</h2>
-            <p className="text-gray-300 leading-relaxed mb-4">
-              When using our Site, you agree to:
-            </p>
+            <p className="text-gray-300 leading-relaxed mb-4">When using our Site, you agree to:</p>
             <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
               <li>Provide accurate and truthful information when submitting agents</li>
               <li>Not submit malicious code, viruses, or harmful content</li>
@@ -56,18 +54,21 @@ export default function TermsPage() {
             </p>
             <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
               <li>You retain all rights to your submitted content</li>
-              <li>You grant us a non-exclusive license to display and distribute your submission</li>
+              <li>
+                You grant us a non-exclusive license to display and distribute your submission
+              </li>
               <li>You warrant that you have the right to submit the content</li>
               <li>You acknowledge that we may edit or reject submissions at our discretion</li>
-              <li>You understand that we are not responsible for reviewing all submissions for security</li>
+              <li>
+                You understand that we are not responsible for reviewing all submissions for
+                security
+              </li>
             </ul>
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Content Guidelines</h2>
-            <p className="text-gray-300 leading-relaxed mb-4">
-              Submitted agents must:
-            </p>
+            <p className="text-gray-300 leading-relaxed mb-4">Submitted agents must:</p>
             <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
               <li>Be relevant to AI coding tools (Claude, Windsurf, Cursor, Replit)</li>
               <li>Include clear installation instructions</li>
@@ -80,7 +81,8 @@ export default function TermsPage() {
           <section className="glass-panel rounded-3xl p-8 border-l-4 border-l-red-500">
             <h2 className="text-2xl font-bold text-white mb-4">Disclaimer of Warranties</h2>
             <p className="text-gray-300 leading-relaxed font-semibold mb-4">
-              THE SITE AND ALL AGENTS LISTED ARE PROVIDED "AS IS" WITHOUT WARRANTIES OF ANY KIND.
+              THE SITE AND ALL AGENTS LISTED ARE PROVIDED &quot;AS IS&quot; WITHOUT WARRANTIES OF
+              ANY KIND.
             </p>
             <p className="text-gray-300 leading-relaxed mb-4">
               We make no warranties, expressed or implied, regarding:
@@ -92,8 +94,8 @@ export default function TermsPage() {
               <li>The continued availability of the Site or any agent</li>
             </ul>
             <p className="text-gray-300 leading-relaxed mt-4">
-              <strong>USE ALL AGENTS AT YOUR OWN RISK.</strong> Always review code before installing or 
-              running any agent on your system.
+              <strong>USE ALL AGENTS AT YOUR OWN RISK.</strong> Always review code before installing
+              or running any agent on your system.
             </p>
           </section>
 
@@ -114,8 +116,9 @@ export default function TermsPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Third-Party Links</h2>
             <p className="text-gray-300 leading-relaxed">
-              Our Site contains links to third-party websites (GitHub, etc.). We are not responsible for 
-              the content, privacy policies, or practices of these third-party sites. Use them at your own risk.
+              Our Site contains links to third-party websites (GitHub, etc.). We are not responsible
+              for the content, privacy policies, or practices of these third-party sites. Use them
+              at your own risk.
             </p>
           </section>
 
@@ -135,17 +138,26 @@ export default function TermsPage() {
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">DMCA Copyright Policy</h2>
             <p className="text-gray-300 leading-relaxed mb-4">
-              We respect the intellectual property rights of others and expect our users to do the same.
+              We respect the intellectual property rights of others and expect our users to do the
+              same.
             </p>
 
-            <h3 className="text-xl font-semibold text-white mt-6 mb-3">Copyright Infringement Notification</h3>
+            <h3 className="text-xl font-semibold text-white mt-6 mb-3">
+              Copyright Infringement Notification
+            </h3>
             <p className="text-gray-300 leading-relaxed mb-4">
-              If you believe that content on our Site infringes your copyright, please send a DMCA takedown
-              notice to <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a> with:
+              If you believe that content on our Site infringes your copyright, please send a DMCA
+              takedown notice to{" "}
+              <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">
+                hello@agentdepot.dev
+              </a>{" "}
+              with:
             </p>
             <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
               <li>Identification of the copyrighted work claimed to have been infringed</li>
-              <li>Identification of the material that is claimed to be infringing (URL or description)</li>
+              <li>
+                Identification of the material that is claimed to be infringing (URL or description)
+              </li>
               <li>Your contact information (name, address, email, phone number)</li>
               <li>A statement that you have a good faith belief that the use is not authorized</li>
               <li>A statement that the information in the notification is accurate</li>
@@ -154,44 +166,48 @@ export default function TermsPage() {
 
             <h3 className="text-xl font-semibold text-white mt-6 mb-3">Counter-Notification</h3>
             <p className="text-gray-300 leading-relaxed mb-4">
-              If you believe your content was removed in error, you may send a counter-notification to the
-              same email address containing:
+              If you believe your content was removed in error, you may send a counter-notification
+              to the same email address containing:
             </p>
             <ul className="list-disc list-inside text-gray-300 space-y-2 ml-4">
               <li>Identification of the material that was removed</li>
               <li>Your contact information</li>
-              <li>A statement under penalty of perjury that you have a good faith belief the material was removed in error</li>
+              <li>
+                A statement under penalty of perjury that you have a good faith belief the material
+                was removed in error
+              </li>
               <li>Your consent to jurisdiction of the federal court in your district</li>
               <li>Your physical or electronic signature</li>
             </ul>
 
             <p className="text-gray-300 leading-relaxed mt-4">
-              We will respond to valid DMCA notices within 48-72 hours and will remove infringing content
-              promptly upon verification.
+              We will respond to valid DMCA notices within 48-72 hours and will remove infringing
+              content promptly upon verification.
             </p>
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Termination</h2>
             <p className="text-gray-300 leading-relaxed">
-              We reserve the right to terminate or suspend access to our Site immediately, without prior 
-              notice, for any reason, including breach of these Terms.
+              We reserve the right to terminate or suspend access to our Site immediately, without
+              prior notice, for any reason, including breach of these Terms.
             </p>
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Changes to Terms</h2>
             <p className="text-gray-300 leading-relaxed">
-              We may revise these Terms at any time. By continuing to use the Site after changes are posted, 
-              you agree to be bound by the revised Terms.
+              We may revise these Terms at any time. By continuing to use the Site after changes are
+              posted, you agree to be bound by the revised Terms.
             </p>
           </section>
 
           <section className="glass-panel rounded-3xl p-8">
             <h2 className="text-2xl font-bold text-white mb-4">Governing Law</h2>
             <p className="text-gray-300 leading-relaxed">
-              These Terms shall be governed by and construed in accordance with the laws of the jurisdiction 
-              in which AgentDepot operates, without regard to conflict of law provisions.
+              These Terms shall be governed by and construed in accordance with the laws of the
+              jurisdiction in which AgentDepot operates, without regard to conflict of law
+              provisions.
             </p>
           </section>
 
@@ -201,8 +217,22 @@ export default function TermsPage() {
               If you have questions about these Terms, please contact us:
             </p>
             <ul className="text-gray-300 space-y-2">
-              <li>Email: <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">hello@agentdepot.dev</a></li>
-              <li>GitHub: <a href="https://github.com/biagruot/agentdepot-agents" className="text-primary hover:underline" target="_blank">github.com/biagruot/agentdepot-agents</a></li>
+              <li>
+                Email:{" "}
+                <a href="mailto:hello@agentdepot.dev" className="text-primary hover:underline">
+                  hello@agentdepot.dev
+                </a>
+              </li>
+              <li>
+                GitHub:{" "}
+                <a
+                  href="https://github.com/biagruot/agentdepot-agents"
+                  className="text-primary hover:underline"
+                  target="_blank"
+                >
+                  github.com/biagruot/agentdepot-agents
+                </a>
+              </li>
             </ul>
           </section>
 

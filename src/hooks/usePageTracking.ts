@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { usePathname, useSearchParams } from 'next/navigation';
-import { useOpenPanel } from '@openpanel/nextjs';
-import { analyticsEvents, getReferrer, getUtmSource, getUtmCampaign } from '@/lib/analytics';
+import { useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useOpenPanel } from "@openpanel/nextjs";
+import { analyticsEvents, getReferrer, getUtmSource, getUtmCampaign } from "@/lib/analytics";
 
 /**
  * Hook to track page views and funnel entry
@@ -13,10 +13,7 @@ import { analyticsEvents, getReferrer, getUtmSource, getUtmCampaign } from '@/li
  * @param options.tool - Tool name if on a tool-specific page
  * @param options.agent_id - Agent ID if on an agent detail page
  */
-export function usePageTracking(options?: {
-  tool?: string;
-  agent_id?: string;
-}) {
+export function usePageTracking(options?: { tool?: string; agent_id?: string }) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const { track } = useOpenPanel();
@@ -33,7 +30,7 @@ export function usePageTracking(options?: {
     track(eventName, data);
 
     // Track funnel entry on homepage
-    if (pathname === '/') {
+    if (pathname === "/") {
       const [funnelEventName, funnelData] = analyticsEvents.funnelEntry({
         source: getUtmSource(),
         campaign: getUtmCampaign(),

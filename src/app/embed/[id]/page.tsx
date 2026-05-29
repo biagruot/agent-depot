@@ -1,5 +1,5 @@
 import { agents } from "@/data/agents";
-import { Copy, Check, ExternalLink } from "lucide-react";
+import { ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { EmbedClient } from "./EmbedClient";
@@ -27,13 +27,11 @@ export default async function EmbedPage({ params }: PageProps) {
       <div className="border border-white/10 rounded-xl bg-[#111] p-4 shadow-2xl">
         <div className="flex justify-between items-start mb-3">
           <div>
-            <h1 className="text-lg font-bold text-white flex items-center gap-2">
-              {agent.name}
-            </h1>
+            <h1 className="text-lg font-bold text-white flex items-center gap-2">{agent.name}</h1>
             <p className="text-xs text-gray-400">by {agent.author.name}</p>
           </div>
-          <Link 
-            href={`https://agentdepot.dev/agent/${agent.id}`} 
+          <Link
+            href={`https://agentdepot.dev/agent/${agent.id}`}
             target="_blank"
             className="p-1.5 bg-white/5 hover:bg-white/10 rounded-lg text-gray-400 hover:text-white transition-colors"
           >
@@ -41,9 +39,7 @@ export default async function EmbedPage({ params }: PageProps) {
           </Link>
         </div>
 
-        <p className="text-sm text-gray-400 line-clamp-2 mb-4">
-          {agent.description}
-        </p>
+        <p className="text-sm text-gray-400 line-clamp-2 mb-4">{agent.description}</p>
 
         <EmbedClient command={agent.installation.command} />
 
@@ -56,8 +52,8 @@ export default async function EmbedPage({ params }: PageProps) {
               {agent.type}
             </span>
           </div>
-          <Link 
-            href="https://agentdepot.dev" 
+          <Link
+            href="https://agentdepot.dev"
             target="_blank"
             className="text-[10px] text-gray-500 hover:text-gray-300 transition-colors font-medium"
           >

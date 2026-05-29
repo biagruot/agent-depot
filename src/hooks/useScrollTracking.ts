@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import { useEffect, useRef } from 'react';
-import { usePathname } from 'next/navigation';
-import { useOpenPanel } from '@openpanel/nextjs';
-import { analyticsEvents } from '@/lib/analytics';
+import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
+import { useOpenPanel } from "@openpanel/nextjs";
+import { analyticsEvents } from "@/lib/analytics";
 
 /**
  * Hook to track scroll depth at 25%, 50%, 75%, and 100%
@@ -26,7 +26,7 @@ export function useScrollTracking(agentId?: string) {
       // Check each threshold
       const thresholds: Array<25 | 50 | 75 | 100> = [25, 50, 75, 100];
 
-      thresholds.forEach(threshold => {
+      thresholds.forEach((threshold) => {
         if (scrollPercent >= threshold && !tracked.current.has(threshold)) {
           tracked.current.add(threshold);
 
@@ -42,16 +42,19 @@ export function useScrollTracking(agentId?: string) {
     };
 
     // Add scroll listener
-    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     // Check on mount (in case already scrolled)
     handleScroll();
 
+    // Capture the ref so cleanup clears the same Set this effect populated.
+    const trackedThresholds = tracked.current;
+
     // Cleanup
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener("scroll", handleScroll);
       // Reset tracked thresholds when pathname changes
-      tracked.current.clear();
+      trackedThresholds.clear();
     };
   }, [pathname, track, agentId]);
 }

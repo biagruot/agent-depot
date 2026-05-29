@@ -12,7 +12,6 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { SortDropdown, SortOption } from "@/components/SortDropdown";
 import { ShareFiltersButton } from "@/components/ShareFiltersButton";
-import { EmailSignup } from "@/components/EmailSignup";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { ClearFiltersButton } from "@/components/ClearFiltersButton";
 import { BackToTop } from "@/components/BackToTop";
@@ -35,28 +34,32 @@ function HomeContent() {
   useTimeTracking();
 
   // Initialize state from URL parameters
-  const initialTool = (searchParams.get("tool") as AgentTool) || 'all';
-  const initialType = (searchParams.get("type") as AgentType) || 'all';
+  const initialTool = (searchParams.get("tool") as AgentTool) || "all";
+  const initialType = (searchParams.get("type") as AgentType) || "all";
   const initialQuery = searchParams.get("q") || "";
-  const initialSort = (searchParams.get("sort") as SortOption) || 'popular';
+  const initialSort = (searchParams.get("sort") as SortOption) || "popular";
 
   const [searchQuery, setSearchQuery] = useState<string>(initialQuery);
-  const [selectedTool, setSelectedTool] = useState<AgentTool | 'all'>(initialTool);
-  const [selectedType, setSelectedType] = useState<AgentType | 'all'>(initialType);
+  const [selectedTool, setSelectedTool] = useState<AgentTool | "all">(initialTool);
+  const [selectedType, setSelectedType] = useState<AgentType | "all">(initialType);
   const [selectedAgent, setSelectedAgent] = useState<Agent | null>(null);
   const [currentSort, setCurrentSort] = useState<SortOption>(initialSort);
 
   // Sync state with URL params when they change (e.g. navigation)
   useEffect(() => {
-    const tool = (searchParams.get("tool") as AgentTool) || 'all';
-    const type = (searchParams.get("type") as AgentType) || 'all';
+    const tool = (searchParams.get("tool") as AgentTool) || "all";
+    const type = (searchParams.get("type") as AgentType) || "all";
     const query = searchParams.get("q") || "";
-    const sort = (searchParams.get("sort") as SortOption) || 'popular';
+    const sort = (searchParams.get("sort") as SortOption) || "popular";
 
+    // Intentional: sync local filter state when the URL changes via external
+    // navigation (back/forward, breadcrumb links), not on every render.
+    /* eslint-disable react-hooks/set-state-in-effect */
     setSelectedTool(tool);
     setSelectedType(type);
     setSearchQuery(query);
     setCurrentSort(sort);
+    /* eslint-enable react-hooks/set-state-in-effect */
   }, [searchParams]);
 
   // Update URL when filters change (user interaction)
@@ -64,20 +67,22 @@ function HomeContent() {
     const params = new URLSearchParams();
 
     if (searchQuery) params.set("q", searchQuery);
-    if (selectedTool !== 'all') params.set("tool", selectedTool);
-    if (selectedType !== 'all') params.set("type", selectedType);
-    if (currentSort !== 'popular') params.set("sort", currentSort);
+    if (selectedTool !== "all") params.set("tool", selectedTool);
+    if (selectedType !== "all") params.set("type", selectedType);
+    if (currentSort !== "popular") params.set("sort", currentSort);
 
-    const newUrl = params.toString() ? `?${params.toString()}` : '/';
+    const newUrl = params.toString() ? `?${params.toString()}` : "/";
 
     // Only update URL if it's different to avoid loops/redundant updates
-    if (window.location.search !== `?${params.toString()}` && (window.location.search !== '' || params.toString() !== '')) {
-      window.history.replaceState({}, '', newUrl);
+    if (
+      window.location.search !== `?${params.toString()}` &&
+      (window.location.search !== "" || params.toString() !== "")
+    ) {
+      window.history.replaceState({}, "", newUrl);
     }
   }, [searchQuery, selectedTool, selectedType, currentSort]);
 
-
-  // Configure Fuse.js with optimized settings for 100+ agents
+  // Configure Fuse.js for client-side fuzzy search over the catalog
   const fuse = useMemo(() => {
     return new Fuse(agents, {
       keys: [
@@ -95,20 +100,17 @@ function HomeContent() {
     });
   }, []);
 
-  // Max score threshold for relevance (lower score = better match)
-  const MAX_SCORE = 0.5;
-
   // Filter agents
   const filteredAgents = useMemo(() => {
     let result = agents;
 
     // 1. Filter by Tool
-    if (selectedTool !== 'all') {
+    if (selectedTool !== "all") {
       result = result.filter((agent) => agent.tool === selectedTool);
     }
 
     // 2. Filter by Type
-    if (selectedType !== 'all') {
+    if (selectedType !== "all") {
       result = result.filter((agent) => agent.type === selectedType);
     }
 
@@ -128,7 +130,6 @@ function HomeContent() {
       const fuseResults = fuse.search(searchQuery);
       const scoreMap = new Map<string, number>();
       fuseResults.forEach((res) => {
-        // @ts-ignore - res.item has id
         scoreMap.set(res.item.id, res.score ?? 0);
       });
       result = [...result].sort((a, b) => {
@@ -137,15 +138,15 @@ function HomeContent() {
         if (scoreA !== scoreB) return scoreA - scoreB;
         // Fallback to current sort option
         switch (currentSort) {
-          case 'newest':
+          case "newest":
             return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-          case 'popular':
+          case "popular":
             return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
-          case 'trending':
+          case "trending":
             const scoreA2 = (a.stats?.stars || 0) + new Date(a.createdAt).getTime() / 1e9;
             const scoreB2 = (b.stats?.stars || 0) + new Date(b.createdAt).getTime() / 1e9;
             return scoreB2 - scoreA2;
-          case 'alphabetical':
+          case "alphabetical":
             return a.name.localeCompare(b.name);
           default:
             return 0;
@@ -155,15 +156,15 @@ function HomeContent() {
       // No search query – use existing sort logic
       result = [...result].sort((a, b) => {
         switch (currentSort) {
-          case 'newest':
+          case "newest":
             return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-          case 'popular':
+          case "popular":
             return (b.stats?.downloads || 0) - (a.stats?.downloads || 0);
-          case 'trending':
+          case "trending":
             const scoreA = (a.stats?.stars || 0) + new Date(a.createdAt).getTime() / 1e9;
             const scoreB = (b.stats?.stars || 0) + new Date(b.createdAt).getTime() / 1e9;
             return scoreB - scoreA;
-          case 'alphabetical':
+          case "alphabetical":
             return a.name.localeCompare(b.name);
           default:
             return 0;
@@ -174,7 +175,7 @@ function HomeContent() {
     return result;
   }, [searchQuery, selectedTool, selectedType, fuse, currentSort]);
 
-  const isFiltering = searchQuery.trim() !== "" || selectedTool !== 'all' || selectedType !== 'all';
+  const isFiltering = searchQuery.trim() !== "" || selectedTool !== "all" || selectedType !== "all";
 
   // Track search results viewed
   useEffect(() => {
@@ -191,26 +192,19 @@ function HomeContent() {
     }
   }, [searchQuery, selectedTool, selectedType, filteredAgents.length, isFiltering, track]);
 
-  // Get Featured Agents (for the top row) - Only show if not filtering
-  const featuredAgents = useMemo(() => {
-    return agents.filter(a => a.featured).slice(0, 4);
-  }, []);
-
   return (
     <div className="min-h-screen pb-20">
-
-
       {/* Back to Top Button */}
       <BackToTop />
 
       {/* Fixed Submit CTA - Bottom Right */}
-      <a
+      <Link
         href="/submit"
         className="fixed bottom-20 sm:bottom-6 right-6 z-50 flex items-center gap-2 px-4 py-2.5 rounded-full bg-white text-black text-sm font-semibold hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
       >
         <span>+</span>
         <span>Submit Agent</span>
-      </a>
+      </Link>
 
       {/* JSON-LD Structured Data for SEO */}
       <script
@@ -219,18 +213,18 @@ function HomeContent() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "AgentDepot",
-            "description": "The complete directory of AI coding agents for developers",
-            "url": "https://agentdepot.dev",
-            "potentialAction": {
+            name: "AgentDepot",
+            description: "The complete directory of AI coding agents for developers",
+            url: "https://agentdepot.dev",
+            potentialAction: {
               "@type": "SearchAction",
-              "target": {
+              target: {
                 "@type": "EntryPoint",
-                "urlTemplate": "https://agentdepot.dev/?q={search_term_string}"
+                urlTemplate: "https://agentdepot.dev/?q={search_term_string}",
               },
-              "query-input": "required name=search_term_string"
-            }
-          })
+              "query-input": "required name=search_term_string",
+            },
+          }),
         }}
       />
 
@@ -241,15 +235,26 @@ function HomeContent() {
           <div className="text-center mb-8 space-y-6 relative">
             {/* Ambient Glow Background */}
             <div className="absolute -top-20 left-1/2 -translate-x-1/2 w-[600px] h-[300px] opacity-30 pointer-events-none blur-[100px]">
-              <div className="absolute top-0 left-0 w-1/2 h-full bg-blue-500/40 rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '4s' }} />
-              <div className="absolute top-0 right-0 w-1/2 h-full bg-purple-500/40 rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '5s', animationDelay: '1s' }} />
-              <div className="absolute bottom-0 left-1/4 w-1/2 h-full bg-orange-500/40 rounded-full mix-blend-screen animate-pulse" style={{ animationDuration: '6s', animationDelay: '2s' }} />
+              <div
+                className="absolute top-0 left-0 w-1/2 h-full bg-blue-500/40 rounded-full mix-blend-screen animate-pulse"
+                style={{ animationDuration: "4s" }}
+              />
+              <div
+                className="absolute top-0 right-0 w-1/2 h-full bg-purple-500/40 rounded-full mix-blend-screen animate-pulse"
+                style={{ animationDuration: "5s", animationDelay: "1s" }}
+              />
+              <div
+                className="absolute bottom-0 left-1/4 w-1/2 h-full bg-orange-500/40 rounded-full mix-blend-screen animate-pulse"
+                style={{ animationDuration: "6s", animationDelay: "2s" }}
+              />
             </div>
 
             {/* Main Title with Gradient */}
             <div className="space-y-3 relative z-10">
               <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight">
-                The Open Source<br />AI Agent Directory
+                The Open Source
+                <br />
+                AI Agent Directory
               </h1>
 
               {/* Subtitle with Glass Badge */}
@@ -259,7 +264,10 @@ function HomeContent() {
                 </p>
 
                 {/* Social Proof / Stats Line - Space Neutral */}
-                <div className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs font-mono text-gray-500 animate-fade-in" style={{ animationDelay: '0.2s' }}>
+                <div
+                  className="flex flex-wrap items-center justify-center gap-3 md:gap-6 text-xs font-mono text-gray-500 animate-fade-in"
+                  style={{ animationDelay: "0.2s" }}
+                >
                   <div className="flex items-center gap-1.5 px-2 py-1 rounded-full bg-white/5 border border-white/5">
                     <span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
                     <span>70+ Agents</span>
@@ -385,7 +393,13 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><div className="text-gray-400">Loading...</div></div>}>
+    <Suspense
+      fallback={
+        <div className="min-h-screen flex items-center justify-center">
+          <div className="text-gray-400">Loading...</div>
+        </div>
+      }
+    >
       <HomeContent />
     </Suspense>
   );

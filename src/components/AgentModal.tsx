@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Github, ExternalLink } from "lucide-react";
 import { Agent } from "@/types/agent";
@@ -17,8 +17,6 @@ interface AgentModalProps {
 }
 
 export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
-
-
   const { track } = useOpenPanel();
 
   useEffect(() => {
@@ -35,11 +33,11 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
       document.body.style.overflow = "hidden";
       // Track agent view
       if (agent) {
-        track('agent_view', {
+        track("agent_view", {
           agent_id: agent.id,
           agent_name: agent.name,
           tool: agent.tool,
-          type: agent.type
+          type: agent.type,
         });
       }
     } else {
@@ -49,8 +47,6 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
       document.body.style.overflow = "unset";
     };
   }, [isOpen, agent, track]);
-
-
 
   if (!agent) return null;
 
@@ -75,8 +71,6 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
             className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
           >
             <div className="bg-[#1a1a1a] border border-white/10 rounded-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto pointer-events-auto shadow-2xl flex flex-col">
-
-
               {/* Header */}
               <div className="p-6 border-b border-white/5 flex justify-between items-start sticky top-0 bg-[#1a1a1a]/95 backdrop-blur z-10">
                 <div>
@@ -84,11 +78,11 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
                     <h2 className="text-2xl font-bold text-white">{agent.name}</h2>
                   </div>
                   <p className="text-gray-400">
-                    by{' '}
+                    by{" "}
                     {agent.author.url || agent.author.github ? (
-                      <a 
-                        href={agent.author.url || agent.author.github} 
-                        target="_blank" 
+                      <a
+                        href={agent.author.url || agent.author.github}
+                        target="_blank"
                         rel="noopener noreferrer"
                         className="hover:text-white transition-colors border-b border-transparent hover:border-gray-400"
                       >
@@ -118,15 +112,14 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
                     <ReactMarkdown>{agent.description}</ReactMarkdown>
                   </div>
 
-                  {agent.fullDescription && (
-                    agent.type === 'rule' ? (
+                  {agent.fullDescription &&
+                    (agent.type === "rule" ? (
                       <RuleBlock content={agent.fullDescription} />
                     ) : (
                       <div className="text-gray-400 whitespace-pre-wrap leading-relaxed pt-4 border-t border-white/5 font-sans">
                         {agent.fullDescription}
                       </div>
-                    )
-                  )}
+                    ))}
                 </div>
 
                 {/* Installation */}
@@ -151,11 +144,13 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
                       href={agent.links.github}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => track('agent_link_click', {
-                        type: 'github',
-                        agent_id: agent.id,
-                        url: agent.links?.github
-                      })}
+                      onClick={() =>
+                        track("agent_link_click", {
+                          type: "github",
+                          agent_id: agent.id,
+                          url: agent.links?.github,
+                        })
+                      }
                       className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
                     >
                       <Github className="w-5 h-5" />
@@ -167,11 +162,13 @@ export function AgentModal({ agent, isOpen, onClose }: AgentModalProps) {
                       href={agent.links.website}
                       target="_blank"
                       rel="noopener noreferrer"
-                      onClick={() => track('agent_link_click', {
-                        type: 'website',
-                        agent_id: agent.id,
-                        url: agent.links?.website
-                      })}
+                      onClick={() =>
+                        track("agent_link_click", {
+                          type: "website",
+                          agent_id: agent.id,
+                          url: agent.links?.website,
+                        })
+                      }
                       className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
                     >
                       <ExternalLink className="w-5 h-5" />

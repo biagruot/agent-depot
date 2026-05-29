@@ -5,36 +5,37 @@ import Link from "next/link";
 import { SpotlightCard } from "./SpotlightCard";
 import { Check, Copy, Heart } from "lucide-react";
 import { useState } from "react";
-import { AgentStats } from "./AgentStats";
 import { useOpenPanel } from "@openpanel/nextjs";
 import { useFavorites } from "@/components/providers/FavoritesProvider";
 import { AuthModal } from "./auth/AuthModal";
 
-const ToolBadge = ({ tool }: { tool: Agent['tool'] }) => {
+const ToolBadge = ({ tool }: { tool: Agent["tool"] }) => {
   const styles = {
-    'claude-code': 'bg-orange-500/10 text-orange-400 border-orange-500/20',
-    'windsurf': 'bg-blue-500/10 text-blue-400 border-blue-500/20',
-    'cursor': 'bg-purple-500/10 text-purple-400 border-purple-500/20',
-    'replit': 'bg-orange-600/10 text-orange-500 border-orange-600/20',
-    'mcp': 'bg-green-500/10 text-green-400 border-green-500/20',
+    "claude-code": "bg-orange-500/10 text-orange-400 border-orange-500/20",
+    windsurf: "bg-blue-500/10 text-blue-400 border-blue-500/20",
+    cursor: "bg-purple-500/10 text-purple-400 border-purple-500/20",
+    replit: "bg-orange-600/10 text-orange-500 border-orange-600/20",
+    mcp: "bg-green-500/10 text-green-400 border-green-500/20",
   };
 
   const labels = {
-    'claude-code': 'Claude',
-    'windsurf': 'Windsurf',
-    'cursor': 'Cursor',
-    'replit': 'Replit',
-    'mcp': 'MCP',
+    "claude-code": "Claude",
+    windsurf: "Windsurf",
+    cursor: "Cursor",
+    replit: "Replit",
+    mcp: "MCP",
   };
 
   return (
-    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium border uppercase tracking-wider ${styles[tool]}`}>
+    <span
+      className={`px-2 py-0.5 rounded-full text-[10px] font-medium border uppercase tracking-wider ${styles[tool]}`}
+    >
       {labels[tool]}
     </span>
   );
 };
 
-const TypeIcon = ({ type }: { type: Agent['type'] }) => {
+const TypeIcon = ({ type }: { type: Agent["type"] }) => {
   const icons = {
     rule: "📝",
     agent: "🤖",
@@ -43,7 +44,11 @@ const TypeIcon = ({ type }: { type: Agent['type'] }) => {
     template: "📦",
   };
 
-  return <span className="text-sm" title={type}>{icons[type]}</span>;
+  return (
+    <span className="text-sm" title={type}>
+      {icons[type]}
+    </span>
+  );
 };
 
 export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: Agent) => void }) {
@@ -79,11 +84,11 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
       setCopied(true);
 
       // Track copy event
-      track('agent_copy', {
+      track("agent_copy", {
         agent_id: agent.id,
         agent_name: agent.name,
         tool: agent.tool,
-        type: agent.type
+        type: agent.type,
       });
 
       setTimeout(() => setCopied(false), 2000);
@@ -100,9 +105,9 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
     }
 
     await toggleFavorite(agent.id);
-    track('agent_favorite', {
+    track("agent_favorite", {
       agent_id: agent.id,
-      action: isFavorited ? 'remove' : 'add'
+      action: isFavorited ? "remove" : "add",
     });
   };
 
@@ -127,10 +132,11 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
             <button
               onClick={handleFavorite}
               aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
-              className={`p-1.5 -mr-1.5 -mt-1.5 rounded-full transition-colors z-20 ${isFavorited
-                ? "text-pink-500 bg-pink-500/10"
-                : "text-gray-500 hover:text-pink-400 hover:bg-white/10"
-                }`}
+              className={`p-1.5 -mr-1.5 -mt-1.5 rounded-full transition-colors z-20 ${
+                isFavorited
+                  ? "text-pink-500 bg-pink-500/10"
+                  : "text-gray-500 hover:text-pink-400 hover:bg-white/10"
+              }`}
             >
               <Heart className={`w-4 h-4 ${isFavorited ? "fill-current" : ""}`} />
             </button>
@@ -167,10 +173,11 @@ export function AgentCard({ agent, onClick }: { agent: Agent; onClick?: (agent: 
                 onClick={handleCopy}
                 className={`
                     flex items-center gap-1.5 px-3 py-1.5 rounded-md text-xs font-medium transition-all duration-200 border z-20
-                    ${copied
-                    ? "bg-green-500/10 text-green-400 border-green-500/20"
-                    : "bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white hover:border-white/20"
-                  }
+                    ${
+                      copied
+                        ? "bg-green-500/10 text-green-400 border-green-500/20"
+                        : "bg-white/5 text-gray-400 border-white/10 hover:bg-white/10 hover:text-white hover:border-white/20"
+                    }
                   `}
               >
                 {copied ? (

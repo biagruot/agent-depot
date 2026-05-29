@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Resend } from "resend";
 import { render } from "@react-email/render";
 import { WelcomeEmail } from "@/emails/WelcomeEmail";
-import { RESEND_CONFIG } from "@/lib/resend";
+import { getResendClient, isResendConfigured, RESEND_CONFIG } from "@/lib/resend";
 
 // Simple email validation regex
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -19,132 +18,95 @@ export async function POST(request: NextRequest) {
 
     // Validate email format
     if (!email || typeof email !== "string" || !EMAIL_REGEX.test(email)) {
-      return NextResponse.json(
-        { error: "Please enter a valid email address" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Please enter a valid email address" }, { status: 400 });
     }
 
-    // Normalize email (lowercase, trim)
     const normalizedEmail = email.toLowerCase().trim();
 
-    // Check for required environment variables
-    const apiKey = process.env.RESEND_API_KEY;
-    const audienceId = process.env.RESEND_AUDIENCE_ID;
-    // Optional: Set this after verifying your domain in Resend
-    // Example: RESEND_FROM_EMAIL="AgentDepot <hello@agentdepot.dev>"
-    // Use configured email or fallback
-    const fromEmail = RESEND_CONFIG.fromEmail;
-
-    if (!apiKey) {
-      console.error("RESEND_API_KEY is not set");
+    if (!isResendConfigured()) {
+      console.error("Newsletter not configured: missing RESEND_API_KEY or RESEND_AUDIENCE_ID");
       return NextResponse.json(
         { error: "Newsletter service is temporarily unavailable" },
-        { status: 503 }
+        { status: 503 },
       );
     }
 
-    if (!audienceId) {
-      console.error("RESEND_AUDIENCE_ID is not set");
-      return NextResponse.json(
-        { error: "Newsletter service is not configured" },
-        { status: 503 }
-      );
-    }
+    const resend = getResendClient();
+    const { audienceId, fromEmail } = RESEND_CONFIG;
 
-    // Initialize Resend client
-    const resend = new Resend(apiKey);
-
-    // Add subscriber to Resend audience
+    // Add the subscriber to the Resend audience
     try {
-      console.log("📧 Adding subscriber to audience:", normalizedEmail);
-
-      const contactResult = await resend.contacts.create({
+      await resend.contacts.create({
         email: normalizedEmail,
-        audienceId: audienceId,
+        audienceId,
         unsubscribed: false,
       });
-
-      console.log("📧 Contact created:", JSON.stringify(contactResult, null, 2));
     } catch (contactError: unknown) {
       const error = contactError as ResendError;
 
-      // Handle duplicate subscriber gracefully
+      // Already subscribed — treat as success
       if (error?.message?.includes("already exists") || error?.statusCode === 409) {
         return NextResponse.json(
           {
             success: true,
-            message: "You're already subscribed! Check your inbox for our latest updates 📬"
+            message: "You're already subscribed! Check your inbox for our latest updates 📬",
           },
-          { status: 200 }
+          { status: 200 },
         );
       }
 
-      // Handle permission errors
+      // API key lacks the "Audiences" permission
       if (error?.name === "restricted_api_key") {
-        console.error("API key lacks permission to manage contacts. Enable 'Audiences' permission in Resend.");
+        console.error("Resend API key lacks permission to manage contacts (enable 'Audiences').");
         return NextResponse.json(
           { error: "Newsletter service configuration error" },
-          { status: 503 }
+          { status: 503 },
         );
       }
 
-      console.error("Failed to add contact to audience:", error);
       throw contactError;
     }
 
-    // Send welcome email if a verified domain is configured
-    // Set RESEND_FROM_EMAIL after verifying your domain in Resend dashboard
-    if (fromEmail) {
-      try {
-        console.log("📧 Sending welcome email to:", normalizedEmail);
+    // Send the welcome email — best-effort, never fail the request over it
+    try {
+      const emailHtml = await render(
+        WelcomeEmail({
+          previewText: "Welcome to the Weekly Drop — your curated AI coding agents digest",
+        }),
+      );
 
-        // Render email to HTML first
-        const emailHtml = await render(WelcomeEmail({
-          previewText: "Welcome to the Weekly Drop - your curated AI coding agents digest",
-        }));
-
-        const emailResult = await resend.emails.send({
-          from: fromEmail,
-          to: normalizedEmail,
-          subject: "Welcome to AgentDepot! 🚀",
-          html: emailHtml,
-        });
-
-        console.log("📧 Welcome email sent:", JSON.stringify(emailResult, null, 2));
-      } catch (emailError) {
-        // Log but don't fail - subscriber is already added to audience
-        console.error("❌ Failed to send welcome email:", emailError);
-      }
-    } else {
-      console.log("📧 RESEND_FROM_EMAIL not set - skipping welcome email");
-      console.log("   To enable: verify your domain at https://resend.com/domains");
-      console.log("   Then set RESEND_FROM_EMAIL='AgentDepot <hello@agentdepot.dev>'");
+      await resend.emails.send({
+        from: fromEmail,
+        to: normalizedEmail,
+        subject: "Welcome to AgentDepot! 🚀",
+        html: emailHtml,
+      });
+    } catch (emailError) {
+      // The subscriber is already added; a failed welcome email shouldn't fail the request.
+      console.error("Welcome email failed to send:", emailError);
     }
 
     return NextResponse.json(
       {
         success: true,
-        message: "Welcome aboard! Check your inbox for a surprise 🎉"
+        message: "Welcome aboard! Check your inbox for a surprise 🎉",
       },
-      { status: 200 }
+      { status: 200 },
     );
-
   } catch (error: unknown) {
     console.error("Subscription error:", error);
 
-    // Check for rate limiting
     const err = error as ResendError;
     if (err?.statusCode === 429) {
       return NextResponse.json(
         { error: "Too many requests. Please try again in a moment." },
-        { status: 429 }
+        { status: 429 },
       );
     }
 
     return NextResponse.json(
       { error: "Something went wrong. Please try again later." },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
