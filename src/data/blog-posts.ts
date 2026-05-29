@@ -2453,11 +2453,11 @@ If you install nothing else, **Filesystem + Git + Fetch** covers the majority of
 
 ## The integrations worth adding
 
-Once the basics are in place, these official and well-maintained servers pull their weight:
+Once the basics are in place, these pull their weight:
 
 - **GitHub** — the official server lets an agent read code, manage issues and PRs, and run changes against a repo. If your work lives on GitHub, this is the highest-leverage add.
-- **Postgres / SQLite** — let the agent inspect your schema and run read-only queries. Enormous for "why is this query slow?" sessions.
-- **Playwright / Puppeteer** — give the agent a real browser to navigate, fill forms, and screenshot. The backbone of agentic end-to-end testing.
+- **Playwright** (Microsoft) — give the agent a real browser to navigate, fill forms, and screenshot. The backbone of agentic end-to-end testing.
+- **A database server** — let the agent inspect your schema and run read-only queries; enormous for "why is this query slow?" sessions. (Heads-up: the original reference Postgres and SQLite servers were archived in 2026, so reach for a maintained community or vendor server — e.g. your database provider's official MCP.)
 
 ## How to vet a server before you trust it
 
@@ -2557,6 +2557,120 @@ The best-kept secret is that these tools compose. Plenty of developers keep a GU
 3. **Try one on a real task, not a demo.** Tool fit shows up on your actual codebase, not a toy example. Give each a genuine ticket before deciding.
 
 Whichever you land on, the force multiplier is the same: good project rules and the right agents installed. Browse them by tool in the [AgentDepot directory →](https://agentdepot.dev)
+    `,
+  },
+  {
+    slug: "ai-coding-agents-parallel-2026",
+    title: "AI Coding in 2026: The Year Agents Started Working in Parallel",
+    excerpt:
+      "AI coding moved from autocomplete-in-a-sidebar to orchestrating a small fleet of autonomous agents. Here's what changed in 2026 and how to actually work with it.",
+    author: "AgentDepot Team",
+    date: "2026-05-30",
+    readTime: "7 min read",
+    tags: ["Trending", "AI Agents", "Workflow"],
+    content: `
+# AI Coding in 2026: The Year Agents Started Working in Parallel
+
+A year ago, "AI coding" mostly meant autocomplete and a chat panel. In 2026 it means something else entirely: agents that take a task, work on it for minutes or hours, and increasingly do it **several at a time**. The headline shift this year is from pair-programming-in-a-sidebar to orchestrating a small fleet of autonomous workers.
+
+Here's what actually changed and how to work with it.
+
+## From chat turns to long-running loops
+
+The biggest architectural change is duration. Earlier assistants lived inside a single prompt-response turn. The current generation runs an execution loop: read the repo, make a plan, edit across many files, run the tests, read the failures, and try again — without you in the seat for each step.
+
+That sounds small; it isn't. It changes your job from "write the next line with help" to "describe an outcome, set the guardrails, and review the result." The skill that matters most is no longer prompt-wording — it's **specifying the task and verifying the output**.
+
+## Parallel agents are the new default
+
+The other big move in 2026 is parallelism. Instead of one agent, the leading tools now run several at once:
+
+- **Cursor** replaced its single composer with an Agents view that runs multiple agents in parallel — plus cloud "agent environments" so they can work on isolated copies of your repo without stepping on each other.
+- **Windsurf** shipped an Agent Command Center — effectively a Kanban board for agent runs — so you can kick off, watch, and merge several agent tasks like tickets.
+- **Claude Code** is terminal-native and composes cleanly in scripts and CI, so "run N agents" is just part of your own orchestration.
+- New entrants like **xAI's Grok Build** launched explicitly around running many agents at once and auto-judging the best result.
+
+The mental model is shifting from "my AI pair" to "a handful of junior teammates I assign work to and review."
+
+## What this means for how you work
+
+**1. Your tests and project rules are now load-bearing.** An agent that runs unsupervised is only safe if it can check its own work. A clear test command and a tidy \`AGENTS.md\` are what turn "autonomous" from scary into useful. Teams with good guardrails get the upside; teams without them get confident nonsense.
+
+**2. Review is the bottleneck, not generation.** When three agents hand you three diffs, the constraint is your ability to read and judge them. Smaller, well-scoped tasks beat one giant "build the feature" prompt — they produce diffs you can actually review.
+
+**3. Isolation matters.** Parallel agents editing the same working tree is a recipe for conflicts; this is why the new cloud environments and git-worktree workflows exist. Give each agent its own sandbox.
+
+**4. Orchestration is a skill.** Deciding what to parallelize, what to keep sequential, and where a human gate belongs is becoming a real part of the job — the same judgment you'd apply to delegating to people.
+
+## The catch
+
+Autonomy multiplies both good and bad decisions. An agent that's right for ten steps is a superpower; one that's confidently wrong for ten steps is a mess to untangle. The winning teams in 2026 aren't the ones that hand agents the most rope — they're the ones with the tightest feedback loops: good tests, small tasks, fast review, and clear rules the agents actually read.
+
+## The takeaway
+
+If your AI workflow still looks like a single chat window, you're a generation behind. Pick one agentic tool, give it a real task with a real test command, and practice the new core loop: **specify, run, review, repeat** — then do it in parallel. The tooling is ready; the habit is the work.
+
+Explore agents, rules, and MCP servers for every major tool in the [AgentDepot directory →](https://agentdepot.dev)
+    `,
+  },
+  {
+    slug: "cursor-windsurf-claude-code-whats-new-mid-2026",
+    title: "What's New in Cursor, Windsurf & Claude Code (Mid-2026)",
+    excerpt:
+      "All three top AI coding tools shipped major versions in early 2026 — and they've converged on autonomous, parallel agents. A practical rundown of what changed and why it matters.",
+    author: "AgentDepot Team",
+    date: "2026-05-29",
+    readTime: "6 min read",
+    tags: ["News", "Tools", "Comparison"],
+    content: `
+# What's New in Cursor, Windsurf & Claude Code (Mid-2026)
+
+The three most popular AI coding tools all shipped major versions in the first half of 2026, and they've converged on the same theme — autonomous, parallel agents — while keeping their distinct shapes. Here's a quick, practical rundown of what changed and why it matters.
+
+## Cursor
+
+Cursor's big release reworked the core interaction around **multiple agents running in parallel** rather than a single composer, with a dedicated Agents view for kicking off and tracking them. The other headline is **cloud agent environments**: agents can run on isolated, configured copies of your repo (Dockerfile-based setup, secrets, multi-repo workspaces) instead of only in your local editor.
+
+For VS Code refugees the pitch is unchanged — it's still a familiar editor — but the day-to-day is now "assign work to agents and review diffs" more than "inline-edit with help."
+
+## Windsurf
+
+Windsurf's 2.0 line leaned into agent *management*. The standout is the **Agent Command Center** — a Kanban-style board for all your agent runs, so long-running tasks behave like tickets you start, watch, and merge. It also bundles tighter cloud deployment (via its Devin integration) for taking an agent's work from prompt to running app.
+
+If you want a polished GUI *and* aggressive automation, Windsurf is leaning hardest into "manage a board of agents."
+
+## Claude Code
+
+Claude Code stayed terminal-native and focused on raw capability. It runs on Anthropic's current frontier model, **Claude Opus 4.8**, and remains a favorite for code quality on hard, multi-step tasks. Recent additions worth knowing:
+
+- **Deeper IDE integration** — it plugs into VS Code, Cursor, Windsurf, and JetBrains IDEs via extensions, so you can use the terminal agent without leaving your editor.
+- **Cloud code review** — a command that runs a multi-agent review of a branch or PR in CI, not just locally.
+- **Higher usage limits** — the throttling that frustrated heavy users earlier has eased considerably.
+
+Because it's a CLI, it also composes naturally into your own scripts and CI — the easiest of the three to wire into automation you control.
+
+## The pattern across all three
+
+Three different shapes, one direction of travel:
+
+| | Shape | 2026 headline |
+| :--- | :--- | :--- |
+| **Cursor** | VS Code fork | Parallel agents + cloud environments |
+| **Windsurf** | Agentic IDE | Agent Command Center (board of runs) |
+| **Claude Code** | Terminal agent | Opus 4.8 + IDE/CI integration |
+
+And a new name to watch: **xAI's Grok Build** entered the race built around many parallel agents with automated judging — a sign the "fleet of agents" model is becoming the norm, not a single-tool quirk.
+
+## What to do about it
+
+You don't need to chase every release. But two things are worth acting on now:
+
+1. **Adopt an \`AGENTS.md\`** so whichever tool (or tools) you use reads the same project context. It's the one piece of config that pays off across all of them.
+2. **Lean on the parallel features for the boring stuff** — migrations, test backfills, dependency bumps — where you can review the diffs quickly. Save your attention for the work that needs judgment.
+
+The tools move fast, but the durable advice doesn't change: good rules, good tests, small reviewable tasks.
+
+Browse rules, skills, and MCP servers for all of these in the [AgentDepot directory →](https://agentdepot.dev)
     `,
   },
 ];
