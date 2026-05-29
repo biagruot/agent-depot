@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# AgentDepot - Public to Private Agent Sync Script
-# Syncs agent data from agentdepot-agents (public) to agentdepot-core (private)
+# AgentDepot - Agent data sync script
+# Copies agent data from the companion agentdepot-agents repo into this app's src/data
 
 set -e  # Exit on error
 
@@ -32,7 +32,7 @@ while [[ $# -gt 0 ]]; do
       echo "  --dry-run    Show what would be synced without making changes"
       echo "  --help       Show this help message"
       echo ""
-      echo "This script syncs agent data from agentdepot-agents (public) to agentdepot-core (private)."
+      echo "This script copies agent data from the companion agentdepot-agents repo into src/data."
       exit 0
       ;;
     *)
