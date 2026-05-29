@@ -14,7 +14,8 @@ export const blogPosts: BlogPost[] = [
   {
     slug: "how-to-install-cursor-agents",
     title: "How to Install Cursor Agents & Rules",
-    excerpt: "A complete guide to supercharging your Cursor editor with custom AI rules and agents.",
+    excerpt:
+      "A complete guide to supercharging your Cursor editor with custom AI rules and agents.",
     author: "AgentDepot Team",
     date: "2025-11-22",
     readTime: "5 min read",
@@ -51,12 +52,13 @@ Now, when you use Cursor's AI features (Cmd+K or Cmd+L), it will automatically r
 ## Conclusion
 
 Using custom rules is the best way to tailor Cursor to your specific workflow. Check back on AgentDepot for new rules added daily!
-    `
+    `,
   },
   {
     slug: "windsurf-vs-cursor-2025",
     title: "Windsurf vs Cursor: Which AI Editor is Right for You?",
-    excerpt: "We compare the two leading AI-native code editors to help you decide which one to use in 2025.",
+    excerpt:
+      "We compare the two leading AI-native code editors to help you decide which one to use in 2025.",
     author: "AgentDepot Team",
     date: "2025-11-23",
     readTime: "8 min read",
@@ -89,12 +91,13 @@ Windsurf introduces the concept of "Flows", allowing the AI to take multi-step a
 If you want stability and a massive community, go with **Cursor**. If you want to experience the bleeding edge of agentic coding, give **Windsurf** a try.
 
 Both are supported on AgentDepot, so you can find agents for either platform!
-    `
+    `,
   },
   {
     slug: "what-are-mcp-servers",
     title: "What are MCP Servers? A Complete Guide to Model Context Protocol",
-    excerpt: "Everything you need to know about MCP servers, how they work, and why they're revolutionizing AI agent development.",
+    excerpt:
+      "Everything you need to know about MCP servers, how they work, and why they're revolutionizing AI agent development.",
     author: "AgentDepot Team",
     date: "2025-12-01",
     readTime: "10 min read",
@@ -181,12 +184,13 @@ Want to create a custom MCP server? Check out the [MCP SDK documentation](https:
 MCP servers are the future of AI agent capabilities. By installing the right MCP servers, you can turn Claude Code into a powerhouse that connects to your entire development workflow.
 
 Browse our [MCP directory](https://agentdepot.dev/mcp) to find servers for your stack!
-    `
+    `,
   },
   {
     slug: "best-claude-code-agents-2025",
     title: "10 Best Claude Code Agents for Developers in 2025",
-    excerpt: "Supercharge your coding workflow with these must-have Claude Code agents for React, TypeScript, Python, and more.",
+    excerpt:
+      "Supercharge your coding workflow with these must-have Claude Code agents for React, TypeScript, Python, and more.",
     author: "AgentDepot Team",
     date: "2025-12-02",
     readTime: "7 min read",
@@ -270,12 +274,13 @@ Claude Code has exploded in popularity, and with it, a rich ecosystem of agents 
 These 10 agents will transform how you code with Claude. Start with 2-3 that match your stack, then explore more as you get comfortable.
 
 Happy coding!
-    `
+    `,
   },
   {
     slug: "cursor-rules-for-react-developers",
     title: "10 Must-Have Cursor Rules for React Developers",
-    excerpt: "Level up your React development in Cursor with these battle-tested rules for components, hooks, and performance.",
+    excerpt:
+      "Level up your React development in Cursor with these battle-tested rules for components, hooks, and performance.",
     author: "AgentDepot Team",
     date: "2025-12-03",
     readTime: "6 min read",
@@ -426,12 +431,13 @@ Find these rules ready-to-use on [AgentDepot](https://agentdepot.dev/cursor).
 These rules codify years of React best practices into Cursor. Your AI pair programmer will now write React code the way you want it.
 
 Browse more [Cursor rules on AgentDepot](https://agentdepot.dev/cursor) and ship better React apps faster!
-    `
+    `,
   },
   {
     slug: "ai-coding-agents-beginners-guide",
     title: "Getting Started with AI Coding Agents: A Beginner's Guide",
-    excerpt: "New to AI coding assistants? Learn what agents are, which tools to use, and how to boost your productivity 10x.",
+    excerpt:
+      "New to AI coding assistants? Learn what agents are, which tools to use, and how to boost your productivity 10x.",
     author: "AgentDepot Team",
     date: "2025-12-04",
     readTime: "12 min read",
@@ -577,12 +583,13 @@ AI coding agents are the future of software development. They don't replace deve
 Start with one agent today. Your future self will thank you.
 
 [Explore agents on AgentDepot →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "custom-windsurf-flows-guide",
     title: "How to Create Custom Windsurf Flows: A Complete Guide",
-    excerpt: "Master Windsurf's Flow mode and learn how to create multi-step AI workflows that handle complex coding tasks autonomously.",
+    excerpt:
+      "Master Windsurf's Flow mode and learn how to create multi-step AI workflows that handle complex coding tasks autonomously.",
     author: "AgentDepot Team",
     date: "2025-12-05",
     readTime: "9 min read",
@@ -774,12 +781,13 @@ Windsurf Flows are the closest thing we have to **autonomous AI development**. T
 Master Flows, and you'll code 10x faster.
 
 Find more [Windsurf rules on AgentDepot →](https://agentdepot.dev/windsurf)
-    `
+    `,
   },
   {
     slug: "ai-agents-vs-cursor-rules",
     title: "AI Agents vs Cursor Rules: What's the Difference?",
-    excerpt: "Confused about agents, rules, prompts, and MCP servers? We break down the terminology and show you what to use when.",
+    excerpt:
+      "Confused about agents, rules, prompts, and MCP servers? We break down the terminology and show you what to use when.",
     author: "AgentDepot Team",
     date: "2025-12-06",
     readTime: "6 min read",
@@ -923,12 +931,13 @@ Here's the TL;DR:
 Stop worrying about terminology. Start installing agents and shipping faster.
 
 [Browse agents by tool →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "productivity-hacks-ai-coding-2025",
     title: "7 AI Coding Productivity Hacks That Will Change How You Ship",
-    excerpt: "Stop using AI as a fancy autocomplete. Here are advanced techniques that will 10x your development speed.",
+    excerpt:
+      "Stop using AI as a fancy autocomplete. Here are advanced techniques that will 10x your development speed.",
     author: "AgentDepot Team",
     date: "2025-12-07",
     readTime: "8 min read",
@@ -1120,12 +1129,13 @@ These 7 hacks turn AI from a fancy autocomplete into a true force multiplier.
 Try one today. Master all seven, and you'll ship **10x faster** with **better quality**.
 
 Find the [best agents for your stack on AgentDepot →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "complete-guide-replit-templates",
     title: "Replit Templates: The Complete Guide to Instant Development Environments",
-    excerpt: "Learn how Replit templates can get you from idea to running code in 30 seconds. Perfect for prototyping, education, and rapid development.",
+    excerpt:
+      "Learn how Replit templates can get you from idea to running code in 30 seconds. Perfect for prototyping, education, and rapid development.",
     author: "AgentDepot Team",
     date: "2025-12-08",
     readTime: "7 min read",
@@ -1314,12 +1324,13 @@ Replit templates remove the friction between "idea" and "running code".
 Whether you're teaching, learning, prototyping, or building, templates get you started in seconds instead of hours.
 
 [Browse Replit templates on AgentDepot →](https://agentdepot.dev/replit)
-    `
+    `,
   },
   {
     slug: "security-best-practices-ai-agents",
     title: "Security Best Practices for AI Coding Agents: What You Need to Know",
-    excerpt: "AI agents can access your code, run commands, and modify files. Here's how to use them safely without compromising your projects or data.",
+    excerpt:
+      "AI agents can access your code, run commands, and modify files. Here's how to use them safely without compromising your projects or data.",
     author: "AgentDepot Team",
     date: "2025-12-09",
     readTime: "10 min read",
@@ -1570,12 +1581,13 @@ Follow these practices:
 Code smarter, not more dangerously.
 
 [Find vetted agents on AgentDepot →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "python-ai-agents-complete-guide",
     title: "Best AI Agents for Python Developers: Complete 2025 Guide",
-    excerpt: "From Django to FastAPI, data science to automation, here are the must-have AI agents every Python developer should install.",
+    excerpt:
+      "From Django to FastAPI, data science to automation, here are the must-have AI agents every Python developer should install.",
     author: "AgentDepot Team",
     date: "2025-12-10",
     readTime: "9 min read",
@@ -1908,12 +1920,13 @@ Python AI agents transform how you code:
 Start with 2-3 agents that match your current project, then explore more.
 
 [Browse Python agents on AgentDepot →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "deepseek-r1-vs-claude-3-5-sonnet",
     title: "DeepSeek R1 vs Claude 3.5 Sonnet: The Open Source Showdown",
-    excerpt: "Can the new open-weights champion DeepSeek R1 dethrone Anthropic's coding king? We tested both on real-world coding tasks.",
+    excerpt:
+      "Can the new open-weights champion DeepSeek R1 dethrone Anthropic's coding king? We tested both on real-world coding tasks.",
     author: "AgentDepot Team",
     date: "2025-12-08",
     readTime: "9 min read",
@@ -1993,12 +2006,13 @@ For autonomous agents that need to "think" for a long time, DeepSeek changes the
 - **Heavy Lifting:** If you are running local agents or batch processing, switch to DeepSeek.
 
 [Find DeepSeek powered agents on AgentDepot →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "mastering-ai-context-files",
     title: "Mastering Context: How to Feed Your AI Agent the Right Files",
-    excerpt: "The #1 reason AI fails is missing context. Learn the art of selecting the perfect file mix for your Cursor or Windsurf sessions.",
+    excerpt:
+      "The #1 reason AI fails is missing context. Learn the art of selecting the perfect file mix for your Cursor or Windsurf sessions.",
     author: "AgentDepot Team",
     date: "2025-12-09",
     readTime: "7 min read",
@@ -2060,12 +2074,13 @@ This gives the AI a "brain" to refer to that is cleaner than reading 50 raw code
 Better input = Better output.
 
 [Check out our Context Optimization Rules →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "python-fastapi-cursor-rules",
     title: "Essential Cursor Rules for Python & FastAPI Developers",
-    excerpt: "Stop writing boilerplate. These 5 Cursor rules will force your AI to write type-safe, production-ready Python code.",
+    excerpt:
+      "Stop writing boilerplate. These 5 Cursor rules will force your AI to write type-safe, production-ready Python code.",
     author: "AgentDepot Team",
     date: "2025-12-10",
     readTime: "6 min read",
@@ -2127,12 +2142,13 @@ Don't let it use \`unittest\`.
 Combine these into your \`.cursorrules\` file at the root of your repository. Your AI will go from writing "script-kiddie" Python to senior engineering code instantly.
 
 [Download the full Python Rule Pack on AgentDepot →](https://agentdepot.dev/python)
-    `
+    `,
   },
   {
     slug: "5-mistakes-ai-coding-agents",
     title: "5 Common Mistakes When Using AI Coding Agents",
-    excerpt: "Are you wasting time with AI? Here are the top 5 pitfalls developers fall into when using tools like Cursor and Windsurf.",
+    excerpt:
+      "Are you wasting time with AI? Here are the top 5 pitfalls developers fall into when using tools like Cursor and Windsurf.",
     author: "AgentDepot Team",
     date: "2025-12-11",
     readTime: "5 min read",
@@ -2172,12 +2188,13 @@ We have analyzed thousands of developer interactions with AI agents. The same pa
 AI agents are multipliers. If you have bad habits, they multiply your bad habits. If you have disciplined workflows, they make you unstoppable.
 
 [Optimize your workflow with our Rules →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "glm-4-6-vs-claude-agent-showdown",
     title: "Why GLM-4.6 is the New King of Autonomous Agents (Sorry, Claude)",
-    excerpt: "Zhipu AI just dropped GLM-4.6 and it changes everything for agentic workflows. We tested its tool-use capabilities against Claude 3.5 Sonnet.",
+    excerpt:
+      "Zhipu AI just dropped GLM-4.6 and it changes everything for agentic workflows. We tested its tool-use capabilities against Claude 3.5 Sonnet.",
     author: "AgentDepot Team",
     date: "2025-12-12",
     readTime: "8 min read",
@@ -2240,12 +2257,13 @@ It is not yet integrated into Cursor by default, but you can use it via:
 Claude 3.5 Sonnet is still better at writing creative poetry or explaining philosophy. But if you are building a **worker agent**—one that needs to execute strict logic, handle tools, and obey schemas—GLM-4.6 is the new state of the art.
 
 [Check out our GLM-4.6 Agent Templates →](https://agentdepot.dev)
-    `
+    `,
   },
   {
     slug: "opencode-cli-agent-review",
     title: "OpenCode: The Terminal-Based AI Agent That Puts You in Control",
-    excerpt: "Tired of bloated AI extensions? OpenCode is a lightning-fast, open-source CLI agent that works with any model (including local LLaMA).",
+    excerpt:
+      "Tired of bloated AI extensions? OpenCode is a lightning-fast, open-source CLI agent that works with any model (including local LLaMA).",
     author: "AgentDepot Team",
     date: "2025-12-13",
     readTime: "6 min read",
@@ -2319,6 +2337,226 @@ If you already possess the muscle memory for the terminal, OpenCode feels like a
 OpenCode isn't trying to replace Cursor for full project development. But for quick tasks, server management, and terminal junkies, it is the best tool we have seen this year.
 
 [Get started with OpenCode →](https://github.com/opencode-ai/opencode)
-    `
+    `,
+  },
+  {
+    slug: "agents-md-standard-guide",
+    title: "AGENTS.md: One File to Steer Every AI Coding Agent",
+    excerpt:
+      "AGENTS.md is the README for your AI agents — a single Markdown file that tells Cursor, Claude Code, Copilot, and 20+ other tools how to work in your repo. Here's how to write a good one.",
+    author: "AgentDepot Team",
+    date: "2026-05-27",
+    readTime: "7 min read",
+    tags: ["AGENTS.md", "Best Practices", "AI Agents"],
+    content: `
+# AGENTS.md: One File to Steer Every AI Coding Agent
+
+If a README explains your project to humans, **AGENTS.md** explains it to machines. It is a single Markdown file at the root of your repo that tells AI coding agents how to build, test, and work in your codebase — the conventions they would otherwise guess at (and get wrong).
+
+The idea caught on fast because it solved a real annoyance: every tool was inventing its own config file. \`.cursorrules\`, \`.github/copilot-instructions.md\`, \`.windsurfrules\`, \`CLAUDE.md\` — the same information, in five places, all drifting out of sync. AGENTS.md is the convergence point.
+
+## Who actually reads it?
+
+This is the part that makes AGENTS.md worth adopting today rather than "someday." It is read natively by a long and growing list of tools — Cursor, Claude Code, OpenAI Codex, GitHub Copilot, Gemini CLI, Aider, Windsurf, Zed, Jules, Factory, and 20+ others — and is now stewarded by the Linux Foundation's Agentic AI Foundation. As of 2026 it ships in **60,000+ public repositories**.
+
+Practically: drop one file in your repo root and most agents your team already uses will pick it up with zero configuration.
+
+## What goes in it
+
+There is **no required schema** — it is just Markdown. That is a feature, not a gap: the same file is readable by a model and by a new teammate. A good AGENTS.md answers the questions an agent asks on its first task:
+
+- **How do I run this?** Dev server, build, and the canonical test command.
+- **What are the house rules?** Language, formatting, lint, naming conventions.
+- **What should I not touch?** Generated files, vendored code, migrations.
+- **How is the project laid out?** The 30-second tour of the directory structure.
+
+Here is a compact, realistic example:
+
+\`\`\`md
+# AGENTS.md
+
+## Setup
+- Install: \`npm install\`
+- Dev server: \`npm run dev\`
+- Run before every PR: \`npm run lint && npm run typecheck && npm test\`
+
+## Conventions
+- TypeScript strict mode. No \`any\`.
+- Use \`next/link\` for internal navigation, never a raw anchor tag.
+- Prettier is the source of truth for formatting — do not hand-format.
+
+## Project layout
+- \`src/app\` — Next.js App Router pages
+- \`src/components\` — UI components
+- \`src/lib\` — utilities and third-party clients
+
+## Guardrails
+- Never edit files in \`src/data/\` by hand; they are synced from another repo.
+- Don't commit secrets — use environment variables.
+\`\`\`
+
+## Tips that make a measurable difference
+
+**1. Put the test command front and center.** The single highest-leverage line in the file is the exact command an agent should run to check its own work. Agents that can self-verify produce dramatically fewer broken changes.
+
+**2. Write rules as imperatives, not vibes.** "Use async/await, not .then() chains" beats "write clean async code." Agents follow concrete instructions far more reliably than aspirational ones.
+
+**3. Keep it short and current.** A 40-line file that is true beats a 400-line file that is half-stale. Treat it like code: when a convention changes, update AGENTS.md in the same change.
+
+**4. Nest when you need to.** Large monorepos can put an AGENTS.md in each package; agents read the closest one to the file they are editing.
+
+## AGENTS.md vs. tool-specific rules
+
+You don't have to throw away your \`.cursorrules\` overnight. Most teams adopt AGENTS.md as the shared baseline and keep a thin tool-specific file only for genuinely tool-specific behavior. Over time, the shared file tends to absorb the rest.
+
+| | AGENTS.md | Tool-specific rules |
+| :--- | :--- | :--- |
+| **Portability** | Every major agent | One tool |
+| **Format** | Plain Markdown | Varies |
+| **Best for** | Shared project context | Tool-only quirks |
+
+## The bottom line
+
+AGENTS.md is the rare standard that is both trivial to adopt and immediately useful. It costs you ten minutes and one file, and it makes every agent on your team meaningfully better at its job — today, not after some migration. If you maintain an open-source project, it is also a courtesy to the growing share of contributors who show up with an agent in tow.
+
+Browse battle-tested rules and agent configs for every major tool in the [AgentDepot directory →](https://agentdepot.dev)
+    `,
+  },
+  {
+    slug: "best-mcp-servers-2026",
+    title: "The MCP Servers Worth Installing in 2026",
+    excerpt:
+      "The Model Context Protocol ecosystem has exploded into hundreds of servers. Here are the battle-tested, free ones actually worth connecting to your agent — and how to vet the rest.",
+    author: "AgentDepot Team",
+    date: "2026-05-20",
+    readTime: "7 min read",
+    tags: ["MCP", "Tools", "Best Of"],
+    content: `
+# The MCP Servers Worth Installing in 2026
+
+The Model Context Protocol (MCP) did for AI tools what USB did for hardware: one standard plug. Instead of every assistant reinventing integrations, an MCP server exposes a capability — your filesystem, a database, a browser — and any MCP-aware client (Claude Code, Cursor, and many others) can use it.
+
+The flip side of that success is noise. There are now hundreds of servers, ranging from essential to barely functional. This is a short, opinionated list of the **free, open-source** ones that have earned a permanent spot in our setup — plus how to judge the ones that haven't.
+
+## The official reference servers
+
+Start here. These are maintained by the MCP steering group in the [modelcontextprotocol/servers](https://github.com/modelcontextprotocol/servers) repo, which means they track the spec closely and aren't going to disappear next quarter.
+
+- **Filesystem** — scoped read/write access to directories you explicitly allow. The foundation for almost any coding workflow.
+- **Git** — inspect history, diffs, and branches without the agent shelling out blindly.
+- **Fetch** — pull a URL and hand the agent clean, readable content. The simplest way to ground answers in real pages.
+- **Memory** — a knowledge-graph store so an agent can remember facts across sessions.
+- **Sequential Thinking** — structured, step-by-step reasoning for harder multi-step tasks.
+- **Time** — timezone and date conversions (boring, and surprisingly handy).
+
+If you install nothing else, **Filesystem + Git + Fetch** covers the majority of day-to-day coding needs.
+
+## The integrations worth adding
+
+Once the basics are in place, these official and well-maintained servers pull their weight:
+
+- **GitHub** — the official server lets an agent read code, manage issues and PRs, and run changes against a repo. If your work lives on GitHub, this is the highest-leverage add.
+- **Postgres / SQLite** — let the agent inspect your schema and run read-only queries. Enormous for "why is this query slow?" sessions.
+- **Playwright / Puppeteer** — give the agent a real browser to navigate, fill forms, and screenshot. The backbone of agentic end-to-end testing.
+
+## How to vet a server before you trust it
+
+An MCP server runs with real permissions on your machine or in your cloud. Treat installing one like adding a dependency — because that is exactly what it is.
+
+1. **Read what it can do.** An MCP server declares its tools. Skim them. A "read-only docs" server that asks to run shell commands is a red flag.
+2. **Prefer least privilege.** Point the Filesystem server at a project directory, not your home folder. Use read-only database credentials when you only need to inspect.
+3. **Check who maintains it.** Official (\`modelcontextprotocol\`) and first-party vendor servers are safer bets than an anonymous one-off.
+4. **Pin the version.** Don't auto-run the latest tag for something with filesystem or network access. Pin it, and read the changelog before bumping.
+
+## A minimal, sane config
+
+Most clients use a JSON config that maps a server name to a command. A starter that is useful without being reckless:
+
+\`\`\`json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/path/to/your/project"]
+    },
+    "git": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/path/to/your/project"]
+    }
   }
+}
+\`\`\`
+
+Note the explicit path: the Filesystem server only sees what you point it at.
+
+## The bottom line
+
+The right number of MCP servers is "the fewest that unblock your actual work." Start with the official reference servers, add GitHub and a database server if you need them, and apply the same scrutiny you would to any dependency. Resist the urge to install a dozen at once — every server is surface area, and an agent with too many tools gets *worse*, not better, at choosing the right one.
+
+Browse curated, free MCP servers — with install commands for each — in the [AgentDepot directory →](https://agentdepot.dev/mcp)
+    `,
+  },
+  {
+    slug: "cursor-vs-claude-code-vs-windsurf-2026",
+    title: "Cursor vs Claude Code vs Windsurf: Choosing Your AI Setup in 2026",
+    excerpt:
+      "Three of the most popular AI coding tools take three different shapes — an editor, a terminal agent, and an agentic IDE. Here's how to pick based on how you actually work.",
+    author: "AgentDepot Team",
+    date: "2026-05-13",
+    readTime: "8 min read",
+    tags: ["Comparison", "Cursor", "Claude Code"],
+    content: `
+# Cursor vs Claude Code vs Windsurf: Choosing Your AI Setup in 2026
+
+"Which AI coding tool should I use?" is the wrong question. The better one is "which *shape* of tool fits how I work?" Cursor, Claude Code, and Windsurf are all excellent and all converging on similar capabilities — but they start from three genuinely different places. Pick the shape first; the details matter less than the fit.
+
+A note up front: all three are model-flexible and improving constantly, so this is deliberately about **workflow and ergonomics**, not a benchmark leaderboard that will be stale next month.
+
+## Cursor — the editor that happens to be an AI
+
+Cursor is a fork of VS Code, which is its whole pitch: everything you know about VS Code still works — extensions, keybindings, settings — plus AI woven deep into the editing surface. Inline edits, multi-file changes, and a chat that sees your codebase.
+
+**Best fit if:** you live in a GUI editor, you want the lowest switching cost from VS Code, and you like a tight edit-review loop where you see every change as it lands.
+
+**The trade-off:** it's a full editor. If you mostly work over SSH or in the terminal, that's a lot of GUI to carry around.
+
+## Claude Code — the terminal-native agent
+
+Claude Code runs in your terminal and leans agentic: you describe an outcome, it explores the repo, makes a plan, edits across files, and can run your tests to check itself. It reads \`AGENTS.md\` / \`CLAUDE.md\` for project context and is comfortable owning a multi-step task end to end.
+
+**Best fit if:** you're comfortable in the terminal, you want an agent that can take a larger task and run with it, and you value using it anywhere a shell runs — including a remote server.
+
+**The trade-off:** it asks you to trust an agent with more autonomy. That's a strength when you've set good guardrails (a clear test command, a tidy \`AGENTS.md\`) and a liability when you haven't.
+
+## Windsurf — the agentic IDE
+
+Windsurf (from the Codeium team) is a full editor like Cursor, but its identity is the **agent flow**: longer-running, more autonomous sequences where the agent keeps context across many steps. It aims to feel like pairing with something that remembers what you were doing three steps ago.
+
+**Best fit if:** you want a polished GUI *and* aggressive agentic automation, and you like the agent maintaining momentum across a long task rather than checking in at every step.
+
+**The trade-off:** more autonomy inside a GUI means you'll want to watch the diffs. Great when it's right; you don't want it confidently wrong for ten steps.
+
+## A quick side-by-side
+
+| | Cursor | Claude Code | Windsurf |
+| :--- | :--- | :--- | :--- |
+| **Shape** | VS Code fork | Terminal agent | Agentic IDE |
+| **Lives in** | GUI editor | Terminal | GUI editor |
+| **Sweet spot** | Tight edit loops | Autonomous tasks | Long agent flows |
+| **Remote / SSH** | Awkward | Native | Awkward |
+| **Switching cost from VS Code** | Near zero | New muscle memory | Low |
+
+## You don't have to choose just one
+
+The best-kept secret is that these tools compose. Plenty of developers keep a GUI editor (Cursor or Windsurf) open for hands-on work and reach for a terminal agent (Claude Code) for big refactors or remote fixes. They read overlapping config — an \`AGENTS.md\` you write once steers all of them — so running two isn't the tax it used to be.
+
+## How to actually decide
+
+1. **Default to your current habitat.** VS Code person? Start with Cursor. Terminal person? Start with Claude Code.
+2. **Match autonomy to your guardrails.** The more autonomous the tool, the more your tests and project rules matter. Strong guardrails unlock the agentic tools; weak ones make them risky.
+3. **Try one on a real task, not a demo.** Tool fit shows up on your actual codebase, not a toy example. Give each a genuine ticket before deciding.
+
+Whichever you land on, the force multiplier is the same: good project rules and the right agents installed. Browse them by tool in the [AgentDepot directory →](https://agentdepot.dev)
+    `,
+  },
 ];
