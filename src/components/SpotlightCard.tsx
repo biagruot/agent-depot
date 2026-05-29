@@ -2,7 +2,6 @@
 
 import { useRef, useState, MouseEvent } from "react";
 
-
 interface SpotlightCardProps {
   children: React.ReactNode;
   className?: string;
@@ -12,7 +11,7 @@ interface SpotlightCardProps {
 export function SpotlightCard({
   children,
   className = "",
-  spotlightColor = "rgba(255, 255, 255, 0.15)"
+  spotlightColor = "rgba(255, 255, 255, 0.15)",
 }: SpotlightCardProps) {
   const divRef = useRef<HTMLDivElement>(null);
   const [position, setPosition] = useState({ x: 0, y: 0 });

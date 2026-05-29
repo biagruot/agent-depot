@@ -5,14 +5,14 @@ import { PageTracker } from "@/components/PageTracker";
 
 export const metadata = {
   title: "Submit an Agent - AgentDepot",
-  description: "Submit your AI coding agent to AgentDepot. Help the community discover the best agents for Claude, Windsurf, Cursor, and Replit.",
+  description:
+    "Submit your AI coding agent to AgentDepot. Help the community discover the best agents for Claude, Windsurf, Cursor, and Replit.",
 };
 
 export default function SubmitPage() {
   return (
     <main className="min-h-screen relative pb-32">
       <PageTracker />
-
 
       <div className="container mx-auto px-4 max-w-4xl relative z-10">
         {/* Header */}
@@ -25,16 +25,17 @@ export default function SubmitPage() {
               </span>
               Join 70+ agents in the directory
             </div>
-            
+
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold bg-gradient-to-br from-white via-white to-gray-400 bg-clip-text text-transparent animate-fade-in leading-tight">
               Ship It.
             </h1>
 
             <p className="text-lg md:text-xl text-gray-400 font-light tracking-wide max-w-2xl mx-auto">
-              Don&apos;t let your agent gather dust. Share it with 10k+ devs and grow your community.
+              Don&apos;t let your agent gather dust. Share it with 10k+ devs and grow your
+              community.
             </p>
           </div>
-          
+
           {/* Quick stats */}
           <div className="flex items-center justify-center gap-8 pt-4">
             <div className="text-center">
@@ -59,7 +60,9 @@ export default function SubmitPage() {
 
         {/* Alternative Methods */}
         <div className="mt-24 pt-16 border-t border-white/10">
-          <h2 className="text-2xl font-bold text-center text-white mb-8">Other Submission Methods</h2>
+          <h2 className="text-2xl font-bold text-center text-white mb-8">
+            Other Submission Methods
+          </h2>
 
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
             <Link
@@ -77,7 +80,8 @@ export default function SubmitPage() {
                 Push to GitHub. Open an issue, we&apos;ll merge it.
               </p>
               <div className="mt-auto flex items-center text-sm font-medium text-purple-400 group-hover:text-purple-300">
-                Open Issue <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                Open Issue{" "}
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>
 
@@ -95,7 +99,8 @@ export default function SubmitPage() {
                 Old school? That works too. Send us the details.
               </p>
               <div className="mt-auto flex items-center text-sm font-medium text-blue-400 group-hover:text-blue-300">
-                Send Email <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
+                Send Email{" "}
+                <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" />
               </div>
             </Link>
           </div>
@@ -112,7 +117,9 @@ export default function SubmitPage() {
               <ul className="space-y-4 text-gray-400 text-sm">
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />
-                  <span>Agent must be relevant to AI coding (Claude, Windsurf, Cursor, Replit).</span>
+                  <span>
+                    Agent must be relevant to AI coding (Claude, Windsurf, Cursor, Replit).
+                  </span>
                 </li>
                 <li className="flex items-start gap-3">
                   <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0" />

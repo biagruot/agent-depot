@@ -35,7 +35,7 @@ export function EmailSignup() {
         setStatus("success");
         // Use the message from the API or fallback
         setMessage(data.message || "Thanks! You're on the list 🎉");
-        track('email_signup', { email });
+        track("email_signup", { email });
         setEmail("");
         setTimeout(() => setStatus("idle"), 5000);
       } else {
@@ -53,12 +53,8 @@ export function EmailSignup() {
   return (
     <div className="w-full max-w-md mx-auto">
       <div className="text-center mb-4">
-        <h3 className="text-lg font-semibold text-white mb-2">
-          Weekly Drop.
-        </h3>
-        <p className="text-sm text-gray-400">
-          No spam. Just high-signal agents.
-        </p>
+        <h3 className="text-lg font-semibold text-white mb-2">Weekly Drop.</h3>
+        <p className="text-sm text-gray-400">No spam. Just high-signal agents.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
@@ -78,9 +74,10 @@ export function EmailSignup() {
           disabled={status === "loading" || status === "success"}
           className={`
             px-6 py-2.5 rounded-lg font-medium transition-all duration-200 flex items-center justify-center gap-2 whitespace-nowrap
-            ${status === "success"
-              ? "bg-green-500/20 text-green-400 border border-green-500/30"
-              : "bg-white text-black hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            ${
+              status === "success"
+                ? "bg-green-500/20 text-green-400 border border-green-500/30"
+                : "bg-white text-black hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
             }
           `}
         >
@@ -104,7 +101,9 @@ export function EmailSignup() {
       </form>
 
       {message && (
-        <p className={`text-sm mt-3 text-center ${status === "error" ? "text-red-400" : "text-green-400"}`}>
+        <p
+          className={`text-sm mt-3 text-center ${status === "error" ? "text-red-400" : "text-green-400"}`}
+        >
           {message}
         </p>
       )}

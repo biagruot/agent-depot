@@ -22,7 +22,7 @@ interface Suggestion {
 export function SearchAutocomplete({
   searchQuery,
   setSearchQuery,
-  placeholder = "Search agents, rules, plugins..."
+  placeholder = "Search agents, rules, plugins...",
 }: SearchAutocompleteProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(-1);
@@ -32,13 +32,13 @@ export function SearchAutocomplete({
   // Extract unique authors and tags
   const uniqueAuthors = useMemo(() => {
     const authors = new Set<string>();
-    agents.forEach(agent => authors.add(agent.author.name));
+    agents.forEach((agent) => authors.add(agent.author.name));
     return Array.from(authors);
   }, []);
 
   const uniqueTags = useMemo(() => {
     const tags = new Set<string>();
-    agents.forEach(agent => agent.tags.forEach(tag => tags.add(tag)));
+    agents.forEach((agent) => agent.tags.forEach((tag) => tags.add(tag)));
     return Array.from(tags);
   }, []);
 
@@ -51,38 +51,38 @@ export function SearchAutocomplete({
 
     // 1. Match Agents (Limit 3)
     const matchedAgents = agents
-      .filter(agent => agent.name.toLowerCase().includes(query))
+      .filter((agent) => agent.name.toLowerCase().includes(query))
       .slice(0, 3)
-      .map(agent => ({
+      .map((agent) => ({
         id: `agent-${agent.id}`,
         type: "agent" as const,
         label: agent.name,
         subLabel: `by ${agent.author.name}`,
-        value: agent.name
+        value: agent.name,
       }));
     results.push(...matchedAgents);
 
     // 2. Match Authors (Limit 2)
     const matchedAuthors = uniqueAuthors
-      .filter(author => author.toLowerCase().includes(query))
+      .filter((author) => author.toLowerCase().includes(query))
       .slice(0, 2)
-      .map(author => ({
+      .map((author) => ({
         id: `author-${author}`,
         type: "author" as const,
         label: author,
-        value: author
+        value: author,
       }));
     results.push(...matchedAuthors);
 
     // 3. Match Tags (Limit 3)
     const matchedTags = uniqueTags
-      .filter(tag => tag.toLowerCase().includes(query))
+      .filter((tag) => tag.toLowerCase().includes(query))
       .slice(0, 3)
-      .map(tag => ({
+      .map((tag) => ({
         id: `tag-${tag}`,
         type: "tag" as const,
         label: tag,
-        value: tag
+        value: tag,
       }));
     results.push(...matchedTags);
 
@@ -120,10 +120,10 @@ export function SearchAutocomplete({
 
     if (e.key === "ArrowDown") {
       e.preventDefault();
-      setSelectedIndex(prev => (prev < suggestions.length - 1 ? prev + 1 : 0));
+      setSelectedIndex((prev) => (prev < suggestions.length - 1 ? prev + 1 : 0));
     } else if (e.key === "ArrowUp") {
       e.preventDefault();
-      setSelectedIndex(prev => (prev > 0 ? prev - 1 : suggestions.length - 1));
+      setSelectedIndex((prev) => (prev > 0 ? prev - 1 : suggestions.length - 1));
     } else if (e.key === "Enter") {
       e.preventDefault();
       if (selectedIndex >= 0) {
@@ -148,18 +148,20 @@ export function SearchAutocomplete({
   };
 
   // Highlight matching text
-  const HighlightedText = ({ text, highlight }: { text: string, highlight: string }) => {
+  const HighlightedText = ({ text, highlight }: { text: string; highlight: string }) => {
     if (!highlight.trim()) return <span>{text}</span>;
 
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
+    const parts = text.split(new RegExp(`(${highlight})`, "gi"));
     return (
       <span>
         {parts.map((part, i) =>
           part.toLowerCase() === highlight.toLowerCase() ? (
-            <span key={i} className="text-white font-semibold">{part}</span>
+            <span key={i} className="text-white font-semibold">
+              {part}
+            </span>
           ) : (
             <span key={i}>{part}</span>
-          )
+          ),
         )}
       </span>
     );
@@ -219,17 +221,23 @@ export function SearchAutocomplete({
                 key={suggestion.id}
                 onClick={() => handleSelect(suggestion)}
                 onMouseEnter={() => setSelectedIndex(index)}
-                className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors ${index === selectedIndex ? "bg-white/10" : "hover:bg-white/5"
-                  }`}
+                className={`w-full px-4 py-3 flex items-center gap-3 text-left transition-colors ${
+                  index === selectedIndex ? "bg-white/10" : "hover:bg-white/5"
+                }`}
               >
                 {/* Icon based on type */}
-                <div className={`p-2 rounded-lg ${suggestion.type === 'agent' ? 'bg-blue-500/10 text-blue-400' :
-                  suggestion.type === 'author' ? 'bg-purple-500/10 text-purple-400' :
-                    'bg-orange-500/10 text-orange-400'
-                  }`}>
-                  {suggestion.type === 'agent' && <Bot className="w-4 h-4" />}
-                  {suggestion.type === 'author' && <User className="w-4 h-4" />}
-                  {suggestion.type === 'tag' && <Tag className="w-4 h-4" />}
+                <div
+                  className={`p-2 rounded-lg ${
+                    suggestion.type === "agent"
+                      ? "bg-blue-500/10 text-blue-400"
+                      : suggestion.type === "author"
+                        ? "bg-purple-500/10 text-purple-400"
+                        : "bg-orange-500/10 text-orange-400"
+                  }`}
+                >
+                  {suggestion.type === "agent" && <Bot className="w-4 h-4" />}
+                  {suggestion.type === "author" && <User className="w-4 h-4" />}
+                  {suggestion.type === "tag" && <Tag className="w-4 h-4" />}
                 </div>
 
                 {/* Content */}
@@ -238,9 +246,7 @@ export function SearchAutocomplete({
                     <HighlightedText text={suggestion.label} highlight={searchQuery} />
                   </div>
                   {suggestion.subLabel && (
-                    <div className="text-xs text-gray-500 truncate">
-                      {suggestion.subLabel}
-                    </div>
+                    <div className="text-xs text-gray-500 truncate">{suggestion.subLabel}</div>
                   )}
                 </div>
 

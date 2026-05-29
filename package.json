@@ -2,11 +2,25 @@
   "name": "agent-depot",
   "version": "0.1.0",
   "private": true,
+  "license": "MIT",
+  "description": "An open directory of AI coding tools for Cursor, Windsurf, Claude Code, Replit, and MCP.",
+  "author": "Biagio Ruotolo",
+  "homepage": "https://agentdepot.dev",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/biagruot/agent-depot.git"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "sync-agents": "./scripts/sync-agents.sh"
   },
   "dependencies": {
@@ -37,7 +51,9 @@
     "baseline-browser-mapping": "^2.9.3",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
+    "prettier": "^3.8.3",
     "tailwindcss": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.7"
   }
 }

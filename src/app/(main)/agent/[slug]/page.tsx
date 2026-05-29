@@ -15,25 +15,36 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
   const { slug } = await params;
   const agent = agents.find((a) => a.id === slug);
 
   if (!agent) return { title: "Agent Not Found" };
 
-  const baseUrl = 'https://agentdepot.dev';
+  const baseUrl = "https://agentdepot.dev";
   const toolNames = {
     "claude-code": "Claude Code",
-    "windsurf": "Windsurf",
-    "cursor": "Cursor",
-    "replit": "Replit",
-    "mcp": "MCP",
+    windsurf: "Windsurf",
+    cursor: "Cursor",
+    replit: "Replit",
+    mcp: "MCP",
   };
 
   return {
     title: `${agent.name} - ${toolNames[agent.tool]} ${agent.type.charAt(0).toUpperCase() + agent.type.slice(1)} | AgentDepot`,
     description: agent.description,
-    keywords: [...agent.tags, agent.tool, agent.type, agent.category, "ai coding", "developer tools"],
+    keywords: [
+      ...agent.tags,
+      agent.tool,
+      agent.type,
+      agent.category,
+      "ai coding",
+      "developer tools",
+    ],
     openGraph: {
       title: `${agent.name} for ${toolNames[agent.tool]}`,
       description: agent.description,
@@ -83,29 +94,31 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
-    "name": agent.name,
-    "description": agent.description,
-    "applicationCategory": "DeveloperApplication",
-    "operatingSystem": "Cross-platform",
-    "offers": {
+    name: agent.name,
+    description: agent.description,
+    applicationCategory: "DeveloperApplication",
+    operatingSystem: "Cross-platform",
+    offers: {
       "@type": "Offer",
-      "price": "0",
-      "priceCurrency": "USD",
+      price: "0",
+      priceCurrency: "USD",
     },
-    "author": {
+    author: {
       "@type": "Person",
-      "name": agent.author.name,
-      "url": agent.author.url || agent.author.github,
+      name: agent.author.name,
+      url: agent.author.url || agent.author.github,
     },
-    "url": `https://agentdepot.dev/agent/${agent.id}`,
-    "keywords": agent.tags.join(", "),
-    "aggregateRating": agent.stats?.stars ? {
-      "@type": "AggregateRating",
-      "ratingValue": "5",
-      "bestRating": "5",
-      "worstRating": "1",
-      "ratingCount": agent.stats.stars,
-    } : undefined,
+    url: `https://agentdepot.dev/agent/${agent.id}`,
+    keywords: agent.tags.join(", "),
+    aggregateRating: agent.stats?.stars
+      ? {
+          "@type": "AggregateRating",
+          ratingValue: "5",
+          bestRating: "5",
+          worstRating: "1",
+          ratingCount: agent.stats.stars,
+        }
+      : undefined,
   };
 
   return (
@@ -120,8 +133,8 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
       <PageTracker agentId={agent.id} tool={agent.tool} />
 
       <div className="container mx-auto px-4 pt-32 max-w-5xl relative z-10">
-        <Link 
-          href="/" 
+        <Link
+          href="/"
           className="inline-flex items-center text-sm text-gray-500 hover:text-white mb-8 transition-colors group"
         >
           <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
@@ -130,29 +143,35 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
 
         <div className="glass-panel rounded-3xl p-8 md:p-12 shadow-2xl shadow-black/50 relative overflow-hidden">
           {/* Background Glow */}
-          <div className={`absolute top-0 right-0 w-[500px] h-[500px] bg-${agent.tool === 'claude-code' ? 'orange' : agent.tool === 'windsurf' ? 'blue' : agent.tool === 'cursor' ? 'purple' : 'orange'}-500/10 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3`} />
+          <div
+            className={`absolute top-0 right-0 w-[500px] h-[500px] bg-${agent.tool === "claude-code" ? "orange" : agent.tool === "windsurf" ? "blue" : agent.tool === "cursor" ? "purple" : "orange"}-500/10 blur-[100px] rounded-full pointer-events-none -translate-y-1/2 translate-x-1/3`}
+          />
 
           {/* Header */}
           <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12 border-b border-white/5 pb-12 relative">
             <div className="space-y-6 max-w-2xl">
               <div className="flex items-center gap-3">
-                <span className={`px-3 py-1 rounded-full text-xs font-medium border uppercase tracking-wider ${toolColors[agent.tool]}`}>
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-medium border uppercase tracking-wider ${toolColors[agent.tool]}`}
+                >
                   {agent.tool}
                 </span>
                 <span className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 text-gray-400 border border-white/10 uppercase tracking-wider">
                   {agent.category}
                 </span>
               </div>
-              
+
               <div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-white">{agent.name}</h1>
+                <h1 className="text-4xl md:text-5xl font-bold mb-4 tracking-tight text-white">
+                  {agent.name}
+                </h1>
                 <p className="text-xl text-gray-400 leading-relaxed">{agent.description}</p>
               </div>
 
               <div className="flex flex-wrap gap-3 pt-2">
                 {agent.links?.github && (
-                  <Link 
-                    href={agent.links.github} 
+                  <Link
+                    href={agent.links.github}
                     target="_blank"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 transition-colors text-sm font-medium"
                   >
@@ -161,8 +180,8 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
                   </Link>
                 )}
                 {agent.links?.website && (
-                  <Link 
-                    href={agent.links.website} 
+                  <Link
+                    href={agent.links.website}
                     target="_blank"
                     className="inline-flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg border border-white/10 transition-colors text-sm font-medium"
                   >
@@ -172,29 +191,29 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
                 )}
               </div>
             </div>
-            
+
             {/* Stats / Meta */}
             <div className="flex flex-col gap-4 min-w-[200px]">
-               <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">
-                  <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Author</div>
-                  <div className="font-medium text-white flex items-center gap-2">
-                    {agent.author.url || agent.author.github ? (
-                      <Link
-                        href={agent.author.url || agent.author.github || '#'}
-                        target="_blank"
-                        className="hover:text-blue-400 transition-colors"
-                      >
-                        {agent.author.name}
-                      </Link>
-                    ) : (
-                      agent.author.name
-                    )}
-                  </div>
-               </div>
-               <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">
-                  <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Added</div>
-                  <div className="font-medium text-white">{agent.createdAt}</div>
-               </div>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">
+                <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Author</div>
+                <div className="font-medium text-white flex items-center gap-2">
+                  {agent.author.url || agent.author.github ? (
+                    <Link
+                      href={agent.author.url || agent.author.github || "#"}
+                      target="_blank"
+                      className="hover:text-blue-400 transition-colors"
+                    >
+                      {agent.author.name}
+                    </Link>
+                  ) : (
+                    agent.author.name
+                  )}
+                </div>
+              </div>
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/5 backdrop-blur-sm">
+                <div className="text-xs text-gray-500 uppercase tracking-wider mb-1">Added</div>
+                <div className="font-medium text-white">{agent.createdAt}</div>
+              </div>
             </div>
           </div>
 
@@ -208,30 +227,32 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
               <section className="space-y-8">
                 <div className="prose prose-invert max-w-none prose-p:text-gray-400 prose-headings:text-white prose-a:text-blue-400 prose-code:text-pink-300 prose-code:bg-white/5 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-code:before:content-none prose-code:after:content-none">
                   <h2 className="text-lg font-semibold mb-4 text-white">About this Agent</h2>
-                  <ReactMarkdown>
-                    {agent.description}
-                  </ReactMarkdown>
+                  <ReactMarkdown>{agent.description}</ReactMarkdown>
                 </div>
 
-                {agent.fullDescription && (
-                  agent.type === 'rule' ? (
+                {agent.fullDescription &&
+                  (agent.type === "rule" ? (
                     <RuleBlock content={agent.fullDescription} />
                   ) : (
                     <div className="text-gray-400 whitespace-pre-wrap leading-relaxed pt-4 border-t border-white/5 font-sans">
                       {agent.fullDescription}
                     </div>
-                  )
-                )}
+                  ))}
               </section>
             </div>
 
             {/* Sidebar */}
             <div className="space-y-8">
               <div>
-                <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-gray-500">Tags</h3>
+                <h3 className="font-semibold mb-4 text-sm uppercase tracking-wider text-gray-500">
+                  Tags
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {agent.tags.map(tag => (
-                    <span key={tag} className="px-3 py-1.5 bg-white/5 rounded-lg text-xs text-gray-300 border border-white/5 hover:border-white/20 transition-colors cursor-default">
+                  {agent.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="px-3 py-1.5 bg-white/5 rounded-lg text-xs text-gray-300 border border-white/5 hover:border-white/20 transition-colors cursor-default"
+                    >
                       #{tag}
                     </span>
                   ))}
@@ -243,7 +264,7 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
                 <p className="text-sm text-gray-400 mb-4">
                   Found a bug or want to improve this agent? Check out the source code.
                 </p>
-                <Link 
+                <Link
                   href={agent.links?.github || "#"}
                   target="_blank"
                   className="text-sm text-blue-400 hover:text-blue-300 flex items-center gap-1"

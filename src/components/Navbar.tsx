@@ -57,10 +57,7 @@ export function Navbar() {
                   href={link.href}
                   className={`
                     relative px-3 py-1.5 text-sm font-medium rounded-lg transition-all duration-200
-                    ${isActive(link.href)
-                      ? "text-white"
-                      : "text-gray-400 hover:text-white"
-                    }
+                    ${isActive(link.href) ? "text-white" : "text-gray-400 hover:text-white"}
                   `}
                 >
                   {link.label}
@@ -113,10 +110,7 @@ export function Navbar() {
               href={link.href}
               className={`
                 text-xs font-medium transition-colors
-                ${isActive(link.href)
-                  ? "text-white"
-                  : "text-gray-400 hover:text-white"
-                }
+                ${isActive(link.href) ? "text-white" : "text-gray-400 hover:text-white"}
               `}
             >
               {link.label}
@@ -127,4 +121,3 @@ export function Navbar() {
     </nav>
   );
 }
-

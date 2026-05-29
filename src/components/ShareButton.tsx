@@ -17,18 +17,24 @@ export function ShareButton({ agent, className = "" }: ShareButtonProps) {
   const [embedCopied, setEmbedCopied] = useState(false);
   const { track } = useOpenPanel();
 
-  const shareUrl = typeof window !== 'undefined' ? `${window.location.origin}/agent/${agent.id}` : `https://agentdepot.dev/agent/${agent.id}`;
-  const embedUrl = typeof window !== 'undefined' ? `${window.location.origin}/embed/${agent.id}` : `https://agentdepot.dev/embed/${agent.id}`;
+  const shareUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/agent/${agent.id}`
+      : `https://agentdepot.dev/agent/${agent.id}`;
+  const embedUrl =
+    typeof window !== "undefined"
+      ? `${window.location.origin}/embed/${agent.id}`
+      : `https://agentdepot.dev/embed/${agent.id}`;
   const shareText = `Check out ${agent.name} for ${agent.tool} on @AgentDepot 🔥`;
 
   const handleCopyLink = () => {
     navigator.clipboard.writeText(shareUrl);
     setCopied(true);
-    track('agent_share', {
-      platform: 'link',
+    track("agent_share", {
+      platform: "link",
       agent_id: agent.id,
       agent_name: agent.name,
-      tool: agent.tool
+      tool: agent.tool,
     });
     setTimeout(() => setCopied(false), 2000);
   };
@@ -37,34 +43,34 @@ export function ShareButton({ agent, className = "" }: ShareButtonProps) {
     const embedCode = `<iframe src="${embedUrl}" width="100%" height="250" style="border:none; border-radius: 12px; overflow: hidden;" title="${agent.name} on AgentDepot"></iframe>`;
     navigator.clipboard.writeText(embedCode);
     setEmbedCopied(true);
-    track('agent_share', {
-      platform: 'embed',
+    track("agent_share", {
+      platform: "embed",
       agent_id: agent.id,
       agent_name: agent.name,
-      tool: agent.tool
+      tool: agent.tool,
     });
     setTimeout(() => setEmbedCopied(false), 2000);
   };
 
   const handleTwitterShare = () => {
     const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
-    track('agent_share', {
-      platform: 'twitter',
+    track("agent_share", {
+      platform: "twitter",
       agent_id: agent.id,
       agent_name: agent.name,
-      tool: agent.tool
+      tool: agent.tool,
     });
-    window.open(url, '_blank');
+    window.open(url, "_blank");
   };
 
   const handleEmailShare = () => {
     const subject = `Check out this AI agent: ${agent.name}`;
     const body = `I found this great AI agent for ${agent.tool}:\n\n${agent.name}\n${agent.description}\n\nCheck it out here: ${shareUrl}`;
-    track('agent_share', {
-      platform: 'email',
+    track("agent_share", {
+      platform: "email",
       agent_id: agent.id,
       agent_name: agent.name,
-      tool: agent.tool
+      tool: agent.tool,
     });
     window.location.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
@@ -82,10 +88,7 @@ export function ShareButton({ agent, className = "" }: ShareButtonProps) {
       <AnimatePresence>
         {isOpen && (
           <>
-            <div
-              className="fixed inset-0 z-10"
-              onClick={() => setIsOpen(false)}
-            />
+            <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)} />
             <motion.div
               initial={{ opacity: 0, y: 10, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}

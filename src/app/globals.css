@@ -21,14 +21,33 @@
   }
 
   @keyframes shake {
-    0%, 100% { transform: translateX(0); }
-    10%, 30%, 50%, 70%, 90% { transform: translateX(-4px); }
-    20%, 40%, 60%, 80% { transform: translateX(4px); }
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+      transform: translateX(-4px);
+    }
+    20%,
+    40%,
+    60%,
+    80% {
+      transform: translateX(4px);
+    }
   }
 
   @keyframes bounce-slow {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
   }
 
   @keyframes confetti {
@@ -50,7 +69,7 @@
   --card-border: rgba(255, 255, 255, 0.08);
   --primary: #3b82f6;
   --primary-glow: rgba(59, 130, 246, 0.5);
-  
+
   /* Tool Colors */
   --color-windsurf: #3b82f6;
   --color-claude: #d97757;
@@ -63,7 +82,7 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
-  background-image: 
+  background-image:
     radial-gradient(circle at 50% 0%, rgba(120, 119, 198, 0.1) 0%, transparent 40%),
     radial-gradient(circle at 0% 0%, rgba(255, 255, 255, 0.03) 0%, transparent 20%);
   min-height: 100vh;

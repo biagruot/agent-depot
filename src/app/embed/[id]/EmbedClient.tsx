@@ -18,9 +18,7 @@ export function EmbedClient({ command }: { command?: string }) {
 
   return (
     <div className="bg-black/30 rounded-lg p-2 border border-white/5 flex gap-2 items-center group">
-      <code className="flex-1 font-mono text-xs text-green-400 truncate px-1">
-        {command}
-      </code>
+      <code className="flex-1 font-mono text-xs text-green-400 truncate px-1">{command}</code>
       <button
         onClick={handleCopy}
         className="bg-white/10 hover:bg-white/20 text-white p-1.5 rounded-md transition-colors"

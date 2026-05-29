@@ -4,7 +4,7 @@ import { ArrowUpDown, Check } from "lucide-react";
 import { useOpenPanel } from "@openpanel/nextjs";
 import { analyticsEvents } from "@/lib/analytics";
 
-export type SortOption = 'newest' | 'popular' | 'trending' | 'alphabetical';
+export type SortOption = "newest" | "popular" | "trending" | "alphabetical";
 
 interface SortDropdownProps {
   currentSort: SortOption;
@@ -19,15 +19,15 @@ const sortLabels: Record<SortOption, string> = {
   newest: "Newest",
   popular: "Most Popular",
   trending: "Trending",
-  alphabetical: "Alphabetical"
+  alphabetical: "Alphabetical",
 };
 
 export function SortDropdown({
   currentSort,
   onSortChange,
-  searchQuery = '',
-  selectedTool = 'all',
-  resultsCount = 0
+  searchQuery = "",
+  selectedTool = "all",
+  resultsCount = 0,
 }: SortDropdownProps) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -63,7 +63,7 @@ export function SortDropdown({
   return (
     <div className="flex items-center gap-2 relative" ref={dropdownRef}>
       <span className="text-sm text-gray-500 hidden sm:inline">Sort by:</span>
-      
+
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="flex items-center gap-2 bg-white/5 border border-white/10 rounded-lg px-3 py-1.5 text-sm text-gray-300 hover:bg-white/10 hover:text-white transition-all min-w-[140px] justify-between"

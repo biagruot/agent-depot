@@ -10,7 +10,7 @@ const iconMap: Record<string, React.ElementType> = {
   Shield,
   Bug,
   Sparkles,
-  Layers
+  Layers,
 };
 
 interface CollectionShelfProps {
@@ -22,7 +22,7 @@ interface CollectionShelfProps {
 export function CollectionShelf({
   collections,
   selectedCollectionId,
-  onSelectCollection
+  onSelectCollection,
 }: CollectionShelfProps) {
   return (
     <div className="flex gap-4 overflow-x-auto pb-6 -mx-4 px-4 snap-x scrollbar-hide">
@@ -41,7 +41,7 @@ export function CollectionShelf({
               "relative group overflow-hidden rounded-2xl p-6 text-left transition-all duration-300 border min-w-[280px] w-[280px] snap-start",
               isSelected
                 ? "border-white/20 shadow-[0_0_30px_-5px_rgba(255,255,255,0.1)]"
-                : "border-white/5 hover:border-white/10 hover:bg-white/5"
+                : "border-white/5 hover:border-white/10 hover:bg-white/5",
             )}
           >
             {/* Dynamic Gradient Background */}
@@ -61,10 +61,12 @@ export function CollectionShelf({
 
             <div className="relative z-10 flex flex-col h-full">
               <div className="flex items-start justify-between mb-4">
-                <div className={cn(
-                  "p-2 rounded-lg bg-white/10 text-white transition-colors",
-                  isSelected ? "bg-white/20" : "group-hover:bg-white/15"
-                )}>
+                <div
+                  className={cn(
+                    "p-2 rounded-lg bg-white/10 text-white transition-colors",
+                    isSelected ? "bg-white/20" : "group-hover:bg-white/15",
+                  )}
+                >
                   <Icon size={20} />
                 </div>
                 {collection.featured && (

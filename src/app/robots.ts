@@ -1,14 +1,14 @@
-import { MetadataRoute } from 'next';
+import { MetadataRoute } from "next";
 
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: '*',
-        allow: '/',
-        disallow: ['/api/', '/private/'],
+        userAgent: "*",
+        allow: "/",
+        disallow: ["/api/", "/private/"],
       },
     ],
-    sitemap: 'https://agentdepot.dev/sitemap.xml',
+    sitemap: "https://agentdepot.dev/sitemap.xml",
   };
 }
