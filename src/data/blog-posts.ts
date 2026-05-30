@@ -12,6 +12,81 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
+    slug: "claude-opus-4-8-for-developers",
+    title: "Claude Opus 4.8 for Developers: Dynamic Workflows, Better Code, and How to Use It",
+    excerpt:
+      "Claude Opus 4.8 just landed with Dynamic Workflows, stronger agentic coding, and a notably more honest model. Here's what changed for developers — and how to put it to work today.",
+    author: "AgentDepot Team",
+    date: "2026-05-30",
+    readTime: "8 min read",
+    tags: ["Claude", "AI Models", "Claude Code"],
+    content: `
+# Claude Opus 4.8 for Developers: Dynamic Workflows, Better Code, and How to Use It
+
+Anthropic shipped **Claude Opus 4.8** on May 28, 2026 — just 41 days after Opus 4.7 — and for once the upgrade is squarely aimed at how developers actually work. The headline isn't a vanity benchmark; it's a new way of running agents and a model that's meaningfully more honest about its own code.
+
+Here's what changed, what the numbers say, and how to get the most out of Claude Opus 4.8.
+
+## What's new in Claude Opus 4.8
+
+**Dynamic Workflows (the big one).** Inside a single Claude Code session, Opus 4.8 can now plan a large task, fan it out across **hundreds of parallel subagents** (capped at 1,000), verify their outputs, and report back — without you hand-orchestrating any of it. Anthropic is positioning it for codebase-scale work: migrations across hundreds of thousands of lines, sweeping refactors, repo-wide audits. It's a research preview, but it's the clearest sign yet that "one agent" is becoming "a fleet."
+
+**A more honest model.** Opus 4.8 is roughly **4x less likely than 4.7 to let a flaw in its own code pass unflagged**, and it's more willing to say "I'm not sure" instead of inventing a confident answer. If you've ever had an agent cheerfully ship broken code, this is the upgrade that matters most day to day.
+
+**Stronger agentic coding.** Anthropic reports **88.6% on SWE-bench Verified** (up from 4.7's 87.6%) and **69.2% on SWE-bench Pro** (up from 64.3%) — ahead of the other current frontier models on the harder Pro set. Take any single benchmark with a grain of salt, but the trend is real: it's better at multi-step, tool-using coding tasks.
+
+**Cheaper, faster, more concise.** Fast mode now runs about **2.5x faster and ~3x cheaper** than before, and the model produces roughly **35% fewer output tokens** for the same work — less waffle, lower bills.
+
+**Effort controls + a handy API change.** You can dial how much "effort" Claude spends on a response (it defaults to high). And the Messages API now accepts system instructions *inside* the messages array, so you can update an agent's guidance mid-task — a small change with a big payoff for agent builders.
+
+## Opus 4.7 vs 4.8 at a glance
+
+| | Opus 4.7 | Opus 4.8 |
+| :--- | :--- | :--- |
+| SWE-bench Verified | 87.6% | **88.6%** |
+| SWE-bench Pro | 64.3% | **69.2%** |
+| Flags its own code flaws | baseline | **~4x better** |
+| Output length | baseline | **~35% shorter** |
+| Parallel subagents | — | **Dynamic Workflows (up to 1,000)** |
+
+## How to actually use Opus 4.8
+
+The model is only half the equation. To get the upside, pair it with the right setup:
+
+**1. Write a real \`AGENTS.md\`.** When an agent is planning work and spawning subagents, its output is bounded by how well it understands your project. A clear test command and house rules turn Dynamic Workflows from "impressive demo" into "actually merged." (See our guide: [AGENTS.md — one file to steer every agent](/blog/agents-md-standard-guide).)
+
+**2. Use it where verification is cheap.** Migrations, dependency bumps, test backfills, lint sweeps — tasks where you can review the diff fast — are exactly where hundreds of parallel subagents shine. Save your judgment for the design work.
+
+**3. Give it the right tools.** Opus 4.8 is strongest when it can see your code, run your tests, and touch the systems it's reasoning about. That's what MCP servers are for — filesystem, Git, a browser, your database. Browse the [free MCP servers in the directory](https://agentdepot.dev/mcp) to wire it up.
+
+**4. Don't skip review.** A more honest model is not an infallible one. The teams getting the most from 4.8 still gate big agent runs behind tests and a human read of the diff.
+
+## Should you switch?
+
+If you're on Claude Code, you're likely already on it — Opus 4.8 is the current default frontier model. If you're choosing between tools, the honesty improvement and Dynamic Workflows are genuinely differentiating for serious coding work, and the cheaper fast mode makes high-volume agent runs easier on the wallet.
+
+## Claude Opus 4.8 FAQ
+
+**Is Claude Opus 4.8 free?**
+You access it through Claude (Pro/Max), Claude Code, or the API — it's a paid model, not a free download. The *tools* you pair with it (agents, rules, MCP servers) are free, and that's what we catalog here.
+
+**How is Opus 4.8 different from 4.7?**
+Better agentic-coding scores, a model that's ~4x better at flagging flaws in its own code, ~35% shorter outputs, cheaper and faster fast mode, and the new Dynamic Workflows for parallel subagents in Claude Code.
+
+**What are Dynamic Workflows?**
+A research-preview capability where Claude Code plans a large task and runs hundreds of parallel subagents (up to 1,000) in one session — built for codebase-scale migrations and refactors.
+
+**Is Claude Opus 4.8 good for coding?**
+Yes — it's currently the strongest model in the Claude line for agentic, multi-step coding, and it leads the harder SWE-bench Pro set among current frontier models.
+
+## The takeaway
+
+Opus 4.8 is less about a higher score and more about a different shape of work: an agent that fans out across your codebase and is honest enough to trust with it. Pair it with a good \`AGENTS.md\`, the right MCP servers, and a real test command — and let it take the boring, parallelizable work off your plate.
+
+Find the agents, skills, and MCP servers to pair with Claude Opus 4.8 in the [AgentDepot directory →](https://agentdepot.dev)
+    `,
+  },
+  {
     slug: "how-to-install-cursor-agents",
     title: "How to Install Cursor Agents & Rules",
     excerpt:

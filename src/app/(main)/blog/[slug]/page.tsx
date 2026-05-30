@@ -26,9 +26,28 @@ export async function generateMetadata({ params }: BlogPostPageProps): Promise<M
     };
   }
 
+  const url = `https://agentdepot.dev/blog/${post.slug}`;
   return {
     title: `${post.title} | AgentDepot Blog`,
     description: post.excerpt,
+    keywords: post.tags,
+    alternates: { canonical: url },
+    openGraph: {
+      type: "article",
+      url,
+      title: post.title,
+      description: post.excerpt,
+      siteName: "AgentDepot",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: [{ url: "/og-image.png", width: 1200, height: 630, alt: post.title }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: ["/og-image.png"],
+    },
   };
 }
 
@@ -42,6 +61,27 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-4xl">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "BlogPosting",
+            headline: post.title,
+            description: post.excerpt,
+            datePublished: post.date,
+            author: { "@type": "Organization", name: post.author },
+            publisher: {
+              "@type": "Organization",
+              name: "AgentDepot",
+              url: "https://agentdepot.dev",
+            },
+            mainEntityOfPage: `https://agentdepot.dev/blog/${post.slug}`,
+            image: "https://agentdepot.dev/og-image.png",
+            keywords: post.tags.join(", "),
+          }),
+        }}
+      />
       {/* Back Button */}
       <Link
         href="/blog"
