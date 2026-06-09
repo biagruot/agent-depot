@@ -1,0 +1,9 @@
+={
+  "name": "homelab-mcp",
+  "one_liner": "MCP server exposing 65+ tools to manage Proxmox homelabs via Claude Code",
+  "category": "MCP Server",
+  "install": "Clone repo, configure env, run server and point Claude Code at it",
+  "fit": 7,
+  "recommend": true,
+  "reason": "Broad, practical MCP server covering real homelab ops (VMs, Docker, monitoring, networking) with solid tool coverage — useful for AI builders running self-hosted infra, though homelab-specific scope limits general audience appeal."
+}
